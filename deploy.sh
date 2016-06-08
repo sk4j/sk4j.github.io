@@ -13,6 +13,18 @@ if [ -z $(which zip) ]; then
 	exit 0
 fi
 
+echo "Procurando pelo git..."
+if [ -z $(which git) ]; then
+	echo "Não encontrado."
+	echo "======================================================================================================"
+	echo " Por favor instale o git. $ apt-get install git"
+	echo ""
+	echo " Reinicie o processo após a instalação."
+	echo "======================================================================================================"
+	echo ""
+	exit 0
+fi
+
 #Empacota os arquivos necessários.
 zip -r sk.zip artifacts/* bin/* etc/* lib/* ext/*
 git add *
