@@ -1,5 +1,5 @@
 #!/bin/bash
 
 function __sk_version {
-    echo -e "Version Command."
+    echo -e "$SK_DIR/var/version"
 }
