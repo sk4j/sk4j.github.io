@@ -13,7 +13,6 @@ sk_lib_folder="${SK_DIR}/lib"
 sk_src_folder="${SK_DIR}/src"
 sk_ext_folder="${SK_DIR}/ext"
 sk_artifacts_folder="${SK_DIR}/artifacts"
-sk_var_folder="${SK_DIR}/var"
 sk_tmp_folder="${SK_DIR}/tmp"
 
 
@@ -120,7 +119,6 @@ mkdir -p "$sk_artifacts_folder"
 mkdir -p "$sk_lib_folder"
 mkdir -p "$sk_src_folder"
 mkdir -p "$sk_ext_folder"
-mkdir -p "$sk_var_folder"
 mkdir -p "$sk_tmp_folder"
 
 echo "Baixando SK..."
@@ -133,4 +131,3 @@ cp -r $SK_DIR/tmp/bin $sk_bin_folder
 cp -r $SK_DIR/tmp/etc $sk_etc_folder
 cp -r $SK_DIR/tmp/lib $sk_lib_folder
 cp -r $SK_DIR/tmp/src $sk_src_folder
-cp -r $SK_DIR/tmp/var $sk_var_folder

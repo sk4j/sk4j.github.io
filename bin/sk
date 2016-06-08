@@ -20,4 +20,4 @@ if [ -f "${SK_DIR}/etc/config" ]; then
 	source "${SK_DIR}/etc/config"
 fi
 
-sk $1 $2
+__sk_main $1 $2

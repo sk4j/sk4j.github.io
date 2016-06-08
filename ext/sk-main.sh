@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function sk {
+function __sk_main {
     COMMAND="$1"
     ARTIFACT="$2"
 
