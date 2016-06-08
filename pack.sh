@@ -1,3 +1,3 @@
 #!/bin/bash
 
-zip -r sk.zip bin/* config/* etc/* src/* var/* lib/* artifacts/*
+zip -r sk.zip artifacts/* bin/* etc/* lib/* src/* var/*  

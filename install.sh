@@ -123,3 +123,12 @@ mkdir -p "$sk_tmp_folder"
 
 echo "Baixando SK..."
 curl -s $SK_SERVICE/sk.zip > $SK_DIR/tmp
+cd $SK_DIR/tmp
+echo "Extraindo arquivos SK..."
+unzip sk.zip
+
+cp -r $SK_DIR/tmp/bin $sk_bin_folder
+cp -r $SK_DIR/tmp/etc $sk_etc_folder
+cp -r $SK_DIR/tmp/lib $sk_lib_folder
+cp -r $SK_DIR/tmp/src $sk_src_folder
+cp -r $SK_DIR/tmp/var $sk_var_folder
