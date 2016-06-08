@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+#Buscando pelo zip
 echo "Procurando pelo zip..."
 if [ -z $(which zip) ]; then
 	echo "Não encontrado."
@@ -26,7 +26,7 @@ if [ -z $(which git) ]; then
 fi
 
 #Empacota os arquivos necessários.
-zip -r sk.zip artifacts/* bin/* etc/* lib/* ext/*
+zip -r sk4j.zip artifacts/* bin/* etc/* lib/* ext/*
 git add *
 git commit -m "Deploy by ${USER}"
 git push

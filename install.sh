@@ -76,6 +76,18 @@ if [ -z $(which curl) ]; then
 	exit 0
 fi
 
+echo "Procurando pelo md5sum..."
+if [ -z $(which md5sum) ]; then
+	echo "Não encontrado."
+	echo "======================================================================================================"
+	echo " Por favor instale o md5sum. $ apt-get install md5sum"
+	echo ""
+	echo " Reinicie o processo após a instalação."
+	echo "======================================================================================================"
+	echo ""
+	exit 0
+fi
+
 echo "Procurando pelo sdkman..."
 if [ -z $(which sdk) ]; then
 	echo "Não encontrado."
