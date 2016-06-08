@@ -13,8 +13,11 @@ export SK_LIB_DIR="${SK_DIR}/lib"
 for f in $(find "${SK_DIR}/src" -type f -name 'sk-*' -exec basename {} \;); do
     source "${SK_DIR}/src/${f}"
 done
+unset f
 
 # Load the sk config.
 if [ -f "${SK_DIR}/etc/config" ]; then
 	source "${SK_DIR}/etc/config"
 fi
+
+sk $1 $2
