@@ -10,8 +10,8 @@ export SK_ARTIFACTIS_DIR="${SK_DIR}/artifacts"
 export SK_LIB_DIR="${SK_DIR}/lib"
 
 # Source sk module scripts.
-for f in $(find "${SK_DIR}/src" -type f -name 'sk-*' -exec basename {} \;); do
-    source "${SK_DIR}/src/${f}"
+for f in $(find "${SK_DIR}/ext" -type f -name 'sk-*' -exec basename {} \;); do
+    source "${SK_DIR}/ext/${f}"
 done
 unset f
 

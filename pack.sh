@@ -1,3 +1,4 @@
 #!/bin/bash
 
-zip -r sk.zip artifacts/* bin/* etc/* lib/* src/* var/*  
+#Empacota os arquivos necessários.
+zip -r sk.zip artifacts/* bin/* etc/* lib/* ext/* var/*
