@@ -12,7 +12,7 @@ sk_etc_folder="${SK_DIR}/etc"
 sk_lib_folder="${SK_DIR}/lib"
 sk_src_folder="${SK_DIR}/src"
 sk_ext_folder="${SK_DIR}/ext"
-sk_artifacts_folder="${SK_DIR}/artifacts"
+sk_artifact_folder="${SK_DIR}/artifact"
 sk_tmp_folder="${SK_DIR}/tmp"
 
 
@@ -127,7 +127,7 @@ fi
 echo "Criando diretórios SK..."
 mkdir -p "$sk_bin_folder"
 mkdir -p "$sk_etc_folder"
-mkdir -p "$sk_artifacts_folder"
+mkdir -p "$sk_artifact_folder"
 mkdir -p "$sk_lib_folder"
 mkdir -p "$sk_src_folder"
 mkdir -p "$sk_ext_folder"
@@ -139,6 +139,7 @@ cd $SK_DIR/tmp
 echo "Extraindo arquivos SK..."
 unzip sk.zip
 
+echo "Copiando dados..."
 cp -r $SK_DIR/tmp/bin $sk_bin_folder
 cp -r $SK_DIR/tmp/etc $sk_etc_folder
 cp -r $SK_DIR/tmp/lib $sk_lib_folder
