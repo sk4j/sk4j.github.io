@@ -1,9 +1,13 @@
 d41d8cd98f00b204e9800998ecf8427e  artifact/readme.txt
-2fdd6cdb623ce733d522566f7839492d  ext/sk-execute.sh
+17c19da34a98cd33ecdf4ed66046cca1  ext/sk-execute.sh
 fcd0fd591d485e15097e8f4354bdb7e6  ext/sk-help.sh
 7bab502edb36e5da61ae514f0c9b278b  ext/sk-list.sh
-675b5749aeece4188f647f918b5f938a  ext/sk-main.sh
+4954d5e60918347924ffc9eff3244163  ext/sk-main.sh
 14ccb85e7127312976af2307ab43d206  ext/sk-test.sh
 89ce27a76c226aa9af67b284f95ee8ab  ext/sk-update.sh
+57e1e567a09ea0aed8313477ad8b0be4  ext/sk-util.sh
 b72ea71f5ae7644dd0f74c47410e11c7  ext/sk-version.sh
 6e5ccee6c126ae6a920f496ec8d72dc6  lib/groovy-all-2.4.6.jar
+a1f021fdd10f5d3cda931f2f672ef288  etc/config
+bb867c6214fb164d043b37560d0a43e0  etc/index
+4b35f5a51cf22ce6599594254c53a7e8  bin/sk

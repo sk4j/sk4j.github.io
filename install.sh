@@ -134,13 +134,15 @@ mkdir -p "$sk_ext_folder"
 mkdir -p "$sk_tmp_folder"
 
 echo "Baixando SK..."
-curl -s $SK_SERVICE/sk.zip > $SK_DIR/tmp
+curl -s $SK_SERVICE/sk4j.zip > $SK_DIR/tmp
 cd $SK_DIR/tmp
 echo "Extraindo arquivos SK..."
-unzip sk.zip
+unzip sk4j.zip
 
 echo "Copiando dados..."
 cp -r $SK_DIR/tmp/bin $sk_bin_folder
 cp -r $SK_DIR/tmp/etc $sk_etc_folder
 cp -r $SK_DIR/tmp/lib $sk_lib_folder
 cp -r $SK_DIR/tmp/src $sk_src_folder
+cp -r $SK_DIR/tmp/artifact $sk_artifact_folder
+cp -r $SK_DIR/tmp/ext $sk_ext_folder

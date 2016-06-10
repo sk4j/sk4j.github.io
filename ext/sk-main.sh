@@ -24,17 +24,17 @@ function __sk_main {
 		source "${SK_DIR}/etc/config"
 	fi
 
-  CMD_TARGET="${SK_DIR}/ext/sk-${COMMAND}.sh"
+    CMD_TARGET="${SK_DIR}/ext/sk-${COMMAND}.sh"
 	if [[ -f "$CMD_TARGET" ]]; then
 		CMD_FOUND="$CMD_TARGET"
 	fi
 
-  if [[ -z "$CMD_FOUND" ]]; then
+    if [[ -z "$CMD_FOUND" ]]; then
 		echo "Commando Inválido: $COMMAND"
 		__sk_help
 	fi
 
-  #Execute the requested command
+   #Execute the requested command
 	if [ -n "$CMD_FOUND" ]; then
 		# It's available as a shell function
 		__sk_"$COMMAND" "$2"

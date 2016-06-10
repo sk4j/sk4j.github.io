@@ -6,7 +6,7 @@ if [ -z "$SK_DIR" ]; then
 	export SK_DIR="$HOME/.sk"
 fi
 
-export SK_ARTIFACTIS_DIR="${SK_DIR}/artifacts"
+export SK_ARTIFACT_DIR="${SK_DIR}/artifact"
 export SK_LIB_DIR="${SK_DIR}/lib"
 
 # Source sk module scripts.

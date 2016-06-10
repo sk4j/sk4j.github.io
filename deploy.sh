@@ -25,15 +25,8 @@ if [ -z $(which git) ]; then
 	exit 0
 fi
 
-#Gera os arquivos de índices
-echo "Gerando arquivo de índices..."
-md5sum artifact/* ext/* lib/* > ./etc/index
+source "ext/sk-util.sh"
 
-#Empacota os arquivos necessários.
-echo "Compactando arquivos SK..."
-zip -r sk4j.zip artifact/* bin/* etc/* lib/* ext/*
-
-echo "Adicionado arquivos ao controle de versão GIT..."
-git add *
-git commit -m "Deploy by ${USER}"
-git push
+__sk_index
+__sk_zip
+__sk_git
