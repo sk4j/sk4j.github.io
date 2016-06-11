@@ -4,6 +4,7 @@ apply plugin: 'groovy'
 
 sourceCompatibility = 1.7
 version = '1.0'
+group='sk4j'
 jar {
     manifest {
         attributes 'Implementation-Title': 'sk4j-core',

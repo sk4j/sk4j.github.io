@@ -17,7 +17,6 @@ repositories {
 
 dependencies {
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
-	compile 'sk4j:sk4j-core:1.0'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 

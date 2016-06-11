@@ -17,7 +17,7 @@ function __sk_zip {
 
 function __sk_git {
     echo "Adicionado arquivos ao controle de versão git..."
-    git add * 
+    git add * -f
     git commit -m "Deploy by ${USER}"
     git push
 }

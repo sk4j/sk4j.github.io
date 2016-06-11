@@ -5,9 +5,9 @@ fcd0fd591d485e15097e8f4354bdb7e6  ext/sk-help.sh
 4954d5e60918347924ffc9eff3244163  ext/sk-main.sh
 14ccb85e7127312976af2307ab43d206  ext/sk-test.sh
 89ce27a76c226aa9af67b284f95ee8ab  ext/sk-update.sh
-81a4f6af5d8a1526fe516b93bb179ba5  ext/sk-util.sh
+1876ea24e6455c7725e58cbeb419e516  ext/sk-util.sh
 b72ea71f5ae7644dd0f74c47410e11c7  ext/sk-version.sh
 6e5ccee6c126ae6a920f496ec8d72dc6  lib/groovy-all-2.4.6.jar
 a1f021fdd10f5d3cda931f2f672ef288  etc/config
-6ee5ad5fd62201b4700bb9ac108fb882  etc/index
+5d73652e54703e05e8b6f30ae47b823d  etc/index
 4b35f5a51cf22ce6599594254c53a7e8  bin/sk
