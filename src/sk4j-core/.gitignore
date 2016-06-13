@@ -1,4 +1,6 @@
-/bin/
-/build/
-/.settings/
-/.gradle/
+bin/
+build/
+.settings/
+.gradle/
+.classpath
+.priject
