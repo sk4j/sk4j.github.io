@@ -25,9 +25,12 @@ dependencies {
 
 test { systemProperties 'property': 'value' }
 
+/**
+ * Tarefa que copia o jar gerado para o 
+ */
 task pack(dependsOn: build) << {
 	copy {
 		from "build/libs/${project.name}-${version}.jar"
-		into '../../artifact'
+		into '../../lib'
 	}
 }
