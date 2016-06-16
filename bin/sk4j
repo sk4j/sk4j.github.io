@@ -8,4 +8,4 @@ for f in $(find "${SK4J_DIR}/ext" -type f -name 'sk4j-*' -exec basename {} \;); 
     source "${SK4J_DIR}/ext/${f}"
 done
 
-__sk4j $1
+__sk4j $1 $2

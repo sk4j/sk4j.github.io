@@ -2,6 +2,7 @@
 
 function __sk4j {
     COMMAND="$1"
+    QUALIFIER="$2"
 
     case "$COMMAND" in
         -e)
@@ -16,11 +17,11 @@ function __sk4j {
 
     if [[ -z "$CMD_FOUND" ]]; then
             echo "Invalid command: $COMMAND"
-            #__sdk_help
+            __sk4j_help
     fi
 
     if [ -n "$CMD_FOUND" ]; then
            # It's available as a shell function
-           __sk4j_"$COMMAND"
+           __sk4j_"$COMMAND" $QUALIFIER
     fi
 }
