@@ -7,7 +7,7 @@ version = '1.0'
 group='sk4j'
 
 
-repositories { mavenCentral() }
+repositories { maven {  url 'http://nexus.tre-pa.gov.br:8090/nexus/content/groups/public' } }
 
 dependencies {
 	compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
@@ -23,9 +23,7 @@ test { systemProperties 'property': 'value' }
 jar {
 	manifest {
 		attributes 'Implementation-Title': 'sk4j-core',
-		'Implementation-Version': version,
-		'Main-Class' : 'sk4j.app.SkAppProxy',
-		'Class-Path': configurations.compile.collect {File file -> "./../lib/${file.name}"}.join(" ")
+		'Implementation-Version': version
 	}
 }
 
