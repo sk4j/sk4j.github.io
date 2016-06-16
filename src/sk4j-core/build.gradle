@@ -7,7 +7,7 @@ version = '1.0'
 group='sk4j'
 
 
-repositories { maven {  url 'http://nexus.tre-pa.gov.br:8090/nexus/content/groups/public' } }
+repositories { mavenCentral() }
 
 dependencies {
 	compile group: 'commons-collections', name: 'commons-collections', version: '3.2'

@@ -6,9 +6,7 @@ sourceCompatibility = 1.7
 version = '1.0'
 
 
-repositories {
-	maven {  url 'http://nexus.tre-pa.gov.br:8090/nexus/content/groups/public' }
-}
+repositories { mavenCentral() }
 
 dependencies {
 	compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
@@ -27,16 +25,17 @@ jar {
 		'Main-Class' : 'org.gradle.App',
 		'Class-Path': configurations.compile.collect {File file -> "./../lib/${file.name}"}.join(" ")
 	}
+	archiveName = "${baseName}.jar"
 }
 
 
 task pack(dependsOn: build) << {
 	copy {
-		from configurations.compile
+		from configurations.compile.filter { File file -> !file.name.startsWith('sk4j-core') }
 		into '../../lib'
 	}
 	copy {
-		from "build/libs/${project.name}-${version}.jar"
+		from "build/libs/${project.name}.jar"
 		into '../../artifact'
 	}
 }
