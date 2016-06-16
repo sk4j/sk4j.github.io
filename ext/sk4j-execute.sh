@@ -2,5 +2,5 @@
 
 
 function __sk4j_execute {
-    echo "Executando JAR! $1 ${CUR_DIR}"
+    java -jar "${SK4J_DIR}/artifact/${1}.jar" ${CUR_DIR}
 }
