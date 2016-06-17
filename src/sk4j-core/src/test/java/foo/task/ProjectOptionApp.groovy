@@ -17,4 +17,11 @@ class ProjectOptionApp extends SkApp {
 		def value = optionReader.read()
 		println value.name
 	}
+
+	@Override
+	public void run() {
+		
+	}
+	
+	
 }

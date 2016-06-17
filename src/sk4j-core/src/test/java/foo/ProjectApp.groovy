@@ -21,4 +21,11 @@ class ProjectApp extends SkApp {
 			println dir.name			
 		}
 	}
+
+	@Override
+	public void run() {
+		
+	}
+	
+	
 }
