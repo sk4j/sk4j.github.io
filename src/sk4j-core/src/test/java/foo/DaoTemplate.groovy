@@ -4,9 +4,10 @@ import sk4j.Template
 
 class DaoTemplate extends Template {
 
+
 	@Override
-	void init() {
-		context['outputPath'] = "${context.model.path}/../persistence/${context.model.name}DAO1.java"
+	public String outputPath() {
+		return "${context.model.path}/../persistence/${context.model.name}DAO1.java"
 	}
 
 	@Override

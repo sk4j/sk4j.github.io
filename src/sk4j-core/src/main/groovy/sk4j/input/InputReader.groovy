@@ -12,10 +12,8 @@ class InputReader {
 	 * @return String de entrada do usuário
 	 */
 	def read() {
-		System.in.withReader {
-			print inputLabel
-			inputValue = it.readLine()
-		}
+		Console console = System.console();
+		console.readLine("${inputLabel}: ");
 	}
 
 	def exit() {
