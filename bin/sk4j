@@ -2,8 +2,6 @@
 
 export SK4J_DIR="${HOME}/git/sk4j.github.io"
 
-echo "$SK4J_DIR"
-
 for f in $(find "${SK4J_DIR}/ext" -type f -name 'sk4j-*' -exec basename {} \;); do
     source "${SK4J_DIR}/ext/${f}"
 done
