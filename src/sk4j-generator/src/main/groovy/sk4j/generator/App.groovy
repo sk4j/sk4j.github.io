@@ -12,7 +12,7 @@ class App extends SkApp {
 		def sk4jArtifactDir = new File("${app.sk4jHome}/artifact")
 
 		SkConsole.caption "*** Sk4j Generator ***"
-
+		
 		//def projectName = app.readLineFromConsole("Digite o nome do projeto")
 		//def packageName = app.readLineFromConsole("Digite o nome do projeto")
 
