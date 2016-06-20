@@ -2,28 +2,14 @@ package sk4j
 
 import sk4j.input.InputReader
 
+/**
+ * 
+ * @author jcruz
+ *
+ */
 class SkConsole {
 
-	enum Color {
-		WHITE('\033[0m'),
-		BLUE('\033[94m'),
-		YELLOW('\033[93m'),
-		MAGENTA('\033[95m'),
-		CYAN('\033[96m'),
-		RED('\033[91m')
-
-		String value
-
-		public Color(String value) {
-			this.value = value
-		}
-
-		public String getValue() {
-			return value
-		}
-	}
-
-	static def white = Color.WHITE.value
+	def whiteColor = ConsoleColor.WHITE.value
 
 	/**
 	 * 
@@ -32,7 +18,7 @@ class SkConsole {
 	 * @param message Texto.
 	 * @return
 	 */
-	static def echo(String message) {
+	def echo(String message) {
 		println "$message"
 	}
 
@@ -44,26 +30,41 @@ class SkConsole {
 	 * @param color Opção de cor disponíveis no enum Color.
 	 * @return
 	 */
-	static def echo(String message, Color color) {
-		println "${color.value}${message}${white}"
+	def echo(String message, ConsoleColor color) {
+		println "${color.value}${message}${whiteColor}"
 	}
 	
-	static def caption(String message) {
-		def yellow = Color.YELLOW.value
-		println "${yellow}${message}${white}"
+	/**
+	 * 
+	 * @param message
+	 * @return
+	 */
+	def caption(String message) {
+		def yellowColor = ConsoleColor.YELLOW.value
+		println "${yellowColor}${message}${whiteColor}"
 	}
 
 	/**
 	 * Exibe um prompt para entrada de dados do usuário.
 	 */
-	static def readLine(inputLabel) {
+	def readLine(inputLabel) {
 		new InputReader(inputLabel: "$inputLabel").read()
 	}
 	
-	static def readOption(inputLabel) {
+	/**
+	 * 
+	 * @param inputLabel
+	 * @return
+	 */
+	def readOption(inputLabel) {
 		
 	}
 	
+	/**
+	 * 
+	 * @param inputLabel
+	 * @return
+	 */
 	static def readOptions(inputLabel) {
 		
 	}
