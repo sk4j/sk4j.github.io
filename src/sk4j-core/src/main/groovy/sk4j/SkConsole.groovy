@@ -1,6 +1,9 @@
 package sk4j
 
+import sk4j.input.Choosable
 import sk4j.input.InputReader
+import sk4j.input.MultipleOptionInputReader
+import sk4j.input.SingleOptionInputReader
 
 /**
  * 
@@ -33,39 +36,30 @@ class SkConsole {
 	def echo(String message, ConsoleColor color) {
 		println "${color.value}${message}${whiteColor}"
 	}
-	
-	/**
-	 * 
-	 * @param message
-	 * @return
-	 */
-	def caption(String message) {
-		def yellowColor = ConsoleColor.YELLOW.value
-		println "${yellowColor}${message}${whiteColor}"
-	}
+
 
 	/**
 	 * Exibe um prompt para entrada de dados do usuário.
 	 */
-	def readLine(inputLabel) {
+	def readln(String inputLabel) {
 		new InputReader(inputLabel: "$inputLabel").read()
 	}
-	
+
 	/**
 	 * 
 	 * @param inputLabel
 	 * @return
 	 */
-	def readOption(inputLabel) {
-		
+	def readopt(String inputLabel, List<? extends Choosable<?>> options) {
+		new SingleOptionInputReader(inputLabel: inputLabel, options: options).read()
 	}
-	
+
 	/**
 	 * 
 	 * @param inputLabel
 	 * @return
 	 */
-	static def readOptions(inputLabel) {
-		
+	def readopts(String inputLabel, List<? extends Choosable<?>> options) {
+		new MultipleOptionInputReader(inputLabel: inputLabel, options: options).read()
 	}
 }

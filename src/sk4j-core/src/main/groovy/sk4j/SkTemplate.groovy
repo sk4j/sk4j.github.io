@@ -1,6 +1,6 @@
 package sk4j
 
-abstract class Template {
+abstract class SkTemplate {
 
 	def model
 
@@ -12,5 +12,4 @@ abstract class Template {
 	 */
 	abstract def template()
 	
-	abstract String outputPath()
 }

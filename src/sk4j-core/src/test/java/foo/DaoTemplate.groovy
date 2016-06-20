@@ -1,14 +1,8 @@
 package foo
 
-import sk4j.Template
+import sk4j.SkTemplate
 
-class DaoTemplate extends Template {
-
-
-	@Override
-	public String outputPath() {
-		return "${context.model.path}/../persistence/${context.model.name}DAO1.java"
-	}
+class DaoTemplate extends SkTemplate {
 
 	@Override
 	def template() {

@@ -1,3 +1,12 @@
+package sk4j.generator.template
+
+import sk4j.SkTemplate
+
+class BuildGradleTemplate extends SkTemplate {
+	
+	@Override
+	def template() {
+		'''
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'groovy'
@@ -23,12 +32,12 @@ test { systemProperties 'property': 'value' }
 
 jar {
 	manifest {
-		attributes 'Implementation-Title': 'Gradle Quickstart',
+		attributes 'Implementation-Title': '${context.projectName}',
 		'Implementation-Version': version,
-		'Main-Class' : 'sk4j.generator.SkGeneratorApp',
-		'Class-Path': configurations.compile.collect {File file -> "./../lib/${file.name}"}.join(" ")
+		'Main-Class' : 'generator.AppGenerator',
+		'Class-Path': configurations.compile.collect {File file -> "./../lib/\\${file.name}"}.join(" ")
 	}
-	archiveName = "${baseName}.jar"
+	archiveName = "\\${baseName}.jar"
 }
 
 
@@ -38,8 +47,11 @@ task pack(dependsOn: build) << {
 		into '../../lib'
 	}
 	copy {
-		from "build/libs/${project.name}.jar"
+		from "build/libs/${context.projectName}.jar"
 		into '../../artifact'
 	}
 }
-
+'''
+	}
+	
+}
