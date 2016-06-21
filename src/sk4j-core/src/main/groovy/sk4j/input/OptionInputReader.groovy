@@ -1,5 +1,7 @@
 package sk4j.input
 
+import sk4j.ConsoleColor;
+
 class OptionInputReader extends InputReader {
 
 	/**
@@ -18,6 +20,8 @@ class OptionInputReader extends InputReader {
 	 * @return
 	 */
 	def printOptions() {
-		def sortedOptions = options.sort().eachWithIndex { Choosable<?> c , i -> println "[${i+1}] ${c.choiseLabel} " }
+		def colorMagenta = ConsoleColor.MAGENTA.value
+		def colorWhite = ConsoleColor.WHITE.value
+		def sortedOptions = options.sort().eachWithIndex { Choosable<?> c , i -> println "${colorMagenta}[${i+1}]${colorWhite} ${c.choiseLabel} " }
 	}
 }

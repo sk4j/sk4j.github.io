@@ -54,9 +54,22 @@ abstract class SkApp {
 		def engine = new GStringTemplateEngine()
 		sktemplate.context = context
 		def template = engine.createTemplate(sktemplate.template()).make([context:sktemplate.context])
-		console.echo "Criando arquivo:   ${path}"
-		new File(path) << template.toString()
+		file(path,template.toString())
 	}
+
+	/**
+	 * 
+	 * Cria o arquivo com o conteudo correspondente.
+	 * 
+	 * @param path
+	 * @param fileContent
+	 * @return
+	 */
+	def file(String path, String fileContent) {
+		console.echo "Criando arquivo:   ${path}"
+		new File(path) << fileContent
+	}
+
 
 	/**
 	 * Método que deverá sr implementado pela aplicação Sk.

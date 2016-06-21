@@ -7,7 +7,7 @@ class SingleOptionInputReader extends OptionInputReader {
 	 */
 	@Override
 	def read() {
-		inputLabel = "\nDigite o número da opção: "
+		inputLabel = "\nDigite o número da opção"
 		printOptions()
 		super.read()
 		boolean valid = validOption(inputValue)

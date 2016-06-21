@@ -13,7 +13,7 @@ class InputReader {
 	 */
 	def read() {
 		Console console = System.console();
-		console.readLine("${inputLabel}: ");
+		inputValue = console.readLine("${inputLabel}: ");
 	}
 
 	def exit() {

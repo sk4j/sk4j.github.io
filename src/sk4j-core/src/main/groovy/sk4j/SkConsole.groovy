@@ -53,6 +53,15 @@ class SkConsole {
 	def readopt(String inputLabel, List<? extends Choosable<?>> options) {
 		new SingleOptionInputReader(inputLabel: inputLabel, options: options).read()
 	}
+	
+	/**
+	 *
+	 * @param inputLabel
+	 * @return
+	 */
+	def readopt(List<? extends Choosable<?>> options) {
+		new SingleOptionInputReader(options: options).read()
+	}
 
 	/**
 	 * 
@@ -61,5 +70,14 @@ class SkConsole {
 	 */
 	def readopts(String inputLabel, List<? extends Choosable<?>> options) {
 		new MultipleOptionInputReader(inputLabel: inputLabel, options: options).read()
+	}
+	
+	/**
+	 *
+	 * @param inputLabel
+	 * @return
+	 */
+	def readopts(List<? extends Choosable<?>> options) {
+		new MultipleOptionInputReader(options: options).read()
 	}
 }
