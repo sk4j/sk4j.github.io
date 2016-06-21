@@ -11,9 +11,6 @@ package sk4j.generator
 
 import sk4j.ConsoleColor
 import sk4j.SkApp
-import sk4j.generator.template.AppGeneratorTemplate
-import sk4j.generator.template.BuildGradleTemplate
-import sk4j.generator.template.GitignoreTemplate
 
 class AppGenerator extends SkApp {
 
