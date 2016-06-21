@@ -34,7 +34,7 @@ jar {
 	manifest {
 		attributes 'Implementation-Title': '${context.projectName}',
 		'Implementation-Version': version,
-		'Main-Class' : 'generator.AppGenerator',
+		'Main-Class' : 'sk4j.generator.AppGenerator',
 		'Class-Path': configurations.compile.collect {File file -> "./../lib/\\${file.name}"}.join(" ")
 	}
 	archiveName = "\\${baseName}.jar"
