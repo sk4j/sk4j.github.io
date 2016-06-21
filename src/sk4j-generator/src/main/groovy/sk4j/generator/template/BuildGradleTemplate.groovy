@@ -5,7 +5,7 @@ import sk4j.SkTemplate
 class BuildGradleTemplate extends SkTemplate {
 	
 	@Override
-	def template() {
+	String template() {
 		'''
 apply plugin: 'java'
 apply plugin: 'eclipse'

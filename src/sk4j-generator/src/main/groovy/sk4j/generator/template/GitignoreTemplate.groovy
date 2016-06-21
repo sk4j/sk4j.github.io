@@ -4,7 +4,7 @@ import sk4j.SkTemplate
 
 class GitignoreTemplate extends SkTemplate {
 	@Override
-	def template() {
+	String template() {
 		'''
 /bin/
 /build/

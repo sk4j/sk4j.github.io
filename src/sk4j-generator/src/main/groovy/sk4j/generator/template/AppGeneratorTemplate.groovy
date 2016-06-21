@@ -5,7 +5,7 @@ import sk4j.SkTemplate
 class AppGeneratorTemplate extends SkTemplate {
 
 	@Override
-	def template() {
+	String template() {
 		'''
 package sk4j.generator
 

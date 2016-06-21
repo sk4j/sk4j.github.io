@@ -1,5 +1,7 @@
 package sk4j
 
+import org.apache.commons.io.FilenameUtils
+
 import groovy.text.GStringTemplateEngine
 import sk4j.model.EProject
 
@@ -66,6 +68,10 @@ abstract class SkApp {
 	 * @return
 	 */
 	def file(String path, String fileContent) {
+		String filePath = FilenameUtils.getPath(path)
+		if(!new File(filePath).exists()) {
+			mkdir(filePath)
+		}
 		console.echo "Criando arquivo:   ${path}"
 		new File(path) << fileContent
 	}

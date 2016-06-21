@@ -13,15 +13,14 @@ abstract class EModel<T>  {
 	 * @param templateClass
 	 * @return
 	 */
-	def merge(Class<? extends SkTemplate> templateClass) {
+	String merge(Class<? extends SkTemplate> templateClass) {
 		this.template = templateClass.newInstance()
-		template.context['model'] = this
-		template.init()
-		Writable t = new GStringTemplateEngine().createTemplate(template.template()).make(context: template.context)
+		template.model = this
+		Writable t = new GStringTemplateEngine().createTemplate(template.template()).make([context: template.context, model: template.model])
 		t.toString()
 	}
 
-	def plus(Class<? extends SkTemplate> templateClass) {
+	String plus(Class<? extends SkTemplate> templateClass) {
 		this.merge(templateClass)
 	}
 }

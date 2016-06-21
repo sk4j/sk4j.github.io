@@ -1,5 +1,6 @@
 package sk4j.model
 
+import org.jboss.forge.roaster._shade.org.eclipse.jdt.core.dom.ThisExpression;
 import org.jboss.forge.roaster.model.source.JavaClassSource
 
 import sk4j.input.Choosable
@@ -23,6 +24,8 @@ class EJavaFile extends EModel<EJavaFile> implements Choosable<EJavaFile>  {
 	 * 
 	 */
 	String name
+	
+	String parentPackageName
 
 	JavaClass javaClass
 
@@ -48,6 +51,18 @@ class EJavaFile extends EModel<EJavaFile> implements Choosable<EJavaFile>  {
 	public String getName() {
 		javaClass.name
 	}
+	
+	public String getParentPackageName() {
+		if(parentPackageName == null) {
+			def packages = Arrays.asList(this.javaClass.package.name.split("\\."))
+			println this.javaClass.package.name.split("\\.")
+			this.parentPackageName = packages.dropRight(1).join(".")
+		}
+		return parentPackageName;
+	}
+
+
+
 	/**
 	 * Verifica se a classe possui a annotation especificada.
 	 * @param name

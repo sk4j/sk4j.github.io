@@ -10,6 +10,5 @@ abstract class SkTemplate {
 	 * Retorna o template da aplicação.
 	 * @return String do Template ou File do Template.
 	 */
-	abstract def template()
-	
+	abstract String template()
 }

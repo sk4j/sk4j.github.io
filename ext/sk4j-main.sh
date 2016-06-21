@@ -7,6 +7,10 @@ function __sk4j {
     case "$COMMAND" in
         -e)
             COMMAND="execute";;
+        -c)
+            COMMAND="execute"
+            QUALIFIER="sk4j-generator"
+            ;;
     esac
 
     CMD_FOUND=""
