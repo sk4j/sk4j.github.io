@@ -55,7 +55,6 @@ class EJavaFile extends EModel<EJavaFile> implements Choosable<EJavaFile>  {
 	public String getParentPackageName() {
 		if(parentPackageName == null) {
 			def packages = Arrays.asList(this.javaClass.package.name.split("\\."))
-			println this.javaClass.package.name.split("\\.")
 			this.parentPackageName = packages.dropRight(1).join(".")
 		}
 		return parentPackageName;
