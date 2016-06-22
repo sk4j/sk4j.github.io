@@ -75,4 +75,12 @@ class EProject {
 		}
 		return dirs
 	}
+	
+	boolean isMavenProject() {
+		new File("${path}/pom.xml").exists()
+	}
+	
+	boolean isGradleProject() {
+		new File("${path}/build.gradle").exists()
+	}
 }

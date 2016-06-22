@@ -22,13 +22,14 @@ abstract class SkApp {
 	/**
 	 * 
 	 */
-	def console = new SkConsole()
+	SkConsole console = new SkConsole()
 
 	def start(args) {
 		context['userHome'] = System.getenv("HOME")
 		context['sk4jHome'] = "${context.userHome}/git/sk4j.github.io"
 		context['projectHome'] = args[0]
-		project = new EProject(file: new File(context['projectHome']))
+		project = new EProject(file: new File(context['projectHome']), path: context['projectHome'])
+		beforeRun()
 		run()
 	}
 
@@ -74,6 +75,20 @@ abstract class SkApp {
 		}
 		console.echo "Criando arquivo:   ${path}"
 		new File(path) << fileContent
+	}
+
+	void beforeRun() {
+	}
+
+	/**
+	 * Finaliza a execução do programa de forma anormal (status 1) com uma mensagem no console.
+	 * 
+	 * @param message
+	 * @return
+	 */
+	def exit(String message) {
+		console.echo message, ConsoleColor.RED
+		System.exit(1)
 	}
 
 
