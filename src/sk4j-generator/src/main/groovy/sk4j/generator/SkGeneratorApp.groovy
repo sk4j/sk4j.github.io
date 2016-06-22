@@ -19,7 +19,7 @@ class SkGeneratorApp extends SkApp {
 
 		if(!context['projectName'].isEmpty()) {
 			console.echo ""
-			console.echo "********************************", ConsoleColor.CYAN
+			console.echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", ConsoleColor.CYAN
 			mkdir "${context.sk4jHome}/src/${context.projectName}"
 			mkdir "${context.sk4jHome}/src/${context.projectName}/src/main/groovy"
 			mkdir "${context.sk4jHome}/src/${context.projectName}/src/main/groovy/sk4j/generator/template"
