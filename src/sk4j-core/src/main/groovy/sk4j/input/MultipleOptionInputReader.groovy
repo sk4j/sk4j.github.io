@@ -1,5 +1,7 @@
 package sk4j.input
 
+import sk4j.ConsoleColor
+
 class MultipleOptionInputReader extends OptionInputReader  {
 
 	/**
@@ -7,8 +9,12 @@ class MultipleOptionInputReader extends OptionInputReader  {
 	 */
 	@Override
 	def read() {
-		inputLabel = "\nDigite o(s) número(s) da(s) opção(s)  ( a > Selecionar todos)"
+		def colorMagenta = ConsoleColor.MAGENTA.value
+		def colorWhite = ConsoleColor.WHITE.value
+		
+		inputLabel = "\nDigite o(s) número(s) da(s) opção(s)"
 		printOptions()
+		println "${colorMagenta} a >${colorWhite} Selecionar todos "
 		super.read()
 		boolean valid = inputValue.equals("a") || inputValue.split(',').every { validOption(it) }
 		if(!valid) exit()
@@ -20,4 +26,5 @@ class MultipleOptionInputReader extends OptionInputReader  {
 				.unique()
 				.collect { options[it-1] }
 	}
+	
 }
