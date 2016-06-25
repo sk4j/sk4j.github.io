@@ -1,12 +1,8 @@
 
 package sk4j.generator
 
-import com.thoughtworks.qdox.model.JavaClass
-
 import sk4j.ConsoleColor
 import sk4j.SkApp
-import sk4j.generator.template.DaoGeneratorTemplate
-import sk4j.model.EJavaFile
 
 class AppGenerator extends SkApp {
 
@@ -29,6 +25,6 @@ class AppGenerator extends SkApp {
 		def selectedEntities = console.readopts(entities)
 		console.echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", ConsoleColor.CYAN
 		// Cria o arquivo *DAO.java com o template DaoGeneratorTemplate
-		selectedEntities.each { file "${it.path}../persistence/${it.name}DAO.java", it.merge(DaoGeneratorTemplate) }
+		selectedEntities.each { file "${it.path}../persistence/${it.name}DAO.java", template('dao', it) }
 	}
 }
