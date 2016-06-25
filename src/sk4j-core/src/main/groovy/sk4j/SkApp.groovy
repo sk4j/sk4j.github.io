@@ -1,8 +1,8 @@
 package sk4j
 
-import org.jtwig.JtwigModel
 import org.jtwig.JtwigTemplate
 
+import sk4j.model.EModel
 import sk4j.model.EProject
 
 /**
@@ -72,12 +72,21 @@ abstract class SkApp {
 
 	/**
 	 * 
-	 * Retorna o Reader com os dados do template.
-	 * 
-	 * @param templatePath
+	 * @param templateName
 	 * @return
 	 */
 	SkTemplate template(String templateName) {
+		new SkTemplate(template: JtwigTemplate.classpathTemplate("/templates/${templateName}.jtwig"), context: this.context)
+	}
+
+	/**
+	 * 
+	 * @param templateName
+	 * @param model
+	 * @return
+	 */
+	public <T extends EModel> SkTemplate template(String templateName, T model) {
+		this.context['model'] = model
 		new SkTemplate(template: JtwigTemplate.classpathTemplate("/templates/${templateName}.jtwig"), context: this.context)
 	}
 
