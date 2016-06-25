@@ -1,0 +1,18 @@
+package sk4j.generator
+
+import sk4j.ConsoleColor
+import sk4j.SkApp
+
+class AppGenerator extends SkApp {
+
+	static main(args) {
+		new AppGenerator().start(args)
+	}
+
+	@Override
+	public void run() {
+		console.echo '*** {{projectName}} ***', ConsoleColor.YELLOW
+		//TODO Generator Code 
+		
+	}
+}
