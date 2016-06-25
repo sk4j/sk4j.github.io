@@ -23,10 +23,10 @@ class SkGeneratorApp extends SkApp {
 			mkdir "${context.sk4jHome}/src/${context.projectName}/bin"
 			mkdir "${context.sk4jHome}/src/${context.projectName}/build"
 
-			file "${context.sk4jHome}/src/${context.projectName}/.gitignore", template('gitignore')
-			file "${context.sk4jHome}/src/${context.projectName}/build.gradle", template('build-gradle')
-			file "${context.sk4jHome}/src/${context.projectName}/src/main/groovy/sk4j/generator/AppGenerator.groovy", template('app-generator')
-			file "${context.sk4jHome}/src/${context.projectName}/src/main/resources/templates/readme.txt", template('readme-txt')
+			file (path: "${context.sk4jHome}/src/${context.projectName}", name: ".gitignore" , template: 'gitignore')
+			file (path: "${context.sk4jHome}/src/${context.projectName}", name: "build.gradle" , template: 'build-gradle')
+			file (path: "${context.sk4jHome}/src/${context.projectName}/src/main/groovy/sk4j/generator", name: "AppGenerator.groovy" , template: 'app-generator')
+			file (path: "${context.sk4jHome}/src/${context.projectName}/src/main/resources/templates", name: "readme.txt" , template: 'readme-txt')
 		}
 	}
 }
