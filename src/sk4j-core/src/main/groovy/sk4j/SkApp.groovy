@@ -69,37 +69,20 @@ abstract class SkApp {
 	 * @param templateClass
 	 * @return
 	 */
-	def file(String path, String fileName , SkTemplate sktemplate) {
+	def file(params) {
 		def cyanColor = ConsoleColor.CYAN.value
 		def grayColor = ConsoleColor.GRAY.value
-		File file = new File("${path}/${fileName}")
+		File file = new File("${params.path}/${params.name}")
 		if(file.exists()) {
-			console.echo "${cyanColor}>>> ${grayColor}Arquivo existente:  ${path}/${fileName}${console.whiteColor}"
+			console.echo "${cyanColor}>>> ${grayColor}Arquivo existente:  ${params.path}/${params.name}${console.whiteColor}"
 			return
 		}
-		console.echo "${cyanColor}>>>${console.whiteColor} Criando arquivo:    ${path}/${fileName}"
+		console.echo "${cyanColor}>>>${console.whiteColor} Criando arquivo:    ${params.path}/${params.name}"
+		this.context['model'] = params.model
+		SkTemplate sktemplate =	new SkTemplate(template: JtwigTemplate.classpathTemplate("/templates/${params.template}.jtwig"), context: this.context)
 		file << sktemplate.merge()
 	}
 
-	/**
-	 * 
-	 * @param templateName
-	 * @return
-	 */
-	SkTemplate template(String templateName) {
-		new SkTemplate(template: JtwigTemplate.classpathTemplate("/templates/${templateName}.jtwig"), context: this.context)
-	}
-
-	/**
-	 * 
-	 * @param templateName
-	 * @param model
-	 * @return
-	 */
-	public <T extends EModel> SkTemplate template(String templateName, T model) {
-		this.context['model'] = model
-		new SkTemplate(template: JtwigTemplate.classpathTemplate("/templates/${templateName}.jtwig"), context: this.context)
-	}
 
 	void beforeRun() {
 	}

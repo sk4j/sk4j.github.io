@@ -102,4 +102,8 @@ class EProject {
 	boolean hasJavaFile(String javaFileName) {
 		getJavaFiles().any { it.javaClass.name.equals(javaFileName) }
 	}
+	
+	String findParentPath(String basePath, String parentName) {
+		File basePathFile = new File(basePath)
+	}
 }
