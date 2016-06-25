@@ -52,10 +52,11 @@ abstract class SkApp {
 	 * @return
 	 */
 	def mkdir(String path) {
+		def cyanColor = ConsoleColor.CYAN.value
 		File dir = new File(path)
 		if(!dir.exists()) {
 			dir.mkdirs()
-			console.echo "Criando diretório: ${dir.absolutePath}"
+			console.echo "${cyanColor}>>>${console.whiteColor} Criando diretório: ${dir.absolutePath}"
 		}
 	}
 
@@ -66,8 +67,15 @@ abstract class SkApp {
 	 * @return
 	 */
 	def file(String path, SkTemplate sktemplate) {
-		console.echo "Criando arquivo:   ${path}"
-		new File(path) << sktemplate.merge()
+		def cyanColor = ConsoleColor.CYAN.value
+		def grayColor = ConsoleColor.GRAY.value
+		File file = new File(path)
+		if(file.exists()) { 
+			console.echo "${cyanColor}>>> ${grayColor}Arquivo existente: ${path}${console.whiteColor}"
+			return
+		}
+		console.echo "${cyanColor}>>>${console.whiteColor} Criando arquivo:   ${path}"
+		file << sktemplate.merge()
 	}
 
 	/**

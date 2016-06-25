@@ -7,7 +7,7 @@ class MultipleOptionInputReader extends OptionInputReader  {
 	 */
 	@Override
 	def read() {
-		inputLabel = "\nDigite o(s) número(s) da(s) opção(s)  ([a] Selecionar todos)"
+		inputLabel = "\nDigite o(s) número(s) da(s) opção(s)  ( a > Selecionar todos)"
 		printOptions()
 		super.read()
 		boolean valid = inputValue.equals("a") || inputValue.split(',').every { validOption(it) }
