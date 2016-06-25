@@ -22,6 +22,6 @@ class OptionInputReader extends InputReader {
 	def printOptions() {
 		def colorMagenta = ConsoleColor.MAGENTA.value
 		def colorWhite = ConsoleColor.WHITE.value
-		options.sort().eachWithIndex { Choosable<?> c , i -> println "${colorMagenta}${i+1} >${colorWhite} ${c.choiseLabel} " }
+		options.sort().eachWithIndex { Choosable<?> c , i -> print "${colorMagenta}${i+1} >${colorWhite} ${c.choiseLabel} " }
 	}
 }

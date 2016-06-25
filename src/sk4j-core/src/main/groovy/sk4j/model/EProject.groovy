@@ -75,12 +75,31 @@ class EProject {
 		}
 		return dirs
 	}
-	
+
+	/**
+	 * Verifica se o projeto possui o arquivo pom.xml (Maven Project)
+	 * 
+	 * @return 
+	 */
 	boolean isMavenProject() {
 		new File("${path}/pom.xml").exists()
 	}
-	
+
+	/**
+	 * Verifica se o projeto possui o arquivo build.gradle (Gradle Project)	
+	 * 
+	 * @return
+	 */
 	boolean isGradleProject() {
 		new File("${path}/build.gradle").exists()
+	}
+	
+	/**
+	 * 
+	 * @param javaFileName
+	 * @return
+	 */
+	boolean hasJavaFile(String javaFileName) {
+		getJavaFiles().any { it.javaClass.name.equals(javaFileName) }
 	}
 }

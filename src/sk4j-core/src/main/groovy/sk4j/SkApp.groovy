@@ -1,8 +1,8 @@
 package sk4j
 
-import org.apache.commons.io.FilenameUtils
+import org.jtwig.JtwigModel
+import org.jtwig.JtwigTemplate
 
-import groovy.text.GStringTemplateEngine
 import sk4j.model.EProject
 
 /**
@@ -28,9 +28,22 @@ abstract class SkApp {
 		context['userHome'] = System.getenv("HOME")
 		context['sk4jHome'] = "${context.userHome}/git/sk4j.github.io"
 		context['projectHome'] = args[0]
+
+		console.with {
+			echo "-"*40
+			echo "USER_HOME: ${context.userHome}"
+			echo "SK4J_HOME: ${context.sk4jHome}"
+			echo "PROJECT_HOME: ${context.projectHome}"
+			echo "-"*40
+		}
+
 		project = new EProject(file: new File(context['projectHome']), path: context['projectHome'])
 		beforeRun()
-		run()
+		try {
+			run()
+		} catch (Exception e) {
+			exit(e.getMessage())
+		}
 	}
 
 	/**
@@ -52,29 +65,20 @@ abstract class SkApp {
 	 * @param templateClass
 	 * @return
 	 */
-	def file(String path, Class<? extends SkTemplate> templateClass) {
-		SkTemplate sktemplate = templateClass.newInstance()
-		def engine = new GStringTemplateEngine()
-		sktemplate.context = context
-		def template = engine.createTemplate(sktemplate.template()).make([context:sktemplate.context])
-		file(path,template.toString())
+	def file(String path, SkTemplate sktemplate) {
+		console.echo "Criando arquivo:   ${path}"
+		new File(path) << sktemplate.merge()
 	}
 
 	/**
 	 * 
-	 * Cria o arquivo com o conteudo correspondente.
+	 * Retorna o Reader com os dados do template.
 	 * 
-	 * @param path
-	 * @param fileContent
+	 * @param templatePath
 	 * @return
 	 */
-	def file(String path, String fileContent) {
-		String filePath = FilenameUtils.getPath(path)
-		if(!new File(filePath).exists()) {
-			mkdir(filePath)
-		}
-		console.echo "Criando arquivo:   ${path}"
-		new File(path) << fileContent
+	SkTemplate template(String templateName) {
+		new SkTemplate(template: JtwigTemplate.classpathTemplate("/templates/${templateName}.jtwig"), context: this.context)
 	}
 
 	void beforeRun() {
@@ -87,6 +91,8 @@ abstract class SkApp {
 	 * @return
 	 */
 	def exit(String message) {
+		console.echo ""
+		console.echo "*"*40, ConsoleColor.RED
 		console.echo message, ConsoleColor.RED
 		System.exit(1)
 	}

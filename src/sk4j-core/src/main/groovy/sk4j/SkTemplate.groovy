@@ -1,14 +1,17 @@
 package sk4j
 
-abstract class SkTemplate {
+import org.jtwig.JtwigModel
+import org.jtwig.JtwigTemplate
 
-	def model
+class SkTemplate {
 
 	def context = [:]
+	
+	JtwigTemplate template
 
-	/**
-	 * Retorna o template da aplicação.
-	 * @return String do Template ou File do Template.
-	 */
-	abstract String template()
+	String merge() {
+		JtwigModel jtwigModel = JtwigModel.newModel()
+		context.each { key, value -> jtwigModel.with(key, value) }
+		template.render(jtwigModel)
+	}
 }
