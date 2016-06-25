@@ -16,7 +16,6 @@ class SkGeneratorApp extends SkApp {
 
 		if(!context['projectName'].isEmpty()) {
 			console.echo ""
-			console.echo ">"*40, ConsoleColor.CYAN
 			mkdir "${context.sk4jHome}/src/${context.projectName}"
 			mkdir "${context.sk4jHome}/src/${context.projectName}/src/main/groovy"
 			mkdir "${context.sk4jHome}/src/${context.projectName}/src/main/groovy/sk4j/generator/"
@@ -28,8 +27,6 @@ class SkGeneratorApp extends SkApp {
 			file "${context.sk4jHome}/src/${context.projectName}/build.gradle", template('build-gradle')
 			file "${context.sk4jHome}/src/${context.projectName}/src/main/groovy/sk4j/generator/AppGenerator.groovy", template('app-generator')
 			file "${context.sk4jHome}/src/${context.projectName}/src/main/resources/templates/readme.txt", template('readme-txt')
-			
-			console.echo "<"*40, ConsoleColor.CYAN
 		}
 	}
 }
