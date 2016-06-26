@@ -12,7 +12,9 @@ class MultipleOptionInputReader extends OptionInputReader  {
 		def colorMagenta = ConsoleColor.MAGENTA.value
 		def colorWhite = ConsoleColor.WHITE.value
 		
-		inputLabel = "\nDigite o(s) número(s) da(s) opção(s)"
+		if(!inputLabel) {
+			inputLabel = "Digite o(s) número(s) da(s) opção(s)"
+		}
 		printOptions()
 		println "${colorMagenta} a >${colorWhite} Selecionar todos "
 		super.read()
