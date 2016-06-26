@@ -1,0 +1,16 @@
+package {{model.parentPackageName}}.business;
+
+import br.gov.frameworkdemoiselle.stereotype.BusinessController;
+import br.gov.frameworkdemoiselle.template.DelegateCrud;
+import {{model.parentPackageName}}.persistence.{{model.name}}DAO;
+import {{model.javaClass.package.name}}.{{model.name}};
+
+@BusinessController
+public class {{model.name}}BC extends DelegateCrud<{{model.name}}, Long, {{model.name}}DAO> {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+}
