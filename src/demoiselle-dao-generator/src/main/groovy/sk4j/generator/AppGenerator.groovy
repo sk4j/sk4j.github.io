@@ -11,14 +11,11 @@ class AppGenerator extends SkApp {
 	}
 
 	@Override
-	public void beforeRun() {
-		if(!project.isMavenProject()) exit "O diretório não possui um projeto maven válido."
-		if(project.javaFiles.isEmpty()) exit "O projeto não possui nenhuma entidade."
-	}
-
-	@Override
 	public void run() {
-		console.echo '*** demoiselle-dao-generator - Gerador de DAO para o Framework Demoiselle ***\n', ConsoleColor.YELLOW
+		// Sai do gerador se o diretório de execução não for um projeto maven.
+		quit condition: !project.isMavenProject(), message: 'O diretório não possui um projeto maven válido.'
+    	// Sair do gerador se o projeto não possuir nenhum arquivo java.		 
+		quit condition: project.javaFiles.isEmpty(), message: 'O projeto não possui nenhuma entidade.'
 		// Filtra no projeto todas as classes java com a annotation @Entity
 		def entities = project.javaFiles.findAll { it.hasAnnotation('Entity') }
 		// Exibe no console as opções de seleção das entidades
