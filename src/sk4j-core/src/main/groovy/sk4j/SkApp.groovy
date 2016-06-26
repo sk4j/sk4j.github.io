@@ -47,8 +47,10 @@ abstract class SkApp {
 
 	/**
 	 * 
-	 * @param path
-	 * @return
+	 * Cria um diretório.
+	 * 
+	 * @param path. Caminho do diretório.
+	 * 
 	 */
 	def mkdir(String path) {
 		def cyanColor = ConsoleColor.CYAN.value
@@ -63,10 +65,14 @@ abstract class SkApp {
 	}
 
 	/**
+	 * Cria um arquivo.
 	 * 
-	 * @param path
-	 * @param templateClass
-	 * @return
+	 * @param params. Mapa com os parâmetros de criação do arquivo. Chaves do mapa: 
+	 * 		  path: String = Caminho do arquivo.
+	 * 		  name: String = Nome do arquivo.
+	 * 		  template: String = Nome do template localizado.
+	 * 		  model: Chooseble = Modelo utilizando no template.
+	 *
 	 */
 	def file(params) {
 		def cyanColor = ConsoleColor.CYAN.value
@@ -81,16 +87,23 @@ abstract class SkApp {
 		SkTemplate sktemplate =	new SkTemplate(template: JtwigTemplate.classpathTemplate("/templates/${params.template}.jtwig"), context: this.context)
 		file << sktemplate.merge()
 	}
-	
+
+	/**
+	 * Sai do aplicativo. 
+	 * 
+	 * @param params. Mapa com os parâmetros de saida. Chaves do mapa:
+	 * 		  condition: boolean = Condição para saída do application
+	 * 		  message: String = Mensagem de saída
+	 * 
+	 */
 	def quit(params) {
 		boolean condition = params.condition
 		String message = params.message
-		
+
 		if(condition) {
 			exit(message)
 		}
 	}
-
 
 	/**
 	 * Finaliza a execução do programa de forma anormal (status 1) com uma mensagem no console.
@@ -104,7 +117,6 @@ abstract class SkApp {
 		console.echo message, ConsoleColor.RED
 		System.exit(1)
 	}
-
 
 	/**
 	 * Método que deverá sr implementado pela aplicação Sk.
