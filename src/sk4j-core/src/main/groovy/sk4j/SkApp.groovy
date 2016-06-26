@@ -38,7 +38,6 @@ abstract class SkApp {
 		}
 
 		project = new EProject(file: new File(context['projectHome']), path: context['projectHome'])
-		beforeRun()
 		try {
 			run()
 		} catch (Exception e) {
@@ -82,10 +81,16 @@ abstract class SkApp {
 		SkTemplate sktemplate =	new SkTemplate(template: JtwigTemplate.classpathTemplate("/templates/${params.template}.jtwig"), context: this.context)
 		file << sktemplate.merge()
 	}
-
-
-	void beforeRun() {
+	
+	def quit(params) {
+		boolean condition = params.condition
+		String message = params.message
+		
+		if(condition) {
+			exit(message)
+		}
 	}
+
 
 	/**
 	 * Finaliza a execução do programa de forma anormal (status 1) com uma mensagem no console.
