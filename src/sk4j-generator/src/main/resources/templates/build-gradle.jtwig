@@ -6,7 +6,10 @@ sourceCompatibility = 1.7
 version = '1.0'
 
 
-repositories { mavenCentral() }
+repositories {
+	mavenCentral() 
+	jcenter() 
+}
 
 dependencies {
 	compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
