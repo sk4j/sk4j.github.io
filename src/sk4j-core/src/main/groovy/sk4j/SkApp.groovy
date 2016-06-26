@@ -72,6 +72,7 @@ abstract class SkApp {
 	 * 		  name: String = Nome do arquivo.
 	 * 		  template: String = Nome do template localizado.
 	 * 		  model: Chooseble = Modelo utilizando no template.
+	 * 		  content: String = Conteúdo do arquivo. Não processa os paramentros template nem model.
 	 *
 	 */
 	def file(params) {
@@ -83,6 +84,10 @@ abstract class SkApp {
 			return
 		}
 		console.echo "${cyanColor}>>>${console.whiteColor} Criando arquivo:    ${params.path}/${params.name}"
+		if(params.content) {
+			file << params.content
+			return
+		}
 		this.context['model'] = params.model
 		SkTemplate sktemplate =	new SkTemplate(template: JtwigTemplate.classpathTemplate("/templates/${params.template}.jtwig"), context: this.context)
 		file << sktemplate.merge()

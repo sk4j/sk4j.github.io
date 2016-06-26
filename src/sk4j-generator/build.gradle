@@ -49,5 +49,13 @@ task pack(dependsOn: build) << {
 		from "build/libs/${project.name}.jar"
 		into '../../artifact'
 	}
+	
+	copy {
+		from "src/main/resources/description.txt"
+		into '../../help'
+		rename {
+			project.name
+		}
+	}
 }
 

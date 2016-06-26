@@ -7,10 +7,10 @@ function __sk4j {
     case "$COMMAND" in
         -e)
             COMMAND="execute";;
-        -c)
-            COMMAND="execute"
-            QUALIFIER="sk4j-generator"
-            ;;
+        -l)
+            COMMAND="list";;
+        -h)
+            COMMAND="help";;
     esac
 
     CMD_FOUND=""
@@ -20,7 +20,7 @@ function __sk4j {
     fi
 
     if [[ -z "$CMD_FOUND" ]]; then
-            echo "Invalid command: $COMMAND"
+            echo "Comando inválido: $COMMAND"
             __sk4j_help
     fi
 
