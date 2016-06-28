@@ -18,7 +18,7 @@ class AppGenerator extends SkApp {
 		// Filtra no projeto todas as classes java com a annotation @Entity
 		def entities = project.javaFiles.findAll { it.hasAnnotation('Entity') }
 		// Exibe no console as opções de seleção das entidades
-		def selectedEntities = console.readopts('Seleciona a(s) entidade(s)',entities)
+		def selectedEntities = console.readopts('Selecione a(s) entidade(s)',entities)
 		// Cria o arquivo *BC.java com o template 'bc.jtwig'
 		selectedEntities.each { EJavaFile jf ->
 			fs.createFile path:"${jf.path}../business", name:"${jf.name}BC.java", template: 'bc', model: jf
