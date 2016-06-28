@@ -64,7 +64,7 @@ class Skfs {
 			return
 		}
 		this.context['model'] = params.model
-		SkTemplate sktemplate =	new SkTemplate(template: JtwigTemplate.classpathTemplate("/templates/${params.template}.jtwig"))
+		SkTemplate sktemplate =	new SkTemplate(template: JtwigTemplate.classpathTemplate("/templates/${params.template}.jtwig"), context: this.context)
 		file << sktemplate.merge()
 	}
 

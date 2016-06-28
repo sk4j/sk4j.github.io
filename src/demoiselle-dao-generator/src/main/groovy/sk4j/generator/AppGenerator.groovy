@@ -21,7 +21,7 @@ class AppGenerator extends SkApp {
 		// Exibe no console as opções de seleção das entidades
 		def selectedEntities = console.readopts('Seleciona a(s) entidade(s)',entities)
 		// Cria o arquivo *DAO.java com o template 'dao.jtwig'
-		selectedEntities.each { file path:"${it.path}../persistence", 
+		selectedEntities.each { fs.createFile path:"${it.path}../persistence", 
 									 name:"${it.name}DAO.java", 
 									 template: 'dao', 
 									 model: it }
