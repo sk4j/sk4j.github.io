@@ -2,9 +2,6 @@ package sk4j.model
 
 import groovy.io.FileType
 
-import java.nio.file.Files;
-
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils
 
 import com.thoughtworks.qdox.JavaDocBuilder
@@ -34,12 +31,17 @@ class EProject {
 	/**
 	 * 
 	 */
-	List<EJavaFile> javaFiles
+	List<EJavaFile> javaFiles = []
 
 	/**
 	 * 
 	 */
 	List<File> dirs
+
+	/**
+	 * 
+	 */
+	List<File> files
 
 	public EProject() {
 		super()
@@ -81,6 +83,18 @@ class EProject {
 			}
 		}
 		return dirs
+	}
+	
+	/**
+	 * Itera por todos os arquivos do projeto.
+	 * @return
+	 */
+	public List<File> getFiles() {
+		if(this.files == null) {
+			this.files = []
+			file.eachFileRecurse(FileType.FILES) { File file -> files << file }
+		}
+		return files
 	}
 
 	/**
