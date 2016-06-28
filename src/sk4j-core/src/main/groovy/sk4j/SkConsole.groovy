@@ -80,4 +80,9 @@ class SkConsole {
 	def readopts(List<? extends Choosable<?>> options) {
 		new MultipleOptionInputReader(options: options).read()
 	}
+	
+	def log(message) {
+		def yellowColor = ConsoleColor.YELLOW.value
+		println "${yellowColor}- ${message}${whiteColor}"
+	}
 }

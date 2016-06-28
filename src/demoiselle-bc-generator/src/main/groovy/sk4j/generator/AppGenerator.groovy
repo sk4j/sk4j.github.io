@@ -1,7 +1,7 @@
 package sk4j.generator
 
-import sk4j.ConsoleColor
 import sk4j.SkApp
+import sk4j.model.EJavaFile
 
 class AppGenerator extends SkApp {
 
@@ -19,10 +19,9 @@ class AppGenerator extends SkApp {
 		def entities = project.javaFiles.findAll { it.hasAnnotation('Entity') }
 		// Exibe no console as opções de seleção das entidades
 		def selectedEntities = console.readopts('Seleciona a(s) entidade(s)',entities)
-		// Cria o arquivo *DAO.java com o template 'dao.jtwig'
-		selectedEntities.each { fs.createFile path:"${it.path}../business",
-									 name:"${it.name}BC.java",
-									 template: 'bc',
-									 model: it }
+		// Cria o arquivo *BC.java com o template 'bc.jtwig'
+		selectedEntities.each { EJavaFile jf ->
+			fs.createFile path:"${jf.path}../business", name:"${jf.name}BC.java", template: 'bc', model: jf
+		}
 	}
 }
