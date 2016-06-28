@@ -31,7 +31,7 @@ class EProject {
 	/**
 	 * 
 	 */
-	List<EJavaFile> javaFiles = []
+	List<EJavaFile> javaFiles
 
 	/**
 	 * 

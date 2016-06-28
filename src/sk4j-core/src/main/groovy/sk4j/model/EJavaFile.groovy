@@ -62,7 +62,19 @@ class EJavaFile extends EModel<EJavaFile> implements Choosable<EJavaFile>  {
 		return parentPackageName
 	}
 
+	public List<EJavaAttribute> getJavaAttributes() {
+		if(javaAttributes == null) {
+			this.javaAttributes = javaClass.fields.collect { new EJavaAttribute(javaField: it) }
+		}
+		return this.javaAttributes
+	}
 
+	public List<EJavaMethod> getJavaMethods() {
+		if(this.javaMethods == null) {
+			this.javaMethods = javaClass.methods.collect { new EJavaMethod(javaMethod: it)}
+		}
+		return this.javaMethods
+	}
 
 	/**
 	 * Verifica se a classe possui a annotation especificada.
