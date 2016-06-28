@@ -33,10 +33,10 @@ class Skfs {
 		File dir = new File(path)
 		if(!dir.exists()) {
 			dir.mkdirs()
-			console.echo "${cyanColor}>>>${console.whiteColor} Criando diretório:  ${dir.absolutePath}"
+			console.echo "${cyanColor}>>>${console.whiteColor} Diretório criado:  ${dir.absolutePath}"
 			return
 		}
-		console.echo "${cyanColor}>>> ${grayColor}Diretório existente: ${dir.absolutePath}${console.whiteColor}"
+		console.log "Diretório existente: ${dir.absolutePath}"
 	}
 
 	/**
@@ -55,10 +55,10 @@ class Skfs {
 		def grayColor = ConsoleColor.GRAY.value
 		File file = new File("${params.path}/${params.name}")
 		if(file.exists()) {
-			console.echo "${cyanColor}>>> ${grayColor}Arquivo existente:  ${params.path}/${params.name}${console.whiteColor}"
+			console.log "Arquivo existente:  ${params.path}/${params.name}"
 			return
 		}
-		console.echo "${cyanColor}>>>${console.whiteColor} Criando arquivo:    ${params.path}/${params.name}"
+		console.echo "${cyanColor}>>>${console.whiteColor} Arquivo criado:    ${params.path}/${params.name}"
 		if(params.content) {
 			file << params.content
 			return
