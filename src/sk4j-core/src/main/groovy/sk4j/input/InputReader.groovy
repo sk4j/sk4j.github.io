@@ -1,7 +1,11 @@
 package sk4j.input
 
+import sk4j.SkSystem;
+
 class InputReader {
 
+	SkSystem system = new SkSystem()
+	
 	def inputValue
 
 	def inputLabel = "Digite: "
@@ -17,7 +21,6 @@ class InputReader {
 	}
 
 	def exit() {
-		println "Opção inválida: ${inputValue}"
-		System.exit(1)
+		system.exit("Opção inválida: ${inputValue}")
 	}
 }
