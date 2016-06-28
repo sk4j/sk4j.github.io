@@ -1,5 +1,6 @@
 package sk4j.model
 
+import sk4j.ConsoleColor
 import sk4j.input.Choosable
 
 import com.thoughtworks.qdox.model.Annotation
@@ -37,6 +38,9 @@ class EJavaAttribute extends EModel<EJavaAttribute> implements Choosable<EJavaAt
 	 */
 	@Override
 	public String getChoiseLabel() {
-		return javaField.name
+		def greenColor = ConsoleColor.GREEN.value
+		def whiteColor = ConsoleColor.WHITE.value
+		def bold = ConsoleColor.BOLD.value
+		return "${bold}${javaField.name}${whiteColor} : ${greenColor}${javaField.type}${whiteColor}"
 	}
 }

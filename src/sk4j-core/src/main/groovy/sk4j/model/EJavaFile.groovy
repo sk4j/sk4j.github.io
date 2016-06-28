@@ -92,7 +92,10 @@ class EJavaFile extends EModel<EJavaFile> implements Choosable<EJavaFile>  {
 
 	@Override
 	public String getChoiseLabel() {
-		this.javaClass.name
+		def greenColor = ConsoleColor.GREEN.value
+		def whiteColor = ConsoleColor.WHITE.value
+		def bold = ConsoleColor.BOLD.value
+		"${bold}${this.javaClass.name}${whiteColor} - ${greenColor}${javaClass.packageName}${whiteColor}"
 	}
 
 	/**
