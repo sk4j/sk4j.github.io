@@ -20,43 +20,19 @@ class SkGeneratorApp extends SkApp {
 		quit condition: context['projectName'].isEmpty(), message: 'Nome de projeto inválido.'
 		quit condition: context['projectDesc'].isEmpty(), message: 'Descrição do projeto inválida.'
 
-		mkdir "${context.sk4jHome}/src/${context.projectName}"
-		mkdir "${context.sk4jHome}/src/${context.projectName}/src/main/groovy"
-		mkdir "${context.sk4jHome}/src/${context.projectName}/src/main/groovy/sk4j/generator/"
-		mkdir "${context.sk4jHome}/src/${context.projectName}/src/main/resources/templates"
-		mkdir "${context.sk4jHome}/src/${context.projectName}/bin"
-		mkdir "${context.sk4jHome}/src/${context.projectName}/build"
-		
-		/*
-		 * Cria o arquivo .gitignore.
-		 * Utiliza o arquivo de template gitignore.jtwig
-		 */
-		file path: "${context.sk4jHome}/src/${context.projectName}",
-			 name: ".gitignore" ,
-			 template: 'gitignore'
-		/*
-		 * Cria o arquivo build.gradle
-		 */
-		file path: "${context.sk4jHome}/src/${context.projectName}",
-			 name: "build.gradle" ,
-			 template: 'build-gradle'
-		/*
-		 * Cria o arquivo src/main/groovy/sk4j/generator/AppGenerator.groovy
-		 */
-		file path: "${context.sk4jHome}/src/${context.projectName}/src/main/groovy/sk4j/generator",
-			 name: "AppGenerator.groovy" ,
-			 template: 'app-generator'
-		/*
-		 * Cria o arquivo src/main/resources/templates/readme.txt
-		 */
-		file path: "${context.sk4jHome}/src/${context.projectName}/src/main/resources/templates",
-			 name: "readme.txt" ,
-			 template: 'readme-txt'
-		/*
-		 * Cria o arquivo /src/main/resources/description.txt
-		 */
-		file path: "${context.sk4jHome}/src/${context.projectName}/src/main/resources/",
-			 name: "description.txt",
-			 content: context['projectDesc']
+		def projectDir = "${context.sk4jHome}/src/${context.projectName}"
+
+		fs.mkdir "${projectDir}"
+		fs.mkdir "${projectDir}/src/main/groovy"
+		fs.mkdir "${projectDir}/src/main/groovy/sk4j/generator/"
+		fs.mkdir "${projectDir}/src/main/resources/templates"
+		fs.mkdir "${projectDir}/bin"
+		fs.mkdir "${projectDir}/build"
+
+		fs.createFile path: "${projectDir}", name: ".gitignore", template: 'gitignore'
+		fs.createFile path: "${projectDir}", name: "build.gradle", template: 'build-gradle'
+		fs.createFile path: "${projectDir}/src/main/groovy/sk4j/generator", name: "AppGenerator.groovy", template: 'app-generator'
+		fs.createFile path: "${projectDir}/src/main/resources/templates", name: "readme.txt", template: 'readme-txt'
+		fs.createFile path: "${projectDir}/src/main/resources/", name: "description.txt", content: context['projectDesc']
 	}
 }

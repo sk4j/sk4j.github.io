@@ -2,6 +2,9 @@ package sk4j.model
 
 import groovy.io.FileType
 
+import java.nio.file.Files;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils
 
 import com.thoughtworks.qdox.JavaDocBuilder
@@ -71,7 +74,11 @@ class EProject {
 	public List<File> getDirs() {
 		if(this.dirs == null) {
 			this.dirs = []
-			file.eachFileRecurse(FileType.DIRECTORIES) { dirs << it }
+			file.eachFileRecurse(FileType.DIRECTORIES) { File dir ->
+				if(!dir.hidden) {
+					dirs << dir
+				}
+			}
 		}
 		return dirs
 	}
@@ -93,7 +100,7 @@ class EProject {
 	boolean isGradleProject() {
 		new File("${path}/build.gradle").exists()
 	}
-	
+
 	/**
 	 * 
 	 * @param javaFileName
@@ -101,9 +108,5 @@ class EProject {
 	 */
 	boolean hasJavaFile(String javaFileName) {
 		getJavaFiles().any { it.javaClass.name.equals(javaFileName) }
-	}
-	
-	String findParentPath(String basePath, String parentName) {
-		File basePathFile = new File(basePath)
 	}
 }
