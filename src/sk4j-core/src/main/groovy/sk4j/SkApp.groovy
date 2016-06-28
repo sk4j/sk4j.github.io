@@ -44,11 +44,13 @@ abstract class SkApp {
 		context['projectHome'] = args[0]
 
 		console.with {
+			echo ""
 			echo "-"*40
-			echo "USER_HOME: ${context.userHome}"
-			echo "SK4J_HOME: ${context.sk4jHome}"
-			echo "PROJECT_HOME: ${context.projectHome}"
+			echo " USER_HOME: ${context.userHome}"
+			echo " SK4J_HOME: ${context.sk4jHome}"
+			echo " PROJECT_HOME: ${context.projectHome}"
 			echo "-"*40
+			echo ""
 		}
 
 		project = new EProject(file: new File(context['projectHome']), path: context['projectHome'])
