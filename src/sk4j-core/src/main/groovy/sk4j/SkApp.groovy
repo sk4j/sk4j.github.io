@@ -1,8 +1,5 @@
 package sk4j
 
-import org.jtwig.JtwigTemplate
-
-import sk4j.model.EModel
 import sk4j.model.EProject
 
 /**
@@ -73,6 +70,19 @@ abstract class SkApp {
 		boolean condition = params.condition
 		String message = params.message
 		if(condition) { system.exit(message) }
+	}
+	
+	/**
+	 * 
+	 * Instancia e executa um processor.
+	 * 
+	 * @param delegateProcessorClass Classe Processor.
+	 */
+	protected <T extends DelegateProcessor> void execute(Class<T> delegateProcessorClass) {
+		DelegateProcessor delegateProcessor = delegateProcessorClass.newInstance()
+		delegateProcessor.project = this.project
+		delegateProcessor.context = this.context
+		delegateProcessor.process()
 	}
 
 	/**

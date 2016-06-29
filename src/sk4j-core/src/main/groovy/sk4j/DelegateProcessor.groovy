@@ -24,5 +24,5 @@ abstract class DelegateProcessor {
 	 */
 	SkSystem system = new SkSystem()
 	
-	abstract public void process();
+	abstract public void execute();
 }
