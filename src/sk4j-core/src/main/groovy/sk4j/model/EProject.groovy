@@ -2,7 +2,11 @@ package sk4j.model
 
 import groovy.io.FileType
 
+import javax.xml.parsers.DocumentBuilder
+import javax.xml.parsers.DocumentBuilderFactory
+
 import org.apache.commons.io.FilenameUtils
+import org.w3c.dom.Document
 
 import com.thoughtworks.qdox.JavaDocBuilder
 import com.thoughtworks.qdox.model.JavaSource
@@ -42,6 +46,11 @@ class EProject {
 	 * 
 	 */
 	List<File> files
+
+	/**
+	 * 
+	 */
+	List<EXmlFile> xmlFiles
 
 	public EProject() {
 		super()
@@ -84,7 +93,7 @@ class EProject {
 		}
 		return dirs
 	}
-	
+
 	/**
 	 * Itera por todos os arquivos do projeto.
 	 * @return
@@ -95,6 +104,22 @@ class EProject {
 			file.eachFileRecurse(FileType.FILES) { File file -> files << file }
 		}
 		return files
+	}
+
+	public List<EXmlFile> getXmlFiles() {
+		if(xmlFiles == null) {
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance()
+			DocumentBuilder builder = factory.newDocumentBuilder()
+			this.xmlFiles = []
+			file.eachFileRecurse(FileType.FILES) { File file ->
+				if(file.absolutePath.endsWith('.xhtml')) {
+					println file.absoluteFile
+					Document document = builder.parse(file.absolutePath)
+					this.xmlFiles << new EXmlFile(path: file.absolutePath, name:file.name, doc: document)
+				}
+			}
+		}
+		return xmlFiles
 	}
 
 	/**

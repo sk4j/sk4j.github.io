@@ -23,9 +23,9 @@ class ProjectApp extends SkApp {
 		 println dir.name
 		 }
 		 }*/
-		def persistence = project.files.find { it.absolutePath.endsWith('src/main/resources/META-INF/persistence.xml') }
+		//def persistence = project.files.find { it.absolutePath.endsWith('src/main/resources/META-INF/persistence.xml') }
 		
-		println persistence	
+		project.xmlFiles.each {	println it.name }
 	}
 
 	@Override
