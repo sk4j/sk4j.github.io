@@ -1,6 +1,7 @@
 package sk4j.generator
 
 import sk4j.SkApp
+import sk4j.generator.processor.EditMBProcessor;
 import sk4j.input.FileChooser
 
 class AppGenerator extends SkApp {
@@ -22,15 +23,15 @@ class AppGenerator extends SkApp {
 		def selectedEntity = console.readopt('Selecione a entidade',entities)
 		console.log "Entidade selecionada: ${selectedEntity.name}\n"
 		// Seleciona os atributos da entidade selecionada
-		context['attributes'] = console.readopts('Selecione o(s) atributo(s)', selectedEntity.javaAttributes)
-		console.log "Atributos selecionados: ${context.attributes*.name}\n"
+		context['selectedAttributes'] = console.readopts('Selecione o(s) atributo(s)', selectedEntity.javaAttributes)
+		console.log "Atributos selecionados: ${context.selectedAttributes*.name}\n"
 		
 		// Exibe prompt para entrada do nome do EditMB. Caso não seja digitado nada o opção defaul sera: 
 		// [Nome da Entidade]EditDialogMB
 		String editMBNameDefault = "${selectedEntity.name}EditDialogMB"
-		def editMBName = console.readln("Digite o nome do EditMB (default: ${editMBNameDefault})")
-		editMBName = editMBName? editMBName : editMBNameDefault
-		console.log "Nome do EditMB: ${editMBName}\n"
+		context['editMBName'] = console.readln("Digite o nome do EditMB (default: ${editMBNameDefault})")
+		context['editMBName'] = context['editMBName']? context['editMBName'] : editMBNameDefault
+		console.log "Nome do EditMB: ${context.editMBName}\n"
 		
 		// Seleciona como opção todos os diretórios em src/main/java que terminam com 'Page'.
 		def pagePackageOptions = project.dirs
@@ -38,8 +39,8 @@ class AppGenerator extends SkApp {
 									.collect { new FileChooser(it) }
 									.sort()
 		// Exibe o prompt para escolha com os itens acima. E retorna apenas 1 elemento da opção.
-		def selectedPackagePage = console.readopt('Selecione o pacote da página (em src/main/java/)',pagePackageOptions)
-		console.log "Página selecionada: ${selectedPackagePage.file.name}\n"
+		context['selectedPagePackage'] = console.readopt('Selecione o pacote da página (em src/main/java/)',pagePackageOptions)
+		console.log "Página selecionada: ${context.selectedPagePackage.file.name}\n"
 		
 		// Seleciona como opção todos os diretórios em src/main/webapp que terminam com 'Page'.
 		def pageDirOptions = project.dirs
@@ -47,7 +48,9 @@ class AppGenerator extends SkApp {
 								   .collect { new FileChooser(it) }
 								   .sort()
         // Exibe o prompt para escolha com os itens acima. E retorna apenas 1 elemento da opção.
-		def selectedDirPage = console.readopt('Selecione o diretório da página (em src/main/webapp/)',pageDirOptions)
-		console.log "Página selecionada: ${selectedDirPage.file.name}\n"
+		context['selectedPageDir'] = console.readopt('Selecione o diretório da página (em src/main/webapp/)',pageDirOptions)
+		console.log "Página selecionada: ${context.selectedPageDir.file.name}\n"
+		
+		execute(EditMBProcessor)
 	}
 }

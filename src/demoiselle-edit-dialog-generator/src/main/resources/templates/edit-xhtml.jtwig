@@ -1,0 +1,4 @@
+{% for attr in selectedAttributes %}
+	{{ attr.name }} : {{ attr.javaField.type }}
+{% endfor %}
+
