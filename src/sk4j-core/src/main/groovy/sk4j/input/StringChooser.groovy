@@ -6,7 +6,7 @@ package sk4j.input
  * @author jcruz
  *
  */
-class StringChooser implements Choosable<String> {
+class StringChooser implements Choosable<StringChooser> {
 
 	String value
 
@@ -16,8 +16,8 @@ class StringChooser implements Choosable<String> {
 	}
 
 	@Override
-	public int compareTo(String o) {
-		return this.compareTo(o)
+	public int compareTo(StringChooser o) {
+		return this.value.compareTo(o.value)
 	}
 
 	@Override

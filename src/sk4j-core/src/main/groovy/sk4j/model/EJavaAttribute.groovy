@@ -12,10 +12,21 @@ import com.thoughtworks.qdox.model.JavaField
  *
  */
 class EJavaAttribute extends EModel<EJavaAttribute> implements Choosable<EJavaAttribute>   {
+	
+	String name
 	/**
 	 * 
 	 */
 	JavaField javaField
+	
+	
+	public String getName() {
+		if(this.name == null) {
+			this.name = javaField.name
+		}
+		return name;
+	}
+
 	/**
 	 * 
 	 * @param name
