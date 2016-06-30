@@ -148,4 +148,10 @@ class EProject {
 	boolean hasJavaFile(String javaFileName) {
 		getJavaFiles().any { it.javaClass.name.equals(javaFileName) }
 	}
+
+	@Override
+	public String toString() {
+		return "EProject [path=" + path + "]";
+	}
+	
 }

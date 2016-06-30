@@ -83,7 +83,8 @@ abstract class SkApp {
 		delegateProcessor.project = this.project
 		delegateProcessor.context = this.context
 		console.log "Executando o processor ${delegateProcessorClass.name}"
-		delegateProcessor.process()
+		delegateProcessor.fs.context = this.context
+		delegateProcessor.execute()
 	}
 
 	/**

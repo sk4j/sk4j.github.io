@@ -1,5 +1,6 @@
 package sk4j.input
 
+import groovy.transform.ToString;
 import sk4j.ConsoleColor
 
 class FileChooser implements Choosable<FileChooser> {
@@ -23,4 +24,10 @@ class FileChooser implements Choosable<FileChooser> {
 		def bold = ConsoleColor.BOLD.value
 		return "${bold}${this.file.name}${whiteColor} - ${greenColor}${file.absolutePath}${whiteColor}"
 	}
+
+	@Override
+	public String toString() {
+		return "FileChooser [file=" + file.absolutePath + "]";
+	}
+	
 }

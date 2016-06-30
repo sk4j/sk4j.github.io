@@ -54,4 +54,10 @@ class EJavaAttribute extends EModel<EJavaAttribute> implements Choosable<EJavaAt
 		def bold = ConsoleColor.BOLD.value
 		return "${bold}${javaField.name}${whiteColor} : ${greenColor}${javaField.type}${whiteColor}"
 	}
+
+	@Override
+	public String toString() {
+		return "EJavaAttribute [name=" + name + "]";
+	}
+	
 }

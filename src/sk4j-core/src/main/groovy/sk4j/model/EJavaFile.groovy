@@ -120,4 +120,10 @@ class EJavaFile extends EModel<EJavaFile> implements Choosable<EJavaFile>  {
 		writer.close()
 		console.echo "${cyanColor}>>>${console.whiteColor} Classe atualizada:  ${javaFile.absolutePath}/${javaClass.name}.java"
 	}
+
+	@Override
+	public String toString() {
+		return "EJavaFile [path=" + path + "]";
+	}
+	
 }

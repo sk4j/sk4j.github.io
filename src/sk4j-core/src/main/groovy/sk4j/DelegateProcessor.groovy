@@ -24,5 +24,20 @@ abstract class DelegateProcessor {
 	 */
 	SkSystem system = new SkSystem()
 	
+	/**
+	 *
+	 * Instancia e executa um processor.
+	 *
+	 * @param delegateProcessorClass Classe Processor.
+	 */
+	protected <T extends DelegateProcessor> void execute(Class<T> delegateProcessorClass) {
+		DelegateProcessor delegateProcessor = delegateProcessorClass.newInstance()
+		delegateProcessor.project = this.project
+		delegateProcessor.context = this.context
+		console.log "Executando o processor ${delegateProcessorClass.name}"
+		delegateProcessor.fs.context = this.context
+		delegateProcessor.execute()
+	}
+	
 	abstract public void execute();
 }

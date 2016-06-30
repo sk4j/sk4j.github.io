@@ -11,10 +11,21 @@ import com.thoughtworks.qdox.model.JavaMethod
  *
  */
 class EJavaMethod extends EModel<EJavaMethod> implements Choosable<EJavaMethod>{
+	
+	String name
 	/**
 	 * 
 	 */
 	JavaMethod javaMethod
+	
+	
+	
+	public String getName() {
+		if(name == null) {
+			this.name = this.javaMethod.name
+		}
+		return name;
+	}
 	/**
 	 * Verifica se o método possui a annotation especificada
 	 * @param name
@@ -38,4 +49,9 @@ class EJavaMethod extends EModel<EJavaMethod> implements Choosable<EJavaMethod>{
 	public String getChoiseLabel() {
 		return javaMethod.name
 	}
+	@Override
+	public String toString() {
+		return "EJavaMethod [name=" + name + "]";
+	}
+	
 }
