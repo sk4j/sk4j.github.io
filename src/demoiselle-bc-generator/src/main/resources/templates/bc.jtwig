@@ -1,6 +1,9 @@
 package {{model.parentPackageName}}.business;
 
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
+import br.jus.tre_pa.jbase.jsf.validation.ValidationManager;
+import org.slf4j.Logger;
+import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import {{model.parentPackageName}}.persistence.{{model.name}}DAO;
 import {{model.javaClass.package.name}}.{{model.name}};
@@ -12,5 +15,25 @@ public class {{model.name}}BC extends DelegateCrud<{{model.name}}, Long, {{model
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private ValidationManager validationManager;
+	
+	@Inject
+	private Logger log;
+	
+	@Override
+	@Transactional
+	public PontoTransmissao update(PontoTransmissao bean) {
+		validationManager.validate(bean);
+		return getDelegate().update(bean);
+	}
+
+	@Override
+	@Transactional
+	public PontoTransmissao insert(PontoTransmissao bean) {
+		validationManager.validate(bean);
+		return getDelegate().insert(bean);
+	}
 
 }
