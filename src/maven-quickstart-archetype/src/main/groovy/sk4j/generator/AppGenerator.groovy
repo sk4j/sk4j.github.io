@@ -16,7 +16,7 @@ class AppGenerator extends SkApp {
 		quit condition: context['projectName'].isEmpty(), message: 'Nome de projeto inválido.'
 		
 		fs.mkdir "${context.projectHome}/${context.projectName}"
-		fs.mkdir "${context.projectHome}/${context.projectName}/src/main/java"
+		fs.mkdir "${context.projectHome}/${context.projectName}/src/main/java/foo"
 		fs.mkdir "${context.projectHome}/${context.projectName}/src/main/resources"
 		fs.mkdir "${context.projectHome}/${context.projectName}/src/main/test"
 		fs.mkdir "${context.projectHome}/${context.projectName}/target"
@@ -24,7 +24,7 @@ class AppGenerator extends SkApp {
 		fs.createFile path: "${context.projectHome}/${context.projectName}",
 			 name: 'pom.xml',
 			 template: 'pom-xml'
-		fs.createFile path: "${context.projectHome}/${context.projectName}/src/main/java",
+		fs.createFile path: "${context.projectHome}/${context.projectName}/src/main/java/foo",
 			 name: 'App.java',
 			 template: 'app-java'
 	}
