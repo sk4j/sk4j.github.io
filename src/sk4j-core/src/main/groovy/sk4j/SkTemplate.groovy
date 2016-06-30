@@ -21,8 +21,14 @@ class SkTemplate {
 	 * @return
 	 */
 	String merge() {
+		SkConsole console = new SkConsole()
 		JtwigModel jtwigModel = JtwigModel.newModel()
-		context.each { key, value -> jtwigModel.with(key, value) }
+		context.each { key, value -> 
+			if(value) { 
+				console.log "Variável do template: ${key} => ${value}"
+				jtwigModel.with(key, value) 
+			}
+		}
 		template.render(jtwigModel)
 	}
 }

@@ -58,14 +58,15 @@ class Skfs {
 			console.log "Arquivo existente:  ${params.path}/${params.name}"
 			return
 		}
-		console.echo "${cyanColor}>>>${console.whiteColor} Arquivo criado:    ${params.path}/${params.name}"
 		if(params.content) {
 			file << params.content
+			console.echo "${cyanColor}>>>${console.whiteColor} Arquivo criado:    ${params.path}/${params.name}"
 			return
 		}
 		this.context['model'] = params.model
 		SkTemplate sktemplate =	new SkTemplate(template: JtwigTemplate.classpathTemplate("/templates/${params.template}.jtwig"), context: this.context)
 		file << sktemplate.merge()
+		console.echo "${cyanColor}>>>${console.whiteColor} Arquivo criado:    ${params.path}/${params.name}"
 	}
 
 }

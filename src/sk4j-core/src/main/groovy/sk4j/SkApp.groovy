@@ -24,7 +24,7 @@ abstract class SkApp {
 	/**
 	 * 
 	 */
-	Skfs fs = new Skfs()
+	Skfs fs = new Skfs(context: this.context)
 	
 	/**
 	 * 
