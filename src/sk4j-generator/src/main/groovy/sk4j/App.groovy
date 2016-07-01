@@ -1,12 +1,12 @@
-package sk4j.generator
+package sk4j
 
 import sk4j.ConsoleColor
 import sk4j.SkApp
 
-class SkGeneratorApp extends SkApp {
+class App extends SkApp {
 
 	static main(args) {
-		new SkGeneratorApp().start(args)
+		new App().start(args)
 	}
 
 	@Override
@@ -24,14 +24,14 @@ class SkGeneratorApp extends SkApp {
 
 		fs.mkdir "${projectDir}"
 		fs.mkdir "${projectDir}/src/main/groovy"
-		fs.mkdir "${projectDir}/src/main/groovy/sk4j/generator/"
+		fs.mkdir "${projectDir}/src/main/groovy/sk4j"
 		fs.mkdir "${projectDir}/src/main/resources/templates"
 		fs.mkdir "${projectDir}/bin"
 		fs.mkdir "${projectDir}/build"
 
 		fs.createFile path: "${projectDir}", name: ".gitignore", template: 'gitignore'
 		fs.createFile path: "${projectDir}", name: "build.gradle", template: 'build-gradle'
-		fs.createFile path: "${projectDir}/src/main/groovy/sk4j/generator", name: "AppGenerator.groovy", template: 'app-generator'
+		fs.createFile path: "${projectDir}/src/main/groovy/sk4j", name: "App.groovy", template: 'app'
 		fs.createFile path: "${projectDir}/src/main/resources/templates", name: "readme.txt", template: 'readme-txt'
 		fs.createFile path: "${projectDir}/src/main/resources/", name: "description.txt", content: context['projectDesc']
 	}

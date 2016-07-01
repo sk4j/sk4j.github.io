@@ -31,9 +31,9 @@ test { systemProperties 'property': 'value' }
 
 jar {
 	manifest {
-		attributes 'Implementation-Title': 'Gradle Quickstart',
+		attributes 'Implementation-Title': 'Sk-Generator',
 		'Implementation-Version': version,
-		'Main-Class' : 'sk4j.generator.SkGeneratorApp',
+		'Main-Class' : 'sk4j.App',
 		'Class-Path': configurations.compile.collect {File file -> "./../lib/${file.name}"}.join(" ")
 	}
 	archiveName = "${baseName}.jar"
