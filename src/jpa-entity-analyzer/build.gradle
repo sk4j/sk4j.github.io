@@ -31,7 +31,7 @@ test { systemProperties 'property': 'value' }
 
 jar {
 	manifest {
-		attributes 'Implementation-Title': 'demoiselle-edit-dialog-generator' ,
+		attributes 'Implementation-Title': 'jpa-entity-analyzer' ,
 		'Implementation-Version': version,
 		'Main-Class' : 'sk4j.App',
 		'Class-Path': configurations.compile.collect {File file -> "./../lib/${file.name}"}.join(" ")
@@ -46,7 +46,7 @@ task pack(dependsOn: build) << {
 		into '../../lib'
 	}
 	copy {
-		from "build/libs/demoiselle-edit-dialog-generator.jar"
+		from "build/libs/jpa-entity-analyzer.jar"
 		into '../../artifact'
 	}
 	copy {

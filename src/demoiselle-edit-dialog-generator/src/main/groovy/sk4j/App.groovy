@@ -1,13 +1,12 @@
-package sk4j.generator
+package sk4j
 
-import sk4j.SkApp
-import sk4j.generator.processor.EditMBProcessor;
 import sk4j.input.FileChooser
+import sk4j.processor.EditMBProcessor
 
-class AppGenerator extends SkApp {
+class App extends SkApp {
 
 	static main(args) {
-		new AppGenerator().start(args)
+		new App().start(args)
 	}
 
 	@Override

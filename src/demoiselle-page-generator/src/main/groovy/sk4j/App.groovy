@@ -1,12 +1,12 @@
-package sk4j.generator
+package sk4j
 
 import sk4j.ConsoleColor
 import sk4j.SkApp
 
-class AppGenerator extends SkApp {
+class App extends SkApp {
 
 	static main(args) {
-		new AppGenerator().start(args)
+		new App().start(args)
 	}
 
 	@Override

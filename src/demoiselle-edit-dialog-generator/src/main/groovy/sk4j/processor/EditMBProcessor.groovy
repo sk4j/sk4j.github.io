@@ -1,4 +1,4 @@
-package sk4j.generator.processor
+package sk4j.processor
 
 import sk4j.DelegateProcessor
 

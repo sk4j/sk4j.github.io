@@ -33,7 +33,7 @@ jar {
 	manifest {
 		attributes 'Implementation-Title': 'demoiselle-bc-generator' ,
 		'Implementation-Version': version,
-		'Main-Class' : 'sk4j.generator.AppGenerator',
+		'Main-Class' : 'sk4j.App',
 		'Class-Path': configurations.compile.collect {File file -> "./../lib/${file.name}"}.join(" ")
 	}
 	archiveName = "${baseName}.jar"
