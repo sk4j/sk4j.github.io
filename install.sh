@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SK4J_HOME="~/git/sk4j.github.io/"
-GIT_HOME="~/git/"
+SK4J_HOME="$HOME/git/sk4j.github.io/"
+GIT_HOME="$HOME/git/"
 
 echo "Procurando pelo git..."
 if [ -z $(which git) ]; then
@@ -28,7 +28,7 @@ cd "$GIT_HOME"
 git clone "https://github.com/sk4j/sk4j.github.io.git"
 
 echo "Instalando o SK4J..."
-echo "SK4J_HOME=~/git/sk4j.github.io" >> ~/.bashrc
-echo "PATH=$PATH:~/git/sk4j.github.io/bin" >> ~/.bashrc
+echo "SK4J_HOME=$HOME/git/sk4j.github.io" >> ~/.bashrc
+echo "PATH=$PATH:$HOME/git/sk4j.github.io/bin" >> ~/.bashrc
 
 source ~/.bashrc
