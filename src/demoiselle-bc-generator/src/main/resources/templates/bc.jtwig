@@ -24,14 +24,14 @@ public class {{model.name}}BC extends DelegateCrud<{{model.name}}, Long, {{model
 	
 	@Override
 	@Transactional
-	public PontoTransmissao update(PontoTransmissao bean) {
+	public {{model.name}} update({{model.name}} bean) {
 		validationManager.validate(bean);
 		return getDelegate().update(bean);
 	}
 
 	@Override
 	@Transactional
-	public PontoTransmissao insert(PontoTransmissao bean) {
+	public {{model.name}} insert({{model.name}} bean) {
 		validationManager.validate(bean);
 		return getDelegate().insert(bean);
 	}
