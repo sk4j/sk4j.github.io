@@ -15,6 +15,7 @@ __sk_autocomplete ()   #  By convention, the function name
         for f in $(find "${SK4J_DIR}/artifact" -type f -name '*.jar' -exec basename {} \;); do
             artifacts="$artifacts $f"
         done
+        echo "$artifacts"
         COMPREPLY=( $( compgen -W "$artifacts" -- $cur ) );;
     -*)
         COMPREPLY=( $( compgen -W '-e -l -h' -- $cur ) );;
