@@ -2,14 +2,9 @@
 
 echo "Procurando pelo git..."
 if [ -z $(which git) ]; then
-	echo "Git não encontrado."
+	echo "Git não encontrado. Tentando instalação via apt-get"
 	echo "======================================================================================================"
-	echo " Instale o git. apt-get install git"
-	echo ""
-	echo " Reinicie o procedimento após a instalação."
-	echo "======================================================================================================"
-	echo ""
-	exit 0
+	sudo apt-get install git
 fi
 
 echo "Clonando diretório sk4j..."
