@@ -12,6 +12,6 @@ git clone "https://github.com/sk4j/sk4j.github.io.git"
 
 echo "Instalando o SK4J..."
 echo "SK4J_HOME=~/git/sk4j.github.io" >> ~/.bashrc
-echo "PATH=$PATH:$SK4J_HOME/bin" >> ~/.bashrc
+echo "PATH=$PATH:~/git/sk4j.github.io/bin" >> ~/.bashrc
 
 source ~/.bashrc
