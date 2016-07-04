@@ -13,7 +13,7 @@ __sk_autocomplete ()   #  By convention, the function name
   case "$cur" in
     -e)
         local artifacts
-        for f in $(find "${SK4J_DIR}/help" -type f -exec basename {} \;); do
+        for f in $(find "${SK4J_DIR}/artifact" -type f -name '*.jar' -exec basename {} \;); do
             artifacts="$artifacts $f"
         done
         COMPREPLY=( $( compgen -W $artifacts -- $cur ) );;
