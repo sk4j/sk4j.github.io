@@ -32,3 +32,7 @@ echo "SK4J_HOME=$HOME/git/sk4j.github.io" >> ~/.bashrc
 echo "PATH=$PATH:$HOME/git/sk4j.github.io/bin" >> ~/.bashrc
 
 source ~/.bashrc
+
+echo ""
+echo "======================================================================================================"
+echo "digite no console: source ~/.bashrc"
