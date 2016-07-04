@@ -22,4 +22,4 @@ __sk_autocomplete ()   #  By convention, the function name
   return 0
 }
 
-complete -F __sk_autocomplete -o filenames "$SK4J_DIR/conf/sk4j-autocomplete.sh"
+complete -F __sk_autocomplete sk4j
