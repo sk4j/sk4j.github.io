@@ -11,8 +11,14 @@ __sk_autocomplete ()   #  By convention, the function name
   cur=${COMP_WORDS[COMP_CWORD]}
 
   case "$cur" in
+    -e)
+        local artifacts
+        for f in $(find "${SK4J_DIR}/help" -type f -exec basename {} \;); do
+            artifacts="$artifacts $f"
+        done
+        COMPREPLY=( $( compgen -W $artifacts -- $cur ) );;
     -*)
-    COMPREPLY=( $( compgen -W '-e -l -h' -- $cur ) );;
+        COMPREPLY=( $( compgen -W '-e -l -h' -- $cur ) );;
 #   Generate the completion matches and load them into $COMPREPLY array.
 #   xx) May add more cases here.
 #   yy)

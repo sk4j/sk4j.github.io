@@ -33,6 +33,8 @@ echo "PATH=$PATH:$HOME/git/sk4j.github.io/bin" >> ~/.bashrc
 
 source ~/.bashrc
 
+sudo cp "$SK4J_HOME/conf/sk4j-autocomplete.sh" /etc/bash_completion.d/
+
 echo ""
 echo "======================================================================================================"
 echo "digite no console: source ~/.bashrc"
