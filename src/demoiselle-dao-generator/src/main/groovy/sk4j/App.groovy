@@ -16,7 +16,7 @@ class App extends SkApp {
 
 	@Override
 	public void run() {
-		chekProject()
+		checkProject()
 		selectEntities()
 		createDaoFileForEntities()
 	}
@@ -42,7 +42,7 @@ class App extends SkApp {
 	/*
 	 * 
 	 */
-	private chekProject() {
+	private checkProject() {
 		// Sai do gerador se o diretório de execução não for um projeto maven.
 		quit condition: !project.isMavenProject(), message: 'O diretório não possui um projeto maven válido.'
 		// Sair do gerador se o projeto não possuir nenhum arquivo java.
