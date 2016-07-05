@@ -36,4 +36,4 @@ Lista todos os artefatos que podem ser executados pelo sk4j.
 ```bash
     $ sk4j -e [nome_artefato]
 ```
-Executa um artefato sk4j. *Precionando a tecla tab após 'sk4j -e' é listado todas as opções de artefatos diponíveis*
+Executa um artefato sk4j. *Precionando a tecla tab após 'sk4j -e' é listado todas as opções de artefatos diponíveis*.
