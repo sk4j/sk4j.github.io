@@ -8,6 +8,8 @@ import javax.xml.parsers.DocumentBuilderFactory
 import org.apache.commons.io.FilenameUtils
 import org.w3c.dom.Document
 
+import sk4j.SkConsole
+
 import com.thoughtworks.qdox.JavaDocBuilder
 import com.thoughtworks.qdox.model.JavaSource
 
@@ -67,10 +69,14 @@ class EProject {
 			this.javaFiles = []
 			file.eachFileRecurse(FileType.FILES) {
 				if(it.name.endsWith('.java')) {
-					JavaDocBuilder builder = new JavaDocBuilder()
-					JavaSource source = builder.addSource(it)
-					def path =  FilenameUtils.normalize(FilenameUtils.getFullPath(it.absolutePath))
-					this.javaFiles << new EJavaFile(javaClass: source.classes[0], path: path)
+					try {
+						JavaDocBuilder builder = new JavaDocBuilder()
+						JavaSource source = builder.addSource(it)
+						def path =  FilenameUtils.normalize(FilenameUtils.getFullPath(it.absolutePath))
+						this.javaFiles << new EJavaFile(javaClass: source.classes[0], path: path)
+					} catch (Exception e) {
+						new SkConsole().log "Erro ao processar classe ${it.name}"
+					}
 				}
 			}
 		}
