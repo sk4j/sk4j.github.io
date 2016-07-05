@@ -11,3 +11,7 @@ Caso as depedências acimas estejam satisfeitas o próximo passo é a efetiva in
 ```bash
     $ curl -s "https://sk4j.github.io/install.sh" | bash
 ```
+Caso o procedimento ocorra sem problemas é necessário digite o comando a seguir:
+```bash
+    $ source ~/.bashrc
+```
