@@ -1,4 +1,10 @@
 # sk4j.github.io
+O projeto sk4j tem como objetivo ser uma ferramenta de produtividade em Java. Suas principais funcionalidades sao:
+
+* Geração de código (java, xhtml, xml etc...) através de templates [jtwig](http://jtwig.org/)
+* Analisador de código fonte java.
+* Gerador de diagrama UML de entidades JPA.
+* Gerador de archetypes de projetos (demoiselle, maven-quickstart e etc.)
 
 ###Dependências
 Para instalar o projeto sk4j é necessário antes possuir os seguintes programas instalados no máquina:
