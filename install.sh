@@ -21,8 +21,6 @@ if [ -d "$SK4J_HOME" ]; then
 	exit 0
 fi
 
-
-
 echo "Clonando diretório sk4j..."
 cd "$GIT_HOME"
 git clone "https://github.com/sk4j/sk4j.github.io.git"
