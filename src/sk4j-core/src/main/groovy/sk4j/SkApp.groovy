@@ -82,7 +82,6 @@ abstract class SkApp {
 		DelegateProcessor delegateProcessor = delegateProcessorClass.newInstance()
 		delegateProcessor.project = this.project
 		delegateProcessor.context = this.context
-		console.log "Executando o processor ${delegateProcessorClass.name}"
 		delegateProcessor.fs.context = this.context
 		delegateProcessor.execute()
 	}
