@@ -2,6 +2,7 @@
 
 ###Dependências
 Para instalar o projeto sk4j é necessário antes possuir os seguintes programas instalados no máquina:
+
     * git (apt-get install git)
     * curl (apt-get install curl)
 
