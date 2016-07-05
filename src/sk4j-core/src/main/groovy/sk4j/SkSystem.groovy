@@ -1,5 +1,7 @@
 package sk4j
 
+import java.awt.Desktop
+
 /**
  * 
  * @author jcruz
@@ -22,5 +24,14 @@ class SkSystem {
 		console.echo "*"*40, ConsoleColor.RED
 		console.echo message, ConsoleColor.RED
 		System.exit(1)
+	}
+
+	def browser(String url) {
+		try {
+			Desktop d = Desktop.getDesktop()
+			d.browse(new URI(url))
+		} catch(Exception e) {
+			exit("Erro ao abrir o navegador.")
+		}
 	}
 }
