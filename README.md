@@ -9,8 +9,8 @@ O projeto sk4j tem como objetivo ser uma ferramenta de produtividade em Java. Su
 ###Dependências
 Para instalar o projeto sk4j é necessário antes possuir os seguintes programas instalados no máquina:
 
-* **git** (sudo apt-get install git)
-* **curl** (sudo apt-get install curl)
+* **git** (*sudo apt-get install git*)
+* **curl** (*sudo apt-get install curl*)
 
 ### Instalação do sk4j
 Com as depedências satisfeitas o próximo passo é a efetiva instalação do sk4j. No console do linux digite o comando abaixo:
