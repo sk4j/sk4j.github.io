@@ -24,7 +24,7 @@ Caso o procedimento ocorra sem problemas é necessário digitar o comando a segu
 Com isso o comando **sk4j** estará disponível no console.
 
 ###Utilização do sk4j
-O sk4j possui uma paleta de comandos bem simples. Abaixo sem os principais commandos
+O sk4j possui uma paleta de comandos bem simples. Abaixo segue os principais comandos:
 ```bash
     $ sk4j -h
 ```
@@ -32,8 +32,8 @@ O comando acima exibe o help do sistema com o modo de uso.
 ```bash
     $ sk4j -l
 ```
-Lista todos os artefatos que podem ser executados pelo sk4j
+Lista todos os artefatos que podem ser executados pelo sk4j.
 ```bash
     $ sk4j -e [nome_artefato]
 ```
-Executa um artefato sk4j.
+Executa um artefato sk4j. *Precionando a tecla tab após 'sk4j -e' é listado todas as opções de artefatos diponíveis*
