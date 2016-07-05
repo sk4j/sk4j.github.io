@@ -13,11 +13,27 @@ Para instalar o projeto sk4j é necessário antes possuir os seguintes programas
 * **curl** (sudo apt-get install curl)
 
 ### Instalação do sk4j
-Caso as depedências acimas estejam satisfeitas o próximo passo é a efetiva instalação do sk4j. No console do linux digite o comando abaixo:
+Com as depedências satisfeitas o próximo passo é a efetiva instalação do sk4j. No console do linux digite o comando abaixo:
 ```bash
     $ curl -s "https://sk4j.github.io/install.sh" | bash
 ```
-Caso o procedimento ocorra sem problemas é necessário digite o comando a seguir:
+Caso o procedimento ocorra sem problemas é necessário digitar o comando a seguir:
 ```bash
     $ source ~/.bashrc
 ```
+Com isso o comando **sk4j** estará disponível no console.
+
+###Utilização do sk4j
+O sk4j possui uma paleta de comandos bem simples. Abaixo sem os principais commandos
+```bash
+    $ sk4j -h
+```
+O comando acima exibe o help do sistema com o modo de uso.
+```bash
+    $ sk4j -l
+```
+Lista todos os artefatos que podem ser executados pelo sk4j
+```bash
+    $ sk4j -e [nome_artefato]
+```
+Executa um artefato sk4j.
