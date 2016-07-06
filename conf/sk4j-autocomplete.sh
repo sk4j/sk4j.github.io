@@ -9,20 +9,20 @@ __sk_autocomplete ()   #  By convention, the function name
     COMPREPLY=()   # Array variable storing the possible completions.
     cur=${COMP_WORDS[COMP_CWORD]}
     prev=${COMP_WORDS[COMP_CWORD-1]}
-    opts="-e -h -l"
+    opts="execute help list"
 
     case "$prev" in
 
-        -e)
+        execute)
             for f in $(find "${SK4J_DIR}/artifact" -type f -name '*.jar' -exec basename -s .jar {} \;); do
                 artifacts="$f $artifacts"
             done
             COMPREPLY=( $( compgen -W "$artifacts" -- $cur ) )
     	    return 0
     	    ;;
-        -l)
+        list)
             ;;
-        -h)
+        help)
             ;;
     esac
 

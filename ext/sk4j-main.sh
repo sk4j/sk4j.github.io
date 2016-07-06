@@ -5,11 +5,11 @@ function __sk4j {
     QUALIFIER="$2"
 
     case "$COMMAND" in
-        -e)
+        execute)
             COMMAND="execute";;
-        -l)
+        list)
             COMMAND="list";;
-        -h)
+        help)
             COMMAND="help";;
     esac
 

@@ -7,6 +7,7 @@ import sk4j.model.EJavaFile
 
 class App extends SkApp {
 
+	//Armazena o resultado de todos os analyzers.
 	def results = []
 
 	static main(args) {
