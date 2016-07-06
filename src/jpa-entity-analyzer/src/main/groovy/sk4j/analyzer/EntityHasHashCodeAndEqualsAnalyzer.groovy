@@ -14,16 +14,16 @@ class EntityHasHashCodeAndEqualsAnalyzer extends DelegateProcessor {
 
 	@Override
 	public void execute() {
-		EJavaFile javaFile = context['javaFile']
+		EJavaFile javaFile = context['javaFileAnalyzerResult'].javaFile
 
 		def hashCode = javaFile.javaMethods.any { EJavaMethod m -> m.name.equals("hashCode") }
 		def equals = javaFile.javaMethods.any { EJavaMethod m -> m.name.equals("equals") }
 
 		if(!hashCode) {
-			context['output'] << "A classe ${javaFile.name} deve implementar hashCode."
+			context['javaFileAnalyzerResult'].results << "A classe ${javaFile.name} deve implementar hashCode."
 		}
 		if(!equals) {
-			context['output'] << "A classe ${javaFile.name} deve implementar equals."
+			context['javaFileAnalyzerResult'].results << "A classe ${javaFile.name} deve implementar equals."
 		}
 	}
 }

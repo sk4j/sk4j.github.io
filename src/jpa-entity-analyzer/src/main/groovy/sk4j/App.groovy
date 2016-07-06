@@ -7,6 +7,8 @@ import sk4j.model.EJavaFile
 
 class App extends SkApp {
 
+	def results = []
+
 	static main(args) {
 		new App().start(args)
 	}
@@ -22,13 +24,11 @@ class App extends SkApp {
 		// Exibe no console as opções de seleção das entidades
 		def selectedEntities = console.readopts('Selecione a(s) entidade(s)',entities)
 		console.log "Entidades selecionadas: ${selectedEntities*.name}"
-		// Cria o arquivo *DAO.java com o template 'dao.jtwig'
-		context.entities = [:]
 
-		context['output'] = []
 		selectedEntities.each { EJavaFile jf ->
-			context['javaFile'] = jf
+			context['javaFileAnalyzerResult'] = new JavaFileAnalyzerResult(javaFile: jf)
 			this.executeAnalyzers(jf)
+			results << context['javaFileAnalyzerResult']
 		}
 
 		generateHtmlAnalyzerResult()
@@ -42,9 +42,13 @@ class App extends SkApp {
 		def writer = new StringWriter()  // html is written here by markup builder
 		def markup = new groovy.xml.MarkupBuilder(writer)
 		markup.html {
-			table {
-				context['output'].each { String output ->
-					tr { td(output) }
+			results.each { JavaFileAnalyzerResult jfar ->
+				h4(jfar.javaFile.name) {
+					table {
+						jfar.results.each { String output ->
+							tr { td(output) }
+						}
+					}
 				}
 			}
 		}
@@ -52,7 +56,7 @@ class App extends SkApp {
 		def date = sdf.format(new Date())
 		fs.mkdir "$context.sk4jHome/tmp"
 		File file = new File("$context.sk4jHome/tmp/jpa-entity-analyzer-${date}.html")
-		def w = file.newWriter() 
+		def w = file.newWriter()
 		w << writer.toString()
 		w.close()
 		system.browser(file.toURI().toURL().toString())
