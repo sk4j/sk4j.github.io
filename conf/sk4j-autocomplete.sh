@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SK4J_DIR="${HOME}/git/sk4j.github.io"
+SK4J_HOME="${HOME}/git/sk4j.github.io"
 __sk_autocomplete ()   #  By convention, the function name
 {                 #+ starts with an underscore.
     local cur prev opts
@@ -14,7 +14,7 @@ __sk_autocomplete ()   #  By convention, the function name
     case "$prev" in
 
         execute)
-            for f in $(find "${SK4J_DIR}/artifact" -type f -name '*.jar' -exec basename -s .jar {} \;); do
+            for f in $(find "${SK4J_HOME}/artifact" -type f -name '*.jar' -exec basename -s .jar {} \;); do
                 artifacts="$f $artifacts"
             done
             COMPREPLY=( $( compgen -W "$artifacts" -- $cur ) )

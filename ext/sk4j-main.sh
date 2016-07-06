@@ -14,7 +14,7 @@ function __sk4j {
     esac
 
     CMD_FOUND=""
-    CMD_TARGET="${SK4J_DIR}/ext/sk4j-${COMMAND}.sh"
+    CMD_TARGET="${SK4J_HOME}/ext/sk4j-${COMMAND}.sh"
     if [[ -f "$CMD_TARGET" ]]; then
            CMD_FOUND="$CMD_TARGET"
     fi

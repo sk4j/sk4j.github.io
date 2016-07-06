@@ -1,9 +1,9 @@
 #!/bin/bash
 
-export SK4J_DIR="${HOME}/git/sk4j.github.io"
+export SK4J_HOME="${HOME}/git/sk4j.github.io"
 
-for f in $(find "${SK4J_DIR}/ext" -type f -name 'sk4j-*' -exec basename {} \;); do
-    source "${SK4J_DIR}/ext/${f}"
+for f in $(find "${SK4J_HOME}/ext" -type f -name 'sk4j-*' -exec basename {} \;); do
+    source "${SK4J_HOME}/ext/${f}"
 done
 
 __sk4j $1 $2

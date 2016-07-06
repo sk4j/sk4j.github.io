@@ -1,37 +1,45 @@
 #!/bin/bash
 
-SK4J_HOME="$HOME/git/sk4j.github.io/"
-GIT_HOME="$HOME/git/"
+SK4J_HOME="$HOME/.sk4j"
+SK4J_SERVICE="https://sk4j.github.io"
 
-echo "Procurando pelo git..."
-if [ -z $(which git) ]; then
-	echo "Git não encontrado. Tente instalar via apt-get depois reinicie o procedimento."
-	echo "======================================================================================================"
+#Verifica se o curl está instalado na máquina
+if [ -z $(which curl) ]; then
+	echo -e "comando 'curl' não instalado. instale pelo gereciador de pacotes."
 	exit 0
 fi
 
-if [ ! -d "$GIT_HOME" ]; then
-	mkdir -p "$GIT_HOME"
+#Verifica a existência do diretório SK4J
+if [ ! -d "$SK4J_HOME" ]; then
+	echo -e "Criando diretórios sk4j em $SK4J_HOME ..."
+	mkdir -p "$SK4J_HOME"
+	mkdir -p "$SK4J_HOME/artifact"
+	mkdir -p "$SK4J_HOME/bin"
+	mkdir -p "$SK4J_HOME/conf"
+	mkdir -p "$SK4J_HOME/ext"
+	mkdir -p "$SK4J_HOME/help"
+	mkdir -p "$SK4J_HOME/lib"
+	mkdir -p "$SK4J_HOME/tmp"
 fi
 
-
-if [ -d "$SK4J_HOME" ]; then
-	echo "O sk4j já está instalado!"
-	echo "======================================================================================================"
-	exit 0
-fi
-
-echo "Clonando diretório sk4j..."
-cd "$GIT_HOME"
-git clone "https://github.com/sk4j/sk4j.github.io.git"
+echo -e "Baixando arquivos sk4j da internet. Aguarde..."
+cd "$SK4J_HOME/bin"
+curl -s -O "$SK4J_SERVICE/bin/sk4j"
+cd "$SK4J_HOME/ext"
+curl -s -O "$SK4J_SERVICE/ext/sk4j-execute.sh"
+curl -s -O "$SK4J_SERVICE/ext/sk4j-help.sh"
+curl -s -O "$SK4J_SERVICE/ext/sk4j-list.sh"
+curl -s -O "$SK4J_SERVICE/ext/sk4j-main.sh"
+curl -s -O "$SK4J_SERVICE/ext/sk4j-update.sh"
+cd "$SK4J_HOME/conf"
+curl -s -O "$SK4J_SERVICE/conf/sk4j-autocomplete.sh"
+curl -s -O "$SK4J_SERVICE/conf/sk4j-profile.sh"
 
 echo "Instalando o SK4J..."
-echo "SK4J_HOME=$HOME/git/sk4j.github.io" >> ~/.bashrc
-echo "PATH=$PATH:$HOME/git/sk4j.github.io/bin" >> ~/.bashrc
 
-source ~/.bashrc
-
+sudo cp "$SK4J_HOME/conf/sk4j-profile.sh" /etc/profile.d/
 sudo cp "$SK4J_HOME/conf/sk4j-autocomplete.sh" /etc/bash_completion.d/
+source ~/.bashrc
 
 echo ""
 echo "======================================================================================================"
