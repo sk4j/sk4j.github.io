@@ -33,11 +33,11 @@ curl -s -O "$SK4J_SERVICE/ext/sk4j-main.sh"
 curl -s -O "$SK4J_SERVICE/ext/sk4j-update.sh"
 cd "$SK4J_HOME/conf"
 curl -s -O "$SK4J_SERVICE/conf/sk4j-autocomplete.sh"
-curl -s -O "$SK4J_SERVICE/conf/sk4j-profile.sh"
+curl -s -O "$SK4J_SERVICE/conf/sk4j-profile"
 
 echo "Instalando o SK4J..."
 
-sudo cp "$SK4J_HOME/conf/sk4j-profile.sh" /etc/profile.d/
+cat "$SK4J_HOME/conf/sk4j-profile.sh" > $HOME/.bashrc
 sudo cp "$SK4J_HOME/conf/sk4j-autocomplete.sh" /etc/bash_completion.d/
 source ~/.bashrc
 
