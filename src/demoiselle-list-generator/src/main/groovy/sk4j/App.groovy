@@ -1,7 +1,5 @@
 package sk4j
 
-import sk4j.ConsoleColor
-import sk4j.SkApp
 
 class App extends SkApp {
 
@@ -11,7 +9,16 @@ class App extends SkApp {
 
 	@Override
 	public void run() {
-		//TODO Generator Code 
-		//system.browser "http://www.google.com"
+		checkProject()
+	}
+	
+	/*
+	 * 
+	 */
+	private checkProject() {
+		// Sai do gerador se o diretório de execução não for um projeto maven.
+		quit condition: !project.isMavenProject(), message: 'O diretório não possui um projeto maven válido.'
+		// Sair do gerador se o projeto não possuir nenhum arquivo java.
+		quit condition: project.javaFiles.isEmpty(), message: 'O projeto não possui nenhum arquivo java.'
 	}
 }
