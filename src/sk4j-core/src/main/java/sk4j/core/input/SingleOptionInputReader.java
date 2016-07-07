@@ -14,7 +14,9 @@ public class SingleOptionInputReader<T extends Choosable<T>> extends OptionInput
 	public T readOption() throws IOException, InvalidOptionException {
 		printOptions();
 		read();
-		validateOption();
+		if (!isValidOption(getValue())) {
+			throw new InvalidOptionException(String.format("Opção inválida: %s", getValue()));
+		}
 		return this.getOptions().get(Integer.valueOf(getValue()) - 1);
 	}
 

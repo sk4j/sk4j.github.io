@@ -38,17 +38,17 @@ public class OptionInputReader<T extends Choosable<T>> extends InputReader {
 	 * @return
 	 * @throws InvalidOptionException
 	 */
-	protected void validateOption() throws InvalidOptionException {
+	protected boolean isValidOption(String value) {
 		Pattern pattern = Pattern.compile("\\s*\\d\\d*");
-		boolean stringIsDigit = pattern.matcher(getValue()).matches();
+		boolean stringIsDigit = pattern.matcher(value).matches();
 		if (stringIsDigit) {
-			boolean digitInRange = IntStream.rangeClosed(1, options.size()).anyMatch(p -> p == Integer.valueOf(getValue()));
+			boolean digitInRange = IntStream.rangeClosed(1, options.size()).anyMatch(p -> p == Integer.valueOf(value));
 			if (!digitInRange) {
-				throw new InvalidOptionException(String.format("Opção inválida: %s", getValue()));
+				return false;
 			}
-			return;
+			return true;
 		}
-		throw new InvalidOptionException(String.format("Opção inválida: %s", getValue()));
+		return false;
 	}
 
 	public List<T> getOptions() {
