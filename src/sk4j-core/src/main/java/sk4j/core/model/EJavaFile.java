@@ -5,6 +5,12 @@ import java.util.List;
 
 import com.thoughtworks.qdox.model.JavaClass;
 
+/**
+ * Classe que representa uma classe java.
+ * 
+ * @author jcruz
+ *
+ */
 public class EJavaFile implements Serializable {
 
 	/**

@@ -28,38 +28,18 @@ public class EProject implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * 
-	 */
 	private String name;
-	/**
-	 * 
-	 */
+
 	private String path;
 
-	/**
-	 * 
-	 */
 	private File file;
 
-	/**
-	 * 
-	 */
 	private List<EJavaFile> javaFiles;
 
-	/**
-	 * 
-	 */
 	private List<File> dirs;
 
-	/**
-	 * 
-	 */
 	private List<File> files;
 
-	/**
-	 * 
-	 */
 	private List<EXmlFile> xmlFiles;
 
 	public EProject(File file) {
