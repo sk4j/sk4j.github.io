@@ -68,4 +68,12 @@ public class SkConsole {
 		return new MultipleOptionInputReader<>(label, options).readOptions();
 	}
 
+	/**
+	 * 
+	 * @param message
+	 */
+	public static void log(String message, Object... args) {
+		System.out.println(String.format(CColor.yellow(message), args));
+	}
+
 }
