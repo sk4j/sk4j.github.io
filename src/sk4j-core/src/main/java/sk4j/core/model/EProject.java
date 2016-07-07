@@ -1,9 +1,18 @@
 package sk4j.core.model;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+import org.apache.commons.io.FilenameUtils;
+
+import com.thoughtworks.qdox.JavaDocBuilder;
+import com.thoughtworks.qdox.model.JavaSource;
 
 public class EProject implements Serializable {
 
@@ -46,6 +55,11 @@ public class EProject implements Serializable {
 	 */
 	List<EXmlFile> xmlFiles;
 
+	public EProject(File file) {
+		super();
+		this.file = file;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -70,9 +84,15 @@ public class EProject implements Serializable {
 		this.file = file;
 	}
 
-	public List<EJavaFile> getJavaFiles() {
-		if(javaFiles == null) {
-			javaFiles = new ArrayList<>();
+	public List<EJavaFile> getJavaFiles() throws IOException {
+		if (javaFiles == null) {
+			//@formatter:off
+			this.javaFiles = Files.walk(file.toPath())
+								  .filter(p -> p.toFile().getName().endsWith(".java"))
+								  .map(this::createJavaFile)
+								  .filter(Objects::nonNull)
+								  .collect(Collectors.toList());
+			//@formatter:on
 		}
 		return javaFiles;
 	}
@@ -134,6 +154,23 @@ public class EProject implements Serializable {
 		} else if (!path.equals(other.path))
 			return false;
 		return true;
+	}
+
+	/**
+	 * 
+	 * @param path
+	 * @return
+	 */
+	private EJavaFile createJavaFile(Path path) {
+		try {
+			JavaDocBuilder builder = new JavaDocBuilder();
+			JavaSource source = builder.addSource(path.toFile());
+			String pathFile = FilenameUtils.normalize(FilenameUtils.getFullPath(path.toFile().getAbsolutePath()));
+			return new EJavaFile(pathFile, source.getClasses()[0]);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
