@@ -7,13 +7,15 @@ import java.util.stream.Collectors;
 
 import com.thoughtworks.qdox.model.JavaClass;
 
+import sk4j.core.input.Choosable;
+
 /**
  * Classe que representa uma classe java.
  * 
  * @author jcruz
  *
  */
-public class EJavaFile implements Serializable {
+public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 
 	/**
 	 * 
@@ -119,6 +121,16 @@ public class EJavaFile implements Serializable {
 					.filter(p -> p.getType().getValue().endsWith(name))
 					.count() > 0;
 		//@formatter:on
+	}
+
+	@Override
+	public int compareTo(EJavaFile o) {
+		return this.getName().compareTo(o.getName());
+	}
+
+	@Override
+	public String getChoiseLabel() {
+		return this.getName();
 	}
 
 }

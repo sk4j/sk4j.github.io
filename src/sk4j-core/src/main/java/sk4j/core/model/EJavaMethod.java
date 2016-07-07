@@ -1,9 +1,16 @@
 package sk4j.core.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import com.thoughtworks.qdox.model.JavaMethod;
 
+/**
+ * Classe que representa um método de uma classe java.
+ * 
+ * @author jcruz
+ *
+ */
 public class EJavaMethod implements Serializable {
 
 	/**
@@ -18,6 +25,7 @@ public class EJavaMethod implements Serializable {
 	public EJavaMethod(JavaMethod javaMethod) {
 		super();
 		this.javaMethod = javaMethod;
+		this.name = this.javaMethod.getName();
 	}
 
 	public String getName() {
@@ -34,6 +42,40 @@ public class EJavaMethod implements Serializable {
 
 	public void setJavaMethod(JavaMethod javaMethod) {
 		this.javaMethod = javaMethod;
+	}
+
+	public boolean hasAnnotation(String name) {
+		//@formatter:off
+		return Arrays.asList(this.javaMethod.getAnnotations())
+					.stream()
+					.filter(p -> p.getType().getValue().endsWith(name))
+					.count() > 0;
+		//@formatter:on
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EJavaMethod other = (EJavaMethod) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
 	}
 
 	@Override
