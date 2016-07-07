@@ -21,15 +21,15 @@ public class OptionInputReader<T extends Choosable<T>> extends InputReader {
 	 * Exibe as opções no console.
 	 * 
 	 */
+	//@formatter:off
 	public void printOptions() {
 		AtomicInteger index = new AtomicInteger();
-		//@formatter:off
 		options
 			.stream()
 			.map(opt -> String.format("%d > %s", index.incrementAndGet(), opt.getChoiseLabel()))
 			.forEach(System.out::println);
-		//@formatter:on
 	}
+	//@formatter:on
 
 	/**
 	 * Verifica se a opção de entrada é valida.

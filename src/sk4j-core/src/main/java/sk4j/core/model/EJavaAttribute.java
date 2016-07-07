@@ -47,13 +47,13 @@ public class EJavaAttribute implements Serializable, Choosable<EJavaAttribute> {
 		this.javaField = javaField;
 	}
 
+	//@formatter:off
 	public boolean hasAnnotation(String name) {
-		//@formatter:off
 		return Arrays.asList(this.javaField.getAnnotations())
 					.stream()
 					.anyMatch(p -> p.getType().getValue().endsWith(name));
-		//@formatter:on
 	}
+	//@formatter:on
 
 	@Override
 	public int hashCode() {

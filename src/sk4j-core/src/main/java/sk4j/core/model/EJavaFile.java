@@ -75,33 +75,33 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 		this.javaClass = javaClass;
 	}
 
+	//@formatter:off
 	public List<EJavaAttribute> getJavaAttributes() {
 		if (this.javaAttributes == null) {
-			//@formatter:off
 			this.javaAttributes = Arrays.asList(javaClass.getFields())
 										.stream()
 										.map(p -> new EJavaAttribute(p))
 										.collect(Collectors.toList());
-			//@formatter:on
 		}
 		return javaAttributes;
 	}
+	//@formatter:on
 
 	public void setJavaAttributes(List<EJavaAttribute> javaAttributes) {
 		this.javaAttributes = javaAttributes;
 	}
 
+	//@formatter:off
 	public List<EJavaMethod> getJavaMethods() {
 		if (this.javaMethods == null) {
-			//@formatter:off
 			this.javaMethods = Arrays.asList(javaClass.getMethods())
 									 .stream()
 									 .map(p -> new EJavaMethod(p))
 									 .collect(Collectors.toList());
-			//@formatter:on
 		}
 		return javaMethods;
 	}
+	//@formatter:on
 
 	public void setJavaMethods(List<EJavaMethod> javaMethods) {
 		this.javaMethods = javaMethods;
@@ -114,13 +114,13 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 	 *            Nome da annotation.
 	 * @return
 	 */
+	//@formatter:off
 	public boolean hasAnnotation(String name) {
-		//@formatter:off
 		return Arrays.asList(javaClass.getAnnotations())
 					.stream()
 					.anyMatch(p -> p.getType().getValue().endsWith(name));
-		//@formatter:on
 	}
+	//@formatter:on
 
 	@Override
 	public int compareTo(EJavaFile o) {

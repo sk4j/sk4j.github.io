@@ -46,13 +46,13 @@ public class EJavaMethod implements Serializable, Choosable<EJavaMethod> {
 		this.javaMethod = javaMethod;
 	}
 
+	//@formatter:off
 	public boolean hasAnnotation(String name) {
-		//@formatter:off
 		return Arrays.asList(this.javaMethod.getAnnotations())
 					.stream()
 					.anyMatch(p -> p.getType().getValue().endsWith(name));
-		//@formatter:on
 	}
+	//@formatter:on
 
 	@Override
 	public int hashCode() {

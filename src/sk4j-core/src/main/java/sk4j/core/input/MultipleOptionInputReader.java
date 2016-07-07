@@ -31,7 +31,7 @@ public class MultipleOptionInputReader<T extends Choosable<T>> extends OptionInp
 					.distinct()
 					.map(p -> this.getOptions().get(p-1))
 					.collect(Collectors.toList());
-		//@formatter:on
 	}
+	//@formatter:on
 
 }

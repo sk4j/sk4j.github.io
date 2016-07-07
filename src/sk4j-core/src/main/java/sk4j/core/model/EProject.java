@@ -77,18 +77,18 @@ public class EProject implements Serializable {
 	 * @return Lista de arquivos java
 	 * @throws IOException
 	 */
+	//@formatter:off
 	public List<EJavaFile> getJavaFiles() throws IOException {
 		if (javaFiles == null) {
-			//@formatter:off
 			this.javaFiles = Files.walk(file.toPath())
 								  .filter(p -> p.toFile().getName().endsWith(".java"))
 								  .map(this::createJavaFile)
 								  .filter(Objects::nonNull)
 								  .collect(Collectors.toList());
-			//@formatter:on
 		}
 		return javaFiles;
 	}
+	//@formatter:on
 
 	public void setJavaFiles(List<EJavaFile> javaFiles) {
 		this.javaFiles = javaFiles;
@@ -100,17 +100,17 @@ public class EProject implements Serializable {
 	 * @return Lista de todos os diretórios do projeto.
 	 * @throws IOException
 	 */
+	//@formatter:off
 	public List<File> getDirs() throws IOException {
 		if (this.dirs == null) {
-			//@formatter:off
 			this.dirs = Files.walk(file.toPath())
 							 .filter(p -> p.toFile().isDirectory() && !p.toFile().isHidden())
 							 .map(p -> p.toFile())
 							 .collect(Collectors.toList());
-			//@formatter:on
 		}
 		return dirs;
 	}
+	//@formatter:on
 
 	public void setDirs(List<File> dirs) {
 		this.dirs = dirs;
@@ -122,17 +122,17 @@ public class EProject implements Serializable {
 	 * @return Lista de todos os arquivos do projeto.
 	 * @throws IOException
 	 */
+	//@formatter:off
 	public List<File> getFiles() throws IOException {
 		if (this.files == null) {
-			//@formatter:off
 			this.files = Files.walk(file.toPath())
 							  .filter(p -> p.toFile().isFile() && !p.toFile().isHidden())
 							  .map(p -> p.toFile())
 							  .collect(Collectors.toList());
-			//@formatter:on
 		}
 		return files;
 	}
+	//@formatter:on
 
 	public void setFiles(List<File> files) {
 		this.files = files;
@@ -155,13 +155,13 @@ public class EProject implements Serializable {
 	 * @return
 	 * @throws IOException
 	 */
+	//@formatter:off
 	public boolean hasJavaFile(String name) throws IOException {
-		//@formatter:off
 		return getFiles()
 			.stream()
 			.anyMatch(p -> p.getName().equals(name.concat(".java")));
-		//@formatter:onf
 	}
+	//@formatter:onf
 
 	/**
 	 * Verifica se o projeto é um projeto Maven.
