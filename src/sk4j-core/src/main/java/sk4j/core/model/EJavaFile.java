@@ -1,7 +1,9 @@
 package sk4j.core.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.thoughtworks.qdox.model.JavaClass;
 
@@ -26,9 +28,9 @@ public class EJavaFile implements Serializable {
 
 	private JavaClass javaClass;
 
-	private List<EJavaAttribute> attributes;
+	private List<EJavaAttribute> javaAttributes;
 
-	private List<EJavaMethod> methods;
+	private List<EJavaMethod> javaMethods;
 
 	public EJavaFile(String path, JavaClass javaClass) {
 		super();
@@ -71,20 +73,52 @@ public class EJavaFile implements Serializable {
 		this.javaClass = javaClass;
 	}
 
-	public List<EJavaAttribute> getAttributes() {
-		return attributes;
+	public List<EJavaAttribute> getJavaAttributes() {
+		if (this.javaAttributes == null) {
+			//@formatter:off
+			this.javaAttributes = Arrays.asList(javaClass.getFields())
+										.stream()
+										.map(p -> new EJavaAttribute(p))
+										.collect(Collectors.toList());
+			//@formatter:on
+		}
+		return javaAttributes;
 	}
 
-	public void setAttributes(List<EJavaAttribute> attributes) {
-		this.attributes = attributes;
+	public void setJavaAttributes(List<EJavaAttribute> javaAttributes) {
+		this.javaAttributes = javaAttributes;
 	}
 
-	public List<EJavaMethod> getMethods() {
-		return methods;
+	public List<EJavaMethod> getJavaMethods() {
+		if (this.javaMethods == null) {
+			//@formatter:off
+			this.javaMethods = Arrays.asList(javaClass.getMethods())
+									 .stream()
+									 .map(p -> new EJavaMethod(p))
+									 .collect(Collectors.toList());
+			//@formatter:on
+		}
+		return javaMethods;
 	}
 
-	public void setMethods(List<EJavaMethod> methods) {
-		this.methods = methods;
+	public void setJavaMethods(List<EJavaMethod> javaMethods) {
+		this.javaMethods = javaMethods;
+	}
+
+	/**
+	 * Verifica se a classe possui a annotation especificada.
+	 * 
+	 * @param name
+	 *            Nome da annotation.
+	 * @return
+	 */
+	public boolean hasAnnotation(String name) {
+		//@formatter:off
+		return Arrays.asList(javaClass.getAnnotations())
+					.stream()
+					.filter(p -> p.getType().getValue().endsWith(name))
+					.count() > 0;
+		//@formatter:on
 	}
 
 }

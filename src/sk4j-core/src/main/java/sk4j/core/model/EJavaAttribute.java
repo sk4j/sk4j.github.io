@@ -15,6 +15,11 @@ public class EJavaAttribute implements Serializable {
 
 	private JavaField javaField;
 
+	public EJavaAttribute(JavaField javaField) {
+		super();
+		this.javaField = javaField;
+	}
+
 	public String getName() {
 		return name;
 	}

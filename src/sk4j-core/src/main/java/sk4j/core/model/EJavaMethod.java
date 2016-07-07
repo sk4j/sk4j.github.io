@@ -15,6 +15,11 @@ public class EJavaMethod implements Serializable {
 
 	private JavaMethod javaMethod;
 
+	public EJavaMethod(JavaMethod javaMethod) {
+		super();
+		this.javaMethod = javaMethod;
+	}
+
 	public String getName() {
 		return name;
 	}
