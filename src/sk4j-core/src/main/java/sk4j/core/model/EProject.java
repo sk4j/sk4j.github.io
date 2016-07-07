@@ -24,36 +24,36 @@ public class EProject implements Serializable {
 	/**
 	 * 
 	 */
-	String name;
+	private String name;
 	/**
 	 * 
 	 */
-	String path;
+	private String path;
 
 	/**
 	 * 
 	 */
-	File file;
+	private File file;
 
 	/**
 	 * 
 	 */
-	List<EJavaFile> javaFiles;
+	private List<EJavaFile> javaFiles;
 
 	/**
 	 * 
 	 */
-	List<File> dirs;
+	private List<File> dirs;
 
 	/**
 	 * 
 	 */
-	List<File> files;
+	private List<File> files;
 
 	/**
 	 * 
 	 */
-	List<EXmlFile> xmlFiles;
+	private List<EXmlFile> xmlFiles;
 
 	public EProject(File file) {
 		super();
@@ -101,7 +101,15 @@ public class EProject implements Serializable {
 		this.javaFiles = javaFiles;
 	}
 
-	public List<File> getDirs() {
+	public List<File> getDirs() throws IOException {
+		if (this.dirs == null) {
+			//@formatter:off
+			this.dirs = Files.walk(file.toPath())
+							 .filter(p -> p.toFile().isDirectory() && !p.toFile().isHidden())
+							 .map(p -> p.toFile())
+							 .collect(Collectors.toList());
+			//@formatter:on
+		}
 		return dirs;
 	}
 
