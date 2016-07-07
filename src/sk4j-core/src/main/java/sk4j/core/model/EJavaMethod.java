@@ -5,13 +5,15 @@ import java.util.Arrays;
 
 import com.thoughtworks.qdox.model.JavaMethod;
 
+import sk4j.core.input.Choosable;
+
 /**
  * Classe que representa um método de uma classe java.
  * 
  * @author jcruz
  *
  */
-public class EJavaMethod implements Serializable {
+public class EJavaMethod implements Serializable, Choosable<EJavaMethod> {
 
 	/**
 	 * 
@@ -81,6 +83,16 @@ public class EJavaMethod implements Serializable {
 	@Override
 	public String toString() {
 		return "EJavaMethod [name=" + name + "]";
+	}
+
+	@Override
+	public int compareTo(EJavaMethod o) {
+		return this.name.compareTo(o.getName());
+	}
+
+	@Override
+	public String getChoiseLabel() {
+		return this.name;
 	}
 
 }
