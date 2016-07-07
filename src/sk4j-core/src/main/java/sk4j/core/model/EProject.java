@@ -14,6 +14,13 @@ import org.apache.commons.io.FilenameUtils;
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaSource;
 
+/**
+ * 
+ * Classe que representa um Prejeto Java (Maven ou Gradle).
+ * 
+ * @author jcruz
+ *
+ */
 public class EProject implements Serializable {
 
 	/**
@@ -84,6 +91,12 @@ public class EProject implements Serializable {
 		this.file = file;
 	}
 
+	/**
+	 * Retorna a lista de todos os arquivos .java do projeto.
+	 * 
+	 * @return Lista de arquivos java
+	 * @throws IOException
+	 */
 	public List<EJavaFile> getJavaFiles() throws IOException {
 		if (javaFiles == null) {
 			//@formatter:off
@@ -101,6 +114,12 @@ public class EProject implements Serializable {
 		this.javaFiles = javaFiles;
 	}
 
+	/**
+	 * Retorna todos os diretórios não ocultos do projeto.
+	 * 
+	 * @return Lista de todos os diretórios do projeto.
+	 * @throws IOException
+	 */
 	public List<File> getDirs() throws IOException {
 		if (this.dirs == null) {
 			//@formatter:off
@@ -117,6 +136,12 @@ public class EProject implements Serializable {
 		this.dirs = dirs;
 	}
 
+	/**
+	 * Retorna a lista de todos os arquivos do projeto.
+	 * 
+	 * @return Lista de todos os arquivos do projeto.
+	 * @throws IOException
+	 */
 	public List<File> getFiles() throws IOException {
 		if (this.files == null) {
 			//@formatter:off
@@ -141,6 +166,15 @@ public class EProject implements Serializable {
 		this.xmlFiles = xmlFiles;
 	}
 
+	/**
+	 * 
+	 * Verifica se o projeto possui o arquivo java especificado.
+	 * 
+	 * @param name
+	 *            Nome do arquivo.
+	 * @return
+	 * @throws IOException
+	 */
 	public boolean hasJavaFile(String name) throws IOException {
 		//@formatter:off
 		return getFiles()
@@ -181,10 +215,8 @@ public class EProject implements Serializable {
 		return true;
 	}
 
-	/**
+	/*
 	 * 
-	 * @param path
-	 * @return
 	 */
 	private EJavaFile createJavaFile(Path path) {
 		try {
