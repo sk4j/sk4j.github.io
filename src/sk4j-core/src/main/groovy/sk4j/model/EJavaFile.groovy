@@ -3,7 +3,6 @@ package sk4j.model
 import org.jboss.forge.roaster.Roaster
 import org.jboss.forge.roaster.model.source.JavaClassSource
 
-import sk4j.ConsoleColor
 import sk4j.SkConsole
 import sk4j.input.Choosable
 

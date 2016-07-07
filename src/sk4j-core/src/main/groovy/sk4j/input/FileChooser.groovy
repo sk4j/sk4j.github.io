@@ -1,7 +1,5 @@
 package sk4j.input
 
-import groovy.transform.ToString;
-import sk4j.ConsoleColor
 
 class FileChooser implements Choosable<FileChooser> {
 

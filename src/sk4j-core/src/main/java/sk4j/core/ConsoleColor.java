@@ -1,4 +1,4 @@
-package sk4j;
+package sk4j.core;
 
 /**
  * 

@@ -1,6 +1,5 @@
 package sk4j.input
 
-import sk4j.ConsoleColor;
 
 class OptionInputReader extends InputReader {
 
