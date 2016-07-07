@@ -159,8 +159,7 @@ public class EProject implements Serializable {
 		//@formatter:off
 		return getFiles()
 			.stream()
-			.filter(p -> p.getName().equals(name.concat(".java")))
-			.count() > 0;
+			.anyMatch(p -> p.getName().equals(name.concat(".java")));
 		//@formatter:onf
 	}
 

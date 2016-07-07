@@ -51,8 +51,7 @@ public class EJavaAttribute implements Serializable, Choosable<EJavaAttribute> {
 		//@formatter:off
 		return Arrays.asList(this.javaField.getAnnotations())
 					.stream()
-					.filter(p -> p.getType().getValue().endsWith(name))
-					.count() > 0;
+					.anyMatch(p -> p.getType().getValue().endsWith(name));
 		//@formatter:on
 	}
 

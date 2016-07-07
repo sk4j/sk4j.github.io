@@ -118,8 +118,7 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 		//@formatter:off
 		return Arrays.asList(javaClass.getAnnotations())
 					.stream()
-					.filter(p -> p.getType().getValue().endsWith(name))
-					.count() > 0;
+					.anyMatch(p -> p.getType().getValue().endsWith(name));
 		//@formatter:on
 	}
 

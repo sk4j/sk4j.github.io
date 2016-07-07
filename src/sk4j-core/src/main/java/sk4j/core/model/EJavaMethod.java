@@ -50,8 +50,7 @@ public class EJavaMethod implements Serializable, Choosable<EJavaMethod> {
 		//@formatter:off
 		return Arrays.asList(this.javaMethod.getAnnotations())
 					.stream()
-					.filter(p -> p.getType().getValue().endsWith(name))
-					.count() > 0;
+					.anyMatch(p -> p.getType().getValue().endsWith(name));
 		//@formatter:on
 	}
 
