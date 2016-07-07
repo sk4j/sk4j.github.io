@@ -11,8 +11,8 @@ public class OptionInputReaderTest {
 	public static void main(String[] args) throws IOException {
 		List<StringChooser> opts = Arrays.asList(new StringChooser("aaa"), new StringChooser("bbb"), new StringChooser("ccc"));
 		
-		new OptionInputReader("Digite as opt1: ",opts).read();
+		OptionInputReader<StringChooser> p = new OptionInputReader<StringChooser>("Digite as opt1: ",opts);
+		p.printOptions();
 		
-		new OptionInputReader("Digite as opt2: ",opts).read();
 	}
 }

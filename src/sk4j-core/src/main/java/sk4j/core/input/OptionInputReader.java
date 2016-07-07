@@ -3,16 +3,24 @@ package sk4j.core.input;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
-public class OptionInputReader extends InputReader {
+import sk4j.core.exception.InvalidOptionException;
 
-	private List<? extends Choosable<?>> options = new ArrayList<>();
+public class OptionInputReader<T extends Choosable<T>> extends InputReader {
 
-	public OptionInputReader(String label, List<? extends Choosable<?>> options) {
+	private List<T> options = new ArrayList<>();
+
+	public OptionInputReader(String label, List<T> options) {
 		super(label);
 		this.options = options;
 	}
 
+	/**
+	 * Exibe as opções no console.
+	 * 
+	 */
 	public void printOptions() {
 		AtomicInteger index = new AtomicInteger();
 		//@formatter:off
@@ -22,4 +30,29 @@ public class OptionInputReader extends InputReader {
 			.forEach(System.out::println);
 		//@formatter:on
 	}
+
+	/**
+	 * Verifica se a opção de entrada é valida.
+	 * 
+	 * @param value
+	 * @return
+	 * @throws InvalidOptionException
+	 */
+	protected void validateOption() throws InvalidOptionException {
+		Pattern pattern = Pattern.compile("\\s*\\d\\d*");
+		boolean stringIsDigit = pattern.matcher(getValue()).matches();
+		if (stringIsDigit) {
+			boolean digitInRange = IntStream.rangeClosed(1, options.size()).anyMatch(p -> p == Integer.valueOf(getValue()));
+			if (!digitInRange) {
+				throw new InvalidOptionException(String.format("Opção inválida: %s", getValue()));
+			}
+			return;
+		}
+		throw new InvalidOptionException(String.format("Opção inválida: %s", getValue()));
+	}
+
+	public List<T> getOptions() {
+		return options;
+	}
+
 }
