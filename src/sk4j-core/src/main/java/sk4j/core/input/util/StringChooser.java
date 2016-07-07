@@ -1,4 +1,6 @@
-package sk4j.core.input;
+package sk4j.core.input.util;
+
+import sk4j.core.input.Choosable;
 
 public class StringChooser implements Choosable<StringChooser> {
 

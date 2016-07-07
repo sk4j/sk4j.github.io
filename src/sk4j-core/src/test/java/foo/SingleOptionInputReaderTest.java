@@ -6,7 +6,7 @@ import java.util.List;
 
 import sk4j.core.exception.InvalidOptionException;
 import sk4j.core.input.SingleOptionInputReader;
-import sk4j.core.input.StringChooser;
+import sk4j.core.input.util.StringChooser;
 
 public class SingleOptionInputReaderTest {
 	public static void main(String[] args) throws IOException, InvalidOptionException {
