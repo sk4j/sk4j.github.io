@@ -164,6 +164,15 @@ public class EProject implements Serializable {
 		//@formatter:onf
 	}
 
+	/**
+	 * Verifica se o projeto é um projeto Maven.
+	 * 
+	 * @return
+	 */
+	public boolean isMavenProject() {
+		return new File("${path}/pom.xml").exists();
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
