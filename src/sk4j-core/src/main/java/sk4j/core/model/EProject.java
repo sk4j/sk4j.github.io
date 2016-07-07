@@ -117,7 +117,15 @@ public class EProject implements Serializable {
 		this.dirs = dirs;
 	}
 
-	public List<File> getFiles() {
+	public List<File> getFiles() throws IOException {
+		if (this.files == null) {
+			//@formatter:off
+			this.files = Files.walk(file.toPath())
+							  .filter(p -> p.toFile().isFile() && !p.toFile().isHidden())
+							  .map(p -> p.toFile())
+							  .collect(Collectors.toList());
+			//@formatter:on
+		}
 		return files;
 	}
 
