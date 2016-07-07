@@ -141,6 +141,15 @@ public class EProject implements Serializable {
 		this.xmlFiles = xmlFiles;
 	}
 
+	public boolean hasJavaFile(String name) throws IOException {
+		//@formatter:off
+		return getFiles()
+			.stream()
+			.filter(p -> p.getName().equals(name.concat(".java")))
+			.count() > 0;
+		//@formatter:onf
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
