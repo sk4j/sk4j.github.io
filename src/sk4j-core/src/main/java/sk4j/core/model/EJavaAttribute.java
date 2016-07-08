@@ -47,6 +47,12 @@ public class EJavaAttribute implements Serializable, Choosable<EJavaAttribute> {
 		this.javaField = javaField;
 	}
 
+	/**
+	 * Verifica se o atributo possui a annotation especificada.
+	 * 
+	 * @param name Nome da annotation.
+	 * @return
+	 */
 	//@formatter:off
 	public boolean hasAnnotation(String name) {
 		return Arrays.asList(this.javaField.getAnnotations())
