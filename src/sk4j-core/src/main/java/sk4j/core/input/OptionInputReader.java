@@ -38,11 +38,13 @@ public class OptionInputReader<T extends Choosable<T>> extends InputReader {
 	 * @return
 	 * @throws InvalidOptionException
 	 */
+	//@formatter:off
 	protected boolean isValidOption(String value) {
 		Pattern pattern = Pattern.compile("\\s*\\d\\d*");
 		boolean stringIsDigit = pattern.matcher(value).matches();
 		if (stringIsDigit) {
-			boolean digitInRange = IntStream.rangeClosed(1, options.size()).anyMatch(p -> p == Integer.valueOf(value));
+			boolean digitInRange = IntStream.rangeClosed(1, options.size())
+										    .anyMatch(p -> p == Integer.valueOf(value));
 			if (!digitInRange) {
 				return false;
 			}
@@ -50,6 +52,7 @@ public class OptionInputReader<T extends Choosable<T>> extends InputReader {
 		}
 		return false;
 	}
+	//@formatter:on
 
 	public List<T> getOptions() {
 		return options;

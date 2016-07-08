@@ -27,7 +27,7 @@ public class MultipleOptionInputReader<T extends Choosable<T>> extends OptionInp
 		return getValue().equals("a") ? this.getOptions() :
 				Arrays.asList(getValue().split(","))
 					.stream()
-					.map(p -> Integer.valueOf(p))
+					.map(Integer::valueOf)
 					.distinct()
 					.map(p -> this.getOptions().get(p-1))
 					.collect(Collectors.toList());
