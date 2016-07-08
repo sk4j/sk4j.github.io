@@ -56,7 +56,7 @@ public class EProject implements Serializable {
 	}
 
 	public String getPath() {
-		return path;
+		return file.getAbsolutePath();
 	}
 
 	public void setPath(String path) {

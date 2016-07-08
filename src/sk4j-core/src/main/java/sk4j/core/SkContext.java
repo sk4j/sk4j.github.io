@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.jtwig.JtwigModel;
 
+import sk4j.core.model.EProject;
+
 /**
  * Classe que contem as variáveis de contexto utilizadas pelo template.
  * 
@@ -14,6 +16,8 @@ import org.jtwig.JtwigModel;
 public class SkContext {
 
 	private Map<String, Object> context;
+
+	private EProject project;
 
 	private static SkContext instance;
 
@@ -50,8 +54,8 @@ public class SkContext {
 	 * 
 	 * @param key
 	 */
-	public void getItem(String key) {
-		get().context.get(key);
+	public Object getItem(String key) {
+		return get().context.get(key);
 	}
 
 	/**
@@ -62,6 +66,22 @@ public class SkContext {
 		JtwigModel jtwigModel = JtwigModel.newModel();
 		get().context.forEach((k, v) -> jtwigModel.with(k, v));
 		return jtwigModel;
+	}
+
+	public Map<String, Object> getContext() {
+		return context;
+	}
+
+	public void setContext(Map<String, Object> context) {
+		this.context = context;
+	}
+
+	public EProject getProject() {
+		return project;
+	}
+
+	void setProject(EProject project) {
+		this.project = project;
 	}
 
 }
