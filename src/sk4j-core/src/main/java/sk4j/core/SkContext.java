@@ -1,5 +1,6 @@
 package sk4j.core;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.jtwig.JtwigModel;
@@ -18,6 +19,7 @@ public class SkContext {
 
 	private SkContext() {
 		super();
+		this.context = new HashMap<>();
 	}
 
 	/**
