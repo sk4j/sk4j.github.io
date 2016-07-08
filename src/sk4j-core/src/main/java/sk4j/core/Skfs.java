@@ -32,7 +32,7 @@ public class Skfs {
 	public static void createFile(Path filePath, String fileName, SkTemplate template) {
 		File file = new File(String.format("%s/%s", filePath.toFile().getAbsolutePath(), fileName));
 		if (file.exists()) {
-			SkConsole.log("Arquivo existente: ");
+			SkConsole.log("Arquivo existente: %s/%s", filePath.toFile().getAbsolutePath(), fileName);
 		}
 	}
 
