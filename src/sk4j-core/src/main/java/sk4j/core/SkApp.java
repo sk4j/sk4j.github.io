@@ -25,7 +25,7 @@ public abstract class SkApp {
 	}
 
 	/**
-	 * 
+	 * Método chamado antes da execução do método {@link #run()}
 	 */
 	protected void beforeRun() {
 
