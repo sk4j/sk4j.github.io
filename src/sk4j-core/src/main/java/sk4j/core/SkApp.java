@@ -13,8 +13,10 @@ public abstract class SkApp {
 	protected void start(String args[]) {
 		SkContext.get().putItem("userHome", System.getenv("HOME"));
 		SkContext.get().putItem("sk4jHome", String.format("%s/.sk4j", SkContext.get().getItem("userHome")));
-		SkContext.get().putItem("projectHome", args[0]);
-		SkContext.get().setProject(new EProject(new File(args[0])));
+		if (args.length > 0) {
+			SkContext.get().putItem("projectHome", args[0]);
+			SkContext.get().setProject(new EProject(new File(args[0])));
+		}
 
 		try {
 			beforeRun();
@@ -41,7 +43,7 @@ public abstract class SkApp {
 			SkSystem.exit(messageOnFail);
 		}
 	}
-
+	
 	/**
 	 * 
 	 */
