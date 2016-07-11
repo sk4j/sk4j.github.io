@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SK4J_HOME="$HOME/git/sk4j.github.io/"
-GIT_HOME="$HOME/git/"
+SK4J_HOME="$HOME/.sk4j"
+GIT_HOME="$HOME/git"
 
 echo "Procurando pelo git..."
 if [ -z $(which git) ]; then

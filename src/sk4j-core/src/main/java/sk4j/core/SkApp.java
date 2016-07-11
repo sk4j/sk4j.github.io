@@ -15,6 +15,7 @@ public abstract class SkApp {
 	protected void start(String args[]) {
 		SkContext.get().putItem("userHome", System.getenv("HOME"));
 		SkContext.get().putItem("sk4jHome", format("${userHome}/.sk4j"));
+		SkContext.get().putItem("sk4jSDKHome", format("${userHome}/git/sk4j.github.io"));
 		if (args.length > 0) {
 			SkContext.get().putItem("projectHome", args[0]);
 			SkContext.get().setProject(new EProject(new File(args[0])));
