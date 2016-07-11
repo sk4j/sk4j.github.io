@@ -16,8 +16,8 @@ public class App extends SkApp {
 
 	@Override
 	protected void beforeRun() throws IOException {
-		String projectName = SkConsole.readln("Digite o nome do projeto");
-		String projectDesc = SkConsole.readln("Digite a descrição do projeto");
+		String projectName = SkConsole.readln("Digite o nome do projeto: ");
+		String projectDesc = SkConsole.readln("Digite a descrição do projeto: ");
 
 		quit(Strings.isBlank(projectName), "Nome de projeto inválido.");
 		quit(Strings.isBlank(projectDesc), "Descrição do projeto inválida.");
