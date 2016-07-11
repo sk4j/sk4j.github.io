@@ -2,6 +2,8 @@ package sk4j.core;
 
 import java.io.File;
 
+import org.apache.commons.lang3.text.StrSubstitutor;
+
 import sk4j.core.model.EProject;
 
 public abstract class SkApp {
@@ -12,7 +14,7 @@ public abstract class SkApp {
 	 */
 	protected void start(String args[]) {
 		SkContext.get().putItem("userHome", System.getenv("HOME"));
-		SkContext.get().putItem("sk4jHome", String.format("%s/.sk4j", SkContext.get().getItem("userHome")));
+		SkContext.get().putItem("sk4jHome", format("${userHome}/.sk4j"));
 		if (args.length > 0) {
 			SkContext.get().putItem("projectHome", args[0]);
 			SkContext.get().setProject(new EProject(new File(args[0])));
@@ -26,10 +28,15 @@ public abstract class SkApp {
 		}
 	}
 
+	protected String format(String value) {
+		StrSubstitutor substitutor = new StrSubstitutor(SkContext.get().getContext());
+		return substitutor.replace(value);
+	}
+
 	/**
 	 * Método chamado antes da execução do método {@link #run()}
 	 */
-	protected void beforeRun() {
+	protected void beforeRun() throws Exception {
 
 	}
 
@@ -43,7 +50,7 @@ public abstract class SkApp {
 			SkSystem.exit(messageOnFail);
 		}
 	}
-	
+
 	/**
 	 * 
 	 */
