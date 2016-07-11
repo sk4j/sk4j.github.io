@@ -28,6 +28,6 @@ public class App extends SkApp {
 
 	@Override
 	public void run() {
-		String projectDir = format("${sk3jHome}/src/${projectName}");
+		String projectDir = format("${sk4jHome}/src/${projectName}");
 	}
 }
