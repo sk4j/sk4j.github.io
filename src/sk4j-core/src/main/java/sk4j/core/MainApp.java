@@ -11,7 +11,7 @@ import sk4j.api.Console;
 import sk4j.api.Context;
 import sk4j.core.model.EProject;
 
-public abstract class MainApp extends App {
+public abstract class MainApp implements App {
 	/**
 	 * 
 	 */
@@ -37,8 +37,8 @@ public abstract class MainApp extends App {
 	 */
 	private void start(String args[]) {
 		context.putItem("userHome", System.getenv("HOME"));
-		context.putItem("sk4jHome", format("${userHome}/.sk4j"));
-		context.putItem("sk4jSDKHome", format("${userHome}/git/sk4j.github.io"));
+		context.putItem("sk4jHome", context.replace("${userHome}/.sk4j"));
+		context.putItem("sk4jSDKHome", context.replace("${userHome}/git/sk4j.github.io"));
 		if (args.length > 0) {
 			context.putItem("projectHome", args[0]);
 			context.setProject(new EProject(new File(args[0])));
@@ -58,8 +58,4 @@ public abstract class MainApp extends App {
 
 	}
 
-	/**
-	 * 
-	 */
-	protected abstract void run() throws Exception;
 }

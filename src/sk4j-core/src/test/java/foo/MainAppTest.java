@@ -13,7 +13,7 @@ public class MainAppTest extends MainApp {
 	}
 
 	@Override
-	protected void run() throws Exception {
+	public void run() throws Exception {
 		System.out.println("Oi");
 	}
 }
