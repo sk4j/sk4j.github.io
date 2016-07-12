@@ -1,7 +1,5 @@
 package sk4j
 
-import sk4j.ConsoleColor
-import sk4j.SkApp
 
 class App extends SkApp {
 

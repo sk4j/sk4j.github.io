@@ -1,5 +1,6 @@
 package sk4j
 
+import sk4j.core.console.ConsoleColor;
 import sk4j.input.Choosable
 import sk4j.input.InputReader
 import sk4j.input.MultipleOptionInputReader

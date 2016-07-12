@@ -1,6 +1,5 @@
 package sk4j.model
 
-import sk4j.ConsoleColor
 import sk4j.input.Choosable
 
 import com.thoughtworks.qdox.model.Annotation
