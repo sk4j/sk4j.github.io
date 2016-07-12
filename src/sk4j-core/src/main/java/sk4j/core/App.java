@@ -14,7 +14,7 @@ import sk4j.api.Context;
  * @author jcruz
  *
  */
-public class SkApp implements Serializable {
+public class App implements Serializable {
 
 	/**
 	 * 

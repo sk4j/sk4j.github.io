@@ -5,7 +5,7 @@ package sk4j.core;
  * @author jcruz
  *
  */
-public abstract class DelegateApp extends SkApp {
+public abstract class DelegateApp extends App {
 	/**
 	 * 
 	 */

@@ -8,7 +8,7 @@ import sk4j.api.Console;
 import sk4j.api.Context;
 import sk4j.core.model.EProject;
 
-public abstract class MainApp extends SkApp {
+public abstract class MainApp extends App {
 	/**
 	 * 
 	 */
