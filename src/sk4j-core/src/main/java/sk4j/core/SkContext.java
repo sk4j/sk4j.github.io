@@ -8,7 +8,7 @@ import org.jtwig.JtwigModel;
 import sk4j.core.model.EProject;
 
 /**
- * Classe que contem as variáveis de contexto utilizadas pelo template.
+ * Classe que contem as variáveis de contexto utilizadas pelo template e aplicação.
  * 
  * @author jcruz
  *

@@ -11,6 +11,8 @@ public class SkApp {
 
 	/**
 	 * 
+	 * Formata a String de entrada com as informações do contexto.
+	 * 
 	 * @param value
 	 * @return
 	 */
@@ -20,6 +22,8 @@ public class SkApp {
 	}
 
 	/**
+	 * 
+	 * Sai da aplicação dada uma condição e exibindo uma mensagem de saída.
 	 * 
 	 * @param condition
 	 * @param messageOnFail
