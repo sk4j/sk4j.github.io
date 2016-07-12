@@ -6,7 +6,6 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.text.StrSubstitutor;
 
-import sk4j.api.Console;
 import sk4j.api.Context;
 
 /**
@@ -24,9 +23,6 @@ public class App implements Serializable {
 	@Inject
 	private Context context;
 
-	@Inject
-	private Console console;
-
 	/**
 	 * 
 	 * Formata a String de entrada com as informações do contexto.
@@ -37,19 +33,6 @@ public class App implements Serializable {
 	protected String format(String value) {
 		StrSubstitutor substitutor = new StrSubstitutor(context.get());
 		return substitutor.replace(value);
-	}
-
-	/**
-	 * 
-	 * Sai da aplicação dada uma condição e exibindo uma mensagem de saída.
-	 * 
-	 * @param condition
-	 * @param messageOnFail
-	 */
-	protected void quit(boolean condition, String messageOnFail) {
-		if (condition) {
-			console.exit(messageOnFail);
-		}
 	}
 
 }
