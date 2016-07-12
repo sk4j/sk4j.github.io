@@ -20,19 +20,6 @@ public interface FS extends Serializable {
 	void mkdir(String path);
 
 	/**
-	 * Cria um arquivo com o modelo de template.
-	 * 
-	 * @param filePath
-	 *            Caminho do arquivo.
-	 * @param fileName
-	 *            Nome do arquivo.
-	 * @param template
-	 *            Template
-	 * @throws IOException 
-	 */
-	void createFile(Path filePath, String fileName, Template template) throws IOException;
-
-	/**
 	 * Cria um arquivo com o conteudo passado pela String.
 	 * 
 	 * @param filePath
@@ -41,7 +28,7 @@ public interface FS extends Serializable {
 	 *            Nome do arquivo.
 	 * @param content
 	 *            Conteúdo do arquivo.
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	void createFile(Path filePath, String fileName, String content) throws IOException;
 

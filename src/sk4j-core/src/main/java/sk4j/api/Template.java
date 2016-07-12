@@ -9,9 +9,5 @@ import java.io.Serializable;
  */
 public interface Template extends Serializable {
 
-	/**
-	 * 
-	 * @return
-	 */
-	String merge();
+	String merge(String templateName);
 }

@@ -40,11 +40,6 @@ public class FSImpl implements FS {
 	}
 
 	@Override
-	public void createFile(Path filePath, String fileName, Template template) throws IOException {
-		createFile(filePath, fileName, template.merge());
-	}
-
-	@Override
 	public void createFile(Path filePath, String fileName, String content) throws IOException {
 		File file = new File(String.format("%s/%s", filePath.toFile().getAbsolutePath(), fileName));
 		if (file.exists()) {
