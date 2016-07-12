@@ -1,5 +1,6 @@
 package sk4j.api;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Path;
 
@@ -27,8 +28,9 @@ public interface FS extends Serializable {
 	 *            Nome do arquivo.
 	 * @param template
 	 *            Template
+	 * @throws IOException 
 	 */
-	void createFile(Path filePath, String fileName, Template template);
+	void createFile(Path filePath, String fileName, Template template) throws IOException;
 
 	/**
 	 * Cria um arquivo com o conteudo passado pela String.
@@ -39,7 +41,8 @@ public interface FS extends Serializable {
 	 *            Nome do arquivo.
 	 * @param content
 	 *            Conteúdo do arquivo.
+	 * @throws IOException 
 	 */
-	void createFile(Path filePath, String fileName, String content);
+	void createFile(Path filePath, String fileName, String content) throws IOException;
 
 }

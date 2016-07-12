@@ -4,7 +4,12 @@ import java.io.File;
 
 import sk4j.core.model.EProject;
 
-public abstract class SkMainApp extends SkApp {
+public abstract class MainApp extends SkApp {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * 
 	 * @param args

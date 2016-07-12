@@ -1,5 +1,7 @@
 package sk4j.core;
 
+import java.io.Serializable;
+
 import org.apache.commons.lang3.text.StrSubstitutor;
 
 /**
@@ -7,7 +9,12 @@ import org.apache.commons.lang3.text.StrSubstitutor;
  * @author jcruz
  *
  */
-public class SkApp {
+public class SkApp implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 
