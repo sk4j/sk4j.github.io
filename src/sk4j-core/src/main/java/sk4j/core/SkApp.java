@@ -1,44 +1,22 @@
 package sk4j.core;
 
-import java.io.File;
-
 import org.apache.commons.lang3.text.StrSubstitutor;
 
-import sk4j.core.model.EProject;
-
-public abstract class SkApp {
+/**
+ * 
+ * @author jcruz
+ *
+ */
+public class SkApp {
 
 	/**
 	 * 
-	 * @param args
+	 * @param value
+	 * @return
 	 */
-	protected void start(String args[]) {
-		SkContext.get().putItem("userHome", System.getenv("HOME"));
-		SkContext.get().putItem("sk4jHome", format("${userHome}/.sk4j"));
-		SkContext.get().putItem("sk4jSDKHome", format("${userHome}/git/sk4j.github.io"));
-		if (args.length > 0) {
-			SkContext.get().putItem("projectHome", args[0]);
-			SkContext.get().setProject(new EProject(new File(args[0])));
-		}
-
-		try {
-			beforeRun();
-			run();
-		} catch (Exception e) {
-			SkSystem.exit(e.getMessage());
-		}
-	}
-
 	protected String format(String value) {
 		StrSubstitutor substitutor = new StrSubstitutor(SkContext.get().getContext());
 		return substitutor.replace(value);
-	}
-
-	/**
-	 * Método chamado antes da execução do método {@link #run()}
-	 */
-	protected void beforeRun() throws Exception {
-
 	}
 
 	/**
@@ -52,8 +30,4 @@ public abstract class SkApp {
 		}
 	}
 
-	/**
-	 * 
-	 */
-	protected abstract void run() throws Exception;
 }

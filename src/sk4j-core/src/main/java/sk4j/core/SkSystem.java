@@ -37,9 +37,9 @@ public class SkSystem {
 	 * 
 	 * @param processorClass
 	 */
-	public static <T extends DelegateProcessor> void process(Class<T> processorClass) {
+	public static <T extends SkDelegateApp> void process(Class<T> processorClass) {
 		try {
-			DelegateProcessor processor = processorClass.newInstance();
+			SkDelegateApp processor = processorClass.newInstance();
 			processor.process();
 		} catch (InstantiationException | IllegalAccessException e) {
 			exit(e.getMessage());
