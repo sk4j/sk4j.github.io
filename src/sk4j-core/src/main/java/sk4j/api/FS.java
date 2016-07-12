@@ -1,5 +1,6 @@
 package sk4j.api;
 
+import java.io.Serializable;
 import java.nio.file.Path;
 
 /**
@@ -8,14 +9,14 @@ import java.nio.file.Path;
  * @author jcruz
  *
  */
-public interface FS {
+public interface FS extends Serializable {
 
 	/**
 	 * Cria um diretório no caminho especificado.
 	 * 
 	 * @param path
 	 */
-	public void mkdir(String path);
+	void mkdir(String path);
 
 	/**
 	 * Cria um arquivo com o modelo de template.
@@ -24,9 +25,10 @@ public interface FS {
 	 *            Caminho do arquivo.
 	 * @param fileName
 	 *            Nome do arquivo.
-	 * @param template Template 
+	 * @param template
+	 *            Template
 	 */
-	public void createFile(Path filePath, String fileName, Template template);
+	void createFile(Path filePath, String fileName, Template template);
 
 	/**
 	 * Cria um arquivo com o conteudo passado pela String.
@@ -38,6 +40,6 @@ public interface FS {
 	 * @param content
 	 *            Conteúdo do arquivo.
 	 */
-	public void createFile(Path filePath, String fileName, String content);
+	void createFile(Path filePath, String fileName, String content);
 
 }
