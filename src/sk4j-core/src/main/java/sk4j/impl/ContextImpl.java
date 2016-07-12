@@ -3,12 +3,12 @@ package sk4j.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.enterprise.context.SessionScoped;
+import javax.inject.Singleton;
 
 import sk4j.api.Context;
 import sk4j.core.model.EProject;
 
-@SessionScoped
+@Singleton
 public class ContextImpl implements Context {
 
 	/**
