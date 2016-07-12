@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.inject.Singleton;
 
+import org.apache.commons.lang3.text.StrSubstitutor;
+
 import sk4j.api.Context;
 import sk4j.core.model.EProject;
 
@@ -43,6 +45,12 @@ public class ContextImpl implements Context {
 	@Override
 	public EProject getProject() {
 		return this.project;
+	}
+
+	@Override
+	public String replace(String value) {
+		StrSubstitutor substitutor = new StrSubstitutor(ctx);
+		return substitutor.replace(value);
 	}
 
 }

@@ -43,4 +43,11 @@ public interface Context extends Serializable {
 	 * @return
 	 */
 	EProject getProject();
+
+	/**
+	 * 
+	 * @param value
+	 * @return
+	 */
+	String replace(String value);
 }
