@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 
 import sk4j.api.Context;
+import sk4j.core.model.EProject;
 
 @SessionScoped
 public class ContextImpl implements Context {
@@ -16,6 +17,8 @@ public class ContextImpl implements Context {
 	private static final long serialVersionUID = 1L;
 
 	private Map<String, Object> ctx = new HashMap<>();
+
+	private EProject project;
 
 	@Override
 	public void putItem(String key, Object value) {
@@ -30,6 +33,16 @@ public class ContextImpl implements Context {
 	@Override
 	public Map<String, Object> get() {
 		return this.ctx;
+	}
+
+	@Override
+	public void setProject(EProject project) {
+		this.project = project;
+	}
+
+	@Override
+	public EProject getProject() {
+		return this.project;
 	}
 
 }

@@ -2,7 +2,12 @@ package sk4j.core;
 
 import java.io.Serializable;
 
+import javax.inject.Inject;
+
 import org.apache.commons.lang3.text.StrSubstitutor;
+
+import sk4j.api.Console;
+import sk4j.api.Context;
 
 /**
  * 
@@ -16,6 +21,12 @@ public class SkApp implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Inject
+	private Context context;
+
+	@Inject
+	private Console console;
+
 	/**
 	 * 
 	 * Formata a String de entrada com as informações do contexto.
@@ -24,7 +35,7 @@ public class SkApp implements Serializable {
 	 * @return
 	 */
 	protected String format(String value) {
-		StrSubstitutor substitutor = new StrSubstitutor(SkContext.get().getContext());
+		StrSubstitutor substitutor = new StrSubstitutor(context.get());
 		return substitutor.replace(value);
 	}
 
@@ -37,7 +48,7 @@ public class SkApp implements Serializable {
 	 */
 	protected void quit(boolean condition, String messageOnFail) {
 		if (condition) {
-			SkSystem.exit(messageOnFail);
+			console.exit(messageOnFail);
 		}
 	}
 

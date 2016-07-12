@@ -48,4 +48,10 @@ public interface Console extends Serializable {
 	 * @throws InvalidOptionException
 	 */
 	<T extends Choosable<T>> List<T> readOptions(String label, List<T> options) throws IOException, InvalidOptionException;
+
+	/**
+	 * 
+	 * @param message
+	 */
+	void exit(String message);
 }
