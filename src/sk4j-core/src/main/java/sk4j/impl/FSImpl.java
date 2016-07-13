@@ -63,7 +63,7 @@ public class FSImpl implements FS {
 		writer.write(content);
 		writer.flush();
 		writer.close();
-		log.info("Arquivo criado:  {}", path.toFile().getAbsolutePath());
+		log.info("Arquivo criado:   {}", path.toFile().getAbsolutePath());
 	}
 
 	@Override
