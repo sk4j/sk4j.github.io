@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 
 import sk4j.api.FS;
-import sk4j.api.Template;
 
 /**
  * 
