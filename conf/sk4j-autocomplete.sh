@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SK4J_HOME="${HOME}/git/sk4j.github.io"
+SK4J_HOME="${HOME}/.sk4j"
 __sk_autocomplete ()   #  By convention, the function name
 {                 #+ starts with an underscore.
     local cur prev opts

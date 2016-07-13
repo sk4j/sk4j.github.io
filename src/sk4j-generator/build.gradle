@@ -5,8 +5,8 @@ sourceCompatibility = 1.8
 version = '1.0'
 
 
-repositories { 
-	mavenCentral() 
+repositories {
+	mavenCentral()
 	jcenter()
 }
 
@@ -18,8 +18,9 @@ dependencies {
 	compile "org.jtwig:jtwig-core:5.57"
 	// https://mvnrepository.com/artifact/org.jboss.weld.se/weld-se
 	compile group: 'org.jboss.weld.se', name: 'weld-se', version: '2.3.5.Final'
-	// https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
-	compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
+	// https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
+	compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.21'
+
 	// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
 	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.6.1'
 	compile files("../../lib/sk4j-core-1.0.jar")
@@ -31,9 +32,9 @@ test { systemProperties 'property': 'value' }
 
 jar {
 	manifest {
-		attributes 'Implementation-Title': 'Sk-Generator',
+		attributes 'Implementation-Title': 'sk4j-generator',
 		'Implementation-Version': version,
-		'Main-Class' : 'sk.sk4j.App',
+		'Main-Class' : 'sk.sk4j.SkGeneratorApp',
 		'Class-Path': configurations.compile.collect {File file -> "./../lib/${file.name}"}.join(" ")
 	}
 	archiveName = "${baseName}.jar"
@@ -49,13 +50,11 @@ task pack(dependsOn: build) << {
 		from "build/libs/${project.name}.jar"
 		into '../../artifact'
 	}
-	
+
 	copy {
 		from "src/main/resources/description.txt"
 		into '../../help'
-		rename {
-			project.name
-		}
+		rename { project.name }
 	}
 }
 
