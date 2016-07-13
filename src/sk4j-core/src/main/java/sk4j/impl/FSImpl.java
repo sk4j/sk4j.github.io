@@ -13,6 +13,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
+import sk4j.api.Context;
 import sk4j.api.FS;
 
 /**
@@ -25,6 +26,9 @@ public class FSImpl implements FS {
 	@Inject
 	private Logger log;
 
+	@Inject
+	private Context context;
+
 	/**
 	 * 
 	 */
@@ -32,6 +36,7 @@ public class FSImpl implements FS {
 
 	@Override
 	public void mkdir(String path) {
+		path = context.replace(path);
 		File dir = new File(path);
 		if (!dir.exists()) {
 			dir.mkdirs();
@@ -43,6 +48,7 @@ public class FSImpl implements FS {
 
 	@Override
 	public void createFile(Path filePath, String fileName, String content) throws IOException {
+		fileName = context.replace(fileName);
 		File file = new File(String.format("%s/%s", filePath.toFile().getAbsolutePath(), fileName));
 		if (file.exists()) {
 			log.warn("Arquivo já existe: {}", file.getAbsolutePath());
@@ -61,6 +67,8 @@ public class FSImpl implements FS {
 
 	@Override
 	public void copy(String source, String destination) throws URISyntaxException, IOException {
+		source = context.replace(source);
+		destination = context.replace(destination);
 		InputStream inputStream = this.getClass().getResourceAsStream(source);
 		Path pdestination = Paths.get(destination);
 		Files.copy(inputStream, pdestination);
