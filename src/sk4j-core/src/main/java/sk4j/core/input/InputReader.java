@@ -22,7 +22,6 @@ public class InputReader {
 	 * @throws IOException
 	 */
 	public String read() throws IOException {
-		System.out.println("");
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print(String.format("%s", label));
 		return value = bufferedReader.readLine();

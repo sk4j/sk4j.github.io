@@ -25,7 +25,8 @@ public class ConsoleImpl implements Console {
 
 	@Override
 	public String readln(String label) throws IOException {
-		return new InputReader(label).read();
+		label = String.format("> %s", label);
+		return new InputReader(CColor.bold(label)).read();
 	}
 
 	@Override
