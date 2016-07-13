@@ -47,9 +47,10 @@ public class FSImpl implements FS {
 	}
 
 	@Override
-	public void createFile(Path filePath, String fileName, String content) throws IOException {
+	public void createFile(String filePath, String fileName, String content) throws IOException {
+		filePath = context.replace(filePath);
 		fileName = context.replace(fileName);
-		File file = new File(String.format("%s/%s", filePath.toFile().getAbsolutePath(), fileName));
+		File file = new File(String.format("%s/%s", filePath, fileName));
 		if (file.exists()) {
 			log.warn("Arquivo já existe: {}", file.getAbsolutePath());
 			return;
@@ -62,7 +63,7 @@ public class FSImpl implements FS {
 		writer.write(content);
 		writer.flush();
 		writer.close();
-		log.info("Arquivo criado: {}", path.toFile().getAbsolutePath());
+		log.info("Arquivo criado:  {}", path.toFile().getAbsolutePath());
 	}
 
 	@Override
@@ -72,6 +73,7 @@ public class FSImpl implements FS {
 		InputStream inputStream = this.getClass().getResourceAsStream(source);
 		Path pdestination = Paths.get(destination);
 		Files.copy(inputStream, pdestination);
+		log.info("Arquivo copiado:  {} -> {}", source, destination);
 	}
 
 }

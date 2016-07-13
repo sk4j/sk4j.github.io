@@ -170,12 +170,12 @@ public class Slf4jLoggerProxy implements Logger, Serializable {
 
 	@Override
 	public void info(final String format, final Object arg1, final Object arg2) {
-		getDelegate().info(format, arg1, arg2);
+		getDelegate().info(CColor.cyan(format), arg1, arg2);
 	}
 
 	@Override
 	public void info(final String format, final Object[] argArray) {
-		getDelegate().info(format, argArray);
+		getDelegate().info(CColor.cyan(format), argArray);
 	}
 
 	@Override

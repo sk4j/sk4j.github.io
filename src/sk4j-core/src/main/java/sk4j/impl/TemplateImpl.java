@@ -7,6 +7,7 @@ import org.jtwig.JtwigTemplate;
 
 import sk4j.api.Context;
 import sk4j.api.Template;
+import sk4j.utils.StringTool;
 
 public class TemplateImpl implements Template {
 
@@ -17,6 +18,9 @@ public class TemplateImpl implements Template {
 
 	@Inject
 	private Context context;
+
+	@Inject
+	private StringTool st;
 
 	private JtwigTemplate template;
 
@@ -29,7 +33,7 @@ public class TemplateImpl implements Template {
 	private JtwigModel createJtwigModel() {
 		JtwigModel jtwigModel = JtwigModel.newModel();
 		context.get().forEach((k, v) -> jtwigModel.with(k, v));
-		return jtwigModel;
+		return jtwigModel.with("st", st);
 	}
 
 }

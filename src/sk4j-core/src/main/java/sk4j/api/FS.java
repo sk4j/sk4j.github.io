@@ -40,6 +40,6 @@ public interface FS extends Serializable {
 	 *            Conteúdo do arquivo.
 	 * @throws IOException
 	 */
-	void createFile(Path filePath, String fileName, String content) throws IOException;
+	void createFile(String filePath, String fileName, String content) throws IOException;
 
 }
