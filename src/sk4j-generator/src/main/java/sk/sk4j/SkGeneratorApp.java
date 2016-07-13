@@ -32,8 +32,8 @@ public class SkGeneratorApp extends MainApp {
 
 	@Override
 	protected void beforeRun() throws IOException {
-		String projectName = console.readln("Digite o nome do projeto:");
-		String projectDesc = console.readln("Digite a descrição do projeto:");
+		String projectName = console.readln("Digite o nome do projeto: ");
+		String projectDesc = console.readln("Digite a descrição do projeto: ");
 		validateProjectName(projectName);
 		validateProjectDesc(projectDesc);
 		
