@@ -30,10 +30,9 @@ public class SkGeneratorApp extends MainApp {
 
 	@Inject
 	private StringTool st;
-	
+
 	@Inject
 	private Template template;
-	
 
 	public static void main(String[] args) throws Exception {
 		new SkGeneratorApp().init(args);
@@ -69,6 +68,7 @@ public class SkGeneratorApp extends MainApp {
 		fs.copy("/files/beans.xml", "${projectDir}/src/main/resources/META-INF/beans.xml");
 		fs.createFile("${projectDir}", "build.gradle", template.merge("build-gradle"));
 		fs.createFile("${projectDir}/src/main/java/sk4j", st.camelize("${projectName}.java"), template.merge("app"));
+		fs.createFile("${projectDir}/src/main/resources", "description.txt", template.merge("description-txt"));
 
 	}
 
