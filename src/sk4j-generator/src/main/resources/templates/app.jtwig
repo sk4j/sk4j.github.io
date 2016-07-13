@@ -1,4 +1,4 @@
-package sk4j
+package sk4j;
 
 import sk4j.core.MainApp;
 
@@ -8,8 +8,8 @@ public class {{ st.camelize(projectName) }} extends MainApp {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static void main(args) throws Exception  {
-		new {{ st.camelize(projectName) }}().init(args)
+	public static void main(String[] args) throws Exception  {
+		new {{ st.camelize(projectName) }}().init(args);
 	}
 	
 	@Override

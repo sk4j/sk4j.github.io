@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export SK4J_HOME="${HOME}/.sk4j"
+export SK4J_HOME="${HOME}/git/sk4j.github.io"
 
 for f in $(find "${SK4J_HOME}/ext" -type f -name 'sk4j-*' -exec basename {} \;); do
     source "${SK4J_HOME}/ext/${f}"
