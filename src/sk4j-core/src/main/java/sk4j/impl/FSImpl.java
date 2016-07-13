@@ -3,8 +3,11 @@ package sk4j.impl;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.inject.Inject;
 
@@ -54,6 +57,15 @@ public class FSImpl implements FS {
 		writer.flush();
 		writer.close();
 		log.info("Arquivo criado: {}", path.toFile().getAbsolutePath());
+	}
+
+	@Override
+	public void copy(String source, String destination) throws URISyntaxException, IOException {
+		InputStream inputStream = this.getClass().getResourceAsStream(source);
+		Path pdestination = Paths.get(destination);
+		System.out.println(inputStream);
+		System.out.println(pdestination);
+		Files.copy(inputStream, pdestination);
 	}
 
 }

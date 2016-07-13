@@ -2,6 +2,7 @@ package sk4j.api;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 
 /**
@@ -18,6 +19,15 @@ public interface FS extends Serializable {
 	 * @param path
 	 */
 	void mkdir(String path);
+
+	/**
+	 * 
+	 * @param source
+	 * @param destination
+	 * @throws URISyntaxException 
+	 * @throws IOException 
+	 */
+	void copy(String source, String destination) throws URISyntaxException, IOException;
 
 	/**
 	 * Cria um arquivo com o conteudo passado pela String.
