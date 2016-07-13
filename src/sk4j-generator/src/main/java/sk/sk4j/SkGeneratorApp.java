@@ -8,7 +8,9 @@ import javax.inject.Inject;
 import sk4j.api.Console;
 import sk4j.api.Context;
 import sk4j.api.FS;
+import sk4j.api.Template;
 import sk4j.core.MainApp;
+import sk4j.utils.StringTool;
 
 public class SkGeneratorApp extends MainApp {
 
@@ -26,13 +28,20 @@ public class SkGeneratorApp extends MainApp {
 	@Inject
 	private Console console;
 
+	@Inject
+	private StringTool st;
+	
+	@Inject
+	private Template template;
+	
+
 	public static void main(String[] args) throws Exception {
 		new SkGeneratorApp().init(args);
 	}
 
 	@Override
 	protected void beforeRun() throws IOException {
-		String projectName = console.readln("Digite o nome do projeto: ");
+		String projectName = console.readln("Digite o nome do projeto (use o traço como separador): ");
 		String projectDesc = console.readln("Digite a descrição do projeto: ");
 		validateProjectName(projectName);
 		validateProjectDesc(projectDesc);
@@ -53,19 +62,24 @@ public class SkGeneratorApp extends MainApp {
 		fs.mkdir("${projectDir}/src/main/resources/META-INF");
 		fs.mkdir("${projectDir}/bin");
 		fs.mkdir("${projectDir}/build");
-		
+
 		fs.copy("/files/gitignore", "${projectDir}/.gitignore");
+		fs.copy("/files/readme.txt", "${projectDir}/src/main/resources/templates/readme.txt");
+		fs.copy("/files/readme.txt", "${projectDir}/src/main/resources/files/readme.txt");
+		fs.copy("/files/beans.xml", "${projectDir}/src/main/resources/META-INF/beans.xml");
+		fs.createFile("${projectDir}", "build.gradle", template.merge("build-gradle"));
+		fs.createFile("${projectDir}/src/main/java/sk4j", st.camelize("${projectName}.java"), template.merge("app"));
 
 	}
 
 	private void validateProjectName(String projectName) {
-		if (projectName == null || projectName.isEmpty()) {
-			console.exit("Nome do projeto inválido.");
+		if (st.isEmpty(projectName) || st.containsWhitespace(projectName)) {
+			console.exit("O nome do projeto não ser vazio ou conter espaços.");
 		}
 	}
 
 	private void validateProjectDesc(String projectDesc) {
-		if (projectDesc == null || projectDesc.isEmpty()) {
+		if (st.isEmpty(projectDesc)) {
 			console.exit("Descrição do projeto inválida.");
 		}
 	}

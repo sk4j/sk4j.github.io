@@ -1,12 +1,19 @@
 package sk4j
 
-import sk4j.ConsoleColor
-import sk4j.SkApp
+import sk4j.core.MainApp;
 
-class App extends SkApp {
+public class {{ st.camelize(projectName) }} extends MainApp {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-	static main(args) {
-		new App().start(args)
+	public static void main(args) throws Exception  {
+		new {{ st.camelize(projectName) }}().init(args)
+	}
+	
+	@Override
+	protected void beforeRun() {
 	}
 
 	@Override
