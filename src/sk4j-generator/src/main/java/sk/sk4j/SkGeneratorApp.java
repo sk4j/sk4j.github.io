@@ -36,7 +36,7 @@ public class SkGeneratorApp extends MainApp {
 		String projectDesc = console.readln("Digite a descrição do projeto: ");
 		validateProjectName(projectName);
 		validateProjectDesc(projectDesc);
-		
+
 		ctx.putItem("projectName", projectName);
 		ctx.putItem("projectDesc", projectDesc);
 	}
@@ -45,16 +45,16 @@ public class SkGeneratorApp extends MainApp {
 	public void run() throws URISyntaxException, IOException {
 		ctx.putItem("projectDir", ctx.replace("${sk4jSDKHome}/src/${projectName}"));
 
-		fs.mkdir(ctx.replace("${projectDir}"));
-		fs.mkdir(ctx.replace("${projectDir}/src/main/java"));
-		fs.mkdir(ctx.replace("${projectDir}/src/main/java/sk4j"));
-		fs.mkdir(ctx.replace("${projectDir}/src/main/resources/templates"));
-		fs.mkdir(ctx.replace("${projectDir}/src/main/resources/files"));
-		fs.mkdir(ctx.replace("${projectDir}/src/main/resources/META-INF"));
-		fs.mkdir(ctx.replace("${projectDir}/bin"));
-		fs.mkdir(ctx.replace("${projectDir}/build"));
+		fs.mkdir("${projectDir}");
+		fs.mkdir("${projectDir}/src/main/java");
+		fs.mkdir("${projectDir}/src/main/java/sk4j");
+		fs.mkdir("${projectDir}/src/main/resources/templates");
+		fs.mkdir("${projectDir}/src/main/resources/files");
+		fs.mkdir("${projectDir}/src/main/resources/META-INF");
+		fs.mkdir("${projectDir}/bin");
+		fs.mkdir("${projectDir}/build");
 		
-		fs.copy("/files/gitignore", ctx.replace("${projectDir}/.gitignore"));
+		fs.copy("/files/gitignore", "${projectDir}/.gitignore");
 
 	}
 
