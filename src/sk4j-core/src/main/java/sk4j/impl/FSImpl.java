@@ -63,8 +63,6 @@ public class FSImpl implements FS {
 	public void copy(String source, String destination) throws URISyntaxException, IOException {
 		InputStream inputStream = this.getClass().getResourceAsStream(source);
 		Path pdestination = Paths.get(destination);
-		System.out.println(inputStream);
-		System.out.println(pdestination);
 		Files.copy(inputStream, pdestination);
 	}
 
