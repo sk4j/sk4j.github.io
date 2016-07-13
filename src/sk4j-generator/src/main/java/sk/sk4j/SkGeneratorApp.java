@@ -1,57 +1,46 @@
 package sk.sk4j;
 
-import java.io.File;
 import java.io.IOException;
 
-import org.jboss.forge.roaster.model.util.Strings;
+import javax.inject.Inject;
 
-import sk4j.core.SkApp;
-import sk4j.core.SkContext;
-import sk4j.core.Skfs;
-import sk4j.core.console.SkConsole;
+import sk4j.api.Context;
+import sk4j.api.FS;
+import sk4j.core.MainApp;
 
-public class App extends SkApp {
+public class SkGeneratorApp extends MainApp {
 
-	public static void main(String[] args) {
-		new App().start(args);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Inject
+	private FS fs;
+
+	@Inject
+	private Context ctx;
+
+	public static void main(String[] args) throws Exception {
+		new SkGeneratorApp().init(args);
 	}
 
 	@Override
 	protected void beforeRun() throws IOException {
 
-		quit(!hasSDK(), "É necessário clonar o projeto sk4j do github: https://github.com/sk4j/sk4j.github.io.git");
-
-		String projectName = SkConsole.readln("Digite o nome do projeto: ");
-		String projectDesc = SkConsole.readln("Digite a descrição do projeto: ");
-
-		quit(Strings.isBlank(projectName), "Nome de projeto inválido.");
-		quit(Strings.isBlank(projectDesc), "Descrição do projeto inválida.");
-
-		SkContext.get().putItem("projectName", projectName);
-		SkContext.get().putItem("projectDesc", projectDesc);
 	}
 
 	@Override
 	public void run() {
-		String projectDir = format("${sk4jSdkHome}/src/${projectName}");
-		SkContext.get().putItem("projectDir", projectDir);
+		ctx.putItem("projectDir", ctx.replace("${sk4jSdkHome}/src/${projectName}"));
 
-		Skfs.mkdir("${projectDir}");
-		Skfs.mkdir("${projectDir}/src/main/java");
-		Skfs.mkdir("${projectDir}/src/main/java/sk4j");
-		Skfs.mkdir("${projectDir}/src/resources/templates");
-		Skfs.mkdir("${projectDir}/bin");
-		Skfs.mkdir("${projectDir}/build");
+		fs.mkdir("${projectDir}");
+		fs.mkdir("${projectDir}/src/main/java");
+		fs.mkdir("${projectDir}/src/main/java/sk4j");
+		fs.mkdir("${projectDir}/src/main/resources/templates");
+		fs.mkdir("${projectDir}/src/main/resources/META-INF");
+		fs.mkdir("${projectDir}/bin");
+		fs.mkdir("${projectDir}/build");
 
-	}
-
-	/**
-	 * 
-	 * Verifica se o diretório
-	 * 
-	 * @return
-	 */
-	private boolean hasSDK() {
-		return new File(String.valueOf(SkContext.get().getItem("sk4jSDKHome"))).exists();
 	}
 }

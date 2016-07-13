@@ -16,6 +16,8 @@ dependencies {
 	compile group: 'org.jboss.forge.roaster', name: 'roaster-jdt', version: '2.18.7.Final'
 	compile group: 'commons-io', name: 'commons-io', version: '2.5'
 	compile "org.jtwig:jtwig-core:5.57"
+	// https://mvnrepository.com/artifact/org.jboss.weld.se/weld-se
+	compile group: 'org.jboss.weld.se', name: 'weld-se', version: '2.3.5.Final'
 	// https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
 	compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
 	// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
