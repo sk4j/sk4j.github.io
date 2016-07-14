@@ -11,7 +11,6 @@ import sk4j.api.Context;
 import sk4j.api.FS;
 import sk4j.api.Template;
 import sk4j.core.MainApp;
-import sk4j.core.exception.InvalidOptionException;
 import sk4j.core.model.EJavaFile;
 
 public class DemoiselleDaoGenerator extends MainApp {
@@ -32,7 +31,7 @@ public class DemoiselleDaoGenerator extends MainApp {
 	@Inject
 	private Template template;
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		new DemoiselleDaoGenerator().init(args);
 	}
 
@@ -42,7 +41,7 @@ public class DemoiselleDaoGenerator extends MainApp {
 	}
 
 	@Override
-	public void run() throws IOException, InvalidOptionException {
+	public void run() throws IOException {
 		List<EJavaFile> entities = ctx.getProject().getJavaFiles().stream().filter(e -> e.hasAnnotation("Entity"))
 				.collect(Collectors.toList());
 		List<EJavaFile> selectedEntities = console.readOptions("Selecione a entidade: ", entities);
@@ -53,11 +52,7 @@ public class DemoiselleDaoGenerator extends MainApp {
 		ctx.putItem("javaFile", javaFile);
 		String daoPath = javaFile.getPath() + "../persistence";
 		String daoFile = javaFile.getName() + "DAO.java";
-		try {
-			fs.createFile(daoPath, daoFile, template.merge("dao-java"));
-		} catch (IOException e) {
-			console.exit(e.getMessage());
-		}
+		fs.createFile(daoPath, daoFile, template.merge("dao-java"));
 	}
 
 	private void validateProject() throws IOException {

@@ -1,8 +1,5 @@
 package sk.sk4j;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 import javax.inject.Inject;
 
 import sk4j.api.Console;
@@ -34,12 +31,12 @@ public class SkGeneratorApp extends MainApp {
 	@Inject
 	private Template template;
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		new SkGeneratorApp().init(args);
 	}
 
 	@Override
-	protected void beforeRun() throws IOException {
+	protected void beforeRun() {
 		String projectName = console.readln("Digite o nome do projeto (use o traço como separador): ");
 		String projectDesc = console.readln("Digite a descrição do projeto: ");
 		validateProjectName(projectName);
@@ -50,7 +47,7 @@ public class SkGeneratorApp extends MainApp {
 	}
 
 	@Override
-	public void run() throws URISyntaxException, IOException {
+	public void run() {
 		ctx.putItem("projectDir", ctx.replace("${sk4jSDKHome}/src/${projectName}"));
 
 		fs.mkdir("${projectDir}");

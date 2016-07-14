@@ -27,7 +27,7 @@ public interface Console extends Serializable {
 	 * @return
 	 * @throws IOException
 	 */
-	String readln(String label) throws IOException;
+	String readln(String label);
 
 	/**
 	 * 
@@ -37,7 +37,7 @@ public interface Console extends Serializable {
 	 * @throws IOException
 	 * @throws InvalidOptionException
 	 */
-	<T extends Choosable<T>> T readOption(String label, List<T> options) throws IOException, InvalidOptionException;
+	<T extends Choosable<T>> T readOption(String label, List<T> options);
 
 	/**
 	 * 
@@ -47,7 +47,7 @@ public interface Console extends Serializable {
 	 * @throws IOException
 	 * @throws InvalidOptionException
 	 */
-	<T extends Choosable<T>> List<T> readOptions(String label, List<T> options) throws IOException, InvalidOptionException;
+	<T extends Choosable<T>> List<T> readOptions(String label, List<T> options);
 
 	/**
 	 * 

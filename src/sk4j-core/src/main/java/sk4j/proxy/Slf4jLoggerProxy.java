@@ -6,8 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 
-import sk4j.core.console.CColor;
-
 public class Slf4jLoggerProxy implements Logger, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -160,22 +158,22 @@ public class Slf4jLoggerProxy implements Logger, Serializable {
 
 	@Override
 	public void info(final String msg) {
-		getDelegate().info(CColor.cyan(msg));
+		getDelegate().info(msg);
 	}
 
 	@Override
 	public void info(final String format, final Object arg) {
-		getDelegate().info(CColor.cyan(format), arg);
+		getDelegate().info(format, arg);
 	}
 
 	@Override
 	public void info(final String format, final Object arg1, final Object arg2) {
-		getDelegate().info(CColor.cyan(format), arg1, arg2);
+		getDelegate().info(format, arg1, arg2);
 	}
 
 	@Override
 	public void info(final String format, final Object[] argArray) {
-		getDelegate().info(CColor.cyan(format), argArray);
+		getDelegate().info(format, argArray);
 	}
 
 	@Override

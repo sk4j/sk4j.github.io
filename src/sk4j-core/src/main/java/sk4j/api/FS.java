@@ -3,7 +3,6 @@ package sk4j.api;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URISyntaxException;
-import java.nio.file.Path;
 
 /**
  * Classe responsável manipular o sistema de arquivos.
@@ -24,10 +23,10 @@ public interface FS extends Serializable {
 	 * 
 	 * @param source
 	 * @param destination
-	 * @throws URISyntaxException 
-	 * @throws IOException 
+	 * @throws URISyntaxException
+	 * @throws IOException
 	 */
-	void copy(String source, String destination) throws URISyntaxException, IOException;
+	void copy(String source, String destination);
 
 	/**
 	 * Cria um arquivo com o conteudo passado pela String.
@@ -40,6 +39,6 @@ public interface FS extends Serializable {
 	 *            Conteúdo do arquivo.
 	 * @throws IOException
 	 */
-	void createFile(String filePath, String fileName, String content) throws IOException;
+	void createFile(String filePath, String fileName, String content);
 
 }

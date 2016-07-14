@@ -23,30 +23,32 @@ public abstract class MainApp implements App {
 	@Inject
 	private Console console;
 
-	protected void init(String args[]) throws Exception {
-		Weld weld = new Weld();
-		WeldContainer container = weld.initialize();
-		MainApp mainApp = container.instance().select(MainApp.class).get();
-		mainApp.start(args);
-		weld.shutdown();
+	protected void init(String args[]) {
+		try {
+			Weld weld = new Weld();
+			WeldContainer container = weld.initialize();
+			MainApp mainApp = container.instance().select(MainApp.class).get();
+			mainApp.start(args);
+			weld.shutdown();
+		} catch (Exception e) {
+			console.exit(e.getMessage());
+		}
 	}
 
 	/**
 	 * 
 	 * @param args
+	 * @throws Exception 
 	 */
-	private void start(String args[]) {
+	private void start(String args[]) throws Exception {
 		context.putItem("userHome", System.getenv("HOME"));
 		context.putItem("sk4jHome", context.replace("${userHome}/.sk4j"));
 		context.putItem("sk4jSDKHome", context.replace("${userHome}/git/sk4j.github.io"));
 		context.putItem("projectHome", args[0]);
 		context.setProject(new EProject(new File(args[0])));
-		try {
-			beforeRun();
-			run();
-		} catch (Exception e) {
-			console.exit(e.getMessage());
-		}
+		beforeRun();
+		run();
+
 	}
 
 	/**

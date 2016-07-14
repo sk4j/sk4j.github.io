@@ -24,19 +24,38 @@ public class ConsoleImpl implements Console {
 	}
 
 	@Override
-	public String readln(String label) throws IOException {
+	public String readln(String label) {
 		label = String.format("> %s", label);
-		return new InputReader(CColor.bold(label)).read();
+		try {
+			return new InputReader(CColor.bold(label)).read();
+		} catch (IOException e) {
+			exit("Erro ao ler entrada de dados. " + e.getMessage());
+		}
+		return null;
 	}
 
 	@Override
-	public <T extends Choosable<T>> T readOption(String label, List<T> options) throws IOException, InvalidOptionException {
-		return new SingleOptionInputReader<>(label, options).readOption();
+	public <T extends Choosable<T>> T readOption(String label, List<T> options) {
+		try {
+			return new SingleOptionInputReader<>(label, options).readOption();
+		} catch (IOException e) {
+			exit("Erro ao ler entrada de dados. " + e.getMessage());
+		} catch (InvalidOptionException e) {
+			exit(e.getMessage());
+		}
+		return null;
 	}
 
 	@Override
-	public <T extends Choosable<T>> List<T> readOptions(String label, List<T> options) throws IOException, InvalidOptionException {
-		return new MultipleOptionInputReader<>(label, options).readOptions();
+	public <T extends Choosable<T>> List<T> readOptions(String label, List<T> options) {
+		try {
+			return new MultipleOptionInputReader<>(label, options).readOptions();
+		} catch (IOException e) {
+			exit("Erro ao ler entrada de dados. " + e.getMessage());
+		} catch (InvalidOptionException e) {
+			exit(e.getMessage());
+		}
+		return null;
 	}
 
 	@Override
