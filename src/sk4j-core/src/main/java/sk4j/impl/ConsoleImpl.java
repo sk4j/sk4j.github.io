@@ -3,7 +3,10 @@ package sk4j.impl;
 import java.io.IOException;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import sk4j.api.Console;
+import sk4j.api.Context;
 import sk4j.core.console.CColor;
 import sk4j.core.exception.InvalidOptionException;
 import sk4j.core.input.Choosable;
@@ -18,21 +21,8 @@ public class ConsoleImpl implements Console {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	public void echo(String message) {
-		System.out.println(message);
-	}
-
-	@Override
-	public String readln(String label) {
-		label = String.format("> %s", label);
-		try {
-			return new InputReader(CColor.bold(label)).read();
-		} catch (IOException e) {
-			exit("Erro ao ler entrada de dados. " + e.getMessage());
-		}
-		return null;
-	}
+	@Inject
+	private Context ctx;
 
 	@Override
 	public <T extends Choosable<T>> T readOption(String label, List<T> options) {
@@ -60,6 +50,7 @@ public class ConsoleImpl implements Console {
 
 	@Override
 	public void exit(String message) {
+		message = ctx.replace(message);
 		System.out.println("");
 		System.out.println("**************************************");
 		System.out.println(CColor.red(message));
@@ -68,10 +59,30 @@ public class ConsoleImpl implements Console {
 	}
 
 	@Override
-	public void exitIf(boolean condition, String message) {
-		if (condition) {
-			exit(message);
+	public String readln(String label) {
+		label = String.format("> %s", ctx.replace(label));
+		try {
+			return new InputReader(CColor.bold(label)).read();
+		} catch (IOException e) {
+			exit("Erro ao ler entrada de dados. " + e.getMessage());
 		}
+		return null;
+	}
+
+	@Override
+	public String readln(String label, ConsoleConf conf) {
+		String ln = readln(label);
+		return null;
+	}
+
+	@Override
+	public String readln(String label, String defaultValue, ConsoleConf conf) {
+		return null;
+	}
+
+	@Override
+	public String readln(String label, String defaultValue) {
+		return null;
 	}
 
 }

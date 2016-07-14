@@ -15,11 +15,9 @@ import sk4j.core.input.Choosable;
  */
 public interface Console extends Serializable {
 
-	/**
-	 * 
-	 * @return
-	 */
-	void echo(String message);
+	public enum ConsoleConf {
+		ALPHANUMERIC, NUMBER, YES_NO
+	}
 
 	/**
 	 * 
@@ -28,6 +26,30 @@ public interface Console extends Serializable {
 	 * @throws IOException
 	 */
 	String readln(String label);
+
+	/**
+	 * 
+	 * @param label
+	 * @param defaultValue
+	 * @return
+	 */
+	String readln(String label, String defaultValue);
+
+	/**
+	 * 
+	 * @param label
+	 * @param conf
+	 * @return
+	 */
+	String readln(String label, ConsoleConf conf);
+
+	/**
+	 * @param label
+	 * @param defaultValue
+	 * @param conf
+	 * @return
+	 */
+	String readln(String label, String defaultValue, ConsoleConf conf);
 
 	/**
 	 * 
@@ -55,10 +77,4 @@ public interface Console extends Serializable {
 	 */
 	void exit(String message);
 
-	/**
-	 * 
-	 * @param condition
-	 * @param message
-	 */
-	void exitIf(boolean condition, String message);
 }

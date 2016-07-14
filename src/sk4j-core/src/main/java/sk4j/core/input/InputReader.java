@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class InputReader {
 
 	private String value;
@@ -24,7 +26,8 @@ public class InputReader {
 	public String read() throws IOException {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print(String.format("%s", label));
-		return value = bufferedReader.readLine();
+		value = bufferedReader.readLine();
+		return StringUtils.trim(value);
 	}
 
 	public String getValue() {
