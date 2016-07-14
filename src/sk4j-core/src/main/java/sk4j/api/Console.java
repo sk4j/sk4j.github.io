@@ -16,8 +16,27 @@ import sk4j.core.input.Choosable;
 public interface Console extends Serializable {
 
 	public enum ConsoleConf {
-		ALPHANUMERIC, NUMBER, YES_NO
+		ALPHANUMERIC, NUMBER, JAVACLASSNAME
 	}
+
+	public enum YesNoOption {
+		YES, NO
+	}
+
+	/**
+	 * 
+	 * @param label
+	 * @return
+	 */
+	YesNoOption readYesNo(String label);
+
+	/**
+	 * 
+	 * @param label
+	 * @param defaultValue
+	 * @return
+	 */
+	YesNoOption readYesNO(String label, YesNoOption defaultValue);
 
 	/**
 	 * 

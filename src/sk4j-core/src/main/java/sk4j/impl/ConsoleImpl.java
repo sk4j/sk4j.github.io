@@ -85,4 +85,14 @@ public class ConsoleImpl implements Console {
 		return null;
 	}
 
+	@Override
+	public YesNoOption readYesNo(String label) {
+		return null;
+	}
+
+	@Override
+	public YesNoOption readYesNO(String label, YesNoOption defaultValue) {
+		return null;
+	}
+
 }
