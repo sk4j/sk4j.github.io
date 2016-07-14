@@ -12,7 +12,6 @@ import sk4j.api.FS;
 import sk4j.api.Template;
 import sk4j.core.MainApp;
 import sk4j.core.exception.InvalidOptionException;
-import sk4j.core.input.Choosable;
 import sk4j.core.model.EJavaFile;
 
 public class DemoiselleDaoGenerator extends MainApp {
@@ -29,7 +28,7 @@ public class DemoiselleDaoGenerator extends MainApp {
 
 	@Inject
 	private Console console;
-	
+
 	@Inject
 	private Template template;
 
@@ -50,7 +49,7 @@ public class DemoiselleDaoGenerator extends MainApp {
 		selectedEntities.stream().forEach(this::createDAO);
 	}
 
-	private void createDAO(EJavaFile javaFile)  {
+	private void createDAO(EJavaFile javaFile) {
 		ctx.putItem("javaFile", javaFile);
 		String daoPath = javaFile.getPath() + "../persistence";
 		String daoFile = javaFile.getName() + "DAO.java";
