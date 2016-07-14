@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.thoughtworks.qdox.model.JavaClass;
 
 import sk4j.core.input.Choosable;
@@ -60,6 +62,10 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 	}
 
 	public String getParentPackageName() {
+		if(this.parentPackageName == null) {
+			List<String> packageTokens = Arrays.asList(getJavaClass().getPackageName().split("\\."));
+			this.parentPackageName = StringUtils.join(packageTokens.subList(0, packageTokens.size()-1), ".");
+		}
 		return parentPackageName;
 	}
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +29,7 @@ public class OptionInputReader<T extends Choosable<T>> extends InputReader {
 	public void printOptions() {
 		AtomicInteger index = new AtomicInteger();
 		System.out.println("");
+		this.options = this.options.stream().sorted().collect(Collectors.toList());
 		options
 			.stream()
 			.sorted()
