@@ -67,6 +67,7 @@ public class FSImpl implements FS {
 			writer.close();
 		} catch (IOException e) {
 			log.error(CColor.red("Erro ao criar arquivo: {}"), e.getMessage());
+			return;
 		}
 		log.info("{}\t{}", CColor.bold(CColor.blue("[CREATE]")), CColor.bold(CColor.blue(path.toFile().getAbsolutePath())));
 	}

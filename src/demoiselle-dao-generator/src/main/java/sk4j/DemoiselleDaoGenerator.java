@@ -44,7 +44,7 @@ public class DemoiselleDaoGenerator extends MainApp {
 	public void run() throws IOException {
 		List<EJavaFile> entities = ctx.getProject().getJavaFiles().stream().filter(e -> e.hasAnnotation("Entity"))
 				.collect(Collectors.toList());
-		List<EJavaFile> selectedEntities = console.readOptions("Selecione a entidade: ", entities);
+		List<EJavaFile> selectedEntities = console.readOptions("Selecione a(s) entidade(s): ", entities);
 		selectedEntities.stream().forEach(this::createDAO);
 	}
 
