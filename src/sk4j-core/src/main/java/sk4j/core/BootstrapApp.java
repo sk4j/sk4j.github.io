@@ -62,7 +62,7 @@ public abstract class BootstrapApp implements Serializable {
 
 	private void setupContext(String[] args) {
 		context.putItem("USER_HOME", System.getenv("HOME"));
-		context.putItem("SK4J_HOME", context.replace("${userHome}/git/sk4j.github.io"));
+		context.putItem("SK4J_HOME", context.replace("{{USER_HOME}}/git/sk4j.github.io"));
 		context.putItem("PROJECT_HOME", args[0]);
 		context.setProject(new EProject(new File(args[0])));
 	}

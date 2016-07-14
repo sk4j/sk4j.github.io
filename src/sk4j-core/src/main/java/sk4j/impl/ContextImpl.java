@@ -5,7 +5,8 @@ import java.util.Map;
 
 import javax.inject.Singleton;
 
-import org.apache.commons.lang3.text.StrSubstitutor;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 import sk4j.api.Context;
 import sk4j.core.model.EProject;
@@ -49,8 +50,10 @@ public class ContextImpl implements Context {
 
 	@Override
 	public String replace(String value) {
-		StrSubstitutor substitutor = new StrSubstitutor(ctx);
-		return substitutor.replace(value);
+		JtwigTemplate template = JtwigTemplate.inlineTemplate(value);
+		JtwigModel model = JtwigModel.newModel();
+		ctx.forEach((k, v) -> model.with(k, v));
+		return template.render(model);
 	}
 
 }

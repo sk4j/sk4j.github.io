@@ -54,4 +54,11 @@ public interface Console extends Serializable {
 	 * @param message
 	 */
 	void exit(String message);
+
+	/**
+	 * 
+	 * @param condition
+	 * @param message
+	 */
+	void exitIf(boolean condition, String message);
 }

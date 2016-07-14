@@ -67,4 +67,11 @@ public class ConsoleImpl implements Console {
 
 	}
 
+	@Override
+	public void exitIf(boolean condition, String message) {
+		if (condition) {
+			exit(message);
+		}
+	}
+
 }
