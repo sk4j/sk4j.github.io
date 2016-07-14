@@ -16,7 +16,7 @@ public class MultipleOptionInputReader<T extends Choosable<T>> extends OptionInp
 	//@formatter:off
 	public List<T> readOptions() throws IOException, InvalidOptionException {
 		printOptions();
-		System.out.println(String.format("a > Selecionar todos"));
+		System.out.println(String.format("a  > Selecionar todos\n"));
 		read();
 		boolean valid = getValue().equals("a") || Arrays.asList(getValue().split(","))
 														.stream()

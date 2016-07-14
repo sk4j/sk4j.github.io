@@ -6,6 +6,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
+import org.apache.commons.lang3.StringUtils;
+
+import sk4j.core.console.CColor;
 import sk4j.core.exception.InvalidOptionException;
 
 public class OptionInputReader<T extends Choosable<T>> extends InputReader {
@@ -24,9 +27,11 @@ public class OptionInputReader<T extends Choosable<T>> extends InputReader {
 	//@formatter:off
 	public void printOptions() {
 		AtomicInteger index = new AtomicInteger();
+		System.out.println("");
 		options
 			.stream()
-			.map(opt -> String.format("%d > %s", index.incrementAndGet(), opt.getChoiseLabel()))
+			.sorted()
+			.map(opt -> String.format("%s > %s", CColor.magenta(StringUtils.rightPad(String.valueOf(index.incrementAndGet()), 2)), CColor.bold(opt.getChoiseLabel())))
 			.forEach(System.out::println);
 	}
 	//@formatter:on
