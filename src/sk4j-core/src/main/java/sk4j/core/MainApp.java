@@ -39,10 +39,8 @@ public abstract class MainApp implements App {
 		context.putItem("userHome", System.getenv("HOME"));
 		context.putItem("sk4jHome", context.replace("${userHome}/.sk4j"));
 		context.putItem("sk4jSDKHome", context.replace("${userHome}/git/sk4j.github.io"));
-		if (args.length > 0) {
-			context.putItem("projectHome", args[0]);
-			context.setProject(new EProject(new File(args[0])));
-		}
+		context.putItem("projectHome", args[0]);
+		context.setProject(new EProject(new File(args[0])));
 		try {
 			beforeRun();
 			run();

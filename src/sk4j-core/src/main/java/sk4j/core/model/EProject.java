@@ -169,7 +169,7 @@ public class EProject implements Serializable {
 	 * @return
 	 */
 	public boolean isMavenProject() {
-		return new File("${path}/pom.xml").exists();
+		return new File(String.format("%s/pom.xml", getPath())).exists();
 	}
 
 	@Override
