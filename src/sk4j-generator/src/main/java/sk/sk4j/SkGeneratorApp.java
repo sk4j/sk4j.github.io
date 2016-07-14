@@ -1,15 +1,16 @@
 package sk.sk4j;
 
+import java.io.Serializable;
+
+import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
-import sk4j.api.Console;
-import sk4j.api.Context;
 import sk4j.api.FS;
 import sk4j.api.Template;
-import sk4j.core.MainApp;
+import sk4j.core.AfterStart;
 import sk4j.utils.StringTool;
 
-public class SkGeneratorApp extends MainApp {
+public class SkGeneratorApp implements Serializable {
 
 	/**
 	 * 
@@ -20,35 +21,12 @@ public class SkGeneratorApp extends MainApp {
 	private FS fs;
 
 	@Inject
-	private Context ctx;
-
-	@Inject
-	private Console console;
-
-	@Inject
 	private StringTool st;
 
 	@Inject
 	private Template template;
 
-	public static void main(String[] args) {
-		new SkGeneratorApp().init(args);
-	}
-
-	@Override
-	protected void beforeRun() {
-		String projectName = console.readln("Digite o nome do projeto (use o traço como separador): ");
-		String projectDesc = console.readln("Digite a descrição do projeto: ");
-		validateProjectName(projectName);
-		validateProjectDesc(projectDesc);
-
-		ctx.putItem("projectName", projectName);
-		ctx.putItem("projectDesc", projectDesc);
-	}
-
-	@Override
-	public void run() {
-		ctx.putItem("projectDir", ctx.replace("${sk4jSDKHome}/src/${projectName}"));
+	public void run(@Observes AfterStart event) {
 
 		fs.mkdir("${projectDir}");
 		fs.mkdir("${projectDir}/src/main/java");
@@ -69,15 +47,4 @@ public class SkGeneratorApp extends MainApp {
 
 	}
 
-	private void validateProjectName(String projectName) {
-		if (st.isEmpty(projectName) || st.containsWhitespace(projectName)) {
-			console.exit("O nome do projeto não ser vazio ou conter espaços.");
-		}
-	}
-
-	private void validateProjectDesc(String projectDesc) {
-		if (st.isEmpty(projectDesc)) {
-			console.exit("Descrição do projeto inválida.");
-		}
-	}
 }
