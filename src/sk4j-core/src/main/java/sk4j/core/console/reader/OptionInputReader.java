@@ -1,4 +1,4 @@
-package sk4j.core.input;
+package sk4j.core.console.reader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.StringUtils;
 
-import sk4j.core.console.CColor;
-import sk4j.core.exception.InvalidOptionException;
+import sk4j.core.console.ConsoleColor;
+import sk4j.core.console.Choosable;
 
 public class OptionInputReader<T extends Choosable<T>> extends InputReader {
 
@@ -33,7 +33,7 @@ public class OptionInputReader<T extends Choosable<T>> extends InputReader {
 		options
 			.stream()
 			.sorted()
-			.map(opt -> String.format("%s > %s", CColor.magenta(StringUtils.rightPad(String.valueOf(index.incrementAndGet()), 2)), CColor.bold(opt.getChoiseLabel())))
+			.map(opt -> String.format("%s > %s", ConsoleColor.magenta(StringUtils.rightPad(String.valueOf(index.incrementAndGet()), 2)), ConsoleColor.bold(opt.getChoiseLabel())))
 			.forEach(System.out::println);
 	}
 	//@formatter:on

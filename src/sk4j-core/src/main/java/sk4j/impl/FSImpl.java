@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 
 import sk4j.api.Context;
 import sk4j.api.FS;
-import sk4j.core.console.CColor;
+import sk4j.core.console.ConsoleColor;
 
 /**
  * 
@@ -40,10 +40,10 @@ public class FSImpl implements FS {
 		File dir = new File(path);
 		if (!dir.exists()) {
 			dir.mkdirs();
-			log.info("{}\t{}", CColor.bold(CColor.blue("[CREATE]")), CColor.bold(CColor.blue(dir.getAbsolutePath())));
+			log.info("{}\t{}", ConsoleColor.bold(ConsoleColor.blue("[CREATE]")), ConsoleColor.bold(ConsoleColor.blue(dir.getAbsolutePath())));
 			return;
 		}
-		log.warn(CColor.gray("[SKIP]\t{}"), dir.getAbsolutePath());
+		log.warn(ConsoleColor.gray("[SKIP]\t{}"), dir.getAbsolutePath());
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class FSImpl implements FS {
 		fileName = context.replace(fileName);
 		File file = new File(String.format("%s/%s", filePath, fileName));
 		if (file.exists()) {
-			log.warn(CColor.gray("[SKIP]\t{}"), file.getAbsolutePath());
+			log.warn(ConsoleColor.gray("[SKIP]\t{}"), file.getAbsolutePath());
 			return;
 		}
 		write(file.toPath(), content);
@@ -65,10 +65,10 @@ public class FSImpl implements FS {
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
-			log.error(CColor.red("Erro ao criar arquivo: {}"), e.getMessage());
+			log.error(ConsoleColor.red("Erro ao criar arquivo: {}"), e.getMessage());
 			return;
 		}
-		log.info("{}\t{}", CColor.bold(CColor.blue("[CREATE]")), CColor.bold(CColor.blue(path.toFile().getAbsolutePath())));
+		log.info("{}\t{}", ConsoleColor.bold(ConsoleColor.blue("[CREATE]")), ConsoleColor.bold(ConsoleColor.blue(path.toFile().getAbsolutePath())));
 	}
 
 	@Override
@@ -80,10 +80,10 @@ public class FSImpl implements FS {
 			Path pdestination = Paths.get(destination);
 			Files.copy(inputStream, pdestination);
 		} catch (IOException e) {
-			log.error(CColor.red("Erro ao criar arquivo: {}"), e.getMessage());
+			log.error(ConsoleColor.red("Erro ao criar arquivo: {}"), e.getMessage());
 			return;
 		}
-		log.info("{}\t{} -> {}", CColor.bold(CColor.blue("[COPY]")), CColor.bold(CColor.green(source)), CColor.bold(CColor.blue(destination)));
+		log.info("{}\t{} -> {}", ConsoleColor.bold(ConsoleColor.blue("[COPY]")), ConsoleColor.bold(ConsoleColor.green(source)), ConsoleColor.bold(ConsoleColor.blue(destination)));
 	}
 
 }

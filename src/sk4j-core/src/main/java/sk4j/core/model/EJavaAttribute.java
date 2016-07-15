@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import com.thoughtworks.qdox.model.JavaField;
 
-import sk4j.core.input.Choosable;
+import sk4j.core.console.Choosable;
 
 /**
  * 

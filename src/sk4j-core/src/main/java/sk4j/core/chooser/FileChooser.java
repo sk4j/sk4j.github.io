@@ -1,8 +1,8 @@
-package sk4j.core.input.util;
+package sk4j.core.chooser;
 
 import java.io.File;
 
-import sk4j.core.input.Choosable;
+import sk4j.core.console.Choosable;
 
 public class FileChooser implements Choosable<FileChooser> {
 

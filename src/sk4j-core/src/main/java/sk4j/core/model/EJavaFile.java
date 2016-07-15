@@ -9,7 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.thoughtworks.qdox.model.JavaClass;
 
-import sk4j.core.input.Choosable;
+import sk4j.core.console.ConsoleColor;
+import sk4j.core.console.Choosable;
 
 /**
  * Classe que representa uma classe java.
@@ -62,9 +63,9 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 	}
 
 	public String getParentPackageName() {
-		if(this.parentPackageName == null) {
+		if (this.parentPackageName == null) {
 			List<String> packageTokens = Arrays.asList(getJavaClass().getPackageName().split("\\."));
-			this.parentPackageName = StringUtils.join(packageTokens.subList(0, packageTokens.size()-1), ".");
+			this.parentPackageName = StringUtils.join(packageTokens.subList(0, packageTokens.size() - 1), ".");
 		}
 		return parentPackageName;
 	}
@@ -135,7 +136,7 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 
 	@Override
 	public String getChoiseLabel() {
-		return this.getName();
+		return this.getName() + " - " + ConsoleColor.gray(this.getJavaClass().getPackageName());
 	}
 
 }

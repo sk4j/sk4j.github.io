@@ -1,11 +1,10 @@
-package sk4j.core.input;
+package sk4j.core.console.reader;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import sk4j.core.exception.InvalidOptionException;
+import sk4j.core.console.Choosable;
 
 public class MultipleOptionInputReader<T extends Choosable<T>> extends OptionInputReader<T> {
 
@@ -14,7 +13,7 @@ public class MultipleOptionInputReader<T extends Choosable<T>> extends OptionInp
 	}
 
 	//@formatter:off
-	public List<T> readOptions() throws IOException, InvalidOptionException {
+	public List<T> readOptions()  {
 		printOptions();
 		System.out.println(String.format("a  > Selecionar todos\n"));
 		read();
@@ -22,7 +21,7 @@ public class MultipleOptionInputReader<T extends Choosable<T>> extends OptionInp
 														.stream()
 														.allMatch(p -> isValidOption(p));
 		if(!valid) {
-			throw new InvalidOptionException(String.format("Opção inválida: %s", getValue()));
+			//throw new InvalidOptionException(String.format("Opção inválida: %s", getValue()));
 		}
 		return getValue().equals("a") ? this.getOptions() :
 				Arrays.asList(getValue().split(","))

@@ -1,9 +1,8 @@
-package sk4j.core.input;
+package sk4j.core.console.reader;
 
-import java.io.IOException;
 import java.util.List;
 
-import sk4j.core.exception.InvalidOptionException;
+import sk4j.core.console.Choosable;
 
 public class SingleOptionInputReader<T extends Choosable<T>> extends OptionInputReader<T> {
 
@@ -11,11 +10,11 @@ public class SingleOptionInputReader<T extends Choosable<T>> extends OptionInput
 		super(label, options);
 	}
 
-	public T readOption() throws IOException, InvalidOptionException {
+	public T readOption() {
 		printOptions();
 		read();
 		if (!isValidOption(getValue())) {
-			throw new InvalidOptionException(String.format("Opção inválida: %s", getValue()));
+			// throw new InvalidOptionException(String.format("Opção inválida: %s", getValue()));
 		}
 		return this.getOptions().get(Integer.valueOf(getValue()) - 1);
 	}

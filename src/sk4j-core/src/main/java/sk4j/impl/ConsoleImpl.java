@@ -1,18 +1,19 @@
 package sk4j.impl;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import sk4j.api.Console;
 import sk4j.api.Context;
-import sk4j.core.console.CColor;
-import sk4j.core.exception.InvalidOptionException;
-import sk4j.core.input.Choosable;
-import sk4j.core.input.InputReader;
-import sk4j.core.input.MultipleOptionInputReader;
-import sk4j.core.input.SingleOptionInputReader;
+import sk4j.core.console.Choosable;
+import sk4j.core.console.ConsoleColor;
+import sk4j.core.console.ConsoleValidator;
+import sk4j.core.console.reader.InputReader;
+import sk4j.core.console.reader.MultipleOptionInputReader;
+import sk4j.core.console.reader.ReadConf;
+import sk4j.core.console.reader.SingleOptionInputReader;
 
 public class ConsoleImpl implements Console {
 
@@ -24,28 +25,17 @@ public class ConsoleImpl implements Console {
 	@Inject
 	private Context ctx;
 
+	@Inject
+	private Map<String, ConsoleValidator> validators;
+
 	@Override
 	public <T extends Choosable<T>> T readOption(String label, List<T> options) {
-		try {
-			return new SingleOptionInputReader<>(label, options).readOption();
-		} catch (IOException e) {
-			exit("Erro ao ler entrada de dados. " + e.getMessage());
-		} catch (InvalidOptionException e) {
-			exit(e.getMessage());
-		}
-		return null;
+		return new SingleOptionInputReader<>(ctx.replace(label), options).readOption();
 	}
 
 	@Override
 	public <T extends Choosable<T>> List<T> readOptions(String label, List<T> options) {
-		try {
-			return new MultipleOptionInputReader<>(label, options).readOptions();
-		} catch (IOException e) {
-			exit("Erro ao ler entrada de dados. " + e.getMessage());
-		} catch (InvalidOptionException e) {
-			exit(e.getMessage());
-		}
-		return null;
+		return new MultipleOptionInputReader<>(ctx.replace(label), options).readOptions();
 	}
 
 	@Override
@@ -53,46 +43,37 @@ public class ConsoleImpl implements Console {
 		message = ctx.replace(message);
 		System.out.println("");
 		System.out.println("**************************************");
-		System.out.println(CColor.red(message));
+		System.out.println(ConsoleColor.red(message));
 		System.exit(1);
 
 	}
 
-	@Override
-	public String readln(String label) {
-		label = String.format("> %s", ctx.replace(label));
-		try {
-			return new InputReader(CColor.bold(label)).read();
-		} catch (IOException e) {
-			exit("Erro ao ler entrada de dados. " + e.getMessage());
-		}
-		return null;
+	private String readInputReader(String label) {
+		return new InputReader(ctx.replace(label)).read();
 	}
 
 	@Override
-	public String readln(String label, ConsoleConf conf) {
-		String ln = readln(label);
-		return null;
+	public String read(String label) {
+		return readInputReader(ConsoleColor.bold(label));
 	}
 
 	@Override
-	public String readln(String label, String defaultValue, ConsoleConf conf) {
-		return null;
+	public String read(String label, ReadConf conf) {
+		String value = readInputReader(ConsoleColor.bold(label));
+		ConsoleValidator validator = validators.get(conf.getValidator().getSimpleName());
+		return validator.validate(value) ? value : read(label, conf);
 	}
 
 	@Override
-	public String readln(String label, String defaultValue) {
-		return null;
+	public String read(String label, String defaultValue, ReadConf conf) {
+		String value = readInputReader(String.format("%s (%s) ", ConsoleColor.bold(label), defaultValue));
+		ConsoleValidator validator = validators.get(conf.getValidator().getSimpleName());
+		return validator.validate(value) ? value : read(label, defaultValue, conf);
 	}
 
 	@Override
-	public YesNoOption readYesNo(String label) {
-		return null;
-	}
-
-	@Override
-	public YesNoOption readYesNO(String label, YesNoOption defaultValue) {
-		return null;
+	public String read(String label, String defaultValue) {
+		return readInputReader(String.format("%s (%s) ", ConsoleColor.bold(label), defaultValue));
 	}
 
 }

@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
-import sk4j.core.exception.InvalidOptionException;
-import sk4j.core.input.Choosable;
+import sk4j.core.console.Choosable;
+import sk4j.core.console.reader.ReadConf;
 
 /**
  * Classe responsável trabalhar com o Console.
@@ -15,28 +15,7 @@ import sk4j.core.input.Choosable;
  */
 public interface Console extends Serializable {
 
-	public enum ConsoleConf {
-		ALPHANUMERIC, NUMBER, JAVACLASSNAME
-	}
-
-	public enum YesNoOption {
-		YES, NO
-	}
-
-	/**
-	 * 
-	 * @param label
-	 * @return
-	 */
-	YesNoOption readYesNo(String label);
-
-	/**
-	 * 
-	 * @param label
-	 * @param defaultValue
-	 * @return
-	 */
-	YesNoOption readYesNO(String label, YesNoOption defaultValue);
+	//@formatter:on
 
 	/**
 	 * 
@@ -44,7 +23,7 @@ public interface Console extends Serializable {
 	 * @return
 	 * @throws IOException
 	 */
-	String readln(String label);
+	String read(String label);
 
 	/**
 	 * 
@@ -52,7 +31,7 @@ public interface Console extends Serializable {
 	 * @param defaultValue
 	 * @return
 	 */
-	String readln(String label, String defaultValue);
+	String read(String label, String defaultValue);
 
 	/**
 	 * 
@@ -60,7 +39,7 @@ public interface Console extends Serializable {
 	 * @param conf
 	 * @return
 	 */
-	String readln(String label, ConsoleConf conf);
+	String read(String label, ReadConf conf);
 
 	/**
 	 * @param label
@@ -68,7 +47,7 @@ public interface Console extends Serializable {
 	 * @param conf
 	 * @return
 	 */
-	String readln(String label, String defaultValue, ConsoleConf conf);
+	String read(String label, String defaultValue, ReadConf conf);
 
 	/**
 	 * 

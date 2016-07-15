@@ -1,6 +1,6 @@
 package sk4j.core.console;
 
-public class CColor {
+public class ConsoleColor {
 	/**
 	 * Coloriza a String com a cor branca.
 	 * 

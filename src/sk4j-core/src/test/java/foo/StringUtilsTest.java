@@ -13,7 +13,8 @@ public class StringUtilsTest {
 			.map(StringUtils::capitalize)
 			.collect(Collectors.joining());
 		System.out.println(v);	
-			
+		
+		System.out.println(StringUtils.substring("Atividades", 0, 1));
 	}
 
 }
