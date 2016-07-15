@@ -5,9 +5,12 @@ import java.io.Serializable;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import sk4j.api.Console;
+import sk4j.api.Context;
 import sk4j.api.FS;
 import sk4j.api.Template;
 import sk4j.core.AfterStart;
+import sk4j.core.console.reader.ReadConf;
 import sk4j.utils.StringTool;
 
 public class Application implements Serializable {
@@ -26,7 +29,20 @@ public class Application implements Serializable {
 	@Inject
 	private Template template;
 
+	@Inject
+	private Context ctx;
+
+	@Inject
+	private Console console;
+
 	public void run(@Observes AfterStart event) {
+
+		String projectName = console.read("Digite o nome do projeto", ReadConf.SK_PROJECT_NAME);
+		String projectDesc = console.read("Digite a descrição do projeto", ReadConf.ALPHANUMERIC);
+
+		ctx.putItem("PROJECT_NAME", projectName);
+		ctx.putItem("PROJECT_DESC", projectDesc);
+		ctx.putItem("PROJECT_DIR", ctx.replace("{{SK4J_HOME}}/src/{{PROJECT_NAME}}"));
 
 		fs.mkdir("{{PROJECT_DIR}}");
 		fs.mkdir("{{PROJECT_DIR}}/src/main/java");
