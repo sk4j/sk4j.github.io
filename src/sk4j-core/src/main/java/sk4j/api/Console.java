@@ -21,7 +21,7 @@ public interface Console extends Serializable {
 	/**
 	 * 
 	 * @param label
-	 * @return
+	 * @return String com valor de entrada.
 	 * @throws IOException
 	 */
 	String read(String label);
@@ -30,7 +30,7 @@ public interface Console extends Serializable {
 	 * 
 	 * @param label
 	 * @param defaultValue
-	 * @return
+	 * @return String com valor de entrada.
 	 */
 	String read(String label, String defaultValue);
 
@@ -38,7 +38,7 @@ public interface Console extends Serializable {
 	 * 
 	 * @param label
 	 * @param conf
-	 * @return
+	 * @return String com valor de entrada.
 	 */
 	String read(String label, ReadConf conf);
 
@@ -46,14 +46,14 @@ public interface Console extends Serializable {
 	 * @param label
 	 * @param defaultValue
 	 * @param conf
-	 * @return
+	 * @return String com valor de entrada.
 	 */
 	String read(String label, String defaultValue, ReadConf conf);
 
 	/**
 	 * 
 	 * @param label
-	 * @return
+	 * @return Item (YES/NO) do Enum YesNoOption
 	 */
 	YesNoOption readYesNo(String label);
 
@@ -61,7 +61,7 @@ public interface Console extends Serializable {
 	 * 
 	 * @param label
 	 * @param defaultValue
-	 * @return
+	 * @return Item (YES/NO) do Enum YesNoOption
 	 */
 	YesNoOption readYesNo(String label, YesNoOption defaultValue);
 
@@ -69,7 +69,7 @@ public interface Console extends Serializable {
 	 * 
 	 * @param label
 	 * @param options
-	 * @return
+	 * @return Elemento selecionado.
 	 * @throws IOException
 	 * @throws InvalidOptionException
 	 */
@@ -79,7 +79,7 @@ public interface Console extends Serializable {
 	 * 
 	 * @param label
 	 * @param options
-	 * @return
+	 * @return Lista de elementos selecionados.
 	 * @throws IOException
 	 * @throws InvalidOptionException
 	 */

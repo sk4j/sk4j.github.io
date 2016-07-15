@@ -12,9 +12,7 @@ import sk4j.api.Context;
 
 /**
  * 
- * Classe utilitária para manipulação de Strings.
- * 
- * Disponível dentro de templates .jtwig com o alias 'st'.
+ * Classe utilitária para manipulação de Strings.A classe está disponivel dentro de templates .jtwig com o alias 'st'.
  * 
  * @author jcruz
  *
@@ -31,10 +29,23 @@ public class StringTool implements Serializable {
 
 	/**
 	 * 
-	 * @param value
-	 * @return
+	 * Verifica se a String é whitespace, vazia ("") ou null.
+	 * 
+	 * <pre>
+	 * st.isBlank(null) = true 
+	 * st.isBlank("") = true 
+	 * st.isBlank(" ") = true 
+	 * st.isBlank("bob") = false 
+	 * st.isBlank(" bob ") = false
+	 * </pre>
+	 * 
+	 * @param str
+	 *            String a ser verificada.
+	 * @return {@code true} se a String for whitespace, vazia ("") ou null.
+	 * 
+	 * 
 	 */
-	public boolean isEmpty(String str) {
+	public boolean isBlank(String str) {
 		return StringUtils.isBlank(ctx.replace(str));
 	}
 
