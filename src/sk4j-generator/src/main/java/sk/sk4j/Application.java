@@ -38,7 +38,7 @@ public class Application implements Serializable {
 	public void run(@Observes AfterStart event) {
 
 		String projectName = console.read("Digite o nome do projeto", ReadConf.SK_PROJECT_NAME);
-		String projectDesc = console.read("Digite a descrição do projeto", ReadConf.ALPHANUMERIC);
+		String projectDesc = console.read("Digite a descrição do projeto", ReadConf.ALPHANUMERIC_SPACE);
 
 		ctx.putItem("PROJECT_NAME", projectName);
 		ctx.putItem("PROJECT_DESC", projectDesc);
@@ -47,6 +47,7 @@ public class Application implements Serializable {
 		fs.mkdir("{{PROJECT_DIR}}");
 		fs.mkdir("{{PROJECT_DIR}}/src/main/java");
 		fs.mkdir("{{PROJECT_DIR}}/src/main/java/sk4j");
+		fs.mkdir("{{PROJECT_DIR}}/src/main/java/sk4j/bootstrap");
 		fs.mkdir("{{PROJECT_DIR}}/src/main/resources/templates");
 		fs.mkdir("{{PROJECT_DIR}}/src/main/resources/files");
 		fs.mkdir("{{PROJECT_DIR}}/src/main/resources/META-INF");
@@ -54,11 +55,12 @@ public class Application implements Serializable {
 		fs.mkdir("{{PROJECT_DIR}}/build");
 
 		fs.copy("/files/gitignore", "{{PROJECT_DIR}}/.gitignore");
-		fs.copy("/files/readme.txt", "{{PROJECT_DIR}}/src/main/resources/templates/readme.txt");
-		fs.copy("/files/readme.txt", "{{PROJECT_DIR}}/src/main/resources/files/readme.txt");
-		fs.copy("/files/beans.xml", "{{PROJECT_DIR}}/src/main/resources/META-INF/beans.xml");
+		fs.copy("/files/readme-txt", "{{PROJECT_DIR}}/src/main/resources/templates/readme.txt");
+		fs.copy("/files/readme-txt", "{{PROJECT_DIR}}/src/main/resources/files/readme.txt");
+		fs.copy("/files/bootstrap-java", "{{PROJECT_DIR}}/src/main/java/sk4j/bootstrap/Bootstrap.java");
+		fs.copy("/files/application-java", "{{PROJECT_DIR}}/src/main/java/sk4j/Application.java");
+		fs.copy("/files/beans-xml", "{{PROJECT_DIR}}/src/main/resources/META-INF/beans.xml");
 		fs.createFile("{{PROJECT_DIR}}", "build.gradle", template.merge("build-gradle"));
-		fs.createFile("{{PROJECT_DIR}}/src/main/java/sk4j", st.camelize("{{PROJECT_NAME}}.java"), template.merge("app"));
 		fs.createFile("{{PROJECT_DIR}}/src/main/resources", "description.txt", template.merge("description-txt"));
 
 	}

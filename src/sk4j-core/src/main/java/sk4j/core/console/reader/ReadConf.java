@@ -2,6 +2,7 @@ package sk4j.core.console.reader;
 
 import sk4j.core.console.ConsoleValidator;
 import sk4j.core.console.validator.ConsoleAlphaValidator;
+import sk4j.core.console.validator.ConsoleAlphanumericSpaceValidator;
 import sk4j.core.console.validator.ConsoleAlphanumericValidator;
 import sk4j.core.console.validator.ConsoleJavaClassNameValidator;
 import sk4j.core.console.validator.ConsoleNumberValidator;
@@ -16,6 +17,8 @@ import sk4j.core.console.validator.ConsoleYesNoValidator;
 public enum ReadConf {
 	//
 	ALPHANUMERIC(ConsoleAlphanumericValidator.class),
+	//
+	ALPHANUMERIC_SPACE(ConsoleAlphanumericSpaceValidator.class),
 	//
 	ALPHA(ConsoleAlphaValidator.class),
 	//
