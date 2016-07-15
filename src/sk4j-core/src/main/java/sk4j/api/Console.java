@@ -6,6 +6,7 @@ import java.util.List;
 
 import sk4j.core.console.Choosable;
 import sk4j.core.console.reader.ReadConf;
+import sk4j.core.console.reader.YesNoOption;
 
 /**
  * Classe responsável trabalhar com o Console.
@@ -48,6 +49,21 @@ public interface Console extends Serializable {
 	 * @return
 	 */
 	String read(String label, String defaultValue, ReadConf conf);
+
+	/**
+	 * 
+	 * @param label
+	 * @return
+	 */
+	YesNoOption readYesNo(String label);
+
+	/**
+	 * 
+	 * @param label
+	 * @param defaultValue
+	 * @return
+	 */
+	YesNoOption readYesNo(String label, YesNoOption defaultValue);
 
 	/**
 	 * 

@@ -2,6 +2,7 @@ package sk4j.core.console.validator;
 
 import java.util.Arrays;
 
+import sk4j.core.console.ConsoleColor;
 import sk4j.core.console.ConsoleValidator;
 
 /**
@@ -23,7 +24,7 @@ public class ConsoleYesNoValidator extends ConsoleValidator {
 
 	@Override
 	protected String consoleMessageOnFalse() {
-		return "";
+		return ConsoleColor.yellow("Entrada inválida. A entrada de dados deve ser y para sim ou n para não.");
 	}
 
 }

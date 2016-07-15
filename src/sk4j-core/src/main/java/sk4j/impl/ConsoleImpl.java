@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
+
 import sk4j.api.Console;
 import sk4j.api.Context;
 import sk4j.core.console.Choosable;
@@ -14,6 +16,7 @@ import sk4j.core.console.reader.InputReader;
 import sk4j.core.console.reader.MultipleOptionInputReader;
 import sk4j.core.console.reader.ReadConf;
 import sk4j.core.console.reader.SingleOptionInputReader;
+import sk4j.core.console.reader.YesNoOption;
 
 public class ConsoleImpl implements Console {
 
@@ -66,14 +69,31 @@ public class ConsoleImpl implements Console {
 
 	@Override
 	public String read(String label, String defaultValue, ReadConf conf) {
-		String value = readInputReader(String.format("%s (%s) ", ConsoleColor.bold(label), defaultValue));
+		String value = readInputReader(String.format("%s (%s)", ConsoleColor.bold(label), defaultValue));
 		ConsoleValidator validator = validators.get(conf.getValidator().getSimpleName());
+		value = StringUtils.isNotBlank(value) ? value : defaultValue;
 		return validator.validate(value) ? value : read(label, defaultValue, conf);
 	}
 
 	@Override
 	public String read(String label, String defaultValue) {
-		return readInputReader(String.format("%s (%s) ", ConsoleColor.bold(label), defaultValue));
+		String value = readInputReader(String.format("%s (%s)", ConsoleColor.bold(label), defaultValue));
+		return StringUtils.isNotBlank(value) ? value : defaultValue;
+	}
+
+	@Override
+	public YesNoOption readYesNo(String label) {
+		String value = readInputReader(String.format("%s %s", ConsoleColor.bold(label), ConsoleColor.cyan("[y|n]")));
+		ConsoleValidator validator = validators.get(ReadConf.YES_NO.getValidator().getSimpleName());
+		return validator.validate(value) ? YesNoOption.getOption(value) : readYesNo(label);
+	}
+
+	@Override
+	public YesNoOption readYesNo(String label, YesNoOption defaultValue) {
+		String value = readInputReader(String.format("%s %s (%s)", ConsoleColor.bold(label), ConsoleColor.cyan("[y|n]"), defaultValue.getValue()));
+		ConsoleValidator validator = validators.get(ReadConf.YES_NO.getValidator().getSimpleName());
+		value = StringUtils.isNotBlank(value) ? value : defaultValue.getValue();
+		return validator.validate(value) ? YesNoOption.getOption(value) : readYesNo(label);
 	}
 
 }

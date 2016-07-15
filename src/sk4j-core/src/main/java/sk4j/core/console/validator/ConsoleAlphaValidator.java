@@ -6,12 +6,11 @@ import sk4j.core.console.ConsoleColor;
 import sk4j.core.console.ConsoleValidator;
 
 /**
- * Verifica se a String contem apenas números.
  * 
  * @author jcruz
  *
  */
-public class ConsoleNumberValidator extends ConsoleValidator {
+public class ConsoleAlphaValidator extends ConsoleValidator {
 
 	/**
 	 * 
@@ -20,12 +19,12 @@ public class ConsoleNumberValidator extends ConsoleValidator {
 
 	@Override
 	protected boolean test(String t) {
-		return StringUtils.isNumeric(t);
+		return StringUtils.isAlpha(t);
 	}
 
 	@Override
 	protected String consoleMessageOnFalse() {
-		return ConsoleColor.yellow("A entrada de dados deve conter apenas números.");
+		return ConsoleColor.yellow("A entrada de dados deve conter apenas letras.");
 	}
 
 }

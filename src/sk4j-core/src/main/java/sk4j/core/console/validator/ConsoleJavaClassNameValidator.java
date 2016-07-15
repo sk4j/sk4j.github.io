@@ -2,6 +2,7 @@ package sk4j.core.console.validator;
 
 import org.apache.commons.lang3.StringUtils;
 
+import sk4j.core.console.ConsoleColor;
 import sk4j.core.console.ConsoleValidator;
 
 /**
@@ -31,7 +32,7 @@ public class ConsoleJavaClassNameValidator extends ConsoleValidator {
 
 	@Override
 	protected String consoleMessageOnFalse() {
-		return "";
+		return ConsoleColor.yellow("A entrada de dados deve ser um nome de classe java válido.");
 	}
 
 }

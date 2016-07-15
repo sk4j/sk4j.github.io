@@ -16,7 +16,7 @@ public class InputReader {
 
 	public InputReader(String label) {
 		super();
-		this.label = label;
+		this.label = StringUtils.appendIfMissing(label, " : ");
 	}
 
 	/**
