@@ -11,7 +11,6 @@ import sk4j.api.FS;
 import sk4j.api.Template;
 import sk4j.core.AfterStart;
 import sk4j.core.console.reader.ReadConf;
-import sk4j.utils.StringTool;
 
 public class Application implements Serializable {
 
@@ -22,9 +21,6 @@ public class Application implements Serializable {
 
 	@Inject
 	private FS fs;
-
-	@Inject
-	private StringTool st;
 
 	@Inject
 	private Template template;
@@ -60,8 +56,9 @@ public class Application implements Serializable {
 		fs.copy("/files/bootstrap-java", "{{PROJECT_DIR}}/src/main/java/sk4j/bootstrap/Bootstrap.java");
 		fs.copy("/files/application-java", "{{PROJECT_DIR}}/src/main/java/sk4j/Application.java");
 		fs.copy("/files/beans-xml", "{{PROJECT_DIR}}/src/main/resources/META-INF/beans.xml");
-		fs.createFile("{{PROJECT_DIR}}", "build.gradle", template.merge("build-gradle"));
-		fs.createFile("{{PROJECT_DIR}}/src/main/resources", "description.txt", template.merge("description-txt"));
+
+		fs.createFile("{{PROJECT_DIR}}", "build.gradle", template.merge("/templates/build-gradle.jtwig"));
+		fs.createFile("{{PROJECT_DIR}}/src/main/resources", "description.txt", template.merge("/templates/description-txt.jtwig"));
 
 	}
 

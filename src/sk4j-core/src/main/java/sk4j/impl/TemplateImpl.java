@@ -26,7 +26,7 @@ public class TemplateImpl implements Template {
 
 	@Override
 	public String merge(String templateName) {
-		this.template = JtwigTemplate.classpathTemplate(String.format("/templates/%s.jtwig", templateName));
+		this.template = JtwigTemplate.classpathTemplate(templateName);
 		return template.render(this.createJtwigModel());
 	}
 
