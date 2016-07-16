@@ -27,7 +27,11 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 
 	private String name;
 
+	private String fullyQualifiedName;
+
 	private String path;
+
+	private String packageName;
 
 	private String parentPackageName;
 
@@ -54,12 +58,34 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 		this.name = name;
 	}
 
+	public String getFullyQualifiedName() {
+		if (this.fullyQualifiedName == null) {
+			this.fullyQualifiedName = this.javaClass.getFullyQualifiedName();
+		}
+		return fullyQualifiedName;
+	}
+
+	public void setFullyQualifiedName(String fullyQualifiedName) {
+		this.fullyQualifiedName = fullyQualifiedName;
+	}
+
 	public String getPath() {
 		return path;
 	}
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public String getPackageName() {
+		if (this.packageName == null) {
+			this.packageName = this.javaClass.getPackageName();
+		}
+		return packageName;
+	}
+
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
 	}
 
 	public String getParentPackageName() {
