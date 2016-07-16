@@ -75,7 +75,7 @@ public class EProject implements Serializable {
 	 * Retorna a lista de todos os arquivos .java do projeto.
 	 * 
 	 * @return Lista de arquivos java
-	 * @throws IOException
+	 * @throws IOException Erro ao ler arquivo.
 	 */
 	//@formatter:off
 	public List<EJavaFile> getJavaFiles() throws IOException {
@@ -98,7 +98,7 @@ public class EProject implements Serializable {
 	 * Retorna todos os diretórios não ocultos do projeto.
 	 * 
 	 * @return Lista de todos os diretórios do projeto.
-	 * @throws IOException
+	 * @throws IOException Erro ao ler arquivo.
 	 */
 	//@formatter:off
 	public List<File> getDirs() throws IOException {
@@ -120,7 +120,7 @@ public class EProject implements Serializable {
 	 * Retorna a lista de todos os arquivos do projeto.
 	 * 
 	 * @return Lista de todos os arquivos do projeto.
-	 * @throws IOException
+	 * @throws IOException Erro ao ler arquivo.
 	 */
 	//@formatter:off
 	public List<File> getFiles() throws IOException {
