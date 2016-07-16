@@ -16,8 +16,6 @@ import sk4j.core.console.reader.YesNoOption;
  */
 public interface Console extends Serializable {
 
-	//@formatter:on
-
 	/**
 	 * 
 	 * @param label
