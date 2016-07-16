@@ -1,11 +1,10 @@
 package sk4j.core.console.reader;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import org.apache.commons.lang3.StringUtils;
 
+import jline.console.ConsoleReader;
 import sk4j.core.console.ConsoleColor;
 
 public class InputReader {
@@ -26,10 +25,12 @@ public class InputReader {
 	 * @throws IOException
 	 */
 	public String read() {
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print(String.format("> %s", label));
+		// BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		try {
-			value = bufferedReader.readLine();
+			ConsoleReader console = new ConsoleReader();
+			console.setPrompt(String.format("> %s", label));
+			value = console.readLine();
+			console.close();
 		} catch (IOException e) {
 			System.out.println(ConsoleColor.red("Erro ao ler entrada de dados."));
 			System.exit(1);
