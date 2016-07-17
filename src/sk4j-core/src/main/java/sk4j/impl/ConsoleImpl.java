@@ -45,7 +45,7 @@ public class ConsoleImpl implements Console {
 	public void exit(String message) {
 		message = ctx.replace(message);
 		System.out.println("");
-		System.out.println("**************************************");
+		System.out.print("*** ");
 		System.out.println(ConsoleColor.red(message));
 		System.exit(1);
 
