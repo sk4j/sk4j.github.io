@@ -26,7 +26,7 @@ public class MultipleOptionInputReader<T extends Choosable<T>> extends OptionInp
 	//@formatter:on
 
 	private List<T> _readOptions() {
-		System.out.println(String.format("a  > Selecionar todos\n"));
+		System.out.println(String.format("a  : Selecionar todos"));
 		read();
 		boolean valid = getValue().equals("a") || Arrays.asList(getValue().split(","))
 														.stream()
