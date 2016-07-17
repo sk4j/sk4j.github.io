@@ -33,7 +33,7 @@ public class OptionInputReader<T extends Choosable<T>> extends InputReader {
 		options
 			.stream()
 			.sorted()
-			.map(opt -> String.format("%s > %s", ConsoleColor.magenta(StringUtils.rightPad(String.valueOf(index.incrementAndGet()), 2)), ConsoleColor.bold(opt.getChoiseLabel())))
+			.map(opt -> String.format("%s : %s", ConsoleColor.magenta(StringUtils.rightPad(String.valueOf(index.incrementAndGet()), 2)), ConsoleColor.bold(opt.getChoiseLabel())))
 			.forEach(System.out::println);
 	}
 	//@formatter:on

@@ -2,19 +2,30 @@ package sk4j.core.console.reader;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+
 import sk4j.core.console.Choosable;
+import sk4j.core.console.ConsoleColor;
 
 public class SingleOptionInputReader<T extends Choosable<T>> extends OptionInputReader<T> {
 
-	public SingleOptionInputReader(String label, List<T> options) {
+	private Logger log;
+
+	public SingleOptionInputReader(String label, List<T> options, Logger log) {
 		super(label, options);
+		this.log = log;
 	}
 
 	public T readOption() {
 		printOptions();
+		return _readOption();
+	}
+
+	private T _readOption() {
 		read();
 		if (!isValidOption(getValue())) {
-			// throw new InvalidOptionException(String.format("Opção inválida: %s", getValue()));
+			log.warn(ConsoleColor.yellow("Opção inválida: {}"), getValue());
+			_readOption();
 		}
 		return this.getOptions().get(Integer.valueOf(getValue()) - 1);
 	}

@@ -39,7 +39,8 @@ public abstract class BootstrapApp implements Serializable {
 			mainApp.start(args);
 			weld.shutdown();
 		} catch (Exception e) {
-			console.exit(e.getMessage());
+			//console.exit(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 

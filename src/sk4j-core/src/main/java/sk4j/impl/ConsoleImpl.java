@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
 
 import sk4j.api.Console;
 import sk4j.api.Context;
@@ -29,16 +30,19 @@ public class ConsoleImpl implements Console {
 	private Context ctx;
 
 	@Inject
+	private Logger log;
+
+	@Inject
 	private Map<String, ConsoleValidator> validators;
 
 	@Override
 	public <T extends Choosable<T>> T readOption(String label, List<T> options) {
-		return new SingleOptionInputReader<>(ctx.replace(label), options).readOption();
+		return new SingleOptionInputReader<>(ctx.replace(label), options, log).readOption();
 	}
 
 	@Override
 	public <T extends Choosable<T>> List<T> readOptions(String label, List<T> options) {
-		return new MultipleOptionInputReader<>(ctx.replace(label), options).readOptions();
+		return new MultipleOptionInputReader<>(ctx.replace(label), options, log).readOptions();
 	}
 
 	@Override
@@ -90,7 +94,8 @@ public class ConsoleImpl implements Console {
 
 	@Override
 	public YesNoOption readYesNo(String label, YesNoOption defaultValue) {
-		String value = readInputReader(String.format("%s %s (%s)", ConsoleColor.bold(label), ConsoleColor.cyan("[y|n]"), defaultValue.getValue()));
+		String value = readInputReader(
+				String.format("%s %s (%s)", ConsoleColor.bold(label), ConsoleColor.cyan("[y|n]"), defaultValue.getValue()));
 		ConsoleValidator validator = validators.get(ReadConf.YES_NO.getValidator().getSimpleName());
 		value = StringUtils.isNotBlank(value) ? value : defaultValue.getValue();
 		return validator.validate(value) ? YesNoOption.getOption(value) : readYesNo(label);

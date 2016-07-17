@@ -165,4 +165,9 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 		return this.getName() + " - " + ConsoleColor.gray(this.getJavaClass().getPackageName());
 	}
 
+	@Override
+	public String toString() {
+		return "EJavaFile [fullyQualifiedName=" + getFullyQualifiedName() + "]";
+	}
+
 }
