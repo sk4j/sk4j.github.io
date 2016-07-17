@@ -40,10 +40,13 @@ public class Application implements Serializable {
 						.stream()
 						.filter(p -> p.hasAnnotation("Entity"))
 						.collect(Collectors.toList()));
-		//@formatter:on
+		
 		selectedEntities.stream().forEach(p -> {
 			context.putItem("javaFile", p);
-			fs.createFile("{{javaFile.path}}../persistence", "{{javaFile.name}}DAO.java", template.merge("/templates/dao-java.jtwig"));
+			fs.createFile("{{javaFile.path}}../persistence",
+						  "{{javaFile.name}}DAO.java", 
+						  template.merge("/templates/dao-java.jtwig"));
 		});
+		//@formatter:on
 	}
 }
