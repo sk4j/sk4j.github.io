@@ -38,11 +38,11 @@ public class Application implements Serializable {
 		List<EJavaFile> selectedEntities = console.readOptions("Selecione a entidade",
 				context.getProject().getJavaFiles()
 						.stream()
-						.filter(p -> p.hasAnnotation("Entity"))
+						.filter(javaFile -> javaFile.hasAnnotation("Entity"))
 						.collect(Collectors.toList()));
 		
-		selectedEntities.stream().forEach(p -> {
-			context.putItem("javaFile", p);
+		selectedEntities.stream().forEach(javaFile -> {
+			context.putItem("javaFile", javaFile);
 			fs.createFile("{{javaFile.path}}../persistence",
 						  "{{javaFile.name}}DAO.java", 
 						  template.merge("/templates/dao-java.jtwig"));
