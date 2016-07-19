@@ -43,7 +43,7 @@ public class Application implements Serializable {
 		
 		selectedEntities.stream().forEach(javaFile -> {
 			context.putItem("javaFile", javaFile);
-			fs.createFile("{{javaFile.path}}../persistence",
+			fs.createFile(fs.findSiblingPath(javaFile.getPath(),"persistence",2),
 						  "{{javaFile.name}}DAO.java", 
 						  template.merge("/templates/dao-java.jtwig"));
 		});

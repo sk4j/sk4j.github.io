@@ -41,4 +41,13 @@ public interface FS extends Serializable {
 	 */
 	void createFile(String filePath, String fileName, String content);
 
+
+	/**
+	 * 
+	 * @param base
+	 * @param name
+	 * @return
+	 */
+	String findSiblingPath(String base, String name, int parentDepth);
+
 }
