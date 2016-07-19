@@ -33,7 +33,7 @@ public class TemplateImpl implements Template {
 	private JtwigModel createJtwigModel() {
 		JtwigModel jtwigModel = JtwigModel.newModel();
 		context.get().forEach((k, v) -> jtwigModel.with(k, v));
-		return jtwigModel.with("st", st);
+		return jtwigModel.with("project", context.getProject()).with("st", st);
 	}
 
 }

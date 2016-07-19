@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaSource;
@@ -48,6 +49,9 @@ public class EProject implements Serializable {
 	}
 
 	public String getName() {
+		if(this.name == null) {
+			this.name = FilenameUtils.getBaseName(getPath());
+		}
 		return name;
 	}
 

@@ -51,7 +51,7 @@ public class ContextImpl implements Context {
 	@Override
 	public String replace(String value) {
 		JtwigTemplate template = JtwigTemplate.inlineTemplate(value);
-		JtwigModel model = JtwigModel.newModel();
+		JtwigModel model = JtwigModel.newModel().with("project", project);
 		ctx.forEach((k, v) -> model.with(k, v));
 		return template.render(model);
 	}

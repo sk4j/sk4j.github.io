@@ -1,0 +1,12 @@
+<html>
+	<body>
+		{% for key1, value1 in report.asMap() %}
+			<h4>{{key1}}</h3>
+			<table>
+				{% for reportItem in value1 %}
+					<tr><td>{{reportItem}}</td></tr>
+				{% endfor %}
+			<table>
+		{% endfor %}
+	</body>
+</html>
