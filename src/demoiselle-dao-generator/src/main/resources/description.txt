@@ -1,0 +1,1 @@
+Gerador de DAO no formato do Framework Demoiselle
