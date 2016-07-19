@@ -2,10 +2,12 @@ package {{javaFile.parentPackageName}}.persistence;
 
 import java.util.List;
 import javax.persistence.TypedQuery;
-
+import br.gov.frameworkdemoiselle.pagination.Pagination;
 import br.gov.frameworkdemoiselle.template.JPACrud;
+import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
 import {{javaFile.fullyQualifiedName}};
 
+@PersistenceController
 public class {{javaFile.name}}DAO extends JPACrud<{{javaFile.name}}, Long> {
 
 	/**
@@ -14,12 +16,23 @@ public class {{javaFile.name}}DAO extends JPACrud<{{javaFile.name}}, Long> {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 
+	 * Implentação do findAll com suporte a paginação.
 	 */
 	@Override
 	public List<{{javaFile.name}}> findAll() {
 		TypedQuery<{{javaFile.name}}> q = getEntityManager().createQuery("select o from {{javaFile.name}} o", {{javaFile.name}}.class);
+		Pagination pagination = getPagination();
+		if (pagination != null) {
+			q.setFirstResult(pagination.getFirstResult());
+			q.setMaxResults(pagination.getPageSize());
+			pagination.setTotalResults(countAll());
+		}
 		return q.getResultList();
+	}
+	
+	public int countAll() {
+		TypedQuery<Long> q = getEntityManager().createQuery("select count(o) from {{javaFile.name}} o", Long.class);
+		return q.getSingleResult().intValue();
 	}
 
 }

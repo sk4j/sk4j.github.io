@@ -42,10 +42,12 @@ public class Application implements Serializable {
 						.collect(Collectors.toList()));
 		
 		selectedEntities.stream().forEach(javaFile -> {
+			//Coloca o javaFile atual no contexto.
 			context.putItem("javaFile", javaFile);
-			fs.createFile(fs.findSiblingPath(javaFile.getPath(),"persistence",2),
-						  "{{javaFile.name}}DAO.java", 
-						  template.merge("/templates/dao-java.jtwig"));
+			//Retorna o diretório que termina com persistence no mesmo nível do javaFile. Sob até 2 níveis de diretório na busca caso necessário.
+			String siblingPath = fs.findSiblingPath(javaFile.getPath(),"persistence",2);
+			//Cria o arquivo de DAO no diretório encontrado acima utilizando o template dao-java.jtwig.
+			fs.createFile(siblingPath, "{{javaFile.name}}DAO.java", template.merge("/templates/dao-java.jtwig"));
 		});
 		//@formatter:on
 	}
