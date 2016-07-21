@@ -6,14 +6,17 @@ public class StringChooser implements Choosable<StringChooser> {
 
 	private String value;
 
-	public StringChooser(String value) {
+	private Integer id;
+
+	public StringChooser(Integer id, String value) {
 		super();
+		this.id = id;
 		this.value = value;
 	}
 
 	@Override
 	public int compareTo(StringChooser o) {
-		return this.value.compareTo(o.getValue());
+		return this.id.compareTo(o.id);
 	}
 
 	@Override
@@ -23,6 +26,10 @@ public class StringChooser implements Choosable<StringChooser> {
 
 	public String getValue() {
 		return value;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 }
