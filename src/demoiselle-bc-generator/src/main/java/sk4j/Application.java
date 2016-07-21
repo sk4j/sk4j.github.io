@@ -35,7 +35,7 @@ public class Application implements Serializable {
 
 	public void run(@Observes AfterStart event) throws IOException {
 		//@formatter:off
-		List<EJavaFile> selectedEntities = console.readOptions("Selecione a entidade",
+		List<EJavaFile> selectedEntities = console.readOptions("Selecione a(s) entidade(s)",
 				context.getProject().getJavaFiles()
 						.stream()
 						.filter(javaFile -> javaFile.hasAnnotation("Entity"))
