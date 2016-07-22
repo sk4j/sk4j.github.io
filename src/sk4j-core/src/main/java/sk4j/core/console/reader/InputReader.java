@@ -15,7 +15,7 @@ public class InputReader {
 
 	public InputReader(String label) {
 		super();
-		this.label = StringUtils.appendIfMissing(label, " : ");
+		this.label = StringUtils.appendIfMissing(ConsoleColor.bgGreen(label), " : ");
 	}
 
 	/**

@@ -3,6 +3,7 @@ package sk4j.core.chooser;
 import java.io.File;
 
 import sk4j.core.console.Choosable;
+import sk4j.core.console.ConsoleColor;
 
 public class FileChooser implements Choosable<FileChooser> {
 
@@ -20,7 +21,7 @@ public class FileChooser implements Choosable<FileChooser> {
 
 	@Override
 	public String getChoiseLabel() {
-		return file.getName();
+		return file.getName().concat(" - ").concat(ConsoleColor.gray(file.getAbsolutePath()));
 	}
 
 	public File getFile() {

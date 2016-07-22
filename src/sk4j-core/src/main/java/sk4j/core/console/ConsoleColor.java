@@ -92,4 +92,8 @@ public class ConsoleColor {
 	public static String bold(String value) {
 		return String.format("\033[1m%s\033[0m", value);
 	}
+	
+	public static String bgGreen(String value) {
+		return String.format("\033[42m%s\033[0m", value);
+	}
 }
