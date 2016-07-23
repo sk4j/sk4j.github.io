@@ -67,27 +67,31 @@ public class ConsoleImpl implements Console {
 	@Override
 	public String read(String label, ReadConf conf) {
 		String value = readInputReader(ConsoleColor.bold(label));
+		System.out.println(ConsoleColor.gray("Entrada: " + value));
 		ConsoleValidator validator = validators.get(conf.getValidator().getSimpleName());
 		return validator.validate(value) ? value : read(label, conf);
 	}
 
 	@Override
 	public String read(String label, String defaultValue, ReadConf conf) {
-		String value = readInputReader(String.format("%s (%s)", ConsoleColor.bold(label), defaultValue));
+		String value = readInputReader(String.format("%s (%s)", label, defaultValue));
+		value = StringUtils.isNotBlank(value) ? value : ctx.replace(defaultValue);
+		System.out.println(ConsoleColor.gray("Entrada: " + value));
 		ConsoleValidator validator = validators.get(conf.getValidator().getSimpleName());
-		value = StringUtils.isNotBlank(value) ? value : defaultValue;
 		return validator.validate(value) ? value : read(label, defaultValue, conf);
 	}
 
 	@Override
 	public String read(String label, String defaultValue) {
 		String value = readInputReader(String.format("%s (%s)", ConsoleColor.bold(label), defaultValue));
-		return StringUtils.isNotBlank(value) ? value : defaultValue;
+		System.out.println(ConsoleColor.gray("Entrada: " + value));
+		return StringUtils.isNotBlank(value) ? value : ctx.replace(defaultValue);
 	}
 
 	@Override
 	public YesNoOption readYesNo(String label) {
 		String value = readInputReader(String.format("%s %s", ConsoleColor.bold(label), ConsoleColor.cyan("[y|n]")));
+		System.out.println(ConsoleColor.gray("Entrada: " + value));
 		ConsoleValidator validator = validators.get(ReadConf.YES_NO.getValidator().getSimpleName());
 		return validator.validate(value) ? YesNoOption.getOption(value) : readYesNo(label);
 	}
@@ -98,6 +102,7 @@ public class ConsoleImpl implements Console {
 				String.format("%s %s (%s)", ConsoleColor.bold(label), ConsoleColor.cyan("[y|n]"), defaultValue.getValue()));
 		ConsoleValidator validator = validators.get(ReadConf.YES_NO.getValidator().getSimpleName());
 		value = StringUtils.isNotBlank(value) ? value : defaultValue.getValue();
+		System.out.println(ConsoleColor.gray("Entrada: " + value));
 		return validator.validate(value) ? YesNoOption.getOption(value) : readYesNo(label);
 	}
 

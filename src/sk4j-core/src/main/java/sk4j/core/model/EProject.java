@@ -15,6 +15,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaSource;
 
+import sk4j.core.console.ConsoleColor;
+
 /**
  * 
  * Classe que representa um Prejeto Java (Maven ou Gradle).
@@ -49,7 +51,7 @@ public class EProject implements Serializable {
 	}
 
 	public String getName() {
-		if(this.name == null) {
+		if (this.name == null) {
 			this.name = FilenameUtils.getBaseName(getPath());
 		}
 		return name;
@@ -79,7 +81,8 @@ public class EProject implements Serializable {
 	 * Retorna a lista de todos os arquivos .java do projeto.
 	 * 
 	 * @return Lista de arquivos java
-	 * @throws IOException Erro ao ler arquivo.
+	 * @throws IOException
+	 *             Erro ao ler arquivo.
 	 */
 	//@formatter:off
 	public List<EJavaFile> getJavaFiles() throws IOException {
@@ -102,7 +105,8 @@ public class EProject implements Serializable {
 	 * Retorna todos os diretórios não ocultos do projeto.
 	 * 
 	 * @return Lista de todos os diretórios do projeto.
-	 * @throws IOException Erro ao ler arquivo.
+	 * @throws IOException
+	 *             Erro ao ler arquivo.
 	 */
 	//@formatter:off
 	public List<File> getDirs() throws IOException {
@@ -124,7 +128,8 @@ public class EProject implements Serializable {
 	 * Retorna a lista de todos os arquivos do projeto.
 	 * 
 	 * @return Lista de todos os arquivos do projeto.
-	 * @throws IOException Erro ao ler arquivo.
+	 * @throws IOException
+	 *             Erro ao ler arquivo.
 	 */
 	//@formatter:off
 	public List<File> getFiles() throws IOException {
@@ -218,6 +223,8 @@ public class EProject implements Serializable {
 			return new EJavaFile(pathFile, source.getClasses()[0]);
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (com.thoughtworks.qdox.parser.ParseException e) {
+			System.out.println(ConsoleColor.red("Erro ao ler classe java: " + path.getFileName()));
 		}
 		return null;
 	}

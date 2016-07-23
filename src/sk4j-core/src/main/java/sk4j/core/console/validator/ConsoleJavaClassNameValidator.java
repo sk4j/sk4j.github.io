@@ -1,6 +1,6 @@
 package sk4j.core.console.validator;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.regex.Pattern;
 
 import sk4j.core.console.ConsoleColor;
 import sk4j.core.console.ConsoleValidator;
@@ -25,9 +25,11 @@ public class ConsoleJavaClassNameValidator extends ConsoleValidator {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private Pattern javaClassNamePattern = Pattern.compile("^[A-Z_$][a-zA-Z\\d_$]*");
+
 	@Override
 	protected boolean test(String t) {
-		return StringUtils.isAllUpperCase(StringUtils.substring(t, 0, 1)) && StringUtils.isAlphanumeric(t);
+		return javaClassNamePattern.matcher(t).matches();
 	}
 
 	@Override
