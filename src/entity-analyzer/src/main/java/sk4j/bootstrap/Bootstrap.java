@@ -16,13 +16,13 @@ public class Bootstrap extends BootstrapApp {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private Context context;
-	
+
 	@Inject
 	private Console console;
-	
+
 	public static void main(String[] args) {
 		new Bootstrap().init(args);
 	}
@@ -31,7 +31,7 @@ public class Bootstrap extends BootstrapApp {
 		if (!context.getProject().isMavenProject()) {
 			console.exit("O diretório não contém um projeto maven.");
 		}
-		if (!context.getProject().getJavaFiles().stream().anyMatch(p -> p.hasAnnotation("Entity"))) {
+		if (!context.getProject().getJavaClasses().stream().anyMatch(p -> p.hasAnnotation("Entity"))) {
 			console.exit("O projeto não possui nenhuma entidade.");
 		}
 	}

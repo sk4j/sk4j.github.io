@@ -23,12 +23,12 @@ public class EJavaAttribute implements Serializable, Choosable<EJavaAttribute> {
 
 	private String name;
 
-	private JavaField javaField;
+	private JavaField qdoxJavaField;
 
-	public EJavaAttribute(JavaField javaField) {
+	public EJavaAttribute(JavaField qdoxJavaField) {
 		super();
-		this.javaField = javaField;
-		this.name = this.javaField.getName();
+		this.qdoxJavaField = qdoxJavaField;
+		this.name = this.qdoxJavaField.getName();
 	}
 
 	public String getName() {
@@ -39,12 +39,12 @@ public class EJavaAttribute implements Serializable, Choosable<EJavaAttribute> {
 		this.name = name;
 	}
 
-	public JavaField getJavaField() {
-		return javaField;
+	public JavaField getQdoxJavaField() {
+		return qdoxJavaField;
 	}
 
-	public void setJavaField(JavaField javaField) {
-		this.javaField = javaField;
+	public void setQdoxJavaField(JavaField qdoxJavaField) {
+		this.qdoxJavaField = qdoxJavaField;
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class EJavaAttribute implements Serializable, Choosable<EJavaAttribute> {
 	 */
 	//@formatter:off
 	public boolean hasAnnotation(String name) {
-		return Arrays.asList(this.javaField.getAnnotations())
+		return Arrays.asList(this.qdoxJavaField.getAnnotations())
 					.stream()
 					.anyMatch(p -> p.getType().getValue().endsWith(name));
 	}

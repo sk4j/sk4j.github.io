@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
-import java.util.Collection;
-import java.util.Iterator;
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Instance;
@@ -45,11 +43,11 @@ public class Application implements Serializable {
 
 	public void run(@Observes AfterStart event) throws IOException {
 		//@formatter:off
-		context.getProject().getJavaFiles()
+		context.getProject().getJavaClasses()
 			.stream()
-			.filter(javaFile -> javaFile.hasAnnotation("Entity"))
-			.forEach(javaFile -> {
-				analyzers.forEach(analizer -> analizer.analyze(javaFile));
+			.filter(javaClass -> javaClass.hasAnnotation("Entity"))
+			.forEach(javaClass -> {
+				analyzers.forEach(analizer -> analizer.analyze(javaClass));
 		});
 		//@formatter:on
 		createHTMLReport();

@@ -22,12 +22,12 @@ public class EJavaMethod implements Serializable, Choosable<EJavaMethod> {
 
 	private String name;
 
-	private JavaMethod javaMethod;
+	private JavaMethod qdoxJavaMethod;
 
-	public EJavaMethod(JavaMethod javaMethod) {
+	public EJavaMethod(JavaMethod qdoxJavaMethod) {
 		super();
-		this.javaMethod = javaMethod;
-		this.name = this.javaMethod.getName();
+		this.qdoxJavaMethod = qdoxJavaMethod;
+		this.name = this.qdoxJavaMethod.getName();
 	}
 
 	public String getName() {
@@ -38,17 +38,17 @@ public class EJavaMethod implements Serializable, Choosable<EJavaMethod> {
 		this.name = name;
 	}
 
-	public JavaMethod getJavaMethod() {
-		return javaMethod;
+	public JavaMethod getQdoxJavaMethod() {
+		return qdoxJavaMethod;
 	}
 
-	public void setJavaMethod(JavaMethod javaMethod) {
-		this.javaMethod = javaMethod;
+	public void setQdoxJavaMethod(JavaMethod qdoxJavaMethod) {
+		this.qdoxJavaMethod = qdoxJavaMethod;
 	}
 
 	//@formatter:off
 	public boolean hasAnnotation(String name) {
-		return Arrays.asList(this.javaMethod.getAnnotations())
+		return Arrays.asList(this.qdoxJavaMethod.getAnnotations())
 					.stream()
 					.anyMatch(p -> p.getType().getValue().endsWith(name));
 	}

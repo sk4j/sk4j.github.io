@@ -18,7 +18,7 @@ import sk4j.core.console.Choosable;
  * @author jcruz
  *
  */
-public class EJavaFile implements Serializable, Choosable<EJavaFile> {
+public class EJavaClass implements Serializable, Choosable<EJavaClass> {
 
 	/**
 	 * 
@@ -35,21 +35,21 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 
 	private String parentPackageName;
 
-	private JavaClass javaClass;
+	private JavaClass qdoxJavaClass;
 
 	private List<EJavaAttribute> javaAttributes;
 
 	private List<EJavaMethod> javaMethods;
 
-	public EJavaFile(String path, JavaClass javaClass) {
+	public EJavaClass(String path, JavaClass qdoxJavaClass) {
 		super();
 		this.path = path;
-		this.javaClass = javaClass;
+		this.qdoxJavaClass = qdoxJavaClass;
 	}
 
 	public String getName() {
 		if (this.name == null) {
-			this.name = this.javaClass.getName();
+			this.name = this.qdoxJavaClass.getName();
 		}
 		return this.name;
 	}
@@ -60,7 +60,7 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 
 	public String getFullyQualifiedName() {
 		if (this.fullyQualifiedName == null) {
-			this.fullyQualifiedName = this.javaClass.getFullyQualifiedName();
+			this.fullyQualifiedName = this.qdoxJavaClass.getFullyQualifiedName();
 		}
 		return fullyQualifiedName;
 	}
@@ -79,7 +79,7 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 
 	public String getPackageName() {
 		if (this.packageName == null) {
-			this.packageName = this.javaClass.getPackageName();
+			this.packageName = this.qdoxJavaClass.getPackageName();
 		}
 		return packageName;
 	}
@@ -90,7 +90,7 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 
 	public String getParentPackageName() {
 		if (this.parentPackageName == null) {
-			List<String> packageTokens = Arrays.asList(getJavaClass().getPackageName().split("\\."));
+			List<String> packageTokens = Arrays.asList(getQdoxJavaClass().getPackageName().split("\\."));
 			this.parentPackageName = StringUtils.join(packageTokens.subList(0, packageTokens.size() - 1), ".");
 		}
 		return parentPackageName;
@@ -100,18 +100,18 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 		this.parentPackageName = parentPackageName;
 	}
 
-	public JavaClass getJavaClass() {
-		return javaClass;
+	public JavaClass getQdoxJavaClass() {
+		return qdoxJavaClass;
 	}
 
-	public void setJavaClass(JavaClass javaClass) {
-		this.javaClass = javaClass;
+	public void setQdoxJavaClass(JavaClass qdoxJavaClass) {
+		this.qdoxJavaClass = qdoxJavaClass;
 	}
 
 	//@formatter:off
 	public List<EJavaAttribute> getJavaAttributes() {
 		if (this.javaAttributes == null) {
-			this.javaAttributes = Arrays.asList(javaClass.getFields())
+			this.javaAttributes = Arrays.asList(qdoxJavaClass.getFields())
 										.stream()
 										.map(p -> new EJavaAttribute(p))
 										.collect(Collectors.toList());
@@ -127,7 +127,7 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 	//@formatter:off
 	public List<EJavaMethod> getJavaMethods() {
 		if (this.javaMethods == null) {
-			this.javaMethods = Arrays.asList(javaClass.getMethods())
+			this.javaMethods = Arrays.asList(qdoxJavaClass.getMethods())
 									 .stream()
 									 .map(p -> new EJavaMethod(p))
 									 .collect(Collectors.toList());
@@ -149,20 +149,20 @@ public class EJavaFile implements Serializable, Choosable<EJavaFile> {
 	 */
 	//@formatter:off
 	public boolean hasAnnotation(String name) {
-		return Arrays.asList(javaClass.getAnnotations())
+		return Arrays.asList(qdoxJavaClass.getAnnotations())
 					.stream()
 					.anyMatch(p -> p.getType().getValue().endsWith(name));
 	}
 	//@formatter:on
 
 	@Override
-	public int compareTo(EJavaFile o) {
+	public int compareTo(EJavaClass o) {
 		return this.getName().compareTo(o.getName());
 	}
 
 	@Override
 	public String getChoiseLabel() {
-		return this.getName() + " - " + ConsoleColor.gray(this.getJavaClass().getPackageName());
+		return this.getName() + " - " + ConsoleColor.gray(this.getQdoxJavaClass().getPackageName());
 	}
 
 	@Override

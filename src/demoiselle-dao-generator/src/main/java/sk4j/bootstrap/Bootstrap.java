@@ -19,7 +19,7 @@ public class Bootstrap extends BootstrapApp {
 
 	@Inject
 	private Context context;
-	
+
 	@Inject
 	private Console console;
 
@@ -31,7 +31,7 @@ public class Bootstrap extends BootstrapApp {
 		if (!context.getProject().isMavenProject()) {
 			console.exit("O diretório não contém um projeto maven.");
 		}
-		if (!context.getProject().getJavaFiles().stream().anyMatch(p -> p.hasAnnotation("Entity"))) {
+		if (!context.getProject().getJavaClasses().stream().anyMatch(javaClass -> javaClass.hasAnnotation("Entity"))) {
 			console.exit("O projeto não possui nenhuma entidade.");
 		}
 	}

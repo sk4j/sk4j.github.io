@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaSource;
@@ -37,7 +36,13 @@ public class EProject implements Serializable {
 
 	private File file;
 
-	private List<EJavaFile> javaFiles;
+	private List<EJavaClass> javaClasses;
+
+	private List<EJavaClass> srcMainJavaFiles;
+
+	private List<EJavaPackage> srcMainJavaPackages;
+
+	private List<File> srcMainWebappDirs;
 
 	private List<File> dirs;
 
@@ -85,20 +90,20 @@ public class EProject implements Serializable {
 	 *             Erro ao ler arquivo.
 	 */
 	//@formatter:off
-	public List<EJavaFile> getJavaFiles() throws IOException {
-		if (javaFiles == null) {
-			this.javaFiles = Files.walk(file.toPath())
+	public List<EJavaClass> getJavaClasses() throws IOException {
+		if (javaClasses == null) {
+			this.javaClasses = Files.walk(file.toPath())
 								  .filter(p -> p.toFile().getName().endsWith(".java"))
 								  .map(this::createJavaFile)
 								  .filter(Objects::nonNull)
 								  .collect(Collectors.toList());
 		}
-		return javaFiles;
+		return javaClasses;
 	}
 	//@formatter:on
 
-	public void setJavaFiles(List<EJavaFile> javaFiles) {
-		this.javaFiles = javaFiles;
+	public void setJavaClasses(List<EJavaClass> javaClasses) {
+		this.javaClasses = javaClasses;
 	}
 
 	/**
@@ -165,7 +170,7 @@ public class EProject implements Serializable {
 	 * @throws IOException
 	 */
 	//@formatter:off
-	public boolean hasJavaFile(String name) throws IOException {
+	public boolean hasJavaClass(String name) throws IOException {
 		return getFiles()
 			.stream()
 			.anyMatch(p -> p.getName().equals(name.concat(".java")));
@@ -215,12 +220,12 @@ public class EProject implements Serializable {
 	/*
 	 * 
 	 */
-	private EJavaFile createJavaFile(Path path) {
+	private EJavaClass createJavaFile(Path path) {
 		try {
 			JavaDocBuilder builder = new JavaDocBuilder();
 			JavaSource source = builder.addSource(path.toFile());
 			String pathFile = FilenameUtils.normalize(FilenameUtils.getFullPath(path.toFile().getAbsolutePath()));
-			return new EJavaFile(pathFile, source.getClasses()[0]);
+			return new EJavaClass(pathFile, source.getClasses()[0]);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (com.thoughtworks.qdox.parser.ParseException e) {

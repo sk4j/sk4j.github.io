@@ -9,7 +9,7 @@ public class ProjectJavaFile {
 
 	public static void main(String[] args) throws IOException {
 		EProject project = new EProject(new File("/opt/workspace-luna/aelis2016"));
-		System.out.println(project.hasJavaFile("TipoPontoBC1"));
+		System.out.println(project.hasJavaClass("TipoPontoBC1"));
 	}
 
 }

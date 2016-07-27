@@ -9,7 +9,7 @@ public class ProjectJavaFileWalk {
 
 	public static void main(String[] args) throws IOException {
 		EProject project = new EProject(new File("/opt/workspace-luna/aelis2016"));
-		project.getJavaFiles()
+		project.getJavaClasses()
 			   .stream()
 			   .map(p -> p.getName())
 			   .forEach(System.out::println);

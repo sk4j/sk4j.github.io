@@ -1,12 +1,12 @@
-package {{javaFile.parentPackageName}}.business;
+package {{javaClass.parentPackageName}}.business;
 
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
-import {{javaFile.fullyQualifiedName}};
-import {{javaFile.parentPackageName}}.persistence.{{javaFile.name}}DAO;
+import {{javaClass.fullyQualifiedName}};
+import {{javaClass.parentPackageName}}.persistence.{{javaClass.name}}DAO;
 
 @BusinessController
-public class {{javaFile.name}}BC extends DelegateCrud<{{javaFile.name}}, Long, {{javaFile.name}}DAO> {
+public class {{javaClass.name}}BC extends DelegateCrud<{{javaClass.name}}, Long, {{javaClass.name}}DAO> {
 
 	/**
 	 * 

@@ -6,11 +6,11 @@ import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
 import br.jus.tre_pa.jbase.jsf.template.Editable;
 import br.jus.tre_pa.jbase.jsf.workflow.annotation.UIAction;
-import {{javaFile.parentPackageName}}.business.{{javaFile.name}}BC;
-import {{javaFile.fullyQualifiedName}};
+import {{javaClass.parentPackageName}}.business.{{javaClass.name}}BC;
+import {{javaClass.fullyQualifiedName}};
 
 @ViewController
-public class {{EDIT_CLASS_NAME}} extends AbstractEditPageBean<{{javaFile.name}}, Long> implements Editable<{{javaFile.name}}, Long> {
+public class {{EDIT_CLASS_NAME}} extends AbstractEditPageBean<{{javaClass.name}}, Long> implements Editable<{{javaClass.name}}, Long> {
 
 	/**
 	 * 
@@ -18,10 +18,10 @@ public class {{EDIT_CLASS_NAME}} extends AbstractEditPageBean<{{javaFile.name}},
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private {{javaFile.name}}BC bc;
+	private {{javaClass.name}}BC bc;
 
 	@Override
-	public {{javaFile.name}} getEventTargetBean() {
+	public {{javaClass.name}} getEventTargetBean() {
 		return getBean();
 	}
 
@@ -69,7 +69,7 @@ public class {{EDIT_CLASS_NAME}} extends AbstractEditPageBean<{{javaFile.name}},
 	@UIAction
 	@Override
 	public String create() {
-		setBean(new {{javaFile.name}}());
+		setBean(new {{javaClass.name}}());
 		return null;
 	}
 	
@@ -81,7 +81,7 @@ public class {{EDIT_CLASS_NAME}} extends AbstractEditPageBean<{{javaFile.name}},
 	}
 
 	@Override
-	protected {{javaFile.name}} handleLoad(Long id) {
+	protected {{javaClass.name}} handleLoad(Long id) {
 		return bc.load(id);
 	}
 

@@ -13,7 +13,7 @@ import sk4j.api.Context;
 import sk4j.api.FS;
 import sk4j.api.Template;
 import sk4j.core.AfterStart;
-import sk4j.core.model.EJavaFile;
+import sk4j.core.model.EJavaClass;
 
 public class Application implements Serializable {
 	/**
@@ -35,19 +35,19 @@ public class Application implements Serializable {
 
 	public void run(@Observes AfterStart event) throws IOException {
 		//@formatter:off
-		List<EJavaFile> selectedEntities = console.readOptions("Selecione a(s) entidade(s)",
-				context.getProject().getJavaFiles()
+		List<EJavaClass> selectedEntities = console.readOptions("Selecione a(s) entidade(s)",
+				context.getProject().getJavaClasses()
 						.stream()
-						.filter(javaFile -> javaFile.hasAnnotation("Entity"))
+						.filter(javaClass -> javaClass.hasAnnotation("Entity"))
 						.collect(Collectors.toList()));
 		
 		selectedEntities.stream().forEach(javaFile -> {
 			//Coloca o javaFile atual no contexto.
-			context.putItem("javaFile", javaFile);
+			context.putItem("javaClass", javaFile);
 			//Retorna o diretório que termina com persistence no mesmo nível do javaFile. Sob até 2 níveis de diretório na busca caso necessário.
 			String siblingPath = fs.findSiblingPath(javaFile.getPath(),"persistence",2);
 			//Cria o arquivo de DAO no diretório encontrado acima utilizando o template dao-java.jtwig.
-			fs.createFile(siblingPath, "{{javaFile.name}}DAO.java", template.merge("/templates/dao-java.jtwig"));
+			fs.createFile(siblingPath, "{{javaClass.name}}DAO.java", template.merge("/templates/dao-java.jtwig"));
 		});
 		//@formatter:on
 	}

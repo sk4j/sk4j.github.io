@@ -14,7 +14,7 @@ import sk4j.api.Context;
 import sk4j.core.AfterStart;
 import sk4j.core.Processor;
 import sk4j.core.chooser.StringChooser;
-import sk4j.core.model.EJavaFile;
+import sk4j.core.model.EJavaClass;
 
 public class Application implements Serializable {
 	/**
@@ -34,19 +34,19 @@ public class Application implements Serializable {
 	public void run(@Observes AfterStart event) throws IOException {
 
 		//@formatter:off
-		EJavaFile selectedEntity = console.readOption("Selecione a entidade",
-				context.getProject().getJavaFiles()
+		EJavaClass selectedEntity = console.readOption("Selecione a entidade",
+				context.getProject().getJavaClasses()
 						.stream()
-						.filter(javaFile -> javaFile.hasAnnotation("Entity"))
+						.filter(javaClass -> javaClass.hasAnnotation("Entity"))
 						.collect(Collectors.toList()));
 		//@formatter:on
-		
-		context.putItem("javaFile", selectedEntity);
+
+		context.putItem("javaClass", selectedEntity);
 		StringChooser option1 = new StringChooser(1, "Gerar apenas a classe do managed bean(MB) de edição.");
 		StringChooser option2 = new StringChooser(2, "Gerar a classe do managed bean(MB) e o xhtml de edição.");
 
 		StringChooser selectedChooser = console.readOption("Selecione a opção", Arrays.asList(option1, option2));
-		
+
 		processors.get(selectedChooser.getId()).process();
 	}
 }

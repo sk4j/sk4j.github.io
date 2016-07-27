@@ -57,7 +57,7 @@ public class EditMBProcessor implements Processor {
 
 		context.putItem("SELECTED_PACKAGE", packageName);
 
-		String editClassName = console.read("Digite o nome do MB", "{{javaFile.name}}EditMB", ReadConf.JAVA_CLASS_NAME);
+		String editClassName = console.read("Digite o nome do MB", "{{javaClass.name}}EditMB", ReadConf.JAVA_CLASS_NAME);
 		context.putItem("EDIT_CLASS_NAME", editClassName);
 
 		fs.createFile(selectedChooser.getFile().getAbsolutePath(), editClassName + ".java", template.merge("/templates/edit-java.jtwig"));

@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import sk4j.core.EntityAnalizer;
 import sk4j.core.EntityReport;
-import sk4j.core.model.EJavaFile;
+import sk4j.core.model.EJavaClass;
 
 /**
  * Verifica se a entidade implementa o hashCode.
@@ -23,9 +23,9 @@ public class EntityHasHashCodeAnalyzer implements EntityAnalizer {
 	private EntityReport report;
 
 	@Override
-	public void analyze(EJavaFile javaFile) {
-		if (!javaFile.getJavaMethods().stream().anyMatch(method -> method.getName().equals("hashCode"))) {
-			report.addReportItem(javaFile.getName(), "A classe deve implementar hashCode.");
+	public void analyze(EJavaClass javaClass) {
+		if (!javaClass.getJavaMethods().stream().anyMatch(method -> method.getName().equals("hashCode"))) {
+			report.addReportItem(javaClass.getName(), "A classe deve implementar hashCode.");
 		}
 	}
 
