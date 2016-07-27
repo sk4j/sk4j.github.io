@@ -1,8 +1,7 @@
-package sk4j.core.model;
+package sk4j.impl.model;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -14,6 +13,8 @@ import org.apache.commons.io.FilenameUtils;
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaSource;
 
+import sk4j.api.model.EJavaClass;
+import sk4j.api.model.EProject;
 import sk4j.core.console.ConsoleColor;
 
 /**
@@ -23,7 +24,7 @@ import sk4j.core.console.ConsoleColor;
  * @author jcruz
  *
  */
-public class EProject implements Serializable {
+public class EProjectImpl implements EProject {
 
 	/**
 	 * 
@@ -38,23 +39,26 @@ public class EProject implements Serializable {
 
 	private List<EJavaClass> javaClasses;
 
-	private List<EJavaClass> srcMainJavaFiles;
+	private List<EJavaClass> srcMainJavaClasses;
+
+	private List<EJavaClass> srcMainTestJavaClasses;
 
 	private List<EJavaPackage> srcMainJavaPackages;
 
 	private List<File> srcMainWebappDirs;
 
+	private List<File> srcMainWebappFiles;
+
 	private List<File> dirs;
 
 	private List<File> files;
 
-	private List<EXmlFile> xmlFiles;
-
-	public EProject(File file) {
+	public EProjectImpl(File file) {
 		super();
 		this.file = file;
 	}
 
+	@Override
 	public String getName() {
 		if (this.name == null) {
 			this.name = FilenameUtils.getBaseName(getPath());
@@ -66,6 +70,7 @@ public class EProject implements Serializable {
 		this.name = name;
 	}
 
+	@Override
 	public String getPath() {
 		return file.getAbsolutePath();
 	}
@@ -74,6 +79,7 @@ public class EProject implements Serializable {
 		this.path = path;
 	}
 
+	@Override
 	public File getFile() {
 		return file;
 	}
@@ -90,6 +96,7 @@ public class EProject implements Serializable {
 	 *             Erro ao ler arquivo.
 	 */
 	//@formatter:off
+	@Override
 	public List<EJavaClass> getJavaClasses() throws IOException {
 		if (javaClasses == null) {
 			this.javaClasses = Files.walk(file.toPath())
@@ -114,6 +121,7 @@ public class EProject implements Serializable {
 	 *             Erro ao ler arquivo.
 	 */
 	//@formatter:off
+	@Override
 	public List<File> getDirs() throws IOException {
 		if (this.dirs == null) {
 			this.dirs = Files.walk(file.toPath())
@@ -137,6 +145,7 @@ public class EProject implements Serializable {
 	 *             Erro ao ler arquivo.
 	 */
 	//@formatter:off
+	@Override
 	public List<File> getFiles() throws IOException {
 		if (this.files == null) {
 			this.files = Files.walk(file.toPath())
@@ -152,14 +161,6 @@ public class EProject implements Serializable {
 		this.files = files;
 	}
 
-	public List<EXmlFile> getXmlFiles() {
-		return xmlFiles;
-	}
-
-	public void setXmlFiles(List<EXmlFile> xmlFiles) {
-		this.xmlFiles = xmlFiles;
-	}
-
 	/**
 	 * 
 	 * Verifica se o projeto possui o arquivo java especificado.
@@ -170,20 +171,67 @@ public class EProject implements Serializable {
 	 * @throws IOException
 	 */
 	//@formatter:off
+	@Override
 	public boolean hasJavaClass(String name) throws IOException {
 		return getFiles()
 			.stream()
 			.anyMatch(p -> p.getName().equals(name.concat(".java")));
 	}
-	//@formatter:onf
+	//@formatter:on
 
 	/**
 	 * Verifica se o projeto é um projeto Maven.
 	 * 
 	 * @return
 	 */
+	@Override
 	public boolean isMavenProject() {
 		return new File(String.format("%s/pom.xml", getPath())).exists();
+	}
+
+	@Override
+	public List<EJavaClass> getSrcMainJavaClasses() {
+		return srcMainJavaClasses;
+	}
+
+	public void setSrcMainJavaClasses(List<EJavaClass> srcMainJavaClasses) {
+		this.srcMainJavaClasses = srcMainJavaClasses;
+	}
+
+	@Override
+	public List<EJavaClass> getSrcMainTestJavaClasses() {
+		return srcMainTestJavaClasses;
+	}
+
+	public void setSrcMainTestJavaClasses(List<EJavaClass> srcMainTestJavaClasses) {
+		this.srcMainTestJavaClasses = srcMainTestJavaClasses;
+	}
+
+	@Override
+	public List<EJavaPackage> getSrcMainJavaPackages() {
+		return srcMainJavaPackages;
+	}
+
+	public void setSrcMainJavaPackages(List<EJavaPackage> srcMainJavaPackages) {
+		this.srcMainJavaPackages = srcMainJavaPackages;
+	}
+
+	@Override
+	public List<File> getSrcMainWebappDirs() {
+		return srcMainWebappDirs;
+	}
+
+	public void setSrcMainWebappDirs(List<File> srcMainWebappDirs) {
+		this.srcMainWebappDirs = srcMainWebappDirs;
+	}
+
+	@Override
+	public List<File> getSrcMainWebappFiles() {
+		return srcMainWebappFiles;
+	}
+
+	public void setSrcMainWebappFiles(List<File> srcMainWebappFiles) {
+		this.srcMainWebappFiles = srcMainWebappFiles;
 	}
 
 	@Override
@@ -203,7 +251,7 @@ public class EProject implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		EProject other = (EProject) obj;
+		EProjectImpl other = (EProjectImpl) obj;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -220,12 +268,12 @@ public class EProject implements Serializable {
 	/*
 	 * 
 	 */
-	private EJavaClass createJavaFile(Path path) {
+	private EJavaClassImpl createJavaFile(Path path) {
 		try {
 			JavaDocBuilder builder = new JavaDocBuilder();
 			JavaSource source = builder.addSource(path.toFile());
 			String pathFile = FilenameUtils.normalize(FilenameUtils.getFullPath(path.toFile().getAbsolutePath()));
-			return new EJavaClass(pathFile, source.getClasses()[0]);
+			return new EJavaClassImpl(pathFile, source.getClasses()[0]);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (com.thoughtworks.qdox.parser.ParseException e) {

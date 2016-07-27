@@ -11,10 +11,10 @@ import javax.inject.Inject;
 
 import sk4j.api.Console;
 import sk4j.api.Context;
+import sk4j.api.model.EJavaClass;
 import sk4j.core.AfterStart;
 import sk4j.core.Processor;
 import sk4j.core.chooser.StringChooser;
-import sk4j.core.model.EJavaClass;
 
 public class Application implements Serializable {
 	/**

@@ -2,9 +2,9 @@ package sk4j.analyzer;
 
 import javax.inject.Inject;
 
+import sk4j.api.model.EJavaClass;
 import sk4j.core.EntityAnalizer;
 import sk4j.core.EntityReport;
-import sk4j.core.model.EJavaClass;
 
 /**
  * Verifica se a entidade implementa o hashCode.

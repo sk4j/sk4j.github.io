@@ -1,11 +1,10 @@
-package sk4j.core.model;
+package sk4j.impl.model;
 
-import java.io.Serializable;
 import java.util.Arrays;
 
 import com.thoughtworks.qdox.model.JavaMethod;
 
-import sk4j.core.console.Choosable;
+import sk4j.api.model.EJavaMethod;
 
 /**
  * Classe que representa um método de uma classe java.
@@ -13,7 +12,7 @@ import sk4j.core.console.Choosable;
  * @author jcruz
  *
  */
-public class EJavaMethod implements Serializable, Choosable<EJavaMethod> {
+public class EJavaMethodImpl implements EJavaMethod {
 
 	/**
 	 * 
@@ -24,12 +23,13 @@ public class EJavaMethod implements Serializable, Choosable<EJavaMethod> {
 
 	private JavaMethod qdoxJavaMethod;
 
-	public EJavaMethod(JavaMethod qdoxJavaMethod) {
+	public EJavaMethodImpl(JavaMethod qdoxJavaMethod) {
 		super();
 		this.qdoxJavaMethod = qdoxJavaMethod;
 		this.name = this.qdoxJavaMethod.getName();
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -38,6 +38,7 @@ public class EJavaMethod implements Serializable, Choosable<EJavaMethod> {
 		this.name = name;
 	}
 
+	@Override
 	public JavaMethod getQdoxJavaMethod() {
 		return qdoxJavaMethod;
 	}
@@ -70,7 +71,7 @@ public class EJavaMethod implements Serializable, Choosable<EJavaMethod> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		EJavaMethod other = (EJavaMethod) obj;
+		EJavaMethodImpl other = (EJavaMethodImpl) obj;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -82,16 +83,6 @@ public class EJavaMethod implements Serializable, Choosable<EJavaMethod> {
 	@Override
 	public String toString() {
 		return "EJavaMethod [name=" + name + "]";
-	}
-
-	@Override
-	public int compareTo(EJavaMethod o) {
-		return this.name.compareTo(o.getName());
-	}
-
-	@Override
-	public String getChoiseLabel() {
-		return this.name;
 	}
 
 }

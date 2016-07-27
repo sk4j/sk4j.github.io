@@ -1,4 +1,4 @@
-package sk4j.core.model;
+package sk4j.impl.model;
 
 import java.io.Serializable;
 

@@ -1,11 +1,10 @@
-package sk4j.core.model;
+package sk4j.impl.model;
 
-import java.io.Serializable;
 import java.util.Arrays;
 
 import com.thoughtworks.qdox.model.JavaField;
 
-import sk4j.core.console.Choosable;
+import sk4j.api.model.EJavaAttribute;
 
 /**
  * 
@@ -14,23 +13,24 @@ import sk4j.core.console.Choosable;
  * @author jcruz
  *
  */
-public class EJavaAttribute implements Serializable, Choosable<EJavaAttribute> {
+public class EJavaAttributeImpl implements EJavaAttribute {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7454896544844888494L;
 
 	private String name;
 
 	private JavaField qdoxJavaField;
 
-	public EJavaAttribute(JavaField qdoxJavaField) {
+	public EJavaAttributeImpl(JavaField qdoxJavaField) {
 		super();
 		this.qdoxJavaField = qdoxJavaField;
 		this.name = this.qdoxJavaField.getName();
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -39,6 +39,7 @@ public class EJavaAttribute implements Serializable, Choosable<EJavaAttribute> {
 		this.name = name;
 	}
 
+	@Override
 	public JavaField getQdoxJavaField() {
 		return qdoxJavaField;
 	}
@@ -50,10 +51,12 @@ public class EJavaAttribute implements Serializable, Choosable<EJavaAttribute> {
 	/**
 	 * Verifica se o atributo possui a annotation especificada.
 	 * 
-	 * @param name Nome da annotation.
+	 * @param name
+	 *            Nome da annotation.
 	 * @return
 	 */
 	//@formatter:off
+	@Override
 	public boolean hasAnnotation(String name) {
 		return Arrays.asList(this.qdoxJavaField.getAnnotations())
 					.stream()
@@ -77,7 +80,7 @@ public class EJavaAttribute implements Serializable, Choosable<EJavaAttribute> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		EJavaAttribute other = (EJavaAttribute) obj;
+		EJavaAttributeImpl other = (EJavaAttributeImpl) obj;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -89,16 +92,6 @@ public class EJavaAttribute implements Serializable, Choosable<EJavaAttribute> {
 	@Override
 	public String toString() {
 		return "EJavaAttribute [name=" + name + "]";
-	}
-
-	@Override
-	public int compareTo(EJavaAttribute o) {
-		return this.name.compareTo(o.getName());
-	}
-
-	@Override
-	public String getChoiseLabel() {
-		return this.name;
 	}
 
 }

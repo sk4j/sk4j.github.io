@@ -1,6 +1,5 @@
-package sk4j.core.model;
+package sk4j.impl.model;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,8 +8,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.thoughtworks.qdox.model.JavaClass;
 
-import sk4j.core.console.ConsoleColor;
-import sk4j.core.console.Choosable;
+import sk4j.api.model.EJavaAttribute;
+import sk4j.api.model.EJavaClass;
+import sk4j.api.model.EJavaMethod;
 
 /**
  * Classe que representa uma classe java.
@@ -18,7 +18,7 @@ import sk4j.core.console.Choosable;
  * @author jcruz
  *
  */
-public class EJavaClass implements Serializable, Choosable<EJavaClass> {
+public class EJavaClassImpl implements EJavaClass {
 
 	/**
 	 * 
@@ -41,12 +41,13 @@ public class EJavaClass implements Serializable, Choosable<EJavaClass> {
 
 	private List<EJavaMethod> javaMethods;
 
-	public EJavaClass(String path, JavaClass qdoxJavaClass) {
+	public EJavaClassImpl(String path, JavaClass qdoxJavaClass) {
 		super();
 		this.path = path;
 		this.qdoxJavaClass = qdoxJavaClass;
 	}
 
+	@Override
 	public String getName() {
 		if (this.name == null) {
 			this.name = this.qdoxJavaClass.getName();
@@ -58,6 +59,7 @@ public class EJavaClass implements Serializable, Choosable<EJavaClass> {
 		this.name = name;
 	}
 
+	@Override
 	public String getFullyQualifiedName() {
 		if (this.fullyQualifiedName == null) {
 			this.fullyQualifiedName = this.qdoxJavaClass.getFullyQualifiedName();
@@ -69,6 +71,7 @@ public class EJavaClass implements Serializable, Choosable<EJavaClass> {
 		this.fullyQualifiedName = fullyQualifiedName;
 	}
 
+	@Override
 	public String getPath() {
 		return path;
 	}
@@ -77,6 +80,7 @@ public class EJavaClass implements Serializable, Choosable<EJavaClass> {
 		this.path = path;
 	}
 
+	@Override
 	public String getPackageName() {
 		if (this.packageName == null) {
 			this.packageName = this.qdoxJavaClass.getPackageName();
@@ -88,6 +92,7 @@ public class EJavaClass implements Serializable, Choosable<EJavaClass> {
 		this.packageName = packageName;
 	}
 
+	@Override
 	public String getParentPackageName() {
 		if (this.parentPackageName == null) {
 			List<String> packageTokens = Arrays.asList(getQdoxJavaClass().getPackageName().split("\\."));
@@ -100,6 +105,7 @@ public class EJavaClass implements Serializable, Choosable<EJavaClass> {
 		this.parentPackageName = parentPackageName;
 	}
 
+	@Override
 	public JavaClass getQdoxJavaClass() {
 		return qdoxJavaClass;
 	}
@@ -109,11 +115,12 @@ public class EJavaClass implements Serializable, Choosable<EJavaClass> {
 	}
 
 	//@formatter:off
+	@Override
 	public List<EJavaAttribute> getJavaAttributes() {
 		if (this.javaAttributes == null) {
 			this.javaAttributes = Arrays.asList(qdoxJavaClass.getFields())
 										.stream()
-										.map(p -> new EJavaAttribute(p))
+										.map(p -> new EJavaAttributeImpl(p))
 										.collect(Collectors.toList());
 		}
 		return javaAttributes;
@@ -125,11 +132,12 @@ public class EJavaClass implements Serializable, Choosable<EJavaClass> {
 	}
 
 	//@formatter:off
+	@Override
 	public List<EJavaMethod> getJavaMethods() {
 		if (this.javaMethods == null) {
 			this.javaMethods = Arrays.asList(qdoxJavaClass.getMethods())
 									 .stream()
-									 .map(p -> new EJavaMethod(p))
+									 .map(p -> new EJavaMethodImpl(p))
 									 .collect(Collectors.toList());
 		}
 		return javaMethods;
@@ -148,22 +156,13 @@ public class EJavaClass implements Serializable, Choosable<EJavaClass> {
 	 * @return
 	 */
 	//@formatter:off
+	@Override
 	public boolean hasAnnotation(String name) {
 		return Arrays.asList(qdoxJavaClass.getAnnotations())
 					.stream()
 					.anyMatch(p -> p.getType().getValue().endsWith(name));
 	}
 	//@formatter:on
-
-	@Override
-	public int compareTo(EJavaClass o) {
-		return this.getName().compareTo(o.getName());
-	}
-
-	@Override
-	public String getChoiseLabel() {
-		return this.getName() + " - " + ConsoleColor.gray(this.getQdoxJavaClass().getPackageName());
-	}
 
 	@Override
 	public String toString() {

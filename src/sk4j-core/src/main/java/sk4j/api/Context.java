@@ -3,7 +3,7 @@ package sk4j.api;
 import java.io.Serializable;
 import java.util.Map;
 
-import sk4j.core.model.EProject;
+import sk4j.impl.model.EProjectImpl;
 
 /**
  * 
@@ -36,13 +36,13 @@ public interface Context extends Serializable {
 	 * 
 	 * @param project
 	 */
-	void setProject(EProject project);
+	void setProject(EProjectImpl project);
 
 	/**
 	 * 
 	 * @return
 	 */
-	EProject getProject();
+	EProjectImpl getProject();
 
 	/**
 	 * 
