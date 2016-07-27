@@ -1,0 +1,88 @@
+package {{SELECTED_PACKAGE}};
+
+import javax.inject.Inject;
+
+import br.gov.frameworkdemoiselle.stereotype.ViewController;
+import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
+import br.jus.tre_pa.jbase.jsf.template.Editable;
+import br.jus.tre_pa.jbase.jsf.workflow.annotation.UIAction;
+import {{javaFile.parentPackageName}}.business.{{javaFile.name}}BC;
+import {{javaFile.fullyQualifiedName}};
+
+@ViewController
+public class {{EDIT_CLASS_NAME}} extends AbstractEditPageBean<{{javaFile.name}}, Long> implements Editable<{{javaFile.name}}, Long> {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Inject
+	private {{javaFile.name}}BC bc;
+
+	@Override
+	public {{javaFile.name}} getEventTargetBean() {
+		return getBean();
+	}
+
+	@Override
+	public String delete() {
+		return null;
+	}
+
+	@Override
+	public String insert() {
+		bc.insert(getBean());
+		return null;
+	}
+
+	@Override
+	public String update() {
+		bc.update(getBean());
+		return null;
+	}
+
+	@UIAction
+	@Override
+	public String save() {
+		if (getBean().getId() == null) {
+			insert();
+			return null;
+		}
+		update();
+		return null;
+	}
+
+	@UIAction
+	@Override
+	public String load(Long id) {
+		bc.load(id);
+		return null;
+	}
+
+	@UIAction
+	@Override
+	public String cancel() {
+		return null;
+	}
+
+	@UIAction
+	@Override
+	public String create() {
+		setBean(new {{javaFile.name}}());
+		return null;
+	}
+	
+	@UIAction
+	@Override
+	public String fetch(Long id) {
+		bc.load(id);
+		return null;
+	}
+
+	@Override
+	protected {{javaFile.name}} handleLoad(Long id) {
+		return bc.load(id);
+	}
+
+}
