@@ -1,21 +1,29 @@
 package sk4j.api.model;
 
+import java.io.Serializable;
+
+import com.thoughtworks.qdox.model.JavaPackage;
+
 import sk4j.core.console.Choosable;
 
-public interface EJavaPackage extends Choosable<EJavaPackage> {
+public interface EJavaPackage extends Choosable<EJavaPackage>, Serializable {
 
 	String getName();
+
+	String getSourceFolderName();
+
+	JavaPackage getQdoxJavaPackage();
 
 	String getPath();
 
 	@Override
 	default int compareTo(EJavaPackage o) {
-		return 0;
+		return getName().compareTo(o.getName());
 	}
 
 	@Override
 	default String getChoiseLabel() {
-		return null;
+		return getName();
 	}
 
 }

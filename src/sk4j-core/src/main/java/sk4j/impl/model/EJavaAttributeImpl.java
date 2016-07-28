@@ -5,14 +5,8 @@ import java.util.Arrays;
 import com.thoughtworks.qdox.model.JavaField;
 
 import sk4j.api.model.EJavaAttribute;
+import sk4j.api.model.EProject;
 
-/**
- * 
- * Classe que representa um atributo de uma classe java.
- * 
- * @author jcruz
- *
- */
 public class EJavaAttributeImpl implements EJavaAttribute {
 
 	/**
@@ -20,12 +14,15 @@ public class EJavaAttributeImpl implements EJavaAttribute {
 	 */
 	private static final long serialVersionUID = 7454896544844888494L;
 
+	private EProject project;
+
 	private String name;
 
 	private JavaField qdoxJavaField;
 
-	public EJavaAttributeImpl(JavaField qdoxJavaField) {
+	public EJavaAttributeImpl(EProject project, JavaField qdoxJavaField) {
 		super();
+		this.project = project;
 		this.qdoxJavaField = qdoxJavaField;
 		this.name = this.qdoxJavaField.getName();
 	}
@@ -48,13 +45,6 @@ public class EJavaAttributeImpl implements EJavaAttribute {
 		this.qdoxJavaField = qdoxJavaField;
 	}
 
-	/**
-	 * Verifica se o atributo possui a annotation especificada.
-	 * 
-	 * @param name
-	 *            Nome da annotation.
-	 * @return
-	 */
 	//@formatter:off
 	@Override
 	public boolean hasAnnotation(String name) {

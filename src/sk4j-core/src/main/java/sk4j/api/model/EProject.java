@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
-import sk4j.impl.model.EJavaPackage;
-
 public interface EProject extends Serializable {
 
 	String getName();
@@ -19,19 +17,23 @@ public interface EProject extends Serializable {
 
 	List<EJavaClass> getSrcMainJavaClasses();
 
-	List<EJavaClass> getSrcMainTestJavaClasses();
-
 	List<EJavaPackage> getSrcMainJavaPackages();
 
-	List<File> getSrcMainWebappDirs();
+	List<EJavaPackage> getSrcTestJavaPackages();
 
-	List<File> getSrcMainWebappFiles();
+	List<EJavaClass> getSrcTestJavaClasses();
+
+	List<File> getSrcMainWebappDirs() throws IOException;
+
+	List<File> getSrcMainWebappFiles() throws IOException;
+
+	List<File> getSrcMainWebappXHTMLFiles() throws IOException;
 
 	List<File> getDirs() throws IOException;
 
 	List<File> getFiles() throws IOException;
 
-	boolean hasJavaClass(String name) throws IOException;
+	boolean hasSrcMainJavaClass(String name) throws IOException;
 
 	public boolean isMavenProject();
 

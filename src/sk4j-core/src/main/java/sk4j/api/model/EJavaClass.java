@@ -14,9 +14,13 @@ public interface EJavaClass extends Choosable<EJavaClass>, Serializable {
 
 	String getFullyQualifiedName();
 
+	String getSourceFolderName();
+
 	String getPath();
 
 	String getPackageName();
+
+	EJavaPackage getJavaPackage();
 
 	String getParentPackageName();
 

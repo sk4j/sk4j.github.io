@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.thoughtworks.qdox.model.JavaClass;
@@ -11,13 +12,9 @@ import com.thoughtworks.qdox.model.JavaClass;
 import sk4j.api.model.EJavaAttribute;
 import sk4j.api.model.EJavaClass;
 import sk4j.api.model.EJavaMethod;
+import sk4j.api.model.EJavaPackage;
+import sk4j.api.model.EProject;
 
-/**
- * Classe que representa uma classe java.
- * 
- * @author jcruz
- *
- */
 public class EJavaClassImpl implements EJavaClass {
 
 	/**
@@ -25,9 +22,13 @@ public class EJavaClassImpl implements EJavaClass {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private EProject project;
+
 	private String name;
 
 	private String fullyQualifiedName;
+
+	private String sourceFolderName;
 
 	private String path;
 
@@ -41,9 +42,10 @@ public class EJavaClassImpl implements EJavaClass {
 
 	private List<EJavaMethod> javaMethods;
 
-	public EJavaClassImpl(String path, JavaClass qdoxJavaClass) {
+	public EJavaClassImpl(EProject project, String sourceFolder, JavaClass qdoxJavaClass) {
 		super();
-		this.path = path;
+		this.project = project;
+		this.sourceFolderName = sourceFolder;
 		this.qdoxJavaClass = qdoxJavaClass;
 	}
 
@@ -73,6 +75,10 @@ public class EJavaClassImpl implements EJavaClass {
 
 	@Override
 	public String getPath() {
+		if (this.path == null) {
+			String packageDir = this.qdoxJavaClass.getPackage().getName().replaceAll("\\.", "/");
+			this.path = FilenameUtils.normalize(project.getPath().concat(this.sourceFolderName).concat("/").concat(packageDir));
+		}
 		return path;
 	}
 
@@ -120,7 +126,7 @@ public class EJavaClassImpl implements EJavaClass {
 		if (this.javaAttributes == null) {
 			this.javaAttributes = Arrays.asList(qdoxJavaClass.getFields())
 										.stream()
-										.map(p -> new EJavaAttributeImpl(p))
+										.map(javaField -> new EJavaAttributeImpl(project,javaField))
 										.collect(Collectors.toList());
 		}
 		return javaAttributes;
@@ -137,7 +143,7 @@ public class EJavaClassImpl implements EJavaClass {
 		if (this.javaMethods == null) {
 			this.javaMethods = Arrays.asList(qdoxJavaClass.getMethods())
 									 .stream()
-									 .map(p -> new EJavaMethodImpl(p))
+									 .map(javaMethod -> new EJavaMethodImpl(project,javaMethod))
 									 .collect(Collectors.toList());
 		}
 		return javaMethods;
@@ -146,6 +152,11 @@ public class EJavaClassImpl implements EJavaClass {
 
 	public void setJavaMethods(List<EJavaMethod> javaMethods) {
 		this.javaMethods = javaMethods;
+	}
+
+	@Override
+	public EJavaPackage getJavaPackage() {
+		return null;
 	}
 
 	/**
@@ -167,6 +178,11 @@ public class EJavaClassImpl implements EJavaClass {
 	@Override
 	public String toString() {
 		return "EJavaFile [fullyQualifiedName=" + getFullyQualifiedName() + "]";
+	}
+
+	@Override
+	public String getSourceFolderName() {
+		return this.sourceFolderName;
 	}
 
 }

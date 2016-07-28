@@ -1,4 +1,4 @@
-package {{SELECTED_PACKAGE}};
+package {{javaPackage.name}};
 
 import javax.inject.Inject;
 

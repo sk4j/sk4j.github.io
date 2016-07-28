@@ -3,27 +3,19 @@ package sk4j.impl.model;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FilenameUtils;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
-import com.thoughtworks.qdox.model.JavaSource;
 
 import sk4j.api.model.EJavaClass;
+import sk4j.api.model.EJavaPackage;
 import sk4j.api.model.EProject;
-import sk4j.core.console.ConsoleColor;
 
-/**
- * 
- * Classe que representa um Prejeto Java (Maven ou Gradle).
- * 
- * @author jcruz
- *
- */
 public class EProjectImpl implements EProject {
 
 	/**
@@ -33,17 +25,17 @@ public class EProjectImpl implements EProject {
 
 	private String name;
 
-	private String path;
-
 	private File file;
 
 	private List<EJavaClass> javaClasses;
 
 	private List<EJavaClass> srcMainJavaClasses;
 
-	private List<EJavaClass> srcMainTestJavaClasses;
+	private List<EJavaClass> srcTestJavaClasses;
 
 	private List<EJavaPackage> srcMainJavaPackages;
+
+	private List<EJavaPackage> srcTestJavaPackages;
 
 	private List<File> srcMainWebappDirs;
 
@@ -52,6 +44,8 @@ public class EProjectImpl implements EProject {
 	private List<File> dirs;
 
 	private List<File> files;
+
+	private List<File> srcMainWebappXHTMLFiles;
 
 	public EProjectImpl(File file) {
 		super();
@@ -66,17 +60,9 @@ public class EProjectImpl implements EProject {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	@Override
 	public String getPath() {
 		return file.getAbsolutePath();
-	}
-
-	public void setPath(String path) {
-		this.path = path;
 	}
 
 	@Override
@@ -84,42 +70,16 @@ public class EProjectImpl implements EProject {
 		return file;
 	}
 
-	public void setFile(File file) {
-		this.file = file;
-	}
-
-	/**
-	 * Retorna a lista de todos os arquivos .java do projeto.
-	 * 
-	 * @return Lista de arquivos java
-	 * @throws IOException
-	 *             Erro ao ler arquivo.
-	 */
-	//@formatter:off
 	@Override
 	public List<EJavaClass> getJavaClasses() throws IOException {
 		if (javaClasses == null) {
-			this.javaClasses = Files.walk(file.toPath())
-								  .filter(p -> p.toFile().getName().endsWith(".java"))
-								  .map(this::createJavaFile)
-								  .filter(Objects::nonNull)
-								  .collect(Collectors.toList());
+			this.javaClasses = new ArrayList<>();
+			this.javaClasses.addAll(getSrcMainJavaClasses());
+			this.javaClasses.addAll(getSrcTestJavaClasses());
 		}
 		return javaClasses;
 	}
-	//@formatter:on
 
-	public void setJavaClasses(List<EJavaClass> javaClasses) {
-		this.javaClasses = javaClasses;
-	}
-
-	/**
-	 * Retorna todos os diretórios não ocultos do projeto.
-	 * 
-	 * @return Lista de todos os diretórios do projeto.
-	 * @throws IOException
-	 *             Erro ao ler arquivo.
-	 */
 	//@formatter:off
 	@Override
 	public List<File> getDirs() throws IOException {
@@ -133,57 +93,32 @@ public class EProjectImpl implements EProject {
 	}
 	//@formatter:on
 
-	public void setDirs(List<File> dirs) {
-		this.dirs = dirs;
-	}
-
-	/**
-	 * Retorna a lista de todos os arquivos do projeto.
-	 * 
-	 * @return Lista de todos os arquivos do projeto.
-	 * @throws IOException
-	 *             Erro ao ler arquivo.
-	 */
-	//@formatter:off
 	@Override
 	public List<File> getFiles() throws IOException {
 		if (this.files == null) {
+			//@formatter:off
 			this.files = Files.walk(file.toPath())
 							  .filter(p -> p.toFile().isFile() && !p.toFile().isHidden())
 							  .map(p -> p.toFile())
 							  .collect(Collectors.toList());
+			//@formatter:on
 		}
 		return files;
 	}
-	//@formatter:on
 
 	public void setFiles(List<File> files) {
 		this.files = files;
 	}
 
-	/**
-	 * 
-	 * Verifica se o projeto possui o arquivo java especificado.
-	 * 
-	 * @param name
-	 *            Nome do arquivo.
-	 * @return
-	 * @throws IOException
-	 */
-	//@formatter:off
 	@Override
-	public boolean hasJavaClass(String name) throws IOException {
-		return getFiles()
+	public boolean hasSrcMainJavaClass(String name) throws IOException {
+		//@formatter:off
+		return getSrcMainJavaClasses()
 			.stream()
-			.anyMatch(p -> p.getName().equals(name.concat(".java")));
+			.anyMatch(javaClass -> javaClass.getName().equals(name));
+		//@formatter:on
 	}
-	//@formatter:on
 
-	/**
-	 * Verifica se o projeto é um projeto Maven.
-	 * 
-	 * @return
-	 */
 	@Override
 	public boolean isMavenProject() {
 		return new File(String.format("%s/pom.xml", getPath())).exists();
@@ -191,55 +126,115 @@ public class EProjectImpl implements EProject {
 
 	@Override
 	public List<EJavaClass> getSrcMainJavaClasses() {
+		if (this.srcMainJavaClasses == null) {
+			//@formatter:off
+			this.srcMainJavaClasses = getSrcMainJavaPackages()
+							.stream()
+							.map(javaPackage -> javaPackage.getQdoxJavaPackage().getClasses())
+							.flatMap(qdoxJavaClasses -> Arrays.asList(qdoxJavaClasses).stream())
+							.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/main/java", qdoxJavaClass))
+							.collect(Collectors.toList());
+			//@formatter:on
+		}
 		return srcMainJavaClasses;
 	}
 
-	public void setSrcMainJavaClasses(List<EJavaClass> srcMainJavaClasses) {
-		this.srcMainJavaClasses = srcMainJavaClasses;
-	}
-
 	@Override
-	public List<EJavaClass> getSrcMainTestJavaClasses() {
-		return srcMainTestJavaClasses;
-	}
-
-	public void setSrcMainTestJavaClasses(List<EJavaClass> srcMainTestJavaClasses) {
-		this.srcMainTestJavaClasses = srcMainTestJavaClasses;
+	public List<EJavaClass> getSrcTestJavaClasses() {
+		if (this.srcTestJavaClasses == null) {
+			//@formatter:off
+			this.srcTestJavaClasses = getSrcTestJavaPackages()
+							.stream()
+							.map(javaPackage -> javaPackage.getQdoxJavaPackage().getClasses())
+							.flatMap(qdoxJavaClasses -> Arrays.asList(qdoxJavaClasses).stream())
+							.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/test/java", qdoxJavaClass))
+							.collect(Collectors.toList());
+			//@formatter:on
+		}
+		return srcTestJavaClasses;
 	}
 
 	@Override
 	public List<EJavaPackage> getSrcMainJavaPackages() {
-		return srcMainJavaPackages;
-	}
+		if (this.srcMainJavaPackages == null) {
+			JavaDocBuilder builder = new JavaDocBuilder();
+			File srcMainJavaDir = new File(FilenameUtils.normalize(getPath().concat("/src/main/java")));
+			builder.addSourceTree(srcMainJavaDir);
 
-	public void setSrcMainJavaPackages(List<EJavaPackage> srcMainJavaPackages) {
-		this.srcMainJavaPackages = srcMainJavaPackages;
+			//@formatter:off
+			this.srcMainJavaPackages = Arrays.asList(builder.getPackages())
+					.stream()
+					.map(javaPackage -> new EJavaPackageImpl(this, javaPackage , "/src/main/java"))
+					.collect(Collectors.toList());
+			//@formatter:on
+		}
+		return this.srcMainJavaPackages;
 	}
 
 	@Override
-	public List<File> getSrcMainWebappDirs() {
+	public List<File> getSrcMainWebappDirs() throws IOException {
+		if (this.srcMainWebappDirs == null) {
+			//@formatter:off
+			this.srcMainWebappDirs= Files.walk(file.toPath())
+					 				.filter(path -> path.toFile().isDirectory() && !path.toFile().isHidden())
+					 				.filter(dir -> dir.toFile().getAbsolutePath().contains("/src/main/webapp/"))
+					 				.map(path -> path.toFile())
+					 				.collect(Collectors.toList());
+			//@formatter:on
+		}
 		return srcMainWebappDirs;
 	}
 
-	public void setSrcMainWebappDirs(List<File> srcMainWebappDirs) {
-		this.srcMainWebappDirs = srcMainWebappDirs;
-	}
-
 	@Override
-	public List<File> getSrcMainWebappFiles() {
+	public List<File> getSrcMainWebappFiles() throws IOException {
+		if (this.srcMainWebappFiles == null) {
+			//@formatter:off
+			this.srcMainWebappFiles = Files.walk(file.toPath())
+					 				.filter(path -> path.toFile().isFile() && !path.toFile().isHidden())
+					 				.filter(file -> file.toFile().getAbsolutePath().contains("/src/main/webapp/"))
+					 				.map(path -> path.toFile())
+					 				.collect(Collectors.toList());
+			//@formatter:on
+		}
 		return srcMainWebappFiles;
 	}
 
-	public void setSrcMainWebappFiles(List<File> srcMainWebappFiles) {
-		this.srcMainWebappFiles = srcMainWebappFiles;
+	@Override
+	public List<EJavaPackage> getSrcTestJavaPackages() {
+		if (this.srcTestJavaPackages == null) {
+			JavaDocBuilder builder = new JavaDocBuilder();
+			File srcTestJavaDir = new File(FilenameUtils.normalize(getPath().concat("/src/test/java")));
+			builder.addSourceTree(srcTestJavaDir);
+
+			//@formatter:off
+			this.srcTestJavaPackages = Arrays.asList(builder.getPackages())
+										.stream()
+										.map(javaPackage -> new EJavaPackageImpl(this, javaPackage , "/src/test/java"))
+										.collect(Collectors.toList());
+			//@formatter:on
+		}
+		return this.srcTestJavaPackages;
+	}
+
+	@Override
+	public List<File> getSrcMainWebappXHTMLFiles() throws IOException {
+		if (this.srcMainWebappXHTMLFiles == null) {
+			//@formatter:off
+			this.srcMainWebappXHTMLFiles = getSrcMainWebappFiles()
+												.stream()
+												.filter(file -> file.getName().endsWith(".xhtml"))
+												.collect(Collectors.toList());
+			//@formatter:on
+		}
+		return srcMainWebappXHTMLFiles;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((file == null) ? 0 : file.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((path == null) ? 0 : path.hashCode());
 		return result;
 	}
 
@@ -252,34 +247,17 @@ public class EProjectImpl implements EProject {
 		if (getClass() != obj.getClass())
 			return false;
 		EProjectImpl other = (EProjectImpl) obj;
+		if (file == null) {
+			if (other.file != null)
+				return false;
+		} else if (!file.equals(other.file))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (path == null) {
-			if (other.path != null)
-				return false;
-		} else if (!path.equals(other.path))
-			return false;
 		return true;
-	}
-
-	/*
-	 * 
-	 */
-	private EJavaClassImpl createJavaFile(Path path) {
-		try {
-			JavaDocBuilder builder = new JavaDocBuilder();
-			JavaSource source = builder.addSource(path.toFile());
-			String pathFile = FilenameUtils.normalize(FilenameUtils.getFullPath(path.toFile().getAbsolutePath()));
-			return new EJavaClassImpl(pathFile, source.getClasses()[0]);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (com.thoughtworks.qdox.parser.ParseException e) {
-			System.out.println(ConsoleColor.red("Erro ao ler classe java: " + path.getFileName()));
-		}
-		return null;
 	}
 
 }

@@ -5,26 +5,21 @@ import java.util.Arrays;
 import com.thoughtworks.qdox.model.JavaMethod;
 
 import sk4j.api.model.EJavaMethod;
+import sk4j.api.model.EProject;
 
-/**
- * Classe que representa um método de uma classe java.
- * 
- * @author jcruz
- *
- */
 public class EJavaMethodImpl implements EJavaMethod {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+
+	private EProject project;
 
 	private String name;
 
 	private JavaMethod qdoxJavaMethod;
 
-	public EJavaMethodImpl(JavaMethod qdoxJavaMethod) {
+	public EJavaMethodImpl(EProject project, JavaMethod qdoxJavaMethod) {
 		super();
+		this.project = project;
 		this.qdoxJavaMethod = qdoxJavaMethod;
 		this.name = this.qdoxJavaMethod.getName();
 	}
