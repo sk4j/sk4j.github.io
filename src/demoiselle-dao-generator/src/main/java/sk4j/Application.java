@@ -38,7 +38,7 @@ public class Application implements Serializable {
 		List<EJavaClass> selectedEntities = console.readOptions("Selecione a(s) entidade(s)",
 				context.getProject().getJavaClasses()
 						.stream()
-						.filter(javaClass -> javaClass.hasAnnotation("Entity"))
+						.filter(javaClass -> javaClass.hasAnnotationByName("Entity"))
 						.collect(Collectors.toList()));
 		
 		selectedEntities.stream().forEach(javaFile -> {

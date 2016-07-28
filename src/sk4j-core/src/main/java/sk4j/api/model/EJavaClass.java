@@ -30,7 +30,17 @@ public interface EJavaClass extends Choosable<EJavaClass>, Serializable {
 
 	List<EJavaMethod> getJavaMethods();
 
-	boolean hasAnnotation(String name);
+	String getSuperClassGenericNameByIndex(int index);
+
+	boolean hasSuperClassGenericNameByNameAndIndex(String genericTypeName, int index);
+
+	boolean hasAnnotationByName(String annotationName);
+
+	boolean extendsSuperClassByName(String superClassName);
+
+	boolean implementsInterfaceByName(String interfaceName);
+
+	boolean isAbstract();
 
 	@Override
 	default int compareTo(EJavaClass javaClass) {

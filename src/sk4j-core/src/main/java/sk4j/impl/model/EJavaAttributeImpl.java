@@ -24,16 +24,11 @@ public class EJavaAttributeImpl implements EJavaAttribute {
 		super();
 		this.project = project;
 		this.qdoxJavaField = qdoxJavaField;
-		this.name = this.qdoxJavaField.getName();
 	}
 
 	@Override
 	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+		return this.qdoxJavaField.getName();
 	}
 
 	@Override
@@ -41,18 +36,99 @@ public class EJavaAttributeImpl implements EJavaAttribute {
 		return qdoxJavaField;
 	}
 
-	public void setQdoxJavaField(JavaField qdoxJavaField) {
-		this.qdoxJavaField = qdoxJavaField;
-	}
-
 	//@formatter:off
 	@Override
-	public boolean hasAnnotation(String name) {
+	public boolean hasAnnotationByName(String name) {
 		return Arrays.asList(this.qdoxJavaField.getAnnotations())
 					.stream()
 					.anyMatch(p -> p.getType().getValue().endsWith(name));
 	}
 	//@formatter:on
+
+	@Override
+	public boolean isLongPrimitive() {
+		return this.qdoxJavaField.getType().getValue().equals("long");
+	}
+
+	@Override
+	public boolean isIntegerPrimitive() {
+		return this.qdoxJavaField.getType().getValue().equals("int");
+	}
+
+	@Override
+	public boolean isBigDecimal() {
+		return this.qdoxJavaField.getType().getValue().endsWith("BigDecimal");
+	}
+
+	@Override
+	public boolean isDate() {
+		return this.qdoxJavaField.getType().getValue().endsWith("Date");
+	}
+
+	@Override
+	public boolean isBooleanPrimitive() {
+		return this.qdoxJavaField.getType().getValue().equals("boolean");
+	}
+
+	@Override
+	public boolean isLongWrapper() {
+		return this.qdoxJavaField.getType().getValue().endsWith("Long");
+	}
+
+	@Override
+	public boolean isIntegerWrapper() {
+		return this.qdoxJavaField.getType().getValue().endsWith("Integer");
+	}
+
+	@Override
+	public boolean isBooleanWrapper() {
+		return this.qdoxJavaField.getType().getValue().endsWith("Boolean");
+	}
+
+	@Override
+	public boolean isString() {
+		return this.qdoxJavaField.getType().getValue().endsWith("String");
+	}
+
+	@Override
+	public boolean isList() {
+		return this.qdoxJavaField.getType().getValue().endsWith("List");
+	}
+
+	@Override
+	public boolean isMap() {
+		return this.qdoxJavaField.getType().getValue().endsWith("Map");
+	}
+
+	@Override
+	public boolean isSet() {
+		return this.qdoxJavaField.getType().getValue().endsWith("Set");
+	}
+
+	@Override
+	public boolean isEnum() {
+		return false;
+	}
+
+	@Override
+	public boolean isStatic() {
+		return this.qdoxJavaField.isStatic();
+	}
+
+	@Override
+	public boolean isPrivate() {
+		return this.qdoxJavaField.isPrivate();
+	}
+
+	@Override
+	public boolean isPublic() {
+		return this.qdoxJavaField.isPublic();
+	}
+
+	@Override
+	public boolean isProtected() {
+		return this.qdoxJavaField.isProtected();
+	}
 
 	@Override
 	public int hashCode() {

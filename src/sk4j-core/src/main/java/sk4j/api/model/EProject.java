@@ -33,7 +33,7 @@ public interface EProject extends Serializable {
 
 	List<File> getFiles() throws IOException;
 
-	boolean hasSrcMainJavaClass(String name) throws IOException;
+	boolean hasSrcMainJavaClassByName(String javaClassName) throws IOException;
 
 	public boolean isMavenProject();
 

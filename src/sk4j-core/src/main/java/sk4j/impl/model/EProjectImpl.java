@@ -111,7 +111,7 @@ public class EProjectImpl implements EProject {
 	}
 
 	@Override
-	public boolean hasSrcMainJavaClass(String name) throws IOException {
+	public boolean hasSrcMainJavaClassByName(String name) throws IOException {
 		//@formatter:off
 		return getSrcMainJavaClasses()
 			.stream()
@@ -132,7 +132,8 @@ public class EProjectImpl implements EProject {
 							.stream()
 							.map(javaPackage -> javaPackage.getQdoxJavaPackage().getClasses())
 							.flatMap(qdoxJavaClasses -> Arrays.asList(qdoxJavaClasses).stream())
-							.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/main/java", qdoxJavaClass))
+							.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/main/java/", qdoxJavaClass))
+							.filter(javaClass -> !javaClass.getQdoxJavaClass().isInterface() && !javaClass.getQdoxJavaClass().isEnum())
 							.collect(Collectors.toList());
 			//@formatter:on
 		}
@@ -147,7 +148,8 @@ public class EProjectImpl implements EProject {
 							.stream()
 							.map(javaPackage -> javaPackage.getQdoxJavaPackage().getClasses())
 							.flatMap(qdoxJavaClasses -> Arrays.asList(qdoxJavaClasses).stream())
-							.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/test/java", qdoxJavaClass))
+							.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/test/java/", qdoxJavaClass))
+							.filter(javaClass -> !javaClass.getQdoxJavaClass().isInterface() && !javaClass.getQdoxJavaClass().isEnum())
 							.collect(Collectors.toList());
 			//@formatter:on
 		}
@@ -158,13 +160,13 @@ public class EProjectImpl implements EProject {
 	public List<EJavaPackage> getSrcMainJavaPackages() {
 		if (this.srcMainJavaPackages == null) {
 			JavaDocBuilder builder = new JavaDocBuilder();
-			File srcMainJavaDir = new File(FilenameUtils.normalize(getPath().concat("/src/main/java")));
+			File srcMainJavaDir = new File(FilenameUtils.normalize(getPath().concat("/src/main/java/")));
 			builder.addSourceTree(srcMainJavaDir);
 
 			//@formatter:off
 			this.srcMainJavaPackages = Arrays.asList(builder.getPackages())
 					.stream()
-					.map(javaPackage -> new EJavaPackageImpl(this, javaPackage , "/src/main/java"))
+					.map(javaPackage -> new EJavaPackageImpl(this, javaPackage , "/src/main/java/"))
 					.collect(Collectors.toList());
 			//@formatter:on
 		}
@@ -203,13 +205,13 @@ public class EProjectImpl implements EProject {
 	public List<EJavaPackage> getSrcTestJavaPackages() {
 		if (this.srcTestJavaPackages == null) {
 			JavaDocBuilder builder = new JavaDocBuilder();
-			File srcTestJavaDir = new File(FilenameUtils.normalize(getPath().concat("/src/test/java")));
+			File srcTestJavaDir = new File(FilenameUtils.normalize(getPath().concat("/src/test/java/")));
 			builder.addSourceTree(srcTestJavaDir);
 
 			//@formatter:off
 			this.srcTestJavaPackages = Arrays.asList(builder.getPackages())
 										.stream()
-										.map(javaPackage -> new EJavaPackageImpl(this, javaPackage , "/src/test/java"))
+										.map(javaPackage -> new EJavaPackageImpl(this, javaPackage , "/src/test/java/"))
 										.collect(Collectors.toList());
 			//@formatter:on
 		}

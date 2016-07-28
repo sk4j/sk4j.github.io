@@ -5,13 +5,48 @@ import java.io.Serializable;
 import com.thoughtworks.qdox.model.JavaField;
 
 import sk4j.core.console.Choosable;
+import sk4j.core.console.ConsoleColor;
 
 public interface EJavaAttribute extends Choosable<EJavaAttribute>, Serializable {
 	String getName();
 
 	JavaField getQdoxJavaField();
 
-	boolean hasAnnotation(String name);
+	boolean isLongPrimitive();
+
+	boolean isLongWrapper();
+
+	boolean isIntegerPrimitive();
+
+	boolean isIntegerWrapper();
+
+	boolean isBigDecimal();
+
+	boolean isDate();
+
+	boolean isBooleanPrimitive();
+
+	boolean isBooleanWrapper();
+
+	boolean isString();
+
+	boolean isList();
+
+	boolean isMap();
+
+	boolean isSet();
+
+	boolean isEnum();
+
+	boolean isStatic();
+
+	boolean isPrivate();
+
+	boolean isPublic();
+
+	boolean isProtected();
+
+	boolean hasAnnotationByName(String annotationName);
 
 	@Override
 	default int compareTo(EJavaAttribute o) {
@@ -20,7 +55,7 @@ public interface EJavaAttribute extends Choosable<EJavaAttribute>, Serializable 
 
 	@Override
 	default String getChoiseLabel() {
-		return getName();
+		return this.getName() + " - " + ConsoleColor.gray(this.getQdoxJavaField().getType().getValue());
 	}
 
 }

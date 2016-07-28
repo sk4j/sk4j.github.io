@@ -45,7 +45,7 @@ public class Application implements Serializable {
 		//@formatter:off
 		context.getProject().getJavaClasses()
 			.stream()
-			.filter(javaClass -> javaClass.hasAnnotation("Entity"))
+			.filter(javaClass -> javaClass.hasAnnotationByName("Entity"))
 			.forEach(javaClass -> {
 				analyzers.forEach(analizer -> analizer.analyze(javaClass));
 		});

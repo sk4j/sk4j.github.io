@@ -168,7 +168,7 @@ public class EJavaClassImpl implements EJavaClass {
 	 */
 	//@formatter:off
 	@Override
-	public boolean hasAnnotation(String name) {
+	public boolean hasAnnotationByName(String name) {
 		return Arrays.asList(qdoxJavaClass.getAnnotations())
 					.stream()
 					.anyMatch(p -> p.getType().getValue().endsWith(name));
@@ -183,6 +183,63 @@ public class EJavaClassImpl implements EJavaClass {
 	@Override
 	public String getSourceFolderName() {
 		return this.sourceFolderName;
+	}
+
+	@Override
+	public String getSuperClassGenericNameByIndex(int index) {
+		if (index <= qdoxJavaClass.getSuperClass().getActualTypeArguments().length) {
+			return qdoxJavaClass.getSuperClass().getActualTypeArguments()[index].getValue();
+		}
+		return "";
+	}
+
+	@Override
+	public boolean hasSuperClassGenericNameByNameAndIndex(String genericTypeName, int index) {
+		return getSuperClassGenericNameByIndex(index).endsWith(genericTypeName);
+	}
+
+	@Override
+	public boolean isAbstract() {
+		return this.qdoxJavaClass.isAbstract();
+	}
+
+	@Override
+	public boolean extendsSuperClassByName(String name) {
+		return this.qdoxJavaClass.getSuperClass().getValue().endsWith(name);
+	}
+
+	@Override
+	public boolean implementsInterfaceByName(String name) {
+		//@formatter:off
+		return Arrays.asList(this.qdoxJavaClass.getImplementedInterfaces())
+			.stream()
+			.anyMatch(javaClass -> javaClass.getName().endsWith(name));
+		//@formatter:on
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((getFullyQualifiedName() == null) ? 0 : getFullyQualifiedName().hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EJavaClassImpl other = (EJavaClassImpl) obj;
+		if (getFullyQualifiedName() == null) {
+			if (other.getFullyQualifiedName() != null)
+				return false;
+		} else if (!getFullyQualifiedName().equals(other.getFullyQualifiedName()))
+			return false;
+		return true;
 	}
 
 }

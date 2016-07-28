@@ -12,6 +12,8 @@ public interface EJavaMethod extends Choosable<EJavaMethod>, Serializable {
 
 	JavaMethod getQdoxJavaMethod();
 
+	boolean hasAnnotationByName(String annotationName);
+
 	@Override
 	default int compareTo(EJavaMethod o) {
 		return getName().compareTo(o.getName());

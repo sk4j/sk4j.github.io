@@ -29,26 +29,19 @@ public class EJavaMethodImpl implements EJavaMethod {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	@Override
 	public JavaMethod getQdoxJavaMethod() {
 		return qdoxJavaMethod;
 	}
 
-	public void setQdoxJavaMethod(JavaMethod qdoxJavaMethod) {
-		this.qdoxJavaMethod = qdoxJavaMethod;
-	}
-
-	//@formatter:off
-	public boolean hasAnnotation(String name) {
+	@Override
+	public boolean hasAnnotationByName(String annotationName) {
+		//@formatter:off
 		return Arrays.asList(this.qdoxJavaMethod.getAnnotations())
-					.stream()
-					.anyMatch(p -> p.getType().getValue().endsWith(name));
+				.stream()
+				.anyMatch(annotation -> annotation.getType().getValue().endsWith(name));
+		//@formatter:on
 	}
-	//@formatter:on
 
 	@Override
 	public int hashCode() {
