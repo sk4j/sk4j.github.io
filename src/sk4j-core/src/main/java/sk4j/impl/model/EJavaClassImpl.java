@@ -13,7 +13,7 @@ import sk4j.api.model.EJavaAttribute;
 import sk4j.api.model.EJavaClass;
 import sk4j.api.model.EJavaMethod;
 import sk4j.api.model.EJavaPackage;
-import sk4j.api.model.EProject;
+import sk4j.api.model.EJavaProject;
 
 public class EJavaClassImpl implements EJavaClass {
 
@@ -22,7 +22,7 @@ public class EJavaClassImpl implements EJavaClass {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private EProject project;
+	private EJavaProject project;
 
 	private String name;
 
@@ -42,7 +42,7 @@ public class EJavaClassImpl implements EJavaClass {
 
 	private List<EJavaMethod> javaMethods;
 
-	public EJavaClassImpl(EProject project, String sourceFolder, JavaClass qdoxJavaClass) {
+	public EJavaClassImpl(EJavaProject project, String sourceFolder, JavaClass qdoxJavaClass) {
 		super();
 		this.project = project;
 		this.sourceFolderName = sourceFolder;

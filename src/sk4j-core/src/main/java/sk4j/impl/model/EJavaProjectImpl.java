@@ -14,9 +14,9 @@ import com.thoughtworks.qdox.JavaDocBuilder;
 
 import sk4j.api.model.EJavaClass;
 import sk4j.api.model.EJavaPackage;
-import sk4j.api.model.EProject;
+import sk4j.api.model.EJavaProject;
 
-public class EProjectImpl implements EProject {
+public class EJavaProjectImpl implements EJavaProject {
 
 	/**
 	 * 
@@ -47,7 +47,7 @@ public class EProjectImpl implements EProject {
 
 	private List<File> srcMainWebappXHTMLFiles;
 
-	public EProjectImpl(File file) {
+	public EJavaProjectImpl(File file) {
 		super();
 		this.file = file;
 	}
@@ -248,7 +248,7 @@ public class EProjectImpl implements EProject {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		EProjectImpl other = (EProjectImpl) obj;
+		EJavaProjectImpl other = (EJavaProjectImpl) obj;
 		if (file == null) {
 			if (other.file != null)
 				return false;

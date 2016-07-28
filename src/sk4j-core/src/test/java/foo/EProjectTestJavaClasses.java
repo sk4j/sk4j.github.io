@@ -3,13 +3,13 @@ package foo;
 import java.io.File;
 import java.util.Arrays;
 
-import sk4j.api.model.EProject;
-import sk4j.impl.model.EProjectImpl;
+import sk4j.api.model.EJavaProject;
+import sk4j.impl.model.EJavaProjectImpl;
 
 public class EProjectTestJavaClasses {
 
 	public static void main(String[] args) {
-		EProject project = new EProjectImpl(new File("/home/jcruz/Programs/eclipse-mars/workspace/ouvidoriaweb"));
+		EJavaProject project = new EJavaProjectImpl(new File("/home/jcruz/Programs/eclipse-mars/workspace/ouvidoriaweb"));
 		//@formatter:off
 		project.getSrcMainJavaPackages()
 			.stream()

@@ -9,7 +9,7 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import sk4j.api.Context;
-import sk4j.impl.model.EProjectImpl;
+import sk4j.impl.model.EJavaProjectImpl;
 
 @Singleton
 public class ContextImpl implements Context {
@@ -21,7 +21,7 @@ public class ContextImpl implements Context {
 
 	private Map<String, Object> ctx = new HashMap<>();
 
-	private EProjectImpl project;
+	private EJavaProjectImpl project;
 
 	@Override
 	public void putItem(String key, Object value) {
@@ -39,12 +39,12 @@ public class ContextImpl implements Context {
 	}
 
 	@Override
-	public void setProject(EProjectImpl project) {
+	public void setProject(EJavaProjectImpl project) {
 		this.project = project;
 	}
 
 	@Override
-	public EProjectImpl getProject() {
+	public EJavaProjectImpl getJavaProject() {
 		return this.project;
 	}
 

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
-public interface EProject extends Serializable {
+public interface EJavaProject extends Serializable {
 
 	String getName();
 

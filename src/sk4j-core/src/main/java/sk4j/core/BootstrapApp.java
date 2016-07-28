@@ -11,7 +11,7 @@ import org.jboss.weld.environment.se.WeldContainer;
 
 import sk4j.api.Console;
 import sk4j.api.Context;
-import sk4j.impl.model.EProjectImpl;
+import sk4j.impl.model.EJavaProjectImpl;
 
 public abstract class BootstrapApp implements Serializable {
 	/**
@@ -65,7 +65,7 @@ public abstract class BootstrapApp implements Serializable {
 		context.putItem("USER_HOME", System.getenv("HOME"));
 		context.putItem("SK4J_HOME", context.replace("{{USER_HOME}}/git/sk4j.github.io"));
 		context.putItem("PROJECT_HOME", args[0]);
-		context.setProject(new EProjectImpl(new File(args[0])));
+		context.setProject(new EJavaProjectImpl(new File(args[0])));
 	}
 
 	private void fireAfterInitEvent() {

@@ -5,19 +5,19 @@ import java.util.Arrays;
 import com.thoughtworks.qdox.model.JavaMethod;
 
 import sk4j.api.model.EJavaMethod;
-import sk4j.api.model.EProject;
+import sk4j.api.model.EJavaProject;
 
 public class EJavaMethodImpl implements EJavaMethod {
 
 	private static final long serialVersionUID = 1L;
 
-	private EProject project;
+	private EJavaProject project;
 
 	private String name;
 
 	private JavaMethod qdoxJavaMethod;
 
-	public EJavaMethodImpl(EProject project, JavaMethod qdoxJavaMethod) {
+	public EJavaMethodImpl(EJavaProject project, JavaMethod qdoxJavaMethod) {
 		super();
 		this.project = project;
 		this.qdoxJavaMethod = qdoxJavaMethod;

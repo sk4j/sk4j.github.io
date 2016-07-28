@@ -5,7 +5,7 @@ import org.apache.commons.io.FilenameUtils;
 import com.thoughtworks.qdox.model.JavaPackage;
 
 import sk4j.api.model.EJavaPackage;
-import sk4j.api.model.EProject;
+import sk4j.api.model.EJavaProject;
 
 public class EJavaPackageImpl implements EJavaPackage {
 
@@ -14,7 +14,7 @@ public class EJavaPackageImpl implements EJavaPackage {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private EProject project;
+	private EJavaProject project;
 
 	private String name;
 
@@ -24,7 +24,7 @@ public class EJavaPackageImpl implements EJavaPackage {
 
 	private String path;
 
-	public EJavaPackageImpl(EProject project, JavaPackage qdoxJavaPackage, String sourceFolderName) {
+	public EJavaPackageImpl(EJavaProject project, JavaPackage qdoxJavaPackage, String sourceFolderName) {
 		super();
 		this.project = project;
 		this.qdoxJavaPackage = qdoxJavaPackage;

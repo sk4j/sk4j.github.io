@@ -110,7 +110,7 @@ public class FSImpl implements FS {
 	}
 
 	private String removeProjectPath(String base) {
-		return StringUtils.difference(context.getProject().getPath(), base);
+		return StringUtils.difference(context.getJavaProject().getPath(), base);
 	}
 
 }

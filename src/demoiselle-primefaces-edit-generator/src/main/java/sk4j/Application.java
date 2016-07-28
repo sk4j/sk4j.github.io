@@ -35,7 +35,7 @@ public class Application implements Serializable {
 
 		//@formatter:off
 		EJavaClass selectedEntity = console.readOption("Selecione a entidade",
-				context.getProject().getJavaClasses()
+				context.getJavaProject().getJavaClasses()
 						.stream()
 						.filter(javaClass -> javaClass.hasAnnotationByName("Entity"))
 						.collect(Collectors.toList()));

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import com.thoughtworks.qdox.model.JavaField;
 
 import sk4j.api.model.EJavaAttribute;
-import sk4j.api.model.EProject;
+import sk4j.api.model.EJavaProject;
 
 public class EJavaAttributeImpl implements EJavaAttribute {
 
@@ -14,13 +14,13 @@ public class EJavaAttributeImpl implements EJavaAttribute {
 	 */
 	private static final long serialVersionUID = 7454896544844888494L;
 
-	private EProject project;
+	private EJavaProject project;
 
 	private String name;
 
 	private JavaField qdoxJavaField;
 
-	public EJavaAttributeImpl(EProject project, JavaField qdoxJavaField) {
+	public EJavaAttributeImpl(EJavaProject project, JavaField qdoxJavaField) {
 		super();
 		this.project = project;
 		this.qdoxJavaField = qdoxJavaField;

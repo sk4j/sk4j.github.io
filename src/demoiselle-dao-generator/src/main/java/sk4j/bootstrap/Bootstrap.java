@@ -28,10 +28,10 @@ public class Bootstrap extends BootstrapApp {
 	}
 
 	protected void validate(@Observes BeforeStart event) throws IOException {
-		if (!context.getProject().isMavenProject()) {
+		if (!context.getJavaProject().isMavenProject()) {
 			console.exit("O diretório não contém um projeto maven.");
 		}
-		if (!context.getProject().getJavaClasses().stream().anyMatch(javaClass -> javaClass.hasAnnotationByName("Entity"))) {
+		if (!context.getJavaProject().getJavaClasses().stream().anyMatch(javaClass -> javaClass.hasAnnotationByName("Entity"))) {
 			console.exit("O projeto não possui nenhuma entidade.");
 		}
 	}

@@ -43,7 +43,7 @@ public class Application implements Serializable {
 
 	public void run(@Observes AfterStart event) throws IOException {
 		//@formatter:off
-		context.getProject().getJavaClasses()
+		context.getJavaProject().getJavaClasses()
 			.stream()
 			.filter(javaClass -> javaClass.hasAnnotationByName("Entity"))
 			.forEach(javaClass -> {

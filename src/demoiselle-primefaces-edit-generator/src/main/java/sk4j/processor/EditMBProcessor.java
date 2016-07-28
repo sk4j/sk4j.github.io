@@ -47,7 +47,7 @@ public class EditMBProcessor implements Processor {
 				*/
 
 		//@formatter:off
-		List<EJavaPackage> viewsPackage = context.getProject().getSrcMainJavaPackages()
+		List<EJavaPackage> viewsPackage = context.getJavaProject().getSrcMainJavaPackages()
 							.stream()
 							.filter(javaPackage -> javaPackage.getName().endsWith("Page") || javaPackage.getName().endsWith("view"))
 							.collect(Collectors.toList());
