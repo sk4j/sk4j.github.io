@@ -48,6 +48,10 @@ public interface EJavaAttribute extends Choosable<EJavaAttribute>, Serializable 
 
 	boolean hasAnnotationByName(String annotationName);
 
+	boolean hasGenericNameByNameAndIndex(String genericTypeName, int index);
+
+	String getGenericNameByIndex(int index);
+
 	@Override
 	default int compareTo(EJavaAttribute o) {
 		return getName().compareTo(o.getName());

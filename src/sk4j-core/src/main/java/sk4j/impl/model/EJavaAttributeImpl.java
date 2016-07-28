@@ -107,6 +107,11 @@ public class EJavaAttributeImpl implements EJavaAttribute {
 
 	@Override
 	public boolean isEnum() {
+		if (qdoxJavaField.getType().getJavaClass() != null) {
+			if (qdoxJavaField.getType().getJavaClass().getSuperClass() != null) {
+				return qdoxJavaField.getType().getJavaClass().getSuperClass().getFullyQualifiedName().endsWith("Enum");
+			}
+		}
 		return false;
 	}
 
@@ -128,6 +133,24 @@ public class EJavaAttributeImpl implements EJavaAttribute {
 	@Override
 	public boolean isProtected() {
 		return this.qdoxJavaField.isProtected();
+	}
+
+	@Override
+	public boolean hasGenericNameByNameAndIndex(String genericTypeName, int index) {
+		if (qdoxJavaField.getType().getActualTypeArguments().length > 0) {
+			if (index <= qdoxJavaField.getType().getActualTypeArguments().length) {
+				return qdoxJavaField.getType().getActualTypeArguments()[index].getValue().endsWith(genericTypeName);
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public String getGenericNameByIndex(int index) {
+		if (index <= qdoxJavaField.getType().getActualTypeArguments().length) {
+			return qdoxJavaField.getType().getActualTypeArguments()[index].getValue();
+		}
+		return "";
 	}
 
 	@Override
