@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import com.thoughtworks.qdox.model.JavaField;
 
-import sk4j.core.console.Choosable;
-import sk4j.core.console.ConsoleColor;
+import sk4j.console.Choosable;
+import sk4j.console.ConsoleColor;
 
 public interface EJavaAttribute extends Choosable<EJavaAttribute>, Serializable {
 	String getName();

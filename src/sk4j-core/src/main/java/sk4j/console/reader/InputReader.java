@@ -1,11 +1,11 @@
-package sk4j.core.console.reader;
+package sk4j.console.reader;
 
 import java.io.IOException;
 
 import org.apache.commons.lang3.StringUtils;
 
 import jline.console.ConsoleReader;
-import sk4j.core.console.ConsoleColor;
+import sk4j.console.ConsoleColor;
 
 public class InputReader {
 

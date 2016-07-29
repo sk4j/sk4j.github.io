@@ -9,8 +9,8 @@ import sk4j.api.Console;
 import sk4j.api.Context;
 import sk4j.api.FS;
 import sk4j.api.Template;
-import sk4j.core.AfterStart;
-import sk4j.core.console.reader.ReadConf;
+import sk4j.console.reader.ReadConf;
+import sk4j.event.AfterStart;
 
 public class Application implements Serializable {
 

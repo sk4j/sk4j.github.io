@@ -1,4 +1,4 @@
-package sk4j.core.console.reader;
+package sk4j.console.reader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.StringUtils;
 
-import sk4j.core.console.ConsoleColor;
-import sk4j.core.console.Choosable;
+import sk4j.console.Choosable;
+import sk4j.console.ConsoleColor;
 
 public class OptionInputReader<T extends Choosable<T>> extends InputReader {
 

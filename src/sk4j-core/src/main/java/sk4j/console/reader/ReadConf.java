@@ -1,13 +1,13 @@
-package sk4j.core.console.reader;
+package sk4j.console.reader;
 
-import sk4j.core.console.ConsoleValidator;
-import sk4j.core.console.validator.ConsoleAlphaValidator;
-import sk4j.core.console.validator.ConsoleAlphanumericSpaceValidator;
-import sk4j.core.console.validator.ConsoleAlphanumericValidator;
-import sk4j.core.console.validator.ConsoleJavaClassNameValidator;
-import sk4j.core.console.validator.ConsoleNumberValidator;
-import sk4j.core.console.validator.ConsoleSkProjectNameValidator;
-import sk4j.core.console.validator.ConsoleYesNoValidator;
+import sk4j.console.ConsoleValidator;
+import sk4j.console.validator.ConsoleAlphaValidator;
+import sk4j.console.validator.ConsoleAlphanumericSpaceValidator;
+import sk4j.console.validator.ConsoleAlphanumericValidator;
+import sk4j.console.validator.ConsoleJavaClassNameValidator;
+import sk4j.console.validator.ConsoleNumberValidator;
+import sk4j.console.validator.ConsoleSkProjectNameValidator;
+import sk4j.console.validator.ConsoleYesNoValidator;
 
 /**
  * 

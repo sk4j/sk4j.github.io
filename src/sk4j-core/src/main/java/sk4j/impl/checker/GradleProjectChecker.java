@@ -1,8 +1,8 @@
-package sk4j.checker;
+package sk4j.impl.checker;
 
+import sk4j.api.Checker;
 import sk4j.api.model.EJavaProject;
-import sk4j.core.Checker;
-import sk4j.core.CheckerException;
+import sk4j.exception.CheckerException;
 
 public class GradleProjectChecker implements Checker {
 

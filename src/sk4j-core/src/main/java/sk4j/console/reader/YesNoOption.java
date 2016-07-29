@@ -1,4 +1,4 @@
-package sk4j.core.console.reader;
+package sk4j.console.reader;
 
 public enum YesNoOption {
 	YES("y"), NO("n");

@@ -11,6 +11,8 @@ import org.jboss.weld.environment.se.WeldContainer;
 
 import sk4j.api.Console;
 import sk4j.api.Context;
+import sk4j.event.AfterStart;
+import sk4j.event.BeforeStart;
 import sk4j.impl.model.EJavaProjectImpl;
 
 public abstract class BootstrapApp implements Serializable {

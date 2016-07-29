@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import sk4j.core.chooser.StringChooser;
-import sk4j.core.console.reader.OptionInputReader;
+import sk4j.console.reader.OptionInputReader;
+import sk4j.utils.StringChooser;
 
 public class OptionInputReaderTest {
 	public static void main(String[] args) throws IOException {

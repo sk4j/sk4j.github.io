@@ -13,7 +13,7 @@ import sk4j.api.Context;
 import sk4j.api.FS;
 import sk4j.api.Template;
 import sk4j.api.model.EJavaClass;
-import sk4j.core.AfterStart;
+import sk4j.event.AfterStart;
 
 public class Application implements Serializable {
 	/**

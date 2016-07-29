@@ -7,8 +7,8 @@ import javax.inject.Inject;
 
 import sk4j.api.Console;
 import sk4j.api.Context;
-import sk4j.core.BeforeStart;
 import sk4j.core.BootstrapApp;
+import sk4j.event.BeforeStart;
 
 public class Bootstrap extends BootstrapApp {
 

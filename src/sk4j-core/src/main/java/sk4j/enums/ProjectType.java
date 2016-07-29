@@ -1,8 +1,8 @@
 package sk4j.enums;
 
-import sk4j.checker.GradleProjectChecker;
-import sk4j.checker.MavenProjectChecker;
-import sk4j.core.Checker;
+import sk4j.api.Checker;
+import sk4j.impl.checker.GradleProjectChecker;
+import sk4j.impl.checker.MavenProjectChecker;
 
 public enum ProjectType {
 

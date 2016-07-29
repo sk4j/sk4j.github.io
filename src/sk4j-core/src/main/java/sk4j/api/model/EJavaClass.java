@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.thoughtworks.qdox.model.JavaClass;
 
-import sk4j.core.console.Choosable;
-import sk4j.core.console.ConsoleColor;
+import sk4j.console.Choosable;
+import sk4j.console.ConsoleColor;
 
 public interface EJavaClass extends Choosable<EJavaClass>, Serializable {
 

@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 
 import sk4j.api.Context;
 import sk4j.api.FS;
-import sk4j.core.console.ConsoleColor;
+import sk4j.console.ConsoleColor;
 
 /**
  * 

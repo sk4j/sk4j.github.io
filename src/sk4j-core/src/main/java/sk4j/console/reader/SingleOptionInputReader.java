@@ -1,11 +1,11 @@
-package sk4j.core.console.reader;
+package sk4j.console.reader;
 
 import java.util.List;
 
 import org.slf4j.Logger;
 
-import sk4j.core.console.Choosable;
-import sk4j.core.console.ConsoleColor;
+import sk4j.console.Choosable;
+import sk4j.console.ConsoleColor;
 
 public class SingleOptionInputReader<T extends Choosable<T>> extends OptionInputReader<T> {
 

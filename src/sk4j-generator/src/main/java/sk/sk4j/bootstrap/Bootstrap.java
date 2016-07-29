@@ -2,8 +2,8 @@ package sk.sk4j.bootstrap;
 
 import javax.enterprise.event.Observes;
 
-import sk4j.core.BeforeStart;
 import sk4j.core.BootstrapApp;
+import sk4j.event.BeforeStart;
 
 public class Bootstrap extends BootstrapApp {
 

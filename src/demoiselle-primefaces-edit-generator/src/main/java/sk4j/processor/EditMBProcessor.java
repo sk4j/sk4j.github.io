@@ -11,9 +11,9 @@ import sk4j.api.Context;
 import sk4j.api.FS;
 import sk4j.api.Template;
 import sk4j.api.model.EJavaPackage;
+import sk4j.console.reader.ReadConf;
 import sk4j.core.Processor;
 import sk4j.core.ProcessorId;
-import sk4j.core.console.reader.ReadConf;
 
 @ProcessorId(1)
 public class EditMBProcessor implements Processor {
@@ -38,13 +38,10 @@ public class EditMBProcessor implements Processor {
 	@Override
 	public void process() throws IOException {
 		/*
-		List<FileChooser> viewsDir = context.getProject().getDirs()
-				.stream()
-				.filter(dir -> dir.getAbsolutePath().contains("/src/main/java/"))
-				.filter(dir -> dir.getName().endsWith("view") || dir.getName().endsWith("Page"))
-				.map(FileChooser::new)
-				.collect(Collectors.toList());
-				*/
+		 * List<FileChooser> viewsDir = context.getProject().getDirs() .stream() .filter(dir ->
+		 * dir.getAbsolutePath().contains("/src/main/java/")) .filter(dir -> dir.getName().endsWith("view") ||
+		 * dir.getName().endsWith("Page")) .map(FileChooser::new) .collect(Collectors.toList());
+		 */
 
 		//@formatter:off
 		List<EJavaPackage> viewsPackage = context.getJavaProject().getSrcMainJavaPackages()

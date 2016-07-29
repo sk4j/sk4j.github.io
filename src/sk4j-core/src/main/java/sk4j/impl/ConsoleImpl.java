@@ -10,14 +10,14 @@ import org.slf4j.Logger;
 
 import sk4j.api.Console;
 import sk4j.api.Context;
-import sk4j.core.console.Choosable;
-import sk4j.core.console.ConsoleColor;
-import sk4j.core.console.ConsoleValidator;
-import sk4j.core.console.reader.InputReader;
-import sk4j.core.console.reader.MultipleOptionInputReader;
-import sk4j.core.console.reader.ReadConf;
-import sk4j.core.console.reader.SingleOptionInputReader;
-import sk4j.core.console.reader.YesNoOption;
+import sk4j.console.Choosable;
+import sk4j.console.ConsoleColor;
+import sk4j.console.ConsoleValidator;
+import sk4j.console.reader.InputReader;
+import sk4j.console.reader.MultipleOptionInputReader;
+import sk4j.console.reader.ReadConf;
+import sk4j.console.reader.SingleOptionInputReader;
+import sk4j.console.reader.YesNoOption;
 
 public class ConsoleImpl implements Console {
 

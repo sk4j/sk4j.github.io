@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
-import sk4j.core.console.Choosable;
-import sk4j.core.console.reader.ReadConf;
-import sk4j.core.console.reader.YesNoOption;
+import sk4j.console.Choosable;
+import sk4j.console.reader.ReadConf;
+import sk4j.console.reader.YesNoOption;
 
 /**
  * Classe responsável trabalhar com o Console.

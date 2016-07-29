@@ -8,7 +8,7 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import sk4j.core.Checker;
+import sk4j.api.Checker;
 
 public class CheckerProducer {
 

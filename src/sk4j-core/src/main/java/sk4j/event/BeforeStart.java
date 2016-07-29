@@ -1,4 +1,4 @@
-package sk4j.core;
+package sk4j.event;
 
 import java.io.Serializable;
 

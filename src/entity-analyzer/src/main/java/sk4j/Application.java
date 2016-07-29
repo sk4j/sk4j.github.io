@@ -13,9 +13,9 @@ import sk4j.api.Browser;
 import sk4j.api.Context;
 import sk4j.api.FS;
 import sk4j.api.Template;
-import sk4j.core.AfterStart;
 import sk4j.core.EntityAnalizer;
 import sk4j.core.EntityReport;
+import sk4j.event.AfterStart;
 
 public class Application implements Serializable {
 	/**

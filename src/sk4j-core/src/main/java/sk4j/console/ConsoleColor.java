@@ -1,4 +1,4 @@
-package sk4j.core.console;
+package sk4j.console;
 
 public class ConsoleColor {
 	/**
