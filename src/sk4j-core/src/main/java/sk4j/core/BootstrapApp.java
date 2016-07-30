@@ -9,8 +9,9 @@ import javax.inject.Inject;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 
-import sk4j.api.Console;
+import jline.console.UserInterruptException;
 import sk4j.api.Context;
+import sk4j.console.ConsoleColor;
 import sk4j.event.AfterStart;
 import sk4j.event.BeforeStart;
 import sk4j.impl.model.EJavaProjectImpl;
@@ -25,24 +26,26 @@ public abstract class BootstrapApp implements Serializable {
 	private Context context;
 
 	@Inject
-	private Console console;
-
-	@Inject
 	private Event<AfterStart> afterStartEvent;
 
 	@Inject
 	private Event<BeforeStart> beforeStartEvent;
 
 	protected void init(String args[]) {
+		Weld weld = new Weld();
 		try {
-			Weld weld = new Weld();
 			WeldContainer container = weld.initialize();
 			BootstrapApp mainApp = container.instance().select(BootstrapApp.class).get();
 			mainApp.start(args);
 			weld.shutdown();
+		} catch (UserInterruptException e) {
+			System.out.println("");
+			System.out.println(ConsoleColor.cyan("Bye sk4j"));
+			System.out.println("");
 		} catch (Exception e) {
-			//console.exit(e.getMessage());
 			e.printStackTrace();
+		} finally {
+			weld.shutdown();
 		}
 	}
 

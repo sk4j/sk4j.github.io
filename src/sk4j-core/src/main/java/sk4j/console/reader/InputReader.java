@@ -28,6 +28,7 @@ public class InputReader {
 		// BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			ConsoleReader console = new ConsoleReader();
+			console.setHandleUserInterrupt(true);
 			System.out.println("");
 			console.setPrompt(String.format("> %s", label));
 			value = console.readLine();
