@@ -125,6 +125,11 @@ public class EJavaProjectImpl implements EJavaProject {
 	}
 
 	@Override
+	public boolean isGradleProject() {
+		return new File(String.format("%s/build.gradle", getPath())).exists();
+	}
+
+	@Override
 	public List<EJavaClass> getSrcMainJavaClasses() {
 		if (this.srcMainJavaClasses == null) {
 			//@formatter:off

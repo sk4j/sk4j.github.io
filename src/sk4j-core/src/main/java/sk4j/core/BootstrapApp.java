@@ -11,9 +11,11 @@ import org.jboss.weld.environment.se.WeldContainer;
 
 import jline.console.UserInterruptException;
 import sk4j.api.Context;
+import sk4j.api.annotation.RequiredJavaProject;
 import sk4j.console.ConsoleColor;
 import sk4j.event.AfterStart;
 import sk4j.event.BeforeStart;
+import sk4j.exception.RequiredJavaProjectException;
 import sk4j.impl.model.EJavaProjectImpl;
 
 public abstract class BootstrapApp implements Serializable {
@@ -37,11 +39,13 @@ public abstract class BootstrapApp implements Serializable {
 			WeldContainer container = weld.initialize();
 			BootstrapApp mainApp = container.instance().select(BootstrapApp.class).get();
 			mainApp.start(args);
-			weld.shutdown();
 		} catch (UserInterruptException e) {
 			System.out.println("");
 			System.out.println(ConsoleColor.cyan("Bye sk4j"));
 			System.out.println("");
+		} catch (RequiredJavaProjectException e) {
+			System.out.println("");
+			System.out.println(ConsoleColor.red(e.getMessage()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -56,6 +60,7 @@ public abstract class BootstrapApp implements Serializable {
 	 */
 	private void start(String args[]) throws Exception {
 		setupContext(args);
+		checkRequiredJavaProject();
 		fireBeforeStartEvent();
 		fireAfterInitEvent();
 	}
@@ -77,6 +82,14 @@ public abstract class BootstrapApp implements Serializable {
 		afterStartEvent.fire(new AfterStart() {
 			private static final long serialVersionUID = 1L;
 		});
+	}
+
+	private void checkRequiredJavaProject() throws RequiredJavaProjectException {
+		if (this.getClass().isAnnotationPresent(RequiredJavaProject.class)) {
+			if (!this.context.getJavaProject().isMavenProject() || !this.context.getJavaProject().isGradleProject()) {
+				throw new RequiredJavaProjectException("O diretório não possui projeto maven ou gradle.");
+			}
+		}
 	}
 
 }

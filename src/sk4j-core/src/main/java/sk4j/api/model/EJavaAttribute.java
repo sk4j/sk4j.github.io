@@ -7,9 +7,26 @@ import com.thoughtworks.qdox.model.JavaField;
 import sk4j.console.Choosable;
 import sk4j.console.ConsoleColor;
 
+/**
+ * Modelo de atributo java.
+ * 
+ * @author jcruz
+ *
+ */
 public interface EJavaAttribute extends Choosable<EJavaAttribute>, Serializable {
+
+	/**
+	 * Retorna o nome do atributo java.
+	 * 
+	 * @return Nome do atributo java.
+	 */
 	String getName();
 
+	/**
+	 * Retorna objeto qdox do atributo.
+	 * 
+	 * @return objeto do tipo JavaField qdox.
+	 */
 	JavaField getQdoxJavaField();
 
 	boolean isLongPrimitive();

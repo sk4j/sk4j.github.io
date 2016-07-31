@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import sk4j.console.Choosable;
 import sk4j.console.ConsoleColor;
+import sk4j.exception.EmptyOptionParamException;
 
 public class OptionInputReader<T extends Choosable<T>> extends InputReader {
 
@@ -63,6 +64,14 @@ public class OptionInputReader<T extends Choosable<T>> extends InputReader {
 
 	public List<T> getOptions() {
 		return options;
+	}
+
+	@Override
+	public String read() {
+		if (this.options == null || this.options.isEmpty()) {
+			throw new EmptyOptionParamException("Nenhuma opção disponível para seleção.");
+		}
+		return super.read();
 	}
 
 }
