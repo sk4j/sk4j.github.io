@@ -1,6 +1,9 @@
-package sk4j.utils;
+package sk4j.chooser;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import sk4j.console.Choosable;
 import sk4j.console.ConsoleColor;
@@ -26,6 +29,15 @@ public class FileChooser implements Choosable<FileChooser> {
 
 	public File getFile() {
 		return file;
+	}
+
+	public static List<FileChooser> asList(File... files) {
+		//@formatter:off
+		return Arrays.asList(files)
+					.stream()
+					.map(FileChooser::new)
+					.collect(Collectors.toList());
+		//@formatter:on
 	}
 
 }

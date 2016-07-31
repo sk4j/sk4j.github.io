@@ -1,4 +1,4 @@
-package sk4j.utils;
+package sk4j.chooser;
 
 import sk4j.console.Choosable;
 

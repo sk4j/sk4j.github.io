@@ -1,4 +1,4 @@
-package sk4j.impl.tool;
+package sk4j.impl.util;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,9 +8,9 @@ import javax.inject.Inject;
 import sk4j.api.Context;
 import sk4j.api.model.EJavaClass;
 import sk4j.api.model.EJavaPackage;
-import sk4j.api.tool.JavaProjectTool;
+import sk4j.api.util.JavaProjectUtil;
 
-public class JavaProjectToolImpl implements JavaProjectTool {
+public class JavaProjectToolUtil implements JavaProjectUtil {
 
 	/**
 	 * 

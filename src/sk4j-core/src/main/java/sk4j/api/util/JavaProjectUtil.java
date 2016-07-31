@@ -1,4 +1,4 @@
-package sk4j.api.tool;
+package sk4j.api.util;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +13,7 @@ import sk4j.api.model.EJavaPackage;
  * @author jcruz
  *
  */
-public interface JavaProjectTool extends Serializable {
+public interface JavaProjectUtil extends Serializable {
 
 	/**
 	 * Retorna a lista de todas as entidades JPA do projeto.
