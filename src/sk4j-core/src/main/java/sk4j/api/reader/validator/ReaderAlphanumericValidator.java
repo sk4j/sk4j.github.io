@@ -1,16 +1,16 @@
-package sk4j.console.validator;
+package sk4j.api.reader.validator;
 
 import org.apache.commons.lang3.StringUtils;
 
+import sk4j.api.ConsoleReaderValidator;
 import sk4j.console.ConsoleColor;
-import sk4j.console.ConsoleValidator;
 
 /**
  * 
  * @author jcruz
  *
  */
-public class ConsoleAlphanumericValidator extends ConsoleValidator {
+public class ReaderAlphanumericValidator extends ConsoleReaderValidator {
 
 	/**
 	 * 

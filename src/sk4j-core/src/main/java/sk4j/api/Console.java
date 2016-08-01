@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
+import sk4j.api.reader.ReaderValidatorType;
 import sk4j.console.Choosable;
-import sk4j.console.reader.ReadConf;
 import sk4j.console.reader.YesNoOption;
 
 /**
@@ -38,7 +38,7 @@ public interface Console extends Serializable {
 	 * @param conf
 	 * @return String com valor de entrada.
 	 */
-	String read(String label, ReadConf conf);
+	String read(String label, ReaderValidatorType conf);
 
 	/**
 	 * @param label
@@ -46,7 +46,7 @@ public interface Console extends Serializable {
 	 * @param conf
 	 * @return String com valor de entrada.
 	 */
-	String read(String label, String defaultValue, ReadConf conf);
+	String read(String label, String defaultValue, ReaderValidatorType conf);
 
 	/**
 	 * 

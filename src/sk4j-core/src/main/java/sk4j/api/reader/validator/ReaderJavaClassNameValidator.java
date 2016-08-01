@@ -1,9 +1,9 @@
-package sk4j.console.validator;
+package sk4j.api.reader.validator;
 
 import java.util.regex.Pattern;
 
+import sk4j.api.ConsoleReaderValidator;
 import sk4j.console.ConsoleColor;
-import sk4j.console.ConsoleValidator;
 
 /**
  * Verifica se a String está de acordo com um nome de classe java padrão. Padrão de nome de classe java:
@@ -18,7 +18,7 @@ import sk4j.console.ConsoleValidator;
  * @author jcruz
  *
  */
-public class ConsoleJavaClassNameValidator extends ConsoleValidator {
+public class ReaderJavaClassNameValidator extends ConsoleReaderValidator {
 
 	/**
 	 * 

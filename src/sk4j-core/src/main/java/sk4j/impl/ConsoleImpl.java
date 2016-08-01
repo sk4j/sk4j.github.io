@@ -9,13 +9,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
 import sk4j.api.Console;
+import sk4j.api.ConsoleReaderValidator;
 import sk4j.api.Context;
+import sk4j.api.reader.ReaderValidatorType;
 import sk4j.console.Choosable;
 import sk4j.console.ConsoleColor;
-import sk4j.console.ConsoleValidator;
 import sk4j.console.reader.InputReader;
 import sk4j.console.reader.MultipleOptionInputReader;
-import sk4j.console.reader.ReadConf;
 import sk4j.console.reader.SingleOptionInputReader;
 import sk4j.console.reader.YesNoOption;
 
@@ -33,7 +33,7 @@ public class ConsoleImpl implements Console {
 	private Logger log;
 
 	@Inject
-	private Map<String, ConsoleValidator> validators;
+	private Map<String, ConsoleReaderValidator> validators;
 
 	@Override
 	public <T extends Choosable<T>> T readOption(String label, List<T> options) {
@@ -65,19 +65,19 @@ public class ConsoleImpl implements Console {
 	}
 
 	@Override
-	public String read(String label, ReadConf conf) {
+	public String read(String label, ReaderValidatorType conf) {
 		String value = readInputReader(ConsoleColor.bold(label));
 		System.out.println(ConsoleColor.gray("Entrada: " + value));
-		ConsoleValidator validator = validators.get(conf.getValidator().getSimpleName());
+		ConsoleReaderValidator validator = validators.get(conf.getValidator().getSimpleName());
 		return validator.validate(value) ? value : read(label, conf);
 	}
 
 	@Override
-	public String read(String label, String defaultValue, ReadConf conf) {
+	public String read(String label, String defaultValue, ReaderValidatorType conf) {
 		String value = readInputReader(String.format("%s (%s)", label, defaultValue));
 		value = StringUtils.isNotBlank(value) ? value : ctx.replace(defaultValue);
 		System.out.println(ConsoleColor.gray("Entrada: " + value));
-		ConsoleValidator validator = validators.get(conf.getValidator().getSimpleName());
+		ConsoleReaderValidator validator = validators.get(conf.getValidator().getSimpleName());
 		return validator.validate(value) ? value : read(label, defaultValue, conf);
 	}
 
@@ -92,7 +92,7 @@ public class ConsoleImpl implements Console {
 	public YesNoOption readYesNo(String label) {
 		String value = readInputReader(String.format("%s %s", ConsoleColor.bold(label), ConsoleColor.cyan("[y|n]")));
 		System.out.println(ConsoleColor.gray("Entrada: " + value));
-		ConsoleValidator validator = validators.get(ReadConf.YES_NO.getValidator().getSimpleName());
+		ConsoleReaderValidator validator = validators.get(ReaderValidatorType.YES_NO.getValidator().getSimpleName());
 		return validator.validate(value) ? YesNoOption.getOption(value) : readYesNo(label);
 	}
 
@@ -100,7 +100,7 @@ public class ConsoleImpl implements Console {
 	public YesNoOption readYesNo(String label, YesNoOption defaultValue) {
 		String value = readInputReader(
 				String.format("%s %s (%s)", ConsoleColor.bold(label), ConsoleColor.cyan("[y|n]"), defaultValue.getValue()));
-		ConsoleValidator validator = validators.get(ReadConf.YES_NO.getValidator().getSimpleName());
+		ConsoleReaderValidator validator = validators.get(ReaderValidatorType.YES_NO.getValidator().getSimpleName());
 		value = StringUtils.isNotBlank(value) ? value : defaultValue.getValue();
 		System.out.println(ConsoleColor.gray("Entrada: " + value));
 		return validator.validate(value) ? YesNoOption.getOption(value) : readYesNo(label);

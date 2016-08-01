@@ -1,4 +1,4 @@
-package sk4j.console;
+package sk4j.api;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
-public abstract class ConsoleValidator implements Serializable {
+public abstract class ConsoleReaderValidator implements Serializable {
 	/**
 	 * 
 	 */
