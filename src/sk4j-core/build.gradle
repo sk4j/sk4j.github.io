@@ -44,12 +44,14 @@ jar {
 }
 
 task pack(dependsOn: build) << {
+	println "${project.projectDir}"
+	
 	copy {
 		from configurations.compile
-		into '../../lib'
+		into "${project.projectDir}/../../lib"
 	}
 	copy {
 		from "build/libs/${project.name}-${version}.jar"
-		into '../../lib'
+		into "${project.projectDir}/../../lib"
 	}
 }
