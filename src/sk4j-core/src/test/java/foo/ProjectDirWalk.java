@@ -8,10 +8,10 @@ import sk4j.impl.EJavaProjectImpl;
 public class ProjectDirWalk {
 
 	public static void main(String[] args) throws IOException {
-		EJavaProjectImpl project = new EJavaProjectImpl(new File("/opt/workspace-luna/aelis2016"));
+		EJavaProjectImpl project = new EJavaProjectImpl(new File("/home/jcruz/Programs/eclipse-mars/workspace/ouvidoriaweb"));
 		project.getDirs()
 			   .stream()
-			   .map(p -> p.getName())
+			   .map(p -> p.getFile().getName())
 			   .forEach(System.out::println);
 	}
 

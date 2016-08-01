@@ -13,7 +13,7 @@ public class EProjectTestWebAppDirs {
 		//@formatter:off
 		project.getSrcMainWebappFiles()
 			.stream()
-			.forEach(dir -> System.out.println(dir.getName()));
+			.forEach(dir -> System.out.println(dir.getFile().getName()));
 			
 		//@formatter:on
 	}

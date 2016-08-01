@@ -12,6 +12,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
 
+import sk4j.model.EFile;
 import sk4j.model.EJavaClass;
 import sk4j.model.EJavaPackage;
 import sk4j.model.EJavaProject;
@@ -37,15 +38,15 @@ public class EJavaProjectImpl implements EJavaProject {
 
 	private List<EJavaPackage> srcTestJavaPackages;
 
-	private List<File> srcMainWebappDirs;
+	private List<EFile> srcMainWebappDirs;
 
-	private List<File> srcMainWebappFiles;
+	private List<EFile> srcMainWebappFiles;
 
-	private List<File> dirs;
+	private List<EFile> dirs;
 
-	private List<File> files;
+	private List<EFile> files;
 
-	private List<File> srcMainWebappXHTMLFiles;
+	private List<EFile> srcMainWebappXHTMLFiles;
 
 	public EJavaProjectImpl(File file) {
 		super();
@@ -82,11 +83,11 @@ public class EJavaProjectImpl implements EJavaProject {
 
 	//@formatter:off
 	@Override
-	public List<File> getDirs() throws IOException {
+	public List<EFile> getDirs() throws IOException {
 		if (this.dirs == null) {
 			this.dirs = Files.walk(file.toPath())
 							 .filter(p -> p.toFile().isDirectory() && !p.toFile().isHidden())
-							 .map(p -> p.toFile())
+							 .map(p -> new EFileImpl(p.toFile()))
 							 .collect(Collectors.toList());
 		}
 		return dirs;
@@ -94,19 +95,19 @@ public class EJavaProjectImpl implements EJavaProject {
 	//@formatter:on
 
 	@Override
-	public List<File> getFiles() throws IOException {
+	public List<EFile> getFiles() throws IOException {
 		if (this.files == null) {
 			//@formatter:off
 			this.files = Files.walk(file.toPath())
 							  .filter(p -> p.toFile().isFile() && !p.toFile().isHidden())
-							  .map(p -> p.toFile())
+							  .map(p -> new EFileImpl(p.toFile()))
 							  .collect(Collectors.toList());
 			//@formatter:on
 		}
 		return files;
 	}
 
-	public void setFiles(List<File> files) {
+	public void setFiles(List<EFile> files) {
 		this.files = files;
 	}
 
@@ -179,13 +180,13 @@ public class EJavaProjectImpl implements EJavaProject {
 	}
 
 	@Override
-	public List<File> getSrcMainWebappDirs() throws IOException {
+	public List<EFile> getSrcMainWebappDirs() throws IOException {
 		if (this.srcMainWebappDirs == null) {
 			//@formatter:off
 			this.srcMainWebappDirs= Files.walk(file.toPath())
 					 				.filter(path -> path.toFile().isDirectory() && !path.toFile().isHidden())
 					 				.filter(dir -> dir.toFile().getAbsolutePath().contains("/src/main/webapp/"))
-					 				.map(path -> path.toFile())
+					 				.map(path -> new EFileImpl(path.toFile()))
 					 				.collect(Collectors.toList());
 			//@formatter:on
 		}
@@ -193,13 +194,13 @@ public class EJavaProjectImpl implements EJavaProject {
 	}
 
 	@Override
-	public List<File> getSrcMainWebappFiles() throws IOException {
+	public List<EFile> getSrcMainWebappFiles() throws IOException {
 		if (this.srcMainWebappFiles == null) {
 			//@formatter:off
 			this.srcMainWebappFiles = Files.walk(file.toPath())
 					 				.filter(path -> path.toFile().isFile() && !path.toFile().isHidden())
 					 				.filter(file -> file.toFile().getAbsolutePath().contains("/src/main/webapp/"))
-					 				.map(path -> path.toFile())
+					 				.map(path -> new EFileImpl(path.toFile()))
 					 				.collect(Collectors.toList());
 			//@formatter:on
 		}
@@ -224,12 +225,12 @@ public class EJavaProjectImpl implements EJavaProject {
 	}
 
 	@Override
-	public List<File> getSrcMainWebappXHTMLFiles() throws IOException {
+	public List<EFile> getSrcMainWebappXHTMLFiles() throws IOException {
 		if (this.srcMainWebappXHTMLFiles == null) {
 			//@formatter:off
 			this.srcMainWebappXHTMLFiles = getSrcMainWebappFiles()
 												.stream()
-												.filter(file -> file.getName().endsWith(".xhtml"))
+												.filter(file -> file.getFile().getName().endsWith(".xhtml"))
 												.collect(Collectors.toList());
 			//@formatter:on
 		}

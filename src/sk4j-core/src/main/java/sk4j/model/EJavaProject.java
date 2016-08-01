@@ -40,15 +40,15 @@ public interface EJavaProject extends Serializable {
 
 	List<EJavaClass> getSrcTestJavaClasses();
 
-	List<File> getSrcMainWebappDirs() throws IOException;
+	List<EFile> getSrcMainWebappDirs() throws IOException;
 
-	List<File> getSrcMainWebappFiles() throws IOException;
+	List<EFile> getSrcMainWebappFiles() throws IOException;
 
-	List<File> getSrcMainWebappXHTMLFiles() throws IOException;
+	List<EFile> getSrcMainWebappXHTMLFiles() throws IOException;
 
-	List<File> getDirs() throws IOException;
+	List<EFile> getDirs() throws IOException;
 
-	List<File> getFiles() throws IOException;
+	List<EFile> getFiles() throws IOException;
 
 	boolean hasSrcMainJavaClassByName(String javaClassName) throws IOException;
 
