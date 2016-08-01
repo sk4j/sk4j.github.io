@@ -2,8 +2,8 @@ package foo;
 
 import java.io.File;
 
-import sk4j.api.model.EJavaProject;
-import sk4j.impl.model.EJavaProjectImpl;
+import sk4j.impl.EJavaProjectImpl;
+import sk4j.model.EJavaProject;
 
 public class EProjectTest {
 

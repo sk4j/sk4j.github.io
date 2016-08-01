@@ -1,6 +1,5 @@
 package sk4j.core;
 
-import java.io.File;
 import java.io.Serializable;
 
 import javax.enterprise.event.Event;
@@ -10,13 +9,12 @@ import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 
 import jline.console.UserInterruptException;
-import sk4j.api.Context;
-import sk4j.api.annotation.RequiredJavaProject;
+import sk4j.annotation.RequiredJavaProject;
 import sk4j.console.ConsoleColor;
 import sk4j.event.AfterStart;
 import sk4j.event.BeforeStart;
 import sk4j.exception.RequiredJavaProjectException;
-import sk4j.impl.model.EJavaProjectImpl;
+import sk4j.model.EJavaProject;
 
 public abstract class BootstrapApp implements Serializable {
 	/**
@@ -25,7 +23,10 @@ public abstract class BootstrapApp implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private Context context;
+	private SystemContext context;
+
+	@Inject
+	private EJavaProject project;
 
 	@Inject
 	private Event<AfterStart> afterStartEvent;
@@ -72,10 +73,9 @@ public abstract class BootstrapApp implements Serializable {
 	}
 
 	private void setupContext(String[] args) {
-		context.putItem("USER_HOME", System.getenv("HOME"));
-		context.putItem("SK4J_HOME", context.replace("{{USER_HOME}}/git/sk4j.github.io"));
-		context.putItem("PROJECT_HOME", args[0]);
-		context.setProject(new EJavaProjectImpl(new File(args[0])));
+		context.put("USER_HOME", System.getenv("HOME"));
+		context.put("SK4J_HOME", context.replace("{{USER_HOME}}/git/sk4j.github.io"));
+		context.put("PROJECT_HOME", args[0]);
 	}
 
 	private void fireAfterInitEvent() {
@@ -86,7 +86,7 @@ public abstract class BootstrapApp implements Serializable {
 
 	private void checkRequiredJavaProject() throws RequiredJavaProjectException {
 		if (this.getClass().isAnnotationPresent(RequiredJavaProject.class)) {
-			if (!this.context.getJavaProject().isMavenProject() || !this.context.getJavaProject().isGradleProject()) {
+			if (!this.project.isMavenProject() || !this.project.isGradleProject()) {
 				throw new RequiredJavaProjectException("O diretório não possui projeto maven ou gradle.");
 			}
 		}

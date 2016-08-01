@@ -13,9 +13,10 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
-import sk4j.api.Context;
-import sk4j.api.FS;
 import sk4j.console.ConsoleColor;
+import sk4j.core.FS;
+import sk4j.core.SystemContext;
+import sk4j.model.EJavaProject;
 
 /**
  * 
@@ -28,7 +29,10 @@ public class FSImpl implements FS {
 	private Logger log;
 
 	@Inject
-	private Context context;
+	private EJavaProject project;
+
+	@Inject
+	private SystemContext context;
 
 	/**
 	 * 
@@ -110,7 +114,7 @@ public class FSImpl implements FS {
 	}
 
 	private String removeProjectPath(String base) {
-		return StringUtils.difference(context.getJavaProject().getPath(), base);
+		return StringUtils.difference(this.project.getPath(), base);
 	}
 
 }

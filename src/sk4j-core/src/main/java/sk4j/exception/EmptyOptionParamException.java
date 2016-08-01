@@ -1,6 +1,6 @@
 package sk4j.exception;
 
-import sk4j.api.Console;
+import sk4j.core.Console;
 
 /**
  * Exception lançada quando os métodos {@link Console#readOption(String, java.util.List)} ou

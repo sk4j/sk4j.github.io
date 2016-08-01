@@ -5,8 +5,8 @@ import java.net.URI;
 
 import javax.inject.Inject;
 
-import sk4j.api.Browser;
-import sk4j.api.Console;
+import sk4j.core.Browser;
+import sk4j.core.Console;
 
 public class BrowserImpl implements Browser {
 

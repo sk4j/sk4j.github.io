@@ -9,7 +9,7 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import sk4j.api.ConsoleReaderValidator;
+import sk4j.core.ConsoleReaderValidator;
 
 public class ConsoleValidatorProducer implements Serializable {
 

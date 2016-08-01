@@ -8,7 +8,7 @@ import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.slf4j.Logger;
 
-import sk4j.proxy.Slf4jLoggerProxy;
+import sk4j.impl.Slf4jLoggerProxy;
 
 public class LoggerProducer implements Serializable {
 

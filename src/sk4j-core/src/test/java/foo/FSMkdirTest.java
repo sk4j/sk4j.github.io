@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 
-import sk4j.api.FS;
+import sk4j.core.FS;
 
 public class FSMkdirTest {
 
