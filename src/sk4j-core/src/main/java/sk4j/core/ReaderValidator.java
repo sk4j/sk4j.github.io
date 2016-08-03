@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
-public abstract class ConsoleReaderValidator implements Serializable {
+public abstract class ReaderValidator implements Serializable {
 	/**
 	 * 
 	 */

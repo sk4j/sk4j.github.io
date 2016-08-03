@@ -9,7 +9,7 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import sk4j.core.ConsoleReaderValidator;
+import sk4j.core.ReaderValidator;
 
 public class ConsoleValidatorProducer implements Serializable {
 
@@ -19,12 +19,12 @@ public class ConsoleValidatorProducer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private Instance<ConsoleReaderValidator> validators;
+	private Instance<ReaderValidator> validators;
 
 	@Produces
 	@Singleton
-	public Map<String, ConsoleReaderValidator> create() {
-		Map<String, ConsoleReaderValidator> map = new HashMap<>();
+	public Map<String, ReaderValidator> create() {
+		Map<String, ReaderValidator> map = new HashMap<>();
 		validators.iterator().forEachRemaining(v -> map.put(v.getClass().getSimpleName(), v));
 		return map;
 	}

@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import jline.console.ConsoleReader;
 import sk4j.console.Colorize;
-import sk4j.core.ConsoleReaderValidator;
+import sk4j.core.ReaderValidator;
 import sk4j.core.Context;
 import sk4j.input.Reader;
 
@@ -28,7 +28,7 @@ public class ReaderImpl implements Reader {
 
 	private String contextKey;
 
-	private ConsoleReaderValidator validator;
+	private ReaderValidator validator;
 
 	public ReaderImpl(String message) {
 		super();
@@ -41,7 +41,7 @@ public class ReaderImpl implements Reader {
 		this.contextKey = contextKey;
 	}
 
-	public ReaderImpl(String message, String contextKey, ConsoleReaderValidator validator) {
+	public ReaderImpl(String message, String contextKey, ReaderValidator validator) {
 		super();
 		this.message = message;
 		this.contextKey = contextKey;

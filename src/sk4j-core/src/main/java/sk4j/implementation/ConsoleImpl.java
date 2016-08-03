@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 
 import sk4j.console.Colorize;
 import sk4j.core.Console;
-import sk4j.core.ConsoleReaderValidator;
+import sk4j.core.ReaderValidator;
 import sk4j.core.Context;
 import sk4j.deprecated.InputReader;
 import sk4j.deprecated.MultipleOptionInputReader;
@@ -31,7 +31,7 @@ public class ConsoleImpl implements Console {
 	private Logger log;
 
 	@Inject
-	private Map<String, ConsoleReaderValidator> validators;
+	private Map<String, ReaderValidator> validators;
 
 	@Override
 	public <T extends Selectable<T>> T readOption(String label, List<T> options) {

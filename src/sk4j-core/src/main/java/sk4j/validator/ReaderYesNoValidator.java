@@ -3,14 +3,14 @@ package sk4j.validator;
 import java.util.Arrays;
 
 import sk4j.console.Colorize;
-import sk4j.core.ConsoleReaderValidator;
+import sk4j.core.ReaderValidator;
 
 /**
  * 
  * @author jcruz
  *
  */
-public class ReaderYesNoValidator extends ConsoleReaderValidator {
+public class ReaderYesNoValidator extends ReaderValidator {
 
 	/**
 	 * 

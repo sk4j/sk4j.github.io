@@ -3,7 +3,7 @@ package sk4j.validator;
 import org.apache.commons.lang3.StringUtils;
 
 import sk4j.console.Colorize;
-import sk4j.core.ConsoleReaderValidator;
+import sk4j.core.ReaderValidator;
 
 /**
  * Verifica se a String contem apenas números.
@@ -11,7 +11,7 @@ import sk4j.core.ConsoleReaderValidator;
  * @author jcruz
  *
  */
-public class ReaderNumberValidator extends ConsoleReaderValidator {
+public class ReaderNumberValidator extends ReaderValidator {
 
 	/**
 	 * 

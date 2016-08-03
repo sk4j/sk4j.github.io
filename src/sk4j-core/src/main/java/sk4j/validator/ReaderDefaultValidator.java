@@ -1,8 +1,8 @@
 package sk4j.validator;
 
-import sk4j.core.ConsoleReaderValidator;
+import sk4j.core.ReaderValidator;
 
-public class ReaderDefaultValidator extends ConsoleReaderValidator {
+public class ReaderDefaultValidator extends ReaderValidator {
 
 	/**
 	 * 
