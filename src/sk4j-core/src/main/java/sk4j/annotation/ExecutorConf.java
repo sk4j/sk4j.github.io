@@ -8,11 +8,11 @@ import java.lang.annotation.Target;
 
 @Retention(RUNTIME)
 @Target(TYPE)
-public @interface ActionSelectorConf {
+public @interface ExecutorConf {
 	/**
 	 * Mensagem exibida no console orientando a entrada do usuário.
 	 * 
 	 * @return Mensagem de entrada.
 	 */
-	String message() default "Digite o número da opção";
+	String message() default "Digite o numero da opção";
 }

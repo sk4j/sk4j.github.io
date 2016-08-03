@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-import sk4j.core.SystemContext;
+import sk4j.core.Context;
 import sk4j.core.Template;
 import sk4j.model.EJavaProject;
 
@@ -17,7 +17,7 @@ public class TemplateImpl implements Template {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private SystemContext context;
+	private Context context;
 
 	@Inject
 	private EJavaProject project;

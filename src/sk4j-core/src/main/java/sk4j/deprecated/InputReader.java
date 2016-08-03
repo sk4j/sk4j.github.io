@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.apache.commons.lang3.StringUtils;
 
 import jline.console.ConsoleReader;
-import sk4j.console.ConsoleColor;
+import sk4j.console.Colorize;
 
 public class InputReader {
 
@@ -15,7 +15,7 @@ public class InputReader {
 
 	public InputReader(String label) {
 		super();
-		this.label = StringUtils.appendIfMissing(ConsoleColor.bgGreen(label), " : ");
+		this.label = StringUtils.appendIfMissing(Colorize.bgGreen(label), " : ");
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class InputReader {
 			value = console.readLine();
 			console.close();
 		} catch (IOException e) {
-			System.out.println(ConsoleColor.red("Erro ao ler entrada de dados."));
+			System.out.println(Colorize.red("Erro ao ler entrada de dados."));
 			System.exit(1);
 		}
 		return StringUtils.trim(value);

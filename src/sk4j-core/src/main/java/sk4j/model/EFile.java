@@ -2,10 +2,10 @@ package sk4j.model;
 
 import java.io.File;
 
-import sk4j.console.ConsoleColor;
-import sk4j.console.ConsoleSelectable;
+import sk4j.console.Colorize;
+import sk4j.console.Selectable;
 
-public interface EFile extends ConsoleSelectable<EFile> {
+public interface EFile extends Selectable<EFile> {
 
 	File getFile();
 
@@ -16,7 +16,7 @@ public interface EFile extends ConsoleSelectable<EFile> {
 
 	@Override
 	default String getSelectLabel() {
-		return ConsoleColor.bold(getFile().getName()) + " - " + ConsoleColor.gray(getFile().getAbsolutePath());
+		return Colorize.bold(getFile().getName()) + " - " + Colorize.gray(getFile().getAbsolutePath());
 	}
 
 }

@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.slf4j.Logger;
 
-import sk4j.console.ConsoleColor;
-import sk4j.console.ConsoleSelectable;
+import sk4j.console.Colorize;
+import sk4j.console.Selectable;
 
-public class SingleOptionInputReader<T extends ConsoleSelectable<T>> extends OptionInputReader<T> {
+public class SingleOptionInputReader<T extends Selectable<T>> extends OptionInputReader<T> {
 
 	private Logger log;
 
@@ -24,7 +24,7 @@ public class SingleOptionInputReader<T extends ConsoleSelectable<T>> extends Opt
 	private T _readOption() {
 		read();
 		if (!isValidOption(getValue())) {
-			log.warn(ConsoleColor.yellow("Opção inválida: {}"), getValue());
+			log.warn(Colorize.yellow("Opção inválida: {}"), getValue());
 			_readOption();
 		}
 		return this.getOptions().get(Integer.valueOf(getValue()) - 1);

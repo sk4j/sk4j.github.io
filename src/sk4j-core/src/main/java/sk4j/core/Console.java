@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
-import sk4j.console.ConsoleSelectable;
+import sk4j.console.Selectable;
 
 /**
  * Classe responsável trabalhar com o Console.
@@ -54,7 +54,7 @@ public interface Console extends Serializable {
 	 * @throws IOException
 	 * @throws InvalidOptionException
 	 */
-	<T extends ConsoleSelectable<T>> T readOption(String label, List<T> options);
+	<T extends Selectable<T>> T readOption(String label, List<T> options);
 
 	/**
 	 * 
@@ -64,7 +64,7 @@ public interface Console extends Serializable {
 	 * @throws IOException
 	 * @throws InvalidOptionException
 	 */
-	<T extends ConsoleSelectable<T>> List<T> readOptions(String label, List<T> options);
+	<T extends Selectable<T>> List<T> readOptions(String label, List<T> options);
 
 	/**
 	 * 

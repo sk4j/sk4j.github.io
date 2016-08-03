@@ -9,11 +9,11 @@ import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.StringUtils;
 
-import sk4j.console.ConsoleColor;
-import sk4j.console.ConsoleSelectable;
+import sk4j.console.Colorize;
+import sk4j.console.Selectable;
 import sk4j.exception.EmptyOptionParamException;
 
-public class OptionInputReader<T extends ConsoleSelectable<T>> extends InputReader {
+public class OptionInputReader<T extends Selectable<T>> extends InputReader {
 
 	private List<T> options = new ArrayList<>();
 
@@ -34,7 +34,7 @@ public class OptionInputReader<T extends ConsoleSelectable<T>> extends InputRead
 		options
 			.stream()
 			.sorted()
-			.map(opt -> String.format("%s : %s", ConsoleColor.magenta(StringUtils.rightPad(String.valueOf(index.incrementAndGet()), 2)), ConsoleColor.bold(opt.getSelectLabel())))
+			.map(opt -> String.format("%s : %s", Colorize.magenta(StringUtils.rightPad(String.valueOf(index.incrementAndGet()), 2)), Colorize.bold(opt.getSelectLabel())))
 			.forEach(System.out::println);
 	}
 	//@formatter:on

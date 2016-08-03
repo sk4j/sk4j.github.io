@@ -2,7 +2,7 @@ package sk4j.validator;
 
 import java.util.regex.Pattern;
 
-import sk4j.console.ConsoleColor;
+import sk4j.console.Colorize;
 import sk4j.core.ConsoleReaderValidator;
 
 /**
@@ -34,7 +34,7 @@ public class ReaderJavaClassNameValidator extends ConsoleReaderValidator {
 
 	@Override
 	protected String consoleMessageOnFalse() {
-		return ConsoleColor.yellow("A entrada de dados deve ser um nome de classe java válido.");
+		return Colorize.yellow("A entrada de dados deve ser um nome de classe java válido.");
 	}
 
 }

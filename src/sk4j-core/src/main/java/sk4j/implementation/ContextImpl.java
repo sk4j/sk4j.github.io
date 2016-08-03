@@ -9,11 +9,11 @@ import javax.inject.Singleton;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-import sk4j.core.SystemContext;
+import sk4j.core.Context;
 import sk4j.model.EJavaProject;
 
 @Singleton
-public class SystemContextImpl implements SystemContext {
+public class ContextImpl implements Context {
 
 	/**
 	 * 

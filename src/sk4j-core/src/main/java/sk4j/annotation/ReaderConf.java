@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RUNTIME)
 @Target(FIELD)
-public @interface SimpleReaderConf {
+public @interface ReaderConf {
 	/**
 	 * Mensagem exibida no console orientando a entrada do usuário.
 	 * 

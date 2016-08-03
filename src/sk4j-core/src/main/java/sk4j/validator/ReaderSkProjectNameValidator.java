@@ -2,7 +2,7 @@ package sk4j.validator;
 
 import java.util.regex.Pattern;
 
-import sk4j.console.ConsoleColor;
+import sk4j.console.Colorize;
 import sk4j.core.ConsoleReaderValidator;
 
 /**
@@ -26,7 +26,7 @@ public class ReaderSkProjectNameValidator extends ConsoleReaderValidator {
 
 	@Override
 	protected String consoleMessageOnFalse() {
-		return ConsoleColor.yellow(
+		return Colorize.yellow(
 				"O nome do projeto não pode possuir letras em caixa alta, espaços ou números. Use o traço para separar as palavras.");
 	}
 

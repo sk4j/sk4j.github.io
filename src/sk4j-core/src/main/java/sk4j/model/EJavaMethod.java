@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 import com.thoughtworks.qdox.model.JavaMethod;
 
-import sk4j.console.ConsoleSelectable;
+import sk4j.console.Selectable;
 
-public interface EJavaMethod extends ConsoleSelectable<EJavaMethod>, Serializable {
+public interface EJavaMethod extends Selectable<EJavaMethod>, Serializable {
 
 	String getName();
 

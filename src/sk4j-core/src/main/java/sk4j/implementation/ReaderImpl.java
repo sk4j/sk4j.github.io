@@ -7,12 +7,12 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
 
 import jline.console.ConsoleReader;
-import sk4j.console.ConsoleColor;
+import sk4j.console.Colorize;
 import sk4j.core.ConsoleReaderValidator;
 import sk4j.core.SimpleReader;
-import sk4j.core.SystemContext;
+import sk4j.core.Context;
 
-public class SimpleReaderImpl implements SimpleReader {
+public class ReaderImpl implements SimpleReader {
 
 	/**
 	 * 
@@ -20,7 +20,7 @@ public class SimpleReaderImpl implements SimpleReader {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private SystemContext systemContext;
+	private Context systemContext;
 
 	private String message;
 
@@ -30,18 +30,18 @@ public class SimpleReaderImpl implements SimpleReader {
 
 	private ConsoleReaderValidator validator;
 
-	public SimpleReaderImpl(String message) {
+	public ReaderImpl(String message) {
 		super();
 		this.message = message;
 	}
 
-	public SimpleReaderImpl(String message, String contextKey) {
+	public ReaderImpl(String message, String contextKey) {
 		super();
 		this.message = message;
 		this.contextKey = contextKey;
 	}
 
-	public SimpleReaderImpl(String message, String contextKey, ConsoleReaderValidator validator) {
+	public ReaderImpl(String message, String contextKey, ConsoleReaderValidator validator) {
 		super();
 		this.message = message;
 		this.contextKey = contextKey;
@@ -84,7 +84,7 @@ public class SimpleReaderImpl implements SimpleReader {
 	}
 
 	protected String getMessage() {
-		return StringUtils.appendIfMissing(ConsoleColor.bgGreen(this.message), " : ");
+		return StringUtils.appendIfMissing(Colorize.bgGreen(this.message), " : ");
 	}
 
 }

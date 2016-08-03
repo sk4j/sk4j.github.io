@@ -13,9 +13,9 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
-import sk4j.console.ConsoleColor;
+import sk4j.console.Colorize;
 import sk4j.core.FS;
-import sk4j.core.SystemContext;
+import sk4j.core.Context;
 import sk4j.model.EJavaProject;
 
 /**
@@ -32,7 +32,7 @@ public class FSImpl implements FS {
 	private EJavaProject project;
 
 	@Inject
-	private SystemContext context;
+	private Context context;
 
 	/**
 	 * 
@@ -45,11 +45,11 @@ public class FSImpl implements FS {
 		File dir = new File(path);
 		if (!dir.exists()) {
 			dir.mkdirs();
-			log.info("{}\t{}", ConsoleColor.bold(ConsoleColor.blue("[CREATE]")),
-					ConsoleColor.bold(ConsoleColor.blue(removeProjectPath(dir.getAbsolutePath()))));
+			log.info("{}\t{}", Colorize.bold(Colorize.blue("[CREATE]")),
+					Colorize.bold(Colorize.blue(removeProjectPath(dir.getAbsolutePath()))));
 			return;
 		}
-		log.warn(ConsoleColor.gray("[SKIP]\t{}. Diretório já existe."), removeProjectPath(dir.getAbsolutePath()));
+		log.warn(Colorize.gray("[SKIP]\t{}. Diretório já existe."), removeProjectPath(dir.getAbsolutePath()));
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class FSImpl implements FS {
 			fileName = context.replace(fileName);
 			File file = new File(String.format("%s/%s", filePath, fileName));
 			if (file.exists()) {
-				log.warn(ConsoleColor.yellow("[SKIP]\t{}. Arquivo já existe."), removeProjectPath(file.getAbsolutePath()));
+				log.warn(Colorize.yellow("[SKIP]\t{}. Arquivo já existe."), removeProjectPath(file.getAbsolutePath()));
 				return;
 			}
 			write(file.toPath(), content);
@@ -73,11 +73,11 @@ public class FSImpl implements FS {
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
-			log.error(ConsoleColor.red("Erro ao criar arquivo: {}"), e.getMessage());
+			log.error(Colorize.red("Erro ao criar arquivo: {}"), e.getMessage());
 			return;
 		}
-		log.info("{}\t{}", ConsoleColor.bold(ConsoleColor.blue("[CREATE]")),
-				ConsoleColor.bold(ConsoleColor.blue(removeProjectPath(path.toFile().getAbsolutePath()))));
+		log.info("{}\t{}", Colorize.bold(Colorize.blue("[CREATE]")),
+				Colorize.bold(Colorize.blue(removeProjectPath(path.toFile().getAbsolutePath()))));
 	}
 
 	@Override
@@ -89,23 +89,23 @@ public class FSImpl implements FS {
 			Path pdestination = Paths.get(destination);
 			Files.copy(inputStream, pdestination);
 		} catch (IOException e) {
-			log.error(ConsoleColor.red("Erro ao criar arquivo: {}"), e.getMessage());
+			log.error(Colorize.red("Erro ao criar arquivo: {}"), e.getMessage());
 			return;
 		}
-		log.info("{}\t{} -> {}", ConsoleColor.bold(ConsoleColor.blue("[COPY]")), ConsoleColor.bold(ConsoleColor.green(source)),
-				ConsoleColor.bold(ConsoleColor.blue(removeProjectPath(destination))));
+		log.info("{}\t{} -> {}", Colorize.bold(Colorize.blue("[COPY]")), Colorize.bold(Colorize.green(source)),
+				Colorize.bold(Colorize.blue(removeProjectPath(destination))));
 	}
 
 	@Override
 	public String findSiblingPath(String base, String name, int parentDepth) {
-		log.info(ConsoleColor.gray("Buscando diretório com nome [{}] no mesmo nivel de [{}]"), name, removeProjectPath(base));
+		log.info(Colorize.gray("Buscando diretório com nome [{}] no mesmo nivel de [{}]"), name, removeProjectPath(base));
 		if (parentDepth > 0 && base != null) {
 			File currentPath = new File(base);
 			File parentPath = currentPath.getParentFile();
 			File siblingPath = new File(String.format("%s/%s", parentPath.getAbsolutePath(), name));
 			if (siblingPath.exists()) {
-				log.info(ConsoleColor.gray("Diretório encontrado: {}"),
-						(ConsoleColor.bold(removeProjectPath(siblingPath.getAbsolutePath()))));
+				log.info(Colorize.gray("Diretório encontrado: {}"),
+						(Colorize.bold(removeProjectPath(siblingPath.getAbsolutePath()))));
 				return siblingPath.getAbsolutePath();
 			}
 			return findSiblingPath(parentPath.getAbsolutePath(), name, parentDepth - 1);

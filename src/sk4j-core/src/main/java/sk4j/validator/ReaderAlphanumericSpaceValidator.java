@@ -2,7 +2,7 @@ package sk4j.validator;
 
 import org.apache.commons.lang3.StringUtils;
 
-import sk4j.console.ConsoleColor;
+import sk4j.console.Colorize;
 import sk4j.core.ConsoleReaderValidator;
 
 /**
@@ -24,7 +24,7 @@ public class ReaderAlphanumericSpaceValidator extends ConsoleReaderValidator {
 
 	@Override
 	protected String consoleMessageOnFalse() {
-		return ConsoleColor.yellow("A entrada de dados deve conter apenas letras, números ou espaços entre palavras.");
+		return Colorize.yellow("A entrada de dados deve conter apenas letras, números ou espaços entre palavras.");
 	}
 
 }

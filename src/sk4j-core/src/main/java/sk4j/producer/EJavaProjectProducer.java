@@ -6,14 +6,14 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import sk4j.core.SystemContext;
+import sk4j.core.Context;
 import sk4j.implementation.EJavaProjectImpl;
 import sk4j.model.EJavaProject;
 
 public class EJavaProjectProducer {
 
 	@Inject
-	private SystemContext context;
+	private Context context;
 
 	@Produces
 	@Singleton

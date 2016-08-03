@@ -10,7 +10,7 @@ import org.jboss.weld.environment.se.WeldContainer;
 
 import jline.console.UserInterruptException;
 import sk4j.annotation.RequiredJavaProject;
-import sk4j.console.ConsoleColor;
+import sk4j.console.Colorize;
 import sk4j.event.AfterStart;
 import sk4j.event.BeforeStart;
 import sk4j.exception.RequiredJavaProjectException;
@@ -23,7 +23,7 @@ public abstract class BootstrapApp implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private SystemContext context;
+	private Context context;
 
 	@Inject
 	private EJavaProject project;
@@ -42,11 +42,11 @@ public abstract class BootstrapApp implements Serializable {
 			mainApp.start(args);
 		} catch (UserInterruptException e) {
 			System.out.println("");
-			System.out.println(ConsoleColor.cyan("Bye sk4j"));
+			System.out.println(Colorize.cyan("Bye sk4j"));
 			System.out.println("");
 		} catch (RequiredJavaProjectException e) {
 			System.out.println("");
-			System.out.println(ConsoleColor.red(e.getMessage()));
+			System.out.println(Colorize.red(e.getMessage()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

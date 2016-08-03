@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 
-import sk4j.console.ConsoleColor;
-import sk4j.console.ConsoleSelectable;
+import sk4j.console.Colorize;
+import sk4j.console.Selectable;
 
-public class MultipleOptionInputReader<T extends ConsoleSelectable<T>> extends OptionInputReader<T> {
+public class MultipleOptionInputReader<T extends Selectable<T>> extends OptionInputReader<T> {
 
 	private Logger log;
 
@@ -32,7 +32,7 @@ public class MultipleOptionInputReader<T extends ConsoleSelectable<T>> extends O
 														.stream()
 														.allMatch(p -> isValidOption(p));
 		if(!valid) {
-			log.warn(ConsoleColor.yellow("Opção inválida: {}"), getValue());
+			log.warn(Colorize.yellow("Opção inválida: {}"), getValue());
 			_readOptions();
 		}
 		return getValue().equals("a") ? this.getOptions() :

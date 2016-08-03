@@ -10,7 +10,7 @@ import java.util.Map;
  * @author jcruz
  *
  */
-public interface SystemContext extends Serializable {
+public interface Context extends Serializable {
 
 	/**
 	 * Adiciona um item no contexto.

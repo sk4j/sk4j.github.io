@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import com.thoughtworks.qdox.model.JavaField;
 
-import sk4j.console.ConsoleSelectable;
-import sk4j.console.ConsoleColor;
+import sk4j.console.Selectable;
+import sk4j.console.Colorize;
 
 /**
  * Modelo de atributo java.
@@ -13,7 +13,7 @@ import sk4j.console.ConsoleColor;
  * @author jcruz
  *
  */
-public interface EJavaAttribute extends ConsoleSelectable<EJavaAttribute>, Serializable {
+public interface EJavaAttribute extends Selectable<EJavaAttribute>, Serializable {
 
 	/**
 	 * Retorna o nome do atributo java.
@@ -76,7 +76,7 @@ public interface EJavaAttribute extends ConsoleSelectable<EJavaAttribute>, Seria
 
 	@Override
 	default String getSelectLabel() {
-		return this.getName() + " - " + ConsoleColor.gray(this.getQdoxJavaField().getType().getValue());
+		return this.getName() + " - " + Colorize.gray(this.getQdoxJavaField().getType().getValue());
 	}
 
 }
