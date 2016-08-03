@@ -1,5 +1,5 @@
 package sk4j.console;
 
-public interface SelectorAction {
+public interface ConsoleActionable {
 	void action();
 }

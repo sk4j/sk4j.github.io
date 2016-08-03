@@ -5,10 +5,10 @@ import java.util.List;
 
 import com.thoughtworks.qdox.model.JavaClass;
 
-import sk4j.console.Selectable;
+import sk4j.console.ConsoleSelectable;
 import sk4j.console.ConsoleColor;
 
-public interface EJavaClass extends Selectable<EJavaClass>, Serializable {
+public interface EJavaClass extends ConsoleSelectable<EJavaClass>, Serializable {
 
 	String getName();
 

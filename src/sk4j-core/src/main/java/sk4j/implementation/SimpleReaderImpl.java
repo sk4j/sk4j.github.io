@@ -1,4 +1,4 @@
-package sk4j.impl;
+package sk4j.implementation;
 
 import java.io.IOException;
 
@@ -51,6 +51,7 @@ public class SimpleReaderImpl implements SimpleReader {
 	@Override
 	public String read() throws IOException {
 		readFromConsole();
+		validateInput();
 		putToSystemContext();
 		return StringUtils.trim(value);
 	}
@@ -69,9 +70,11 @@ public class SimpleReaderImpl implements SimpleReader {
 		}
 	}
 
-	private void validateInput() {
+	private void validateInput() throws IOException {
 		if (validator != null) {
-
+			if (!validator.validate(value)) {
+				read();
+			}
 		}
 	}
 

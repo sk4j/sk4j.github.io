@@ -1,10 +1,11 @@
-package sk4j.console;
+package sk4j.deprecated;
 
 import java.io.IOException;
 
 import org.apache.commons.lang3.StringUtils;
 
 import jline.console.ConsoleReader;
+import sk4j.console.ConsoleColor;
 
 public class InputReader {
 

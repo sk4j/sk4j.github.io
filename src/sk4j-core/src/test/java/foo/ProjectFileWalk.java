@@ -3,7 +3,7 @@ package foo;
 import java.io.File;
 import java.io.IOException;
 
-import sk4j.impl.EJavaProjectImpl;
+import sk4j.implementation.EJavaProjectImpl;
 
 public class ProjectFileWalk {
 

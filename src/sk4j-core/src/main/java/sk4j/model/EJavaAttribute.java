@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.thoughtworks.qdox.model.JavaField;
 
-import sk4j.console.Selectable;
+import sk4j.console.ConsoleSelectable;
 import sk4j.console.ConsoleColor;
 
 /**
@@ -13,7 +13,7 @@ import sk4j.console.ConsoleColor;
  * @author jcruz
  *
  */
-public interface EJavaAttribute extends Selectable<EJavaAttribute>, Serializable {
+public interface EJavaAttribute extends ConsoleSelectable<EJavaAttribute>, Serializable {
 
 	/**
 	 * Retorna o nome do atributo java.

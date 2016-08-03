@@ -1,4 +1,4 @@
-package sk4j.impl;
+package sk4j.implementation;
 
 import java.util.List;
 import java.util.Map;
@@ -9,13 +9,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
 import sk4j.console.ConsoleColor;
-import sk4j.console.InputReader;
-import sk4j.console.MultipleOptionInputReader;
-import sk4j.console.Selectable;
-import sk4j.console.SingleOptionInputReader;
+import sk4j.console.ConsoleSelectable;
 import sk4j.core.Console;
 import sk4j.core.ConsoleReaderValidator;
 import sk4j.core.SystemContext;
+import sk4j.deprecated.InputReader;
+import sk4j.deprecated.MultipleOptionInputReader;
+import sk4j.deprecated.SingleOptionInputReader;
 
 public class ConsoleImpl implements Console {
 
@@ -34,12 +34,12 @@ public class ConsoleImpl implements Console {
 	private Map<String, ConsoleReaderValidator> validators;
 
 	@Override
-	public <T extends Selectable<T>> T readOption(String label, List<T> options) {
+	public <T extends ConsoleSelectable<T>> T readOption(String label, List<T> options) {
 		return new SingleOptionInputReader<>(ctx.replace(label), options, log).readOption();
 	}
 
 	@Override
-	public <T extends Selectable<T>> List<T> readOptions(String label, List<T> options) {
+	public <T extends ConsoleSelectable<T>> List<T> readOptions(String label, List<T> options) {
 		return new MultipleOptionInputReader<>(ctx.replace(label), options, log).readOptions();
 	}
 

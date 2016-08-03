@@ -3,7 +3,7 @@ package foo;
 import java.io.File;
 import java.util.Arrays;
 
-import sk4j.impl.EJavaProjectImpl;
+import sk4j.implementation.EJavaProjectImpl;
 import sk4j.model.EJavaProject;
 
 public class EProjectTestJavaClasses {

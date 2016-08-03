@@ -1,4 +1,4 @@
-package sk4j.console;
+package sk4j.deprecated;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,7 +6,10 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 
-public class MultipleOptionInputReader<T extends Selectable<T>> extends OptionInputReader<T> {
+import sk4j.console.ConsoleColor;
+import sk4j.console.ConsoleSelectable;
+
+public class MultipleOptionInputReader<T extends ConsoleSelectable<T>> extends OptionInputReader<T> {
 
 	private Logger log;
 

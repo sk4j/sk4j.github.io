@@ -1,4 +1,4 @@
-package sk4j.console;
+package sk4j.deprecated;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +9,11 @@ import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.StringUtils;
 
+import sk4j.console.ConsoleColor;
+import sk4j.console.ConsoleSelectable;
 import sk4j.exception.EmptyOptionParamException;
 
-public class OptionInputReader<T extends Selectable<T>> extends InputReader {
+public class OptionInputReader<T extends ConsoleSelectable<T>> extends InputReader {
 
 	private List<T> options = new ArrayList<>();
 

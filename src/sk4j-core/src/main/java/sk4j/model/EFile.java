@@ -3,9 +3,9 @@ package sk4j.model;
 import java.io.File;
 
 import sk4j.console.ConsoleColor;
-import sk4j.console.Selectable;
+import sk4j.console.ConsoleSelectable;
 
-public interface EFile extends Selectable<EFile> {
+public interface EFile extends ConsoleSelectable<EFile> {
 
 	File getFile();
 

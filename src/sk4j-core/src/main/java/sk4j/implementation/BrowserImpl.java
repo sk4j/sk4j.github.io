@@ -1,4 +1,4 @@
-package sk4j.impl;
+package sk4j.implementation;
 
 import java.awt.Desktop;
 import java.net.URI;
