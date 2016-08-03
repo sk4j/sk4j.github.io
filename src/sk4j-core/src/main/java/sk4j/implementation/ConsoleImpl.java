@@ -10,12 +10,12 @@ import org.slf4j.Logger;
 
 import sk4j.console.Colorize;
 import sk4j.core.Console;
-import sk4j.core.ReaderValidator;
 import sk4j.core.Context;
 import sk4j.deprecated.InputReader;
 import sk4j.deprecated.MultipleOptionInputReader;
 import sk4j.deprecated.SingleOptionInputReader;
 import sk4j.input.Selectable;
+import sk4j.validator.ReaderValidator;
 
 public class ConsoleImpl implements Console {
 

@@ -1,4 +1,4 @@
-package sk4j.core;
+package sk4j.template;
 
 import java.io.Serializable;
 
@@ -9,5 +9,5 @@ import java.io.Serializable;
  */
 public interface Template extends Serializable {
 
-	String merge(String templateName);
+	String merge();
 }

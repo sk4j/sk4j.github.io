@@ -1,9 +1,9 @@
-package sk4j.validator;
+package sk4j.validator.custom;
 
 import java.util.regex.Pattern;
 
-import sk4j.console.Colorize;
-import sk4j.core.ReaderValidator;
+import sk4j.validator.ReaderValidator;
+import sk4j.validator.annotation.ReaderValidatorConf;
 
 /**
  * Verifica se a String está de acordo com um nome de classe java padrão. Padrão de nome de classe java:
@@ -18,7 +18,8 @@ import sk4j.core.ReaderValidator;
  * @author jcruz
  *
  */
-public class ReaderJavaClassNameValidator extends ReaderValidator {
+@ReaderValidatorConf(messageOnFail = "A entrada de dados deve ser um nome de classe java válido")
+public class ReaderJavaClassNameValidator implements ReaderValidator {
 
 	/**
 	 * 
@@ -28,13 +29,8 @@ public class ReaderJavaClassNameValidator extends ReaderValidator {
 	private Pattern javaClassNamePattern = Pattern.compile("^[A-Z_$][a-zA-Z\\d_$]*");
 
 	@Override
-	protected boolean test(String t) {
+	public boolean test(String t) {
 		return javaClassNamePattern.matcher(t).matches();
-	}
-
-	@Override
-	protected String consoleMessageOnFalse() {
-		return Colorize.yellow("A entrada de dados deve ser um nome de classe java válido.");
 	}
 
 }

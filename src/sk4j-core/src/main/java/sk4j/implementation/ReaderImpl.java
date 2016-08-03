@@ -8,9 +8,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import jline.console.ConsoleReader;
 import sk4j.console.Colorize;
-import sk4j.core.ReaderValidator;
 import sk4j.core.Context;
+import sk4j.core.Log;
 import sk4j.input.Reader;
+import sk4j.validator.ReaderValidator;
 
 public class ReaderImpl implements Reader {
 
@@ -20,7 +21,10 @@ public class ReaderImpl implements Reader {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private Context systemContext;
+	private Context context;
+
+	@Inject
+	private Log log;
 
 	private String message;
 
@@ -66,13 +70,14 @@ public class ReaderImpl implements Reader {
 
 	private void putToSystemContext() {
 		if (this.contextKey != null) {
-			systemContext.put(contextKey, this.value);
+			context.put(contextKey, this.value);
 		}
 	}
 
 	private void validateInput() throws IOException {
 		if (validator != null) {
-			if (!validator.validate(value)) {
+			if (!validator.test(value)) {
+				log.warn(validator.getMessageOnFail());
 				read();
 			}
 		}

@@ -28,4 +28,11 @@ public @interface ReaderConf {
 	 * @return Id de contexto.
 	 */
 	String contextKey() default "";
+
+	/**
+	 * Ativa o modo de confirmação. A entrada deverá ser yes ou no.
+	 * 
+	 * @return <code>true</code> Ativa o modo de confirmação.
+	 */
+	boolean confirmationMode() default false;
 }
