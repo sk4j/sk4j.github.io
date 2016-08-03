@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 
 import sk4j.console.Colorize;
-import sk4j.console.Selectable;
+import sk4j.input.Selectable;
 
 public class MultipleOptionInputReader<T extends Selectable<T>> extends OptionInputReader<T> {
 

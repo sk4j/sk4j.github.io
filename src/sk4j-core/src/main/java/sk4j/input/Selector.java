@@ -1,9 +1,7 @@
-package sk4j.core;
+package sk4j.input;
 
 import java.io.Serializable;
 import java.util.List;
-
-import sk4j.console.Selectable;
 
 public interface Selector<T extends Selectable<T>> extends Serializable {
 

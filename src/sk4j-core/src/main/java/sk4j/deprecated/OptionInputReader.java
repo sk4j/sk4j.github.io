@@ -10,8 +10,8 @@ import java.util.stream.IntStream;
 import org.apache.commons.lang3.StringUtils;
 
 import sk4j.console.Colorize;
-import sk4j.console.Selectable;
 import sk4j.exception.EmptyOptionParamException;
+import sk4j.input.Selectable;
 
 public class OptionInputReader<T extends Selectable<T>> extends InputReader {
 

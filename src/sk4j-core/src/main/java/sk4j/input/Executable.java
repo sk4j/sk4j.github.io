@@ -1,4 +1,4 @@
-package sk4j.console;
+package sk4j.input;
 
 public interface Executable {
 	void execute();

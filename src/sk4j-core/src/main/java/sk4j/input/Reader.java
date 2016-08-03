@@ -1,4 +1,4 @@
-package sk4j.core;
+package sk4j.input;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author jcruz
  *
  */
-public interface SimpleReader extends Serializable {
+public interface Reader extends Serializable {
 
 	/**
 	 * Retorna o texto do console.

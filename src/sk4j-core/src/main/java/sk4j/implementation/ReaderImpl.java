@@ -9,10 +9,10 @@ import org.apache.commons.lang3.StringUtils;
 import jline.console.ConsoleReader;
 import sk4j.console.Colorize;
 import sk4j.core.ConsoleReaderValidator;
-import sk4j.core.SimpleReader;
 import sk4j.core.Context;
+import sk4j.input.Reader;
 
-public class ReaderImpl implements SimpleReader {
+public class ReaderImpl implements Reader {
 
 	/**
 	 * 

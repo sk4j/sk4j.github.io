@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.thoughtworks.qdox.model.JavaPackage;
 
-import sk4j.console.Selectable;
+import sk4j.input.Selectable;
 
 public interface EJavaPackage extends Selectable<EJavaPackage>, Serializable {
 

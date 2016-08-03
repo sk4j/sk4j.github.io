@@ -1,4 +1,4 @@
-package sk4j.console;
+package sk4j.input;
 
 public interface Selectable<T> extends Comparable<T> {
 	String getSelectLabel();

@@ -1,8 +1,6 @@
-package sk4j.core;
+package sk4j.input;
 
 import java.util.List;
-
-import sk4j.console.Executable;
 
 public interface Executor<T extends Executable> extends Executable {
 	void executeOne(List<T> actions);
