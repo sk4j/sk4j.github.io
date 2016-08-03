@@ -11,7 +11,7 @@ import javax.inject.Singleton;
 
 import sk4j.core.ReaderValidator;
 
-public class ConsoleValidatorProducer implements Serializable {
+public class ReaderValidatorProducer implements Serializable {
 
 	/**
 	 * 
