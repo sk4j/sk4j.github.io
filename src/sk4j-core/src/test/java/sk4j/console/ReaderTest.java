@@ -16,7 +16,10 @@ import sk4j.runner.WeldJUnit4Runner;
 public class ReaderTest {
 
 	@Inject
-	@ReaderConf(message = "Digite o nome do dao")
+	private Reader fileNameReader;
+
+	@Inject
+	@ReaderConf(message = "Deseja criar o arquivo {{fileName}}?", confirmationMode = true)
 	private Reader daoNameReader;
 
 	@Inject
@@ -24,6 +27,8 @@ public class ReaderTest {
 
 	@Test
 	public void test() throws IOException {
+		fileNameReader.read();
+		System.out.println(context);
 		daoNameReader.read();
 		System.out.println(context);
 	}

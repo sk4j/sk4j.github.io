@@ -20,9 +20,6 @@ public class ContextImpl implements Context {
 
 	private Map<String, Object> ctx = new HashMap<>();
 
-	// @Inject
-	// private EJavaProject project;
-
 	@Override
 	public void put(String key, Object value) {
 		this.ctx.put(key, value);

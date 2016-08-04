@@ -55,7 +55,7 @@ public class ReaderImpl implements Reader {
 		ConsoleReader console = new ConsoleReader();
 		// console.setCopyPasteDetection(true);
 		console.setHandleUserInterrupt(true);
-		console.setPrompt(String.format("\n> %s", getMessage()));
+		console.setPrompt(String.format("\n> %s", context.replace(getMessage())));
 		this.value = StringUtils.trim(console.readLine());
 		console.close();
 	}

@@ -39,5 +39,9 @@ public @interface ReaderConf {
 	 */
 	boolean confirmationMode() default false;
 
+	/**
+	 * 
+	 * @return
+	 */
 	Class<? extends ReaderValidator> validator() default ReaderDefaultValidator.class;
 }
