@@ -1,6 +1,7 @@
 package sk4j.implementation;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.inject.Inject;
 
@@ -12,6 +13,7 @@ import sk4j.core.Context;
 import sk4j.core.Log;
 import sk4j.input.Reader;
 import sk4j.validator.ReaderValidator;
+import sk4j.validator.custom.ReaderYesNoValidator;
 
 public class ReaderImpl implements Reader {
 
@@ -28,18 +30,19 @@ public class ReaderImpl implements Reader {
 
 	private String message;
 
+	private String defaultValue = "";
+
 	private String value;
 
 	private String contextKey;
 
 	private ReaderValidator validator;
 
-	public ReaderImpl(Context context, Log log, String message, String contextKey, ReaderValidator validator) {
+	private boolean ignoreContext;
+
+	public ReaderImpl(String message, ReaderValidator validator) {
 		super();
-		this.context = context;
-		this.log = log;
 		this.message = message;
-		this.contextKey = contextKey;
 		this.validator = validator;
 	}
 
@@ -53,16 +56,43 @@ public class ReaderImpl implements Reader {
 
 	private void readFromConsole() throws IOException {
 		ConsoleReader console = new ConsoleReader();
-		// console.setCopyPasteDetection(true);
 		console.setHandleUserInterrupt(true);
-		console.setPrompt(String.format("\n> %s", context.replace(getMessage())));
-		this.value = StringUtils.trim(console.readLine());
+		console.setPrompt(getFormatedMessage());
+		String _value = StringUtils.trim(console.readLine());
+		this.value = StringUtils.isNotBlank(_value) ? value : defaultValue;
 		console.close();
 	}
 
+	private String getFormatedMessage() {
+		StringBuffer formatedMessage = new StringBuffer();
+		formatedMessage.append(" > ");
+		formatedMessage.append(Colorize.bold(message.replace(":", "")));
+		if (StringUtils.isNotBlank(defaultValue)) {
+			if (validator instanceof ReaderYesNoValidator) {
+				if (Arrays.asList("y", "Y").contains(defaultValue)) {
+					formatedMessage.append(" (Y/n)");
+				} else {
+					formatedMessage.append(" (y/N)");
+				}
+			} else {
+				formatedMessage.append(" (");
+				formatedMessage.append(defaultValue);
+				formatedMessage.append(")");
+			}
+		} else {
+			if (validator instanceof ReaderYesNoValidator) {
+				formatedMessage.append(" (y/N)");
+			}
+		}
+		formatedMessage.append(": ");
+		return context.replace(formatedMessage.toString());
+	}
+
 	private void putToContext() {
-		if (StringUtils.isNotBlank(this.contextKey)) {
-			context.put(contextKey, this.value);
+		if (!ignoreContext) {
+			if (StringUtils.isNotBlank(this.contextKey)) {
+				context.put(contextKey, this.value);
+			}
 		}
 	}
 
@@ -76,13 +106,32 @@ public class ReaderImpl implements Reader {
 		}
 	}
 
-	@Override
-	public String read(String defaultValue) {
-		return null;
+	public void setContext(Context context) {
+		this.context = context;
 	}
 
-	protected String getMessage() {
-		return StringUtils.appendIfMissing(Colorize.bgGreen(this.message), " : ");
+	public void setLog(Log log) {
+		this.log = log;
+	}
+
+	public void setDefaultValue(String defaultValue) {
+		this.defaultValue = defaultValue;
+	}
+
+	public void setContextKey(String contextKey) {
+		this.contextKey = contextKey;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public void setValidator(ReaderValidator validator) {
+		this.validator = validator;
+	}
+
+	public void setIgnoreContext(boolean ignoreContext) {
+		this.ignoreContext = ignoreContext;
 	}
 
 }

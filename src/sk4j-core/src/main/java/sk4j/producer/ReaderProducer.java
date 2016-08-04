@@ -16,7 +16,6 @@ import sk4j.input.Reader;
 import sk4j.input.annotation.ReaderConf;
 import sk4j.validator.ReaderValidator;
 import sk4j.validator.custom.ReaderDefaultValidator;
-import sk4j.validator.custom.ReaderYesNoValidator;
 
 public class ReaderProducer {
 
@@ -33,23 +32,27 @@ public class ReaderProducer {
 	public Reader create(InjectionPoint ip) {
 		Field field = (Field) ip.getMember();
 		String fieldContextKey = field.getName().replaceAll("Reader", "");
+		ReaderImpl readerImpl = new ReaderImpl("Digite", readerValidators.get(ReaderDefaultValidator.class.getSimpleName()));
+		readerImpl.setContext(context);
+		readerImpl.setLog(log);
+		readerImpl.setContextKey(fieldContextKey);
 		if (field.isAnnotationPresent(ReaderConf.class)) {
 			ReaderConf readerConf = field.getAnnotation(ReaderConf.class);
-			//@formatter:off
-			String message = StringUtils.isNotBlank(readerConf.message()) ? 
-								readerConf.message() : 
-								"Digite";
-			String contextKey = StringUtils.isNotBlank(readerConf.contextKey()) ? 
-								readerConf.contextKey() : 
-								fieldContextKey;
-			ReaderValidator readerValidator = readerConf.confirmationMode() ? 
-								readerValidators.get(ReaderYesNoValidator.class.getSimpleName()) : 
-								readerValidators.get(readerConf.validator().getSimpleName());
-			//@formatter:on
-			return new ReaderImpl(context, log, message, contextKey, readerValidator);
+			if (StringUtils.isNotBlank(readerConf.message())) {
+				readerImpl.setMessage(readerConf.message());
+			}
+			readerImpl.setIgnoreContext(readerConf.ignoreContext());
+			if (!readerConf.ignoreContext()) {
+				if (StringUtils.isNotBlank(readerConf.contextKey())) {
+					readerImpl.setContextKey(readerConf.contextKey());
+				}
+			}
+			readerImpl.setDefaultValue(readerConf.defaultValue());
+			readerImpl.setValidator(readerValidators.get(readerConf.validator()));
+			return readerImpl;
 
 		}
-		return new ReaderImpl(context, log, "Digite", fieldContextKey, readerValidators.get(ReaderDefaultValidator.class.getSimpleName()));
+		return readerImpl;
 	}
 
 }

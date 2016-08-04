@@ -19,7 +19,7 @@ public class ReaderTest {
 	private Reader fileNameReader;
 
 	@Inject
-	@ReaderConf(message = "Deseja criar o arquivo {{fileName}}?", confirmationMode = true)
+	@ReaderConf(message = "Deseja criar o arquivo {{fileName}}?", defaultValue = "apt-get")
 	private Reader daoNameReader;
 
 	@Inject

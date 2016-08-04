@@ -19,12 +19,4 @@ public interface Reader extends Serializable {
 	 */
 	String read() throws IOException;
 
-	/**
-	 * Retorna o texto do console.
-	 * 
-	 * @param defaultValue
-	 *            Valor padrão em caso de entrada vazia.
-	 * @return Texto do console.
-	 */
-	String read(String defaultValue);
 }

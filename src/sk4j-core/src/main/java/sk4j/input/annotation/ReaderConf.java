@@ -25,6 +25,8 @@ public @interface ReaderConf {
 	 */
 	String message() default "Digite";
 
+	String defaultValue() default "";
+
 	/**
 	 * Id da variável de contexto que irá armazenar os dados de entrada.
 	 * 
@@ -32,16 +34,7 @@ public @interface ReaderConf {
 	 */
 	String contextKey() default "";
 
-	/**
-	 * Ativa o modo de confirmação. A entrada deverá ser yes ou no.
-	 * 
-	 * @return <code>true</code> Ativa o modo de confirmação.
-	 */
-	boolean confirmationMode() default false;
+	boolean ignoreContext() default false;
 
-	/**
-	 * 
-	 * @return
-	 */
 	Class<? extends ReaderValidator> validator() default ReaderDefaultValidator.class;
 }
