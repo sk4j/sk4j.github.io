@@ -34,19 +34,10 @@ public class ReaderImpl implements Reader {
 
 	private ReaderValidator validator;
 
-	public ReaderImpl(String message) {
+	public ReaderImpl(Context context, Log log, String message, String contextKey, ReaderValidator validator) {
 		super();
-		this.message = message;
-	}
-
-	public ReaderImpl(String message, String contextKey) {
-		super();
-		this.message = message;
-		this.contextKey = contextKey;
-	}
-
-	public ReaderImpl(String message, String contextKey, ReaderValidator validator) {
-		super();
+		this.context = context;
+		this.log = log;
 		this.message = message;
 		this.contextKey = contextKey;
 		this.validator = validator;
@@ -56,20 +47,21 @@ public class ReaderImpl implements Reader {
 	public String read() throws IOException {
 		readFromConsole();
 		validateInput();
-		putToSystemContext();
-		return StringUtils.trim(value);
+		putToContext();
+		return value;
 	}
 
 	private void readFromConsole() throws IOException {
 		ConsoleReader console = new ConsoleReader();
+		// console.setCopyPasteDetection(true);
 		console.setHandleUserInterrupt(true);
-		console.setPrompt(String.format("\n> %s\n", getMessage()));
-		this.value = console.readLine();
+		console.setPrompt(String.format("\n> %s", getMessage()));
+		this.value = StringUtils.trim(console.readLine());
 		console.close();
 	}
 
-	private void putToSystemContext() {
-		if (this.contextKey != null) {
+	private void putToContext() {
+		if (StringUtils.isNotBlank(this.contextKey)) {
 			context.put(contextKey, this.value);
 		}
 	}
@@ -78,7 +70,8 @@ public class ReaderImpl implements Reader {
 		if (validator != null) {
 			if (!validator.test(value)) {
 				log.warn(validator.getMessageOnFail());
-				read();
+				this.value = null;
+				this.read();
 			}
 		}
 	}

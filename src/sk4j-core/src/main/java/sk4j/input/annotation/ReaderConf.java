@@ -6,6 +6,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import sk4j.validator.ReaderValidator;
+import sk4j.validator.custom.ReaderDefaultValidator;
+
 /**
  * Configurações do leitor.
  * 
@@ -35,4 +38,6 @@ public @interface ReaderConf {
 	 * @return <code>true</code> Ativa o modo de confirmação.
 	 */
 	boolean confirmationMode() default false;
+
+	Class<? extends ReaderValidator> validator() default ReaderDefaultValidator.class;
 }
