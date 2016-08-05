@@ -7,10 +7,10 @@ import java.io.Serializable;
  * @author jcruz
  *
  */
-public interface Nameable extends Serializable {
+public interface Nameable<T> extends Serializable {
 
-	public String getValue();
+	public T getValue();
 
-	public void setValue(String string);
+	public void setValue(T string);
 
 }
