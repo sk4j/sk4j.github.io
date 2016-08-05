@@ -6,13 +6,26 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+/**
+ * Configurações do executor.
+ * 
+ * @author jcruz
+ *
+ */
 @Retention(RUNTIME)
 @Target(TYPE)
-public @interface OptionReaderConf {
+public @interface ExecutableConf {
+
 	/**
-	 * Mensagem exibida no console orientando a entrada do usuário.
+	 * Order de visualização no console.
 	 * 
-	 * @return Mensagem de entrada.
+	 * @return
 	 */
-	String message() default "Digite o numero da opção";
+	int order();
+
+	/**
+	 * 
+	 * @return
+	 */
+	String message();
 }

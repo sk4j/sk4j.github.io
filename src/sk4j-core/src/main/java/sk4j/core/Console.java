@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
-import sk4j.input.Selectable;
+import sk4j.input.api.Selectable;
 
 /**
  * Classe responsável trabalhar com o Console.

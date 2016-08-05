@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.thoughtworks.qdox.model.JavaMethod;
 
-import sk4j.input.Selectable;
+import sk4j.input.api.Selectable;
 
 public interface EJavaMethod extends Selectable<EJavaMethod>, Serializable {
 

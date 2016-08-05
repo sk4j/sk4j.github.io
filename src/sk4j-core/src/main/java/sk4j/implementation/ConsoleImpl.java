@@ -1,7 +1,6 @@
 package sk4j.implementation;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -11,8 +10,7 @@ import sk4j.console.Colorize;
 import sk4j.core.Console;
 import sk4j.core.Context;
 import sk4j.deprecated.InputReader;
-import sk4j.input.Selectable;
-import sk4j.validator.ReaderValidator;
+import sk4j.input.api.Selectable;
 
 public class ConsoleImpl implements Console {
 
@@ -26,9 +24,6 @@ public class ConsoleImpl implements Console {
 
 	// @Inject
 	// private Logger log;
-
-	@Inject
-	private Map<String, ReaderValidator> validators;
 
 	@Override
 	public <T extends Selectable<T>> T readOption(String label, List<T> options) {

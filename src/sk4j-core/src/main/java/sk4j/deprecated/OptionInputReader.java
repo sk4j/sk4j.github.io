@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import sk4j.console.Colorize;
 import sk4j.exception.EmptyOptionParamException;
-import sk4j.input.Selectable;
+import sk4j.input.api.Selectable;
 
 public class OptionInputReader<T extends Selectable<T>> extends InputReader {
 
