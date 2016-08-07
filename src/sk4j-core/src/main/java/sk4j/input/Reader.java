@@ -1,11 +1,12 @@
 package sk4j.input;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 
-import sk4j.input.api.Executable;
 import sk4j.input.api.Nameable;
 import sk4j.input.api.Selectable;
+import sk4j.input.api.Task;
 
 /**
  * Leitor de opções do console.
@@ -15,7 +16,7 @@ import sk4j.input.api.Selectable;
  */
 public interface Reader extends Serializable {
 
-	<T extends Nameable> T read(Class<T> nameableOption);
+	<T extends Nameable<T>> T read(Class<T> nameableOption);
 
 	/**
 	 * Seleciona uma opção de uma lista de selecionáveis.
@@ -36,27 +37,27 @@ public interface Reader extends Serializable {
 	<T extends Selectable<T>> List<T> selectMany(List<T> selectableOptions);
 
 	/**
-	 * Seleciona e executa uma opção de uma lista de executáveis.
+	 * Seleciona e executa uma opção de uma lista de tarefas.
 	 * 
-	 * @param executableOptions
-	 *            Lista de executáveis.
+	 * @param taskOptions
+	 *            Lista de tarefas.
 	 */
-	<T extends Executable<T>> void selectAndExecuteOne(List<T> executableOptions);
+	<T extends Task> void selectAndExecuteOne(Iterator<T> taskOptions);
 
 	/**
-	 * Seleciona e executa uma lista opções de uma lista de executáveis.
+	 * Seleciona e executa uma lista de tarefas.
 	 * 
-	 * @param executableOptions
-	 *            Lista de executáveis.
+	 * @param taskOptions
+	 *            Lista de tarefas.
 	 */
-	<T extends Executable<T>> void selectAndExecuteMany(List<T> executableOptions);
+	<T extends Task> void selectAndExecuteMany(Iterator<T> taskOptions);
 
 	/**
-	 * Confirma uma opção executável.
+	 * Confirma a execução de uma tarefa.
 	 * 
-	 * @param executableOption
+	 * @param taskOption
 	 *            Opção executável.
 	 */
-	<T extends Executable<T>> void confirm(Class<T> executableOption);
+	<T extends Task> void confirm(T taskOption);
 
 }

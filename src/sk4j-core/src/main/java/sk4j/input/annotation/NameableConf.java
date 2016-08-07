@@ -19,5 +19,4 @@ public @interface NameableConf {
 	String defaultValue() default "";
 
 	boolean ignoreContext() default false;
-
 }
