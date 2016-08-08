@@ -16,16 +16,17 @@ import sk4j.input.api.Task;
  */
 public interface Reader extends Serializable {
 
-	<T extends Nameable<T>> T read(Class<T> nameableOption);
+	<T extends Nameable<T>> T read(String message, Class<T> nameableOption);
 
 	/**
 	 * Seleciona uma opção de uma lista de selecionáveis.
 	 * 
+	 * @param message
 	 * @param selectableOptions
 	 *            Lista de selecionáveis.
 	 * @return Opção selecionada.
 	 */
-	<T extends Selectable<T>> T selectOne(List<T> selectableOptions);
+	<T extends Selectable<T>> T selectOne(String message, List<T> selectableOptions);
 
 	/**
 	 * Seleciona uma lista de opções de uma lista de selecionáveis.
@@ -34,7 +35,7 @@ public interface Reader extends Serializable {
 	 *            Lista de selecionáveis.
 	 * @return Lista de opções selecionadas.
 	 */
-	<T extends Selectable<T>> List<T> selectMany(List<T> selectableOptions);
+	<T extends Selectable<T>> List<T> selectMany(String message, List<T> selectableOptions);
 
 	/**
 	 * Seleciona e executa uma opção de uma lista de tarefas.
