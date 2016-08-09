@@ -33,8 +33,9 @@ public interface Selector extends Serializable {
 	 * @param selectableOptions
 	 *            Lista de selecionáveis.
 	 * @return Lista de opções selecionadas.
+	 * @throws IOException
 	 */
-	<X, T extends Selectable<X>> List<T> selectMany(List<T> selectableOptions, String message);
+	<X, T extends Selectable<X>> List<T> selectMany(List<T> selectableOptions, String message) throws IOException;
 
 	/**
 	 * Seleciona e executa uma opção de uma lista de tarefas.
