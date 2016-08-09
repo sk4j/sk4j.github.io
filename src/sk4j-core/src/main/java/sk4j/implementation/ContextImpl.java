@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.inject.Singleton;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
@@ -36,10 +37,13 @@ public class ContextImpl implements Context {
 
 	@Override
 	public String replace(String value) {
-		JtwigTemplate template = JtwigTemplate.inlineTemplate(value);
-		JtwigModel model = JtwigModel.newModel();
-		ctx.forEach((k, v) -> model.with(k, v));
-		return template.render(model);
+		if (StringUtils.isNotBlank(value)) {
+			JtwigTemplate template = JtwigTemplate.inlineTemplate(value);
+			JtwigModel model = JtwigModel.newModel();
+			ctx.forEach((k, v) -> model.with(k, v));
+			return template.render(model);
+		}
+		return value;
 	}
 
 	@Override

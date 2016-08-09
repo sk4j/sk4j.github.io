@@ -23,4 +23,9 @@ public abstract class Name implements Serializable {
 		return null;
 	}
 
+	@Override
+	public String toString() {
+		return "Name [value=" + value + "]";
+	}
+
 }

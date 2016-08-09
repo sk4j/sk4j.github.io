@@ -15,8 +15,6 @@ import sk4j.input.api.Task;
  */
 public interface Selector extends Serializable {
 
-	// <X, T extends Nameable<X>> T read(T nameableOption) throws IOException;
-
 	/**
 	 * Seleciona uma opção de uma lista de selecionáveis.
 	 * 
@@ -25,7 +23,7 @@ public interface Selector extends Serializable {
 	 *            Lista de selecionáveis.
 	 * @return Opção selecionada.
 	 */
-	<X, T extends Selectable<X>> T selectOne(List<T> selectableOptions);
+	<X, T extends Selectable<X>> T selectOne(List<T> selectableOptions, String message);
 
 	/**
 	 * Seleciona uma lista de opções de uma lista de selecionáveis.
@@ -34,7 +32,7 @@ public interface Selector extends Serializable {
 	 *            Lista de selecionáveis.
 	 * @return Lista de opções selecionadas.
 	 */
-	<X, T extends Selectable<X>> List<T> selectMany(String message, List<T> selectableOptions);
+	<X, T extends Selectable<X>> List<T> selectMany(List<T> selectableOptions, String message);
 
 	/**
 	 * Seleciona e executa uma opção de uma lista de tarefas.
@@ -42,7 +40,7 @@ public interface Selector extends Serializable {
 	 * @param taskOptions
 	 *            Lista de tarefas.
 	 */
-	<T extends Task> void selectAndExecuteOne(Iterator<T> taskOptions);
+	<T extends Task> void selectAndExecuteOne(Iterator<T> taskOptions, String message);
 
 	/**
 	 * Seleciona e executa uma lista de tarefas.
@@ -50,7 +48,7 @@ public interface Selector extends Serializable {
 	 * @param taskOptions
 	 *            Lista de tarefas.
 	 */
-	<T extends Task> void selectAndExecuteMany(Iterator<T> taskOptions);
+	<T extends Task> void selectAndExecuteMany(Iterator<T> taskOptions, String message);
 
 	/**
 	 * Confirma a execução de uma tarefa.
@@ -58,6 +56,6 @@ public interface Selector extends Serializable {
 	 * @param taskOption
 	 *            Opção executável.
 	 */
-	<T extends Task> void confirm(T taskOption);
+	<T extends Task> void confirm(T taskOption, String message);
 
 }

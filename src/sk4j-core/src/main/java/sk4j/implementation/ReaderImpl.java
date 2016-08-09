@@ -36,13 +36,13 @@ public class ReaderImpl implements Reader {
 
 	@Override
 	public <T extends Name> void read(T name, String message) throws IOException {
-		this.message = message;
-		this.defaultValue = name.getDefaultValue();
+		this.message = context.replace(message);
+		this.defaultValue = context.replace(name.getDefaultValue());
 		this.contextKey = Strman.toCamelCase(name.getClass().getSimpleName());
 		String value = readConsole();
 		name.setValue(value);
 		if (validate(name)) {
-			context.put(contextKey, value);
+			context.put(contextKey, name);
 			return;
 		}
 		read(name, message);
@@ -50,13 +50,13 @@ public class ReaderImpl implements Reader {
 
 	@Override
 	public <T extends Name> void read(T name, String message, String contextKey) throws IOException {
-		this.message = message;
-		this.defaultValue = name.getDefaultValue();
+		this.message = context.replace(message);
+		this.defaultValue = context.replace(name.getDefaultValue());
 		this.contextKey = contextKey;
 		String value = readConsole();
 		name.setValue(value);
 		if (validate(name)) {
-			context.put(contextKey, value);
+			context.put(contextKey, name);
 			return;
 		}
 		read(name, message);
@@ -67,7 +67,7 @@ public class ReaderImpl implements Reader {
 		consoleReader.setHandleUserInterrupt(true);
 		String value = consoleReader.readLine(getFormattedMessage());
 		consoleReader.close();
-		return StringUtils.trim(value);
+		return StringUtils.isNotBlank(value) ? StringUtils.trim(value) : this.defaultValue;
 	}
 
 	private <T extends Name> boolean validate(T name) {
@@ -81,10 +81,10 @@ public class ReaderImpl implements Reader {
 	private <T extends Name> String getFormattedMessage() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("> ");
-		sb.append(context.replace(message));
+		sb.append(message);
 		if (StringUtils.isNotBlank(defaultValue)) {
 			sb.append(" (");
-			sb.append(context.replace(defaultValue));
+			sb.append(defaultValue);
 			sb.append(")");
 		}
 		sb.append(": ");
