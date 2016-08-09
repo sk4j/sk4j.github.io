@@ -1,5 +1,6 @@
 package sk4j.input;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
@@ -22,8 +23,9 @@ public interface Selector extends Serializable {
 	 * @param selectableOptions
 	 *            Lista de selecionáveis.
 	 * @return Opção selecionada.
+	 * @throws IOException
 	 */
-	<X, T extends Selectable<X>> T selectOne(List<T> selectableOptions, String message);
+	<X, T extends Selectable<X>> T selectOne(List<T> selectableOptions, String message) throws IOException;
 
 	/**
 	 * Seleciona uma lista de opções de uma lista de selecionáveis.

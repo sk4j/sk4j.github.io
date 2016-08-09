@@ -43,6 +43,10 @@ public class Colorize {
 		return String.format("\033[95m%s\033[0m", value);
 	}
 
+	public static String magenta(Integer value) {
+		return String.format("\033[95m%s\033[0m", String.valueOf(value));
+	}
+
 	/**
 	 * 
 	 * @param value
@@ -92,7 +96,7 @@ public class Colorize {
 	public static String bold(String value) {
 		return String.format("\033[1m%s\033[0m", value);
 	}
-	
+
 	public static String bgGreen(String value) {
 		return String.format("\033[42m%s\033[0m", value);
 	}
