@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
-import sk4j.input.api.Nameable;
 import sk4j.input.api.Selectable;
 import sk4j.input.api.Task;
 
@@ -14,9 +13,9 @@ import sk4j.input.api.Task;
  * @author jcruz
  *
  */
-public interface Reader extends Serializable {
+public interface Selector extends Serializable {
 
-	<T extends Nameable<T>> T read(String message, Class<T> nameableOption);
+	// <X, T extends Nameable<X>> T read(T nameableOption) throws IOException;
 
 	/**
 	 * Seleciona uma opção de uma lista de selecionáveis.
@@ -26,7 +25,7 @@ public interface Reader extends Serializable {
 	 *            Lista de selecionáveis.
 	 * @return Opção selecionada.
 	 */
-	<T extends Selectable<T>> T selectOne(String message, List<T> selectableOptions);
+	<X, T extends Selectable<X>> T selectOne(List<T> selectableOptions);
 
 	/**
 	 * Seleciona uma lista de opções de uma lista de selecionáveis.
@@ -35,7 +34,7 @@ public interface Reader extends Serializable {
 	 *            Lista de selecionáveis.
 	 * @return Lista de opções selecionadas.
 	 */
-	<T extends Selectable<T>> List<T> selectMany(String message, List<T> selectableOptions);
+	<X, T extends Selectable<X>> List<T> selectMany(String message, List<T> selectableOptions);
 
 	/**
 	 * Seleciona e executa uma opção de uma lista de tarefas.

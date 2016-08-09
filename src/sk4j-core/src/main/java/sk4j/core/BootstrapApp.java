@@ -38,6 +38,7 @@ public abstract class BootstrapApp implements Serializable {
 		Weld weld = new Weld();
 		try {
 			WeldContainer container = weld.initialize();
+			Beans.setBeanManager(container.getBeanManager());
 			BootstrapApp mainApp = container.instance().select(BootstrapApp.class).get();
 			mainApp.start(args);
 		} catch (UserInterruptException e) {

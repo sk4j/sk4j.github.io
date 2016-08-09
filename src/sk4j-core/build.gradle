@@ -18,6 +18,8 @@ dependencies {
 	compile group: 'commons-io', name: 'commons-io', version: '2.5'
 	// https://mvnrepository.com/artifact/org.jboss.weld.se/weld-se
 	compile group: 'org.jboss.weld.se', name: 'weld-se', version: '2.3.5.Final'
+	// https://mvnrepository.com/artifact/org.jboss.weld.se/weld-se-core
+	compile group: 'org.jboss.weld.se', name: 'weld-se-core', version: '2.3.5.Final'
 	// https://mvnrepository.com/artifact/com.lyncode/jtwig-core
 	compile "org.jtwig:jtwig-core:5.57"
 	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
