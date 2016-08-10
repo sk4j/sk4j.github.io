@@ -18,6 +18,7 @@ import com.google.common.collect.Range;
 import jline.console.ConsoleReader;
 import sk4j.console.Colorize;
 import sk4j.core.Context;
+import sk4j.core.Log;
 import sk4j.core.Task;
 import sk4j.exception.EmptyParamOptionException;
 import sk4j.input.Selectable;
@@ -32,6 +33,9 @@ public class SelectorImpl implements Selector {
 
 	@Inject
 	private Context context;
+
+	@Inject
+	private Log log;
 
 	private String selectOneErrorMessage = "Opção inválida: %s. Escolha apenas um valor entre 1 e %d.";
 
@@ -58,7 +62,10 @@ public class SelectorImpl implements Selector {
 	 */
 	@Override
 	public <X, T extends Selectable<X>> void selectOne(String message, String contextKey, List<T> selectableOptions) throws IOException {
-
+		if (StringUtils.isNotBlank(contextKey)) {
+			T t = selectOne(message, selectableOptions);
+			context.put(contextKey, t);
+		}
 	}
 
 	/*
@@ -77,8 +84,12 @@ public class SelectorImpl implements Selector {
 	 * @see sk4j.input.Selector#selectOne(java.lang.String, java.lang.String, java.lang.Iterable)
 	 */
 	@Override
-	public <X, T extends Selectable<X>> void selectOne(String message, String cotextKey, Iterable<T> selectableOptions) throws IOException {
-
+	public <X, T extends Selectable<X>> void selectOne(String message, String contextKey, Iterable<T> selectableOptions)
+			throws IOException {
+		if (StringUtils.isNotBlank(contextKey)) {
+			T t = selectOne(message, selectableOptions);
+			context.put(contextKey, t);
+		}
 	}
 
 	/*
@@ -100,7 +111,10 @@ public class SelectorImpl implements Selector {
 	 */
 	@Override
 	public <X, T extends Selectable<X>> void selectMany(String message, String contextKey, List<T> selectableOptions) throws IOException {
-
+		if (StringUtils.isNotBlank(contextKey)) {
+			List<T> ts = selectMany(message, selectableOptions);
+			context.put(contextKey, ts);
+		}
 	}
 
 	/*
@@ -121,7 +135,10 @@ public class SelectorImpl implements Selector {
 	@Override
 	public <X, T extends Selectable<X>> void selectMany(String message, String contextKey, Iterable<T> selectableOptions)
 			throws IOException {
-
+		if (StringUtils.isNotBlank(contextKey)) {
+			List<T> ts = selectMany(message, selectableOptions);
+			context.put(contextKey, ts);
+		}
 	}
 
 	/*
@@ -183,7 +200,7 @@ public class SelectorImpl implements Selector {
 			}
 			return;
 		}
-		System.out.println(Colorize.yellow(String.format(confirmErrorMessage, value)));
+		log.warn(String.format(confirmErrorMessage, value));
 		confirm(message, taskOption);
 	}
 
@@ -222,7 +239,7 @@ public class SelectorImpl implements Selector {
 				return options.get(option);
 			}
 		}
-		System.out.println(Colorize.yellow(String.format(selectOneErrorMessage, value, options.size())));
+		log.warn(String.format(selectOneErrorMessage, value, options.size()));
 		return readSelectOne(options, message);
 	}
 
@@ -253,7 +270,7 @@ public class SelectorImpl implements Selector {
 				//@formatter:on
 			}
 		}
-		System.out.println(Colorize.yellow(String.format(selectManyErrorMessage, value, options.size())));
+		log.warn(String.format(selectManyErrorMessage, value, options.size()));
 		return readSelectMany(options, message);
 	}
 

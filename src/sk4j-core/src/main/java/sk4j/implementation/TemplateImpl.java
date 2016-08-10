@@ -25,6 +25,10 @@ public class TemplateImpl implements Template {
 		this.templateName = templateName;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see sk4j.template.Template#merge()
+	 */
 	@Override
 	public String merge() {
 		this.template = JtwigTemplate.classpathTemplate(templateName);
