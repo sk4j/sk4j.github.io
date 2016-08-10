@@ -26,6 +26,15 @@ public interface Selector extends Serializable {
 	<X, T extends Selectable<X>> T selectOne(String message, List<T> selectableOptions) throws IOException;
 
 	/**
+	 * 
+	 * @param message
+	 * @param contextKey
+	 * @param selectableOptions
+	 * @throws IOException
+	 */
+	<X, T extends Selectable<X>> void selectOne(String message, String contextKey, List<T> selectableOptions) throws IOException;
+
+	/**
 	 * Seleciona uma opção de uma lista de selecionáveis.
 	 * 
 	 * @param message
@@ -35,6 +44,15 @@ public interface Selector extends Serializable {
 	 * @throws IOException
 	 */
 	<X, T extends Selectable<X>> T selectOne(String message, Iterable<T> selectableOptions) throws IOException;
+
+	/**
+	 * 
+	 * @param message
+	 * @param cotextKey
+	 * @param selectableOptions
+	 * @throws IOException
+	 */
+	<X, T extends Selectable<X>> void selectOne(String message, String cotextKey, Iterable<T> selectableOptions) throws IOException;
 
 	/**
 	 * Seleciona uma lista de opções de uma lista de selecionáveis.
@@ -47,6 +65,15 @@ public interface Selector extends Serializable {
 	<X, T extends Selectable<X>> List<T> selectMany(String message, List<T> selectableOptions) throws IOException;
 
 	/**
+	 * 
+	 * @param message
+	 * @param contextKey
+	 * @param selectableOptions
+	 * @throws IOException
+	 */
+	<X, T extends Selectable<X>> void selectMany(String message, String contextKey, List<T> selectableOptions) throws IOException;
+
+	/**
 	 * Seleciona uma lista de opções de uma lista de selecionáveis.
 	 * 
 	 * @param selectableOptions
@@ -55,6 +82,15 @@ public interface Selector extends Serializable {
 	 * @throws IOException
 	 */
 	<X, T extends Selectable<X>> List<T> selectMany(String message, Iterable<T> selectableOptions) throws IOException;
+
+	/**
+	 * 
+	 * @param message
+	 * @param contextKey
+	 * @param selectableOptions
+	 * @throws IOException
+	 */
+	<X, T extends Selectable<X>> void selectMany(String message, String contextKey, Iterable<T> selectableOptions) throws IOException;
 
 	/**
 	 * Seleciona e executa uma opção de uma lista de tarefas.

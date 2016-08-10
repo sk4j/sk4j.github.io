@@ -19,7 +19,7 @@ import jline.console.ConsoleReader;
 import sk4j.console.Colorize;
 import sk4j.core.Context;
 import sk4j.core.Task;
-import sk4j.exception.EmptyOptionParamException;
+import sk4j.exception.EmptyParamOptionException;
 import sk4j.input.Selectable;
 import sk4j.input.Selector;
 
@@ -39,62 +39,140 @@ public class SelectorImpl implements Selector {
 
 	private String confirmErrorMessage = "Opção inválida: %s. Escolha y para sim ou n para não.";
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Selector#selectOne(java.lang.String, java.util.List)
+	 */
 	@Override
 	public <X, T extends Selectable<X>> T selectOne(String message, List<T> selectableOptions) throws IOException {
-		if (selectableOptions == null || selectableOptions.isEmpty()) {
-			throw new EmptyOptionParamException();
-		}
+		validateParamOptions(selectableOptions);
 		Map<Integer, T> options = printSelectableOptions(selectableOptions);
 		return readSelectOne(options, message);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Selector#selectOne(java.lang.String, java.lang.String, java.util.List)
+	 */
+	@Override
+	public <X, T extends Selectable<X>> void selectOne(String message, String contextKey, List<T> selectableOptions) throws IOException {
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Selector#selectOne(java.lang.String, java.lang.Iterable)
+	 */
 	@Override
 	public <X, T extends Selectable<X>> T selectOne(String message, Iterable<T> selectableOptions) throws IOException {
 		return selectOne(message, Lists.newArrayList(selectableOptions));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Selector#selectOne(java.lang.String, java.lang.String, java.lang.Iterable)
+	 */
+	@Override
+	public <X, T extends Selectable<X>> void selectOne(String message, String cotextKey, Iterable<T> selectableOptions) throws IOException {
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Selector#selectMany(java.lang.String, java.util.List)
+	 */
 	@Override
 	public <X, T extends Selectable<X>> List<T> selectMany(String message, List<T> selectableOptions) throws IOException {
-		if (selectableOptions == null || selectableOptions.isEmpty()) {
-			throw new EmptyOptionParamException();
-		}
+		validateParamOptions(selectableOptions);
 		Map<Integer, T> options = printSelectableOptions(selectableOptions);
 		return readSelectMany(options, message);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Selector#selectMany(java.lang.String, java.lang.String, java.util.List)
+	 */
+	@Override
+	public <X, T extends Selectable<X>> void selectMany(String message, String contextKey, List<T> selectableOptions) throws IOException {
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Selector#selectMany(java.lang.String, java.lang.Iterable)
+	 */
 	@Override
 	public <X, T extends Selectable<X>> List<T> selectMany(String message, Iterable<T> selectableOptions) throws IOException {
 		return selectMany(message, Lists.newArrayList(selectableOptions));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Selector#selectMany(java.lang.String, java.lang.String, java.lang.Iterable)
+	 */
+	@Override
+	public <X, T extends Selectable<X>> void selectMany(String message, String contextKey, Iterable<T> selectableOptions)
+			throws IOException {
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Selector#selectAndExecuteOne(java.lang.String, java.util.List)
+	 */
 	@Override
 	public <T extends Task> void selectAndExecuteOne(String message, List<T> taskOptions) throws IOException {
-		if (taskOptions == null || taskOptions.isEmpty()) {
-			throw new EmptyOptionParamException();
-		}
+		validateParamOptions(taskOptions);
 		Map<Integer, T> options = printSelectableOptions(taskOptions);
 		readSelectOne(options, message).run();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Selector#selectAndExecuteOne(java.lang.String, java.lang.Iterable)
+	 */
 	@Override
 	public <T extends Task> void selectAndExecuteOne(String message, Iterable<T> taskOptions) throws IOException {
 		selectAndExecuteOne(message, Lists.newArrayList(taskOptions));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Selector#selectAndExecuteMany(java.lang.String, java.util.List)
+	 */
 	@Override
 	public <T extends Task> void selectAndExecuteMany(String message, List<T> taskOptions) throws IOException {
-		if (taskOptions == null || taskOptions.isEmpty()) {
-			throw new EmptyOptionParamException();
-		}
+		validateParamOptions(taskOptions);
 		Map<Integer, T> options = printSelectableOptions(taskOptions);
 		readSelectMany(options, message).parallelStream().forEach(task -> task.run());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Selector#selectAndExecuteMany(java.lang.String, java.lang.Iterable)
+	 */
 	@Override
 	public <T extends Task> void selectAndExecuteMany(String message, Iterable<T> taskOptions) throws IOException {
 		selectAndExecuteMany(message, Lists.newArrayList(taskOptions));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Selector#confirm(java.lang.String, sk4j.core.Task)
+	 */
 	@Override
 	public <T extends Task> void confirm(String message, T taskOption) throws IOException {
 		String value = readConsole(message.concat(" (y/n)"));
@@ -194,6 +272,12 @@ public class SelectorImpl implements Selector {
 		String value = consoleReader.readLine(String.format("> %s: ", message));
 		consoleReader.close();
 		return StringUtils.trim(value);
+	}
+
+	private <X, T extends Selectable<X>> void validateParamOptions(List<T> options) {
+		if (options == null || options.isEmpty()) {
+			throw new EmptyParamOptionException();
+		}
 	}
 
 }
