@@ -37,6 +37,8 @@ public class SelectorImpl implements Selector {
 
 	private String selectManyErrorMessage = "Opção inválida: %s. Escolha um valor entre 1 e %d. Use vírgula para selecionar mais de uma opção. Digite * para selecionar todos.";
 
+	private String confirmErrorMessage = "Opção inválida: %s. Escolha y para sim ou n para não.";
+
 	@Override
 	public <X, T extends Selectable<X>> T selectOne(String message, List<T> selectableOptions) throws IOException {
 		if (selectableOptions == null || selectableOptions.isEmpty()) {
@@ -94,8 +96,17 @@ public class SelectorImpl implements Selector {
 	}
 
 	@Override
-	public <T extends Task> void confirm(String message, T taskOption) {
-
+	public <T extends Task> void confirm(String message, T taskOption) throws IOException {
+		String value = readConsole(message.concat(" (y/n)"));
+		if (Arrays.asList("y", "n").contains(value)) {
+			if (value.equals("y")) {
+				taskOption.run();
+				return;
+			}
+			return;
+		}
+		System.out.println(Colorize.yellow(String.format(confirmErrorMessage, value)));
+		confirm(message, taskOption);
 	}
 
 	/**

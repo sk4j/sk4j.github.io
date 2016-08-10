@@ -98,7 +98,8 @@ public interface Selector extends Serializable {
 	 * 
 	 * @param taskOption
 	 *            Opção executável.
+	 * @throws IOException
 	 */
-	<T extends Task> void confirm(String message, T taskOption);
+	<T extends Task> void confirm(String message, T taskOption) throws IOException;
 
 }
