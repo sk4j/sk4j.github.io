@@ -153,6 +153,10 @@ public class EJavaAttributeImpl implements EJavaAttribute {
 		return "";
 	}
 
+	public EJavaProject getProject() {
+		return project;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

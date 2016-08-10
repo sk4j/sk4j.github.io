@@ -43,6 +43,10 @@ public class EJavaMethodImpl implements EJavaMethod {
 		//@formatter:on
 	}
 
+	public EJavaProject getProject() {
+		return project;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
