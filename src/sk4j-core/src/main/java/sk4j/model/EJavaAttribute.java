@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.thoughtworks.qdox.model.JavaField;
 
 import sk4j.console.Colorize;
-import sk4j.input.api.Selectable;
+import sk4j.input.Selectable;
 
 /**
  * Modelo de atributo java.

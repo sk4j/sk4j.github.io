@@ -6,7 +6,7 @@ import java.util.List;
 import com.thoughtworks.qdox.model.JavaClass;
 
 import sk4j.console.Colorize;
-import sk4j.input.api.Selectable;
+import sk4j.input.Selectable;
 
 public interface EJavaClass extends Selectable<EJavaClass>, Serializable {
 

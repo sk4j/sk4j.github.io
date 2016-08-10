@@ -20,8 +20,8 @@ import sk4j.console.Colorize;
 import sk4j.core.Context;
 import sk4j.core.Task;
 import sk4j.exception.EmptyOptionParamException;
+import sk4j.input.Selectable;
 import sk4j.input.Selector;
-import sk4j.input.api.Selectable;
 
 public class SelectorImpl implements Selector {
 

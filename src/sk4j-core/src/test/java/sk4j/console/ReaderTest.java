@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import sk4j.FooName;
 import sk4j.bootstrap.SK4JRunner;
 import sk4j.core.Context;
-import sk4j.input.api.Reader;
+import sk4j.input.Reader;
 
 @RunWith(SK4JRunner.class)
 public class ReaderTest {

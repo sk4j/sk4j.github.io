@@ -1,4 +1,4 @@
-package sk4j.input.api;
+package sk4j.input;
 
 import java.io.Serializable;
 

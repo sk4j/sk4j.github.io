@@ -1,7 +1,7 @@
 package sk4j.core;
 
 import sk4j.annotation.TaskConf;
-import sk4j.input.api.Selectable;
+import sk4j.input.Selectable;
 
 @FunctionalInterface
 public interface Task extends Selectable<Task> {

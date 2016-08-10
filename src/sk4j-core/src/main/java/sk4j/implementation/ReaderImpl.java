@@ -14,8 +14,8 @@ import org.apache.commons.lang3.StringUtils;
 import jline.console.ConsoleReader;
 import sk4j.console.Colorize;
 import sk4j.core.Context;
-import sk4j.input.api.Name;
-import sk4j.input.api.Reader;
+import sk4j.input.Name;
+import sk4j.input.Reader;
 import strman.Strman;
 
 public class ReaderImpl implements Reader {

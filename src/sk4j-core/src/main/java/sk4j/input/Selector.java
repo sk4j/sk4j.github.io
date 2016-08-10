@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import sk4j.core.Task;
-import sk4j.input.api.Selectable;
 
 /**
  * Leitor de opções do console.
