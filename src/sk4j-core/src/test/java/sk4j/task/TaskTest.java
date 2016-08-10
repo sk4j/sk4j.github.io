@@ -9,8 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import sk4j.bootstrap.SK4JRunner;
+import sk4j.core.Task;
 import sk4j.input.Selector;
-import sk4j.input.api.Task;
 
 @RunWith(SK4JRunner.class)
 public class TaskTest {

@@ -1,12 +1,10 @@
 package sk4j.implementation;
 
-import javax.inject.Inject;
-
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
+import sk4j.core.Beans;
 import sk4j.core.Context;
-import sk4j.model.EJavaProject;
 import sk4j.template.Template;
 
 public class TemplateImpl implements Template {
@@ -16,11 +14,7 @@ public class TemplateImpl implements Template {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Inject
-	private Context context;
-
-	@Inject
-	private EJavaProject project;
+	private Context context = Beans.getReference(Context.class);
 
 	private JtwigTemplate template;
 
@@ -40,7 +34,7 @@ public class TemplateImpl implements Template {
 	private JtwigModel createJtwigModel() {
 		JtwigModel jtwigModel = JtwigModel.newModel();
 		context.getContext().forEach((k, v) -> jtwigModel.with(k, v));
-		return jtwigModel.with("project", project);
+		return jtwigModel;
 	}
 
 }

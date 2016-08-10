@@ -18,10 +18,10 @@ import com.google.common.collect.Range;
 import jline.console.ConsoleReader;
 import sk4j.console.Colorize;
 import sk4j.core.Context;
+import sk4j.core.Task;
 import sk4j.exception.EmptyOptionParamException;
 import sk4j.input.Selector;
 import sk4j.input.api.Selectable;
-import sk4j.input.api.Task;
 
 public class SelectorImpl implements Selector {
 
