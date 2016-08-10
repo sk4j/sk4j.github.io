@@ -18,6 +18,7 @@ import com.google.common.collect.Range;
 import jline.console.ConsoleReader;
 import sk4j.console.Colorize;
 import sk4j.core.Context;
+import sk4j.exception.EmptyOptionParamException;
 import sk4j.input.Selector;
 import sk4j.input.api.Selectable;
 import sk4j.input.api.Task;
@@ -38,6 +39,9 @@ public class SelectorImpl implements Selector {
 
 	@Override
 	public <X, T extends Selectable<X>> T selectOne(String message, List<T> selectableOptions) throws IOException {
+		if (selectableOptions == null || selectableOptions.isEmpty()) {
+			throw new EmptyOptionParamException();
+		}
 		Map<Integer, T> options = printSelectableOptions(selectableOptions);
 		return readSelectOne(options, message);
 	}
@@ -49,6 +53,9 @@ public class SelectorImpl implements Selector {
 
 	@Override
 	public <X, T extends Selectable<X>> List<T> selectMany(String message, List<T> selectableOptions) throws IOException {
+		if (selectableOptions == null || selectableOptions.isEmpty()) {
+			throw new EmptyOptionParamException();
+		}
 		Map<Integer, T> options = printSelectableOptions(selectableOptions);
 		return readSelectMany(options, message);
 	}
@@ -60,6 +67,9 @@ public class SelectorImpl implements Selector {
 
 	@Override
 	public <T extends Task> void selectAndExecuteOne(String message, List<T> taskOptions) throws IOException {
+		if (taskOptions == null || taskOptions.isEmpty()) {
+			throw new EmptyOptionParamException();
+		}
 		Map<Integer, T> options = printSelectableOptions(taskOptions);
 		readSelectOne(options, message).run();
 	}
@@ -71,6 +81,9 @@ public class SelectorImpl implements Selector {
 
 	@Override
 	public <T extends Task> void selectAndExecuteMany(String message, List<T> taskOptions) throws IOException {
+		if (taskOptions == null || taskOptions.isEmpty()) {
+			throw new EmptyOptionParamException();
+		}
 		Map<Integer, T> options = printSelectableOptions(taskOptions);
 		readSelectMany(options, message).parallelStream().forEach(task -> task.run());
 	}
