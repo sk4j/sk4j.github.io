@@ -35,7 +35,7 @@ public class ReaderImpl implements Reader {
 	private String contextKey;
 
 	@Override
-	public <T extends Name> void read(String message, T name) throws IOException {
+	public <T extends Name> T read(String message, T name) throws IOException {
 		this.message = context.replace(message);
 		this.defaultValue = context.replace(name.getDefaultValue());
 		this.contextKey = Strman.toCamelCase(name.getClass().getSimpleName());
@@ -43,9 +43,9 @@ public class ReaderImpl implements Reader {
 		name.setValue(value);
 		if (validate(name)) {
 			context.put(contextKey, name);
-			return;
+			return name;
 		}
-		read(message, name);
+		return read(message, name);
 	}
 
 	@Override
