@@ -24,16 +24,31 @@ public class EJavaMethodImpl implements EJavaMethod {
 		this.name = this.qdoxJavaMethod.getName();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaMethod#getName()
+	 */
 	@Override
 	public String getName() {
 		return name;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaMethod#getQdoxJavaMethod()
+	 */
 	@Override
 	public JavaMethod getQdoxJavaMethod() {
 		return qdoxJavaMethod;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaMethod#hasAnnotationByName(java.lang.String)
+	 */
 	@Override
 	public boolean hasAnnotationByName(String annotationName) {
 		//@formatter:off
@@ -43,6 +58,12 @@ public class EJavaMethodImpl implements EJavaMethod {
 		//@formatter:on
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaMethod#getProject()
+	 */
+	@Override
 	public EJavaProject getProject() {
 		return project;
 	}

@@ -53,6 +53,11 @@ public class EJavaProjectImpl implements EJavaProject {
 		this.file = file;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#getName()
+	 */
 	@Override
 	public String getName() {
 		if (this.name == null) {
@@ -61,16 +66,31 @@ public class EJavaProjectImpl implements EJavaProject {
 		return name;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#getPath()
+	 */
 	@Override
 	public String getPath() {
 		return file.getAbsolutePath();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#getFile()
+	 */
 	@Override
 	public File getFile() {
 		return file;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#getJavaClasses()
+	 */
 	@Override
 	public List<EJavaClass> getJavaClasses() throws IOException {
 		if (javaClasses == null) {
@@ -81,19 +101,29 @@ public class EJavaProjectImpl implements EJavaProject {
 		return javaClasses;
 	}
 
-	//@formatter:off
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#getDirs()
+	 */
 	@Override
 	public List<EFile> getDirs() throws IOException {
+		//@formatter:off
 		if (this.dirs == null) {
 			this.dirs = Files.walk(file.toPath())
 							 .filter(p -> p.toFile().isDirectory() && !p.toFile().isHidden())
 							 .map(p -> new EFileImpl(p.toFile()))
 							 .collect(Collectors.toList());
 		}
+		//@formatter:on
 		return dirs;
 	}
-	//@formatter:on
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#getFiles()
+	 */
 	@Override
 	public List<EFile> getFiles() throws IOException {
 		if (this.files == null) {
@@ -107,10 +137,11 @@ public class EJavaProjectImpl implements EJavaProject {
 		return files;
 	}
 
-	public void setFiles(List<EFile> files) {
-		this.files = files;
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#hasSrcMainJavaClassByName(java.lang.String)
+	 */
 	@Override
 	public boolean hasSrcMainJavaClassByName(String name) throws IOException {
 		//@formatter:off
@@ -120,16 +151,31 @@ public class EJavaProjectImpl implements EJavaProject {
 		//@formatter:on
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#isMavenProject()
+	 */
 	@Override
 	public boolean isMavenProject() {
 		return new File(String.format("%s/pom.xml", getPath())).exists();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#isGradleProject()
+	 */
 	@Override
 	public boolean isGradleProject() {
 		return new File(String.format("%s/build.gradle", getPath())).exists();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#getSrcMainJavaClasses()
+	 */
 	@Override
 	public List<EJavaClass> getSrcMainJavaClasses() {
 		if (this.srcMainJavaClasses == null) {
@@ -146,6 +192,11 @@ public class EJavaProjectImpl implements EJavaProject {
 		return srcMainJavaClasses;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#getSrcTestJavaClasses()
+	 */
 	@Override
 	public List<EJavaClass> getSrcTestJavaClasses() {
 		if (this.srcTestJavaClasses == null) {
@@ -162,6 +213,11 @@ public class EJavaProjectImpl implements EJavaProject {
 		return srcTestJavaClasses;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#getSrcMainJavaPackages()
+	 */
 	@Override
 	public List<EJavaPackage> getSrcMainJavaPackages() {
 		if (this.srcMainJavaPackages == null) {
@@ -179,6 +235,11 @@ public class EJavaProjectImpl implements EJavaProject {
 		return this.srcMainJavaPackages;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#getSrcMainWebappDirs()
+	 */
 	@Override
 	public List<EFile> getSrcMainWebappDirs() throws IOException {
 		if (this.srcMainWebappDirs == null) {
@@ -193,6 +254,11 @@ public class EJavaProjectImpl implements EJavaProject {
 		return srcMainWebappDirs;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#getSrcMainWebappFiles()
+	 */
 	@Override
 	public List<EFile> getSrcMainWebappFiles() throws IOException {
 		if (this.srcMainWebappFiles == null) {
@@ -207,6 +273,11 @@ public class EJavaProjectImpl implements EJavaProject {
 		return srcMainWebappFiles;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#getSrcTestJavaPackages()
+	 */
 	@Override
 	public List<EJavaPackage> getSrcTestJavaPackages() {
 		if (this.srcTestJavaPackages == null) {
@@ -224,6 +295,11 @@ public class EJavaProjectImpl implements EJavaProject {
 		return this.srcTestJavaPackages;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaProject#getSrcMainWebappXHTMLFiles()
+	 */
 	@Override
 	public List<EFile> getSrcMainWebappXHTMLFiles() throws IOException {
 		if (this.srcMainWebappXHTMLFiles == null) {
@@ -266,6 +342,11 @@ public class EJavaProjectImpl implements EJavaProject {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "EJavaProjectImpl [name=" + name + "]";
 	}
 
 }

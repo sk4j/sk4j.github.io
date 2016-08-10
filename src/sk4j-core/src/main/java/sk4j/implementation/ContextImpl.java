@@ -21,11 +21,21 @@ public class ContextImpl implements Context {
 
 	private Map<String, Object> ctx = new HashMap<>();
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.core.Context#put(java.lang.String, java.lang.Object)
+	 */
 	@Override
 	public void put(String key, Object value) {
 		this.ctx.put(key, value);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.core.Context#get(java.lang.String)
+	 */
 	@Override
 	public Object get(String key) {
 		Object value = this.ctx.get(key);
@@ -35,6 +45,11 @@ public class ContextImpl implements Context {
 		return value;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.core.Context#replace(java.lang.String)
+	 */
 	@Override
 	public String replace(String value) {
 		if (StringUtils.isNotBlank(value)) {
@@ -46,6 +61,11 @@ public class ContextImpl implements Context {
 		return value;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.core.Context#getContext()
+	 */
 	@Override
 	public Map<String, Object> getContext() {
 		return this.ctx;

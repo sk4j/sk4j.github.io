@@ -34,6 +34,11 @@ public class ReaderImpl implements Reader {
 
 	private String contextKey;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Reader#read(java.lang.String, sk4j.input.Name)
+	 */
 	@Override
 	public <T extends Name> T read(String message, T name) throws IOException {
 		this.message = context.replace(message);
@@ -48,6 +53,11 @@ public class ReaderImpl implements Reader {
 		return read(message, name);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.input.Reader#read(java.lang.String, java.lang.String, sk4j.input.Name)
+	 */
 	@Override
 	public <T extends Name> void read(String message, String contextKey, T name) throws IOException {
 		this.message = context.replace(message);

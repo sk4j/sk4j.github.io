@@ -49,6 +49,11 @@ public class EJavaClassImpl implements EJavaClass {
 		this.qdoxJavaClass = qdoxJavaClass;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#getName()
+	 */
 	@Override
 	public String getName() {
 		if (this.name == null) {
@@ -57,10 +62,11 @@ public class EJavaClassImpl implements EJavaClass {
 		return this.name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#getFullyQualifiedName()
+	 */
 	@Override
 	public String getFullyQualifiedName() {
 		if (this.fullyQualifiedName == null) {
@@ -69,10 +75,11 @@ public class EJavaClassImpl implements EJavaClass {
 		return fullyQualifiedName;
 	}
 
-	public void setFullyQualifiedName(String fullyQualifiedName) {
-		this.fullyQualifiedName = fullyQualifiedName;
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#getPath()
+	 */
 	@Override
 	public String getPath() {
 		if (this.path == null) {
@@ -82,10 +89,11 @@ public class EJavaClassImpl implements EJavaClass {
 		return path;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#getPackageName()
+	 */
 	@Override
 	public String getPackageName() {
 		if (this.packageName == null) {
@@ -94,10 +102,11 @@ public class EJavaClassImpl implements EJavaClass {
 		return packageName;
 	}
 
-	public void setPackageName(String packageName) {
-		this.packageName = packageName;
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#getParentPackageName()
+	 */
 	@Override
 	public String getParentPackageName() {
 		if (this.parentPackageName == null) {
@@ -107,84 +116,91 @@ public class EJavaClassImpl implements EJavaClass {
 		return parentPackageName;
 	}
 
-	public void setParentPackageName(String parentPackageName) {
-		this.parentPackageName = parentPackageName;
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#getQdoxJavaClass()
+	 */
 	@Override
 	public JavaClass getQdoxJavaClass() {
 		return qdoxJavaClass;
 	}
 
-	public void setQdoxJavaClass(JavaClass qdoxJavaClass) {
-		this.qdoxJavaClass = qdoxJavaClass;
-	}
-
-	//@formatter:off
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#getJavaAttributes()
+	 */
 	@Override
 	public List<EJavaAttribute> getJavaAttributes() {
+		//@formatter:off
 		if (this.javaAttributes == null) {
 			this.javaAttributes = Arrays.asList(qdoxJavaClass.getFields())
 										.stream()
 										.map(javaField -> new EJavaAttributeImpl(project,javaField))
 										.collect(Collectors.toList());
 		}
+		//@formatter:on
 		return javaAttributes;
 	}
-	//@formatter:on
 
-	public void setJavaAttributes(List<EJavaAttribute> javaAttributes) {
-		this.javaAttributes = javaAttributes;
-	}
-
-	//@formatter:off
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#getJavaMethods()
+	 */
 	@Override
 	public List<EJavaMethod> getJavaMethods() {
+		//@formatter:off
 		if (this.javaMethods == null) {
 			this.javaMethods = Arrays.asList(qdoxJavaClass.getMethods())
 									 .stream()
 									 .map(javaMethod -> new EJavaMethodImpl(project,javaMethod))
 									 .collect(Collectors.toList());
 		}
+		//@formatter:on
 		return javaMethods;
 	}
-	//@formatter:on
 
-	public void setJavaMethods(List<EJavaMethod> javaMethods) {
-		this.javaMethods = javaMethods;
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#getJavaPackage()
+	 */
 	@Override
 	public EJavaPackage getJavaPackage() {
 		return null;
 	}
 
-	/**
-	 * Verifica se a classe possui a annotation especificada.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param name
-	 *            Nome da annotation.
-	 * @return
+	 * @see sk4j.model.EJavaClass#hasAnnotationByName(java.lang.String)
 	 */
-	//@formatter:off
 	@Override
 	public boolean hasAnnotationByName(String name) {
+		//@formatter:off
 		return Arrays.asList(qdoxJavaClass.getAnnotations())
 					.stream()
 					.anyMatch(p -> p.getType().getValue().endsWith(name));
-	}
-	//@formatter:on
-
-	@Override
-	public String toString() {
-		return "EJavaFile [fullyQualifiedName=" + getFullyQualifiedName() + "]";
+		//@formatter:on
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#getSourceFolderName()
+	 */
 	@Override
 	public String getSourceFolderName() {
 		return this.sourceFolderName;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#getSuperClassGenericNameByIndex(int)
+	 */
 	@Override
 	public String getSuperClassGenericNameByIndex(int index) {
 		if (index <= qdoxJavaClass.getSuperClass().getActualTypeArguments().length) {
@@ -193,21 +209,41 @@ public class EJavaClassImpl implements EJavaClass {
 		return "";
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#hasSuperClassGenericNameByNameAndIndex(java.lang.String, int)
+	 */
 	@Override
 	public boolean hasSuperClassGenericNameByNameAndIndex(String genericTypeName, int index) {
 		return getSuperClassGenericNameByIndex(index).endsWith(genericTypeName);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#isAbstract()
+	 */
 	@Override
 	public boolean isAbstract() {
 		return this.qdoxJavaClass.isAbstract();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#extendsSuperClassByName(java.lang.String)
+	 */
 	@Override
 	public boolean extendsSuperClassByName(String name) {
 		return this.qdoxJavaClass.getSuperClass().getValue().endsWith(name);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaClass#implementsInterfaceByName(java.lang.String)
+	 */
 	@Override
 	public boolean implementsInterfaceByName(String name) {
 		//@formatter:off
@@ -240,6 +276,11 @@ public class EJavaClassImpl implements EJavaClass {
 		} else if (!getFullyQualifiedName().equals(other.getFullyQualifiedName()))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "EJavaFile [fullyQualifiedName=" + getFullyQualifiedName() + "]";
 	}
 
 }

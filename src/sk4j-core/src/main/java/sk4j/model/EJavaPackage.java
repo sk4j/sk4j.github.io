@@ -16,6 +16,8 @@ public interface EJavaPackage extends Selectable<EJavaPackage>, Serializable {
 
 	String getPath();
 
+	EJavaProject getProject();
+
 	@Override
 	default int compareTo(EJavaPackage o) {
 		return getName().compareTo(o.getName());

@@ -13,6 +13,11 @@ public class EFileImpl implements EFile {
 		this.file = file;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EFile#getFile()
+	 */
 	@Override
 	public File getFile() {
 		return this.file;

@@ -14,6 +14,8 @@ public interface EJavaMethod extends Selectable<EJavaMethod>, Serializable {
 
 	boolean hasAnnotationByName(String annotationName);
 
+	EJavaProject getProject();
+
 	@Override
 	default int compareTo(EJavaMethod o) {
 		return getName().compareTo(o.getName());

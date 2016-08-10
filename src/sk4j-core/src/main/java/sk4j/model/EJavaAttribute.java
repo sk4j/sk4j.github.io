@@ -69,6 +69,8 @@ public interface EJavaAttribute extends Selectable<EJavaAttribute>, Serializable
 
 	String getGenericNameByIndex(int index);
 
+	EJavaProject getProject();
+
 	@Override
 	default int compareTo(EJavaAttribute o) {
 		return getName().compareTo(o.getName());

@@ -31,6 +31,11 @@ public class EJavaPackageImpl implements EJavaPackage {
 		this.sourceFolderName = sourceFolderName;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaPackage#getName()
+	 */
 	@Override
 	public String getName() {
 		if (this.name == null) {
@@ -39,28 +44,41 @@ public class EJavaPackageImpl implements EJavaPackage {
 		return this.name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaPackage#getSourceFolderName()
+	 */
 	@Override
 	public String getSourceFolderName() {
 		return this.sourceFolderName;
 	}
 
-	public void setSourceFolderName(String sourceFolderName) {
-		this.sourceFolderName = sourceFolderName;
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaPackage#getQdoxJavaPackage()
+	 */
 	@Override
 	public JavaPackage getQdoxJavaPackage() {
 		return this.qdoxJavaPackage;
 	}
 
-	public void setQdoxJavaPackage(JavaPackage qdoxJavaPackage) {
-		this.qdoxJavaPackage = qdoxJavaPackage;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaPackage#getProject()
+	 */
+	@Override
+	public EJavaProject getProject() {
+		return this.project;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaPackage#getPath()
+	 */
 	@Override
 	public String getPath() {
 		if (this.path == null) {
@@ -68,6 +86,42 @@ public class EJavaPackageImpl implements EJavaPackage {
 			this.path = FilenameUtils.normalize(project.getPath().concat(this.sourceFolderName).concat("/").concat(packageDir));
 		}
 		return this.path;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((path == null) ? 0 : path.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EJavaPackageImpl other = (EJavaPackageImpl) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (path == null) {
+			if (other.path != null)
+				return false;
+		} else if (!path.equals(other.path))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "EJavaPackageImpl [project=" + project + ", name=" + name + "]";
 	}
 
 }

@@ -26,85 +26,165 @@ public class EJavaAttributeImpl implements EJavaAttribute {
 		this.qdoxJavaField = qdoxJavaField;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#getName()
+	 */
 	@Override
 	public String getName() {
 		return this.qdoxJavaField.getName();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#getQdoxJavaField()
+	 */
 	@Override
 	public JavaField getQdoxJavaField() {
 		return qdoxJavaField;
 	}
 
-	//@formatter:off
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#hasAnnotationByName(java.lang.String)
+	 */
 	@Override
 	public boolean hasAnnotationByName(String name) {
+		//@formatter:off
 		return Arrays.asList(this.qdoxJavaField.getAnnotations())
 					.stream()
 					.anyMatch(p -> p.getType().getValue().endsWith(name));
+		//@formatter:on
 	}
-	//@formatter:on
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isLongPrimitive()
+	 */
 	@Override
 	public boolean isLongPrimitive() {
 		return this.qdoxJavaField.getType().getValue().equals("long");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isIntegerPrimitive()
+	 */
 	@Override
 	public boolean isIntegerPrimitive() {
 		return this.qdoxJavaField.getType().getValue().equals("int");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isBigDecimal()
+	 */
 	@Override
 	public boolean isBigDecimal() {
 		return this.qdoxJavaField.getType().getValue().endsWith("BigDecimal");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isDate()
+	 */
 	@Override
 	public boolean isDate() {
 		return this.qdoxJavaField.getType().getValue().endsWith("Date");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isBooleanPrimitive()
+	 */
 	@Override
 	public boolean isBooleanPrimitive() {
 		return this.qdoxJavaField.getType().getValue().equals("boolean");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isLongWrapper()
+	 */
 	@Override
 	public boolean isLongWrapper() {
 		return this.qdoxJavaField.getType().getValue().endsWith("Long");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isIntegerWrapper()
+	 */
 	@Override
 	public boolean isIntegerWrapper() {
 		return this.qdoxJavaField.getType().getValue().endsWith("Integer");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isBooleanWrapper()
+	 */
 	@Override
 	public boolean isBooleanWrapper() {
 		return this.qdoxJavaField.getType().getValue().endsWith("Boolean");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isString()
+	 */
 	@Override
 	public boolean isString() {
 		return this.qdoxJavaField.getType().getValue().endsWith("String");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isList()
+	 */
 	@Override
 	public boolean isList() {
 		return this.qdoxJavaField.getType().getValue().endsWith("List");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isMap()
+	 */
 	@Override
 	public boolean isMap() {
 		return this.qdoxJavaField.getType().getValue().endsWith("Map");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isSet()
+	 */
 	@Override
 	public boolean isSet() {
 		return this.qdoxJavaField.getType().getValue().endsWith("Set");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isEnum()
+	 */
 	@Override
 	public boolean isEnum() {
 		if (qdoxJavaField.getType().getJavaClass() != null) {
@@ -115,26 +195,51 @@ public class EJavaAttributeImpl implements EJavaAttribute {
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isStatic()
+	 */
 	@Override
 	public boolean isStatic() {
 		return this.qdoxJavaField.isStatic();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isPrivate()
+	 */
 	@Override
 	public boolean isPrivate() {
 		return this.qdoxJavaField.isPrivate();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isPublic()
+	 */
 	@Override
 	public boolean isPublic() {
 		return this.qdoxJavaField.isPublic();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#isProtected()
+	 */
 	@Override
 	public boolean isProtected() {
 		return this.qdoxJavaField.isProtected();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#hasGenericNameByNameAndIndex(java.lang.String, int)
+	 */
 	@Override
 	public boolean hasGenericNameByNameAndIndex(String genericTypeName, int index) {
 		if (qdoxJavaField.getType().getActualTypeArguments().length > 0) {
@@ -145,6 +250,11 @@ public class EJavaAttributeImpl implements EJavaAttribute {
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#getGenericNameByIndex(int)
+	 */
 	@Override
 	public String getGenericNameByIndex(int index) {
 		if (index <= qdoxJavaField.getType().getActualTypeArguments().length) {
@@ -153,6 +263,12 @@ public class EJavaAttributeImpl implements EJavaAttribute {
 		return "";
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.model.EJavaAttribute#getProject()
+	 */
+	@Override
 	public EJavaProject getProject() {
 		return project;
 	}
