@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public interface Reader extends Serializable {
 
-	<T extends Name> void read(T name, String message) throws IOException;
+	<T extends Name> void read(String message, T name) throws IOException;
 
-	<T extends Name> void read(T name, String message, String contextKey) throws IOException;
+	<T extends Name> void read(String message, String contextKey, T name) throws IOException;
 }

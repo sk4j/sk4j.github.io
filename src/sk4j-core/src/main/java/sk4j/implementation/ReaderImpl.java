@@ -35,7 +35,7 @@ public class ReaderImpl implements Reader {
 	private String contextKey;
 
 	@Override
-	public <T extends Name> void read(T name, String message) throws IOException {
+	public <T extends Name> void read(String message, T name) throws IOException {
 		this.message = context.replace(message);
 		this.defaultValue = context.replace(name.getDefaultValue());
 		this.contextKey = Strman.toCamelCase(name.getClass().getSimpleName());
@@ -45,11 +45,11 @@ public class ReaderImpl implements Reader {
 			context.put(contextKey, name);
 			return;
 		}
-		read(name, message);
+		read(message, name);
 	}
 
 	@Override
-	public <T extends Name> void read(T name, String message, String contextKey) throws IOException {
+	public <T extends Name> void read(String message, String contextKey, T name) throws IOException {
 		this.message = context.replace(message);
 		this.defaultValue = context.replace(name.getDefaultValue());
 		this.contextKey = contextKey;
@@ -59,7 +59,7 @@ public class ReaderImpl implements Reader {
 			context.put(contextKey, name);
 			return;
 		}
-		read(name, message);
+		read(message, name);
 	}
 
 	private String readConsole() throws IOException {

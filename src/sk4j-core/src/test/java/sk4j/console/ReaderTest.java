@@ -30,7 +30,7 @@ public class ReaderTest {
 
 	@Test
 	public void test() throws IOException {
-		reader.read(fooName, "Digite o nome do foo", "fooNameDao");
+		reader.read("Digite o nome do foo", "fooNameDao", fooName);
 		System.out.println(fooName.getValue());
 		System.out.println(context);
 		// daoName.read("Digite o nome do dao");

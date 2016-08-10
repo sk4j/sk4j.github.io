@@ -1,11 +1,9 @@
 package sk4j.input.api;
 
-import java.io.Serializable;
-
 import sk4j.input.annotation.TaskConf;
 
 @FunctionalInterface
-public interface Task extends Serializable, Comparable<Task> {
+public interface Task extends Selectable<Task> {
 
 	void run();
 
@@ -19,7 +17,8 @@ public interface Task extends Serializable, Comparable<Task> {
 		return this.getClass().getSimpleName().compareTo(o.getClass().getSimpleName());
 	}
 
-	default String message() {
+	@Override
+	default String getSelectLabel() {
 		if (this.getClass().isAnnotationPresent(TaskConf.class)) {
 			return this.getClass().getAnnotation(TaskConf.class).label();
 		}

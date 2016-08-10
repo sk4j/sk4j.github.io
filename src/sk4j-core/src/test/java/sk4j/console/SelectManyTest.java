@@ -25,10 +25,10 @@ public class SelectManyTest {
 	public void test() throws IOException {
 		EJavaProject javaProject = new EJavaProjectImpl(new File("/home/jcruz/Programs/eclipse-mars/workspace/aelis2016"));
 		//@formatter:off
-		List<EJavaClass> selectedJavaClass = selector.selectMany(javaProject.getSrcMainJavaClasses()
+		List<EJavaClass> selectedJavaClass = selector.selectMany("Selecione a(s) entidade(s)",javaProject.getSrcMainJavaClasses()
 					.stream()
 					.filter(javaClass -> javaClass.hasAnnotationByName("Entity"))
-					.collect(Collectors.toList()), "Selecione a(s) entidade(s)");
+					.collect(Collectors.toList()));
 		//@formatter:off
 		System.out.println(selectedJavaClass);
 	}
