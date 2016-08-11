@@ -1,6 +1,7 @@
 package sk4j.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 
 import sk4j.input.Selectable;
 
@@ -18,6 +19,15 @@ public interface EPath extends Selectable<EPath> {
 	 * @return java.nio.file.Path.Path do java.
 	 */
 	Path getPath();
+
+	/**
+	 * Retorna o caminho irmão do nó atual com o nome correspondente
+	 * 
+	 * 
+	 * @param name
+	 * @return
+	 */
+	Optional<Path> sibling(String name);
 
 	@Override
 	default int compareTo(EPath o) {
