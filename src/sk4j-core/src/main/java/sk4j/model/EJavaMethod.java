@@ -22,7 +22,7 @@ public interface EJavaMethod extends Selectable<EJavaMethod>, Serializable {
 	}
 
 	@Override
-	default String getSelectLabel() {
+	default String getConsoleLabel() {
 		return getMethodName();
 	}
 

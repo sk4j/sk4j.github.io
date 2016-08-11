@@ -49,10 +49,10 @@ public class SelectorImpl implements Selector {
 	 * @see sk4j.input.Selector#selectOne(java.lang.String, java.util.List)
 	 */
 	@Override
-	public <X, T extends Selectable<X>> T selectOne(String message, List<T> selectableOptions) throws IOException {
+	public <X, T extends Selectable<X>> T selectOne(String prompt, List<T> selectableOptions) throws IOException {
 		validateParamOptions(selectableOptions);
 		Map<Integer, T> options = printSelectableOptions(selectableOptions);
-		return readSelectOne(options, message);
+		return readSelectOne(options, prompt);
 	}
 
 	/*
@@ -61,9 +61,9 @@ public class SelectorImpl implements Selector {
 	 * @see sk4j.input.Selector#selectOne(java.lang.String, java.lang.String, java.util.List)
 	 */
 	@Override
-	public <X, T extends Selectable<X>> void selectOne(String message, String contextKey, List<T> selectableOptions) throws IOException {
+	public <X, T extends Selectable<X>> void selectOne(String prompt, String contextKey, List<T> selectableOptions) throws IOException {
 		if (StringUtils.isNotBlank(contextKey)) {
-			T t = selectOne(message, selectableOptions);
+			T t = selectOne(prompt, selectableOptions);
 			context.put(contextKey, t);
 		}
 	}
@@ -74,8 +74,8 @@ public class SelectorImpl implements Selector {
 	 * @see sk4j.input.Selector#selectOne(java.lang.String, java.lang.Iterable)
 	 */
 	@Override
-	public <X, T extends Selectable<X>> T selectOne(String message, Iterable<T> selectableOptions) throws IOException {
-		return selectOne(message, Lists.newArrayList(selectableOptions));
+	public <X, T extends Selectable<X>> T selectOne(String prompt, Iterable<T> selectableOptions) throws IOException {
+		return selectOne(prompt, Lists.newArrayList(selectableOptions));
 	}
 
 	/*
@@ -84,10 +84,10 @@ public class SelectorImpl implements Selector {
 	 * @see sk4j.input.Selector#selectOne(java.lang.String, java.lang.String, java.lang.Iterable)
 	 */
 	@Override
-	public <X, T extends Selectable<X>> void selectOne(String message, String contextKey, Iterable<T> selectableOptions)
+	public <X, T extends Selectable<X>> void selectOne(String prompt, String contextKey, Iterable<T> selectableOptions)
 			throws IOException {
 		if (StringUtils.isNotBlank(contextKey)) {
-			T t = selectOne(message, selectableOptions);
+			T t = selectOne(prompt, selectableOptions);
 			context.put(contextKey, t);
 		}
 	}
@@ -98,10 +98,10 @@ public class SelectorImpl implements Selector {
 	 * @see sk4j.input.Selector#selectMany(java.lang.String, java.util.List)
 	 */
 	@Override
-	public <X, T extends Selectable<X>> List<T> selectMany(String message, List<T> selectableOptions) throws IOException {
+	public <X, T extends Selectable<X>> List<T> selectMany(String prompt, List<T> selectableOptions) throws IOException {
 		validateParamOptions(selectableOptions);
 		Map<Integer, T> options = printSelectableOptions(selectableOptions);
-		return readSelectMany(options, message);
+		return readSelectMany(options, prompt);
 	}
 
 	/*
@@ -110,9 +110,9 @@ public class SelectorImpl implements Selector {
 	 * @see sk4j.input.Selector#selectMany(java.lang.String, java.lang.String, java.util.List)
 	 */
 	@Override
-	public <X, T extends Selectable<X>> void selectMany(String message, String contextKey, List<T> selectableOptions) throws IOException {
+	public <X, T extends Selectable<X>> void selectMany(String prompt, String contextKey, List<T> selectableOptions) throws IOException {
 		if (StringUtils.isNotBlank(contextKey)) {
-			List<T> ts = selectMany(message, selectableOptions);
+			List<T> ts = selectMany(prompt, selectableOptions);
 			context.put(contextKey, ts);
 		}
 	}
@@ -123,8 +123,8 @@ public class SelectorImpl implements Selector {
 	 * @see sk4j.input.Selector#selectMany(java.lang.String, java.lang.Iterable)
 	 */
 	@Override
-	public <X, T extends Selectable<X>> List<T> selectMany(String message, Iterable<T> selectableOptions) throws IOException {
-		return selectMany(message, Lists.newArrayList(selectableOptions));
+	public <X, T extends Selectable<X>> List<T> selectMany(String prompt, Iterable<T> selectableOptions) throws IOException {
+		return selectMany(prompt, Lists.newArrayList(selectableOptions));
 	}
 
 	/*
@@ -133,10 +133,10 @@ public class SelectorImpl implements Selector {
 	 * @see sk4j.input.Selector#selectMany(java.lang.String, java.lang.String, java.lang.Iterable)
 	 */
 	@Override
-	public <X, T extends Selectable<X>> void selectMany(String message, String contextKey, Iterable<T> selectableOptions)
+	public <X, T extends Selectable<X>> void selectMany(String prompt, String contextKey, Iterable<T> selectableOptions)
 			throws IOException {
 		if (StringUtils.isNotBlank(contextKey)) {
-			List<T> ts = selectMany(message, selectableOptions);
+			List<T> ts = selectMany(prompt, selectableOptions);
 			context.put(contextKey, ts);
 		}
 	}
@@ -147,10 +147,10 @@ public class SelectorImpl implements Selector {
 	 * @see sk4j.input.Selector#selectAndExecuteOne(java.lang.String, java.util.List)
 	 */
 	@Override
-	public <T extends Task> void selectAndExecuteOne(String message, List<T> taskOptions) throws IOException {
+	public <T extends Task> void selectAndExecuteOne(String prompt, List<T> taskOptions) throws IOException {
 		validateParamOptions(taskOptions);
 		Map<Integer, T> options = printSelectableOptions(taskOptions);
-		readSelectOne(options, message).run();
+		readSelectOne(options, prompt).run();
 	}
 
 	/*
@@ -159,8 +159,8 @@ public class SelectorImpl implements Selector {
 	 * @see sk4j.input.Selector#selectAndExecuteOne(java.lang.String, java.lang.Iterable)
 	 */
 	@Override
-	public <T extends Task> void selectAndExecuteOne(String message, Iterable<T> taskOptions) throws IOException {
-		selectAndExecuteOne(message, Lists.newArrayList(taskOptions));
+	public <T extends Task> void selectAndExecuteOne(String prompt, Iterable<T> taskOptions) throws IOException {
+		selectAndExecuteOne(prompt, Lists.newArrayList(taskOptions));
 	}
 
 	/*
@@ -169,10 +169,10 @@ public class SelectorImpl implements Selector {
 	 * @see sk4j.input.Selector#selectAndExecuteMany(java.lang.String, java.util.List)
 	 */
 	@Override
-	public <T extends Task> void selectAndExecuteMany(String message, List<T> taskOptions) throws IOException {
+	public <T extends Task> void selectAndExecuteMany(String prompt, List<T> taskOptions) throws IOException {
 		validateParamOptions(taskOptions);
 		Map<Integer, T> options = printSelectableOptions(taskOptions);
-		readSelectMany(options, message).parallelStream().forEach(task -> task.run());
+		readSelectMany(options, prompt).parallelStream().forEach(task -> task.run());
 	}
 
 	/*
@@ -181,8 +181,8 @@ public class SelectorImpl implements Selector {
 	 * @see sk4j.input.Selector#selectAndExecuteMany(java.lang.String, java.lang.Iterable)
 	 */
 	@Override
-	public <T extends Task> void selectAndExecuteMany(String message, Iterable<T> taskOptions) throws IOException {
-		selectAndExecuteMany(message, Lists.newArrayList(taskOptions));
+	public <T extends Task> void selectAndExecuteMany(String prompt, Iterable<T> taskOptions) throws IOException {
+		selectAndExecuteMany(prompt, Lists.newArrayList(taskOptions));
 	}
 
 	/*
@@ -218,7 +218,7 @@ public class SelectorImpl implements Selector {
 			.sorted()
 			.forEach(s -> {
 				optionMap.put(counter.incrementAndGet(), s);
-				System.out.println(String.format("%s : %s", Colorize.magenta(counter.get()), context.replace(s.getSelectLabel())));
+				System.out.println(String.format("%s : %s", Colorize.magenta(counter.get()), context.replace(s.getConsoleLabel())));
 			});
 		//@formatter:on
 		return optionMap;
@@ -277,16 +277,16 @@ public class SelectorImpl implements Selector {
 	/**
 	 * Lê um string do console.
 	 * 
-	 * @param message
+	 * @param prompt
 	 *            Mensagem do prompt.
 	 * @return String do console.
 	 * @throws IOException
 	 *             Erro na leitura do console.
 	 */
-	private String readConsole(String message) throws IOException {
+	private String readConsole(String prompt) throws IOException {
 		ConsoleReader consoleReader = new ConsoleReader();
 		consoleReader.setHandleUserInterrupt(true);
-		String value = consoleReader.readLine(String.format("> %s: ", message));
+		String value = consoleReader.readLine(String.format("> %s: ", prompt));
 		consoleReader.close();
 		return StringUtils.trim(value);
 	}

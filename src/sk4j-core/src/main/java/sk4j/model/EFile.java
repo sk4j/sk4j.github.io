@@ -15,7 +15,7 @@ public interface EFile extends Selectable<EFile> {
 	}
 
 	@Override
-	default String getSelectLabel() {
+	default String getConsoleLabel() {
 		return Colorize.bold(getFile().getName()) + " - " + Colorize.gray(getFile().getAbsolutePath());
 	}
 

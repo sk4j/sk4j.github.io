@@ -48,7 +48,7 @@ public interface EJavaClass extends Selectable<EJavaClass>, Serializable {
 	}
 
 	@Override
-	default String getSelectLabel() {
+	default String getConsoleLabel() {
 		return this.getClassName() + " - " + Colorize.gray(this.getQdoxJavaClass().getPackageName());
 	}
 

@@ -9,6 +9,12 @@ import sk4j.model.EPath;
 
 public class EPaths {
 
+	/**
+	 * Retorna uma instância de EPath.
+	 * 
+	 * @param pathName
+	 * @return
+	 */
 	public static EPath get(String pathName) {
 		return new EPathImpl(Paths.get(Beans.getReference(Context.class).replace(pathName)));
 	}

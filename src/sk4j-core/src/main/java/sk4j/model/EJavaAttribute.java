@@ -77,7 +77,7 @@ public interface EJavaAttribute extends Selectable<EJavaAttribute>, Serializable
 	}
 
 	@Override
-	default String getSelectLabel() {
+	default String getConsoleLabel() {
 		return this.getAttributeName() + " - " + Colorize.gray(this.getQdoxJavaField().getType().getValue());
 	}
 

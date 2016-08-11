@@ -24,7 +24,7 @@ public interface EJavaPackage extends Selectable<EJavaPackage>, Serializable {
 	}
 
 	@Override
-	default String getSelectLabel() {
+	default String getConsoleLabel() {
 		return getPackageName();
 	}
 

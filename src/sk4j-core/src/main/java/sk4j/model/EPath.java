@@ -4,8 +4,19 @@ import java.nio.file.Path;
 
 import sk4j.input.Selectable;
 
+/**
+ * Representa um caminho no sistema de arquivos.
+ * 
+ * @author jcruz
+ *
+ */
 public interface EPath extends Selectable<EPath> {
 
+	/**
+	 * Objecto do tipo Path.
+	 * 
+	 * @return java.nio.file.Path.Path do java.
+	 */
 	Path getPath();
 
 	@Override
@@ -14,7 +25,7 @@ public interface EPath extends Selectable<EPath> {
 	}
 
 	@Override
-	default String getSelectLabel() {
+	default String getConsoleLabel() {
 		return getPath().toString();
 	}
 

@@ -17,6 +17,7 @@ public interface FS extends Serializable {
 	 * Cria um diretório no caminho especificado.
 	 * 
 	 * @param path
+	 *            Caminho do diretório.
 	 * @throws IOException
 	 */
 	void mkdir(EPath epath) throws IOException;
@@ -25,7 +26,9 @@ public interface FS extends Serializable {
 	 * Copia um arquivo do diretório source para o diretório de destino
 	 * 
 	 * @param source
+	 *            Caminho fonte no classapth
 	 * @param destination
+	 *            Caminho de destino no sistema de arquivos.
 	 * @throws IOException
 	 */
 	void copy(String source, EPath epathDestination) throws IOException;

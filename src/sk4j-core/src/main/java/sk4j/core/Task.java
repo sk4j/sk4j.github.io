@@ -19,7 +19,7 @@ public interface Task extends Selectable<Task> {
 	}
 
 	@Override
-	default String getSelectLabel() {
+	default String getConsoleLabel() {
 		if (this.getClass().isAnnotationPresent(TaskConf.class)) {
 			return this.getClass().getAnnotation(TaskConf.class).label();
 		}
