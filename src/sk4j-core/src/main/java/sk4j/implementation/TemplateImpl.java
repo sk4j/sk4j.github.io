@@ -1,17 +1,15 @@
 package sk4j.implementation;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-import sk4j.console.Colorize;
 import sk4j.core.Beans;
 import sk4j.core.Context;
-import sk4j.core.Log;
+import sk4j.file.EPaths;
+import sk4j.file.FS;
+import sk4j.model.EPath;
 import sk4j.template.Template;
 
 public class TemplateImpl implements Template {
@@ -23,9 +21,7 @@ public class TemplateImpl implements Template {
 
 	private Context context = Beans.getReference(Context.class);
 
-	private Log log = Beans.getReference(Log.class);
-
-	private final String CREATE_ID = Colorize.bold(Colorize.blue("[CREATE]"));
+	private FS fs = Beans.getReference(FS.class);
 
 	/*
 	 * (non-Javadoc)
@@ -41,8 +37,10 @@ public class TemplateImpl implements Template {
 	 * @see sk4j.template.Template#mergeAndCreateFile(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void mergeAndCreateFile(String templateName, String path) {
-
+	public void mergeAndCreateFile(String templateName, EPath epath) throws IOException {
+		String content = this.merge(templateName);
+		fs.mkdir(EPaths.get(epath.getPath().getParent()));
+		fs.write(epath.getPath(), content);
 	}
 
 	/*
@@ -52,14 +50,6 @@ public class TemplateImpl implements Template {
 		JtwigModel jtwigModel = JtwigModel.newModel();
 		context.getContext().forEach((k, v) -> jtwigModel.with(k, v));
 		return jtwigModel;
-	}
-
-	private void write(Path path, String content) throws IOException {
-		BufferedWriter writer = Files.newBufferedWriter(path);
-		writer.write(content);
-		writer.flush();
-		writer.close();
-		log.format("%s\t%s", CREATE_ID, Colorize.bold(Colorize.blue(path.toFile().getAbsolutePath())));
 	}
 
 }

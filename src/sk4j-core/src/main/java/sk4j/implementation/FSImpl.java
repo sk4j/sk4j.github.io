@@ -1,14 +1,14 @@
 package sk4j.implementation;
 
-import java.io.File;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.Set;
 
 import javax.inject.Inject;
-
-import org.apache.commons.lang3.StringUtils;
 
 import sk4j.console.Colorize;
 import sk4j.core.Context;
@@ -40,6 +40,7 @@ public class FSImpl implements FS {
 
 	@Override
 	public void mkdir(EPath epath) throws IOException {
+		Set<String> p;
 		if (Files.notExists(epath.getPath())) {
 			Files.createDirectories(epath.getPath());
 			log.format("%s\t%s", CREATE_ID, Colorize.bold(Colorize.blue(epath.getPath().toString())));
@@ -54,21 +55,19 @@ public class FSImpl implements FS {
 		InputStream inputStream = this.getClass().getResourceAsStream(source);
 		Path pdestination = destination.getPath();
 		Files.copy(inputStream, pdestination);
-		log.format("%s\t%s -> %s", COPY_ID, Colorize.bold(Colorize.green(source)),
-				Colorize.bold(Colorize.blue(destination.getPath().toString())));
+		String sourceOut = Colorize.bold(Colorize.green(source));
+		String detinationOut = Colorize.bold(Colorize.blue(destination.getPath().toString()));
+		log.format("%s\t%s -> %s", COPY_ID, sourceOut, detinationOut);
 	}
 
-	public void createFile(String filePath, String fileName, String content) {
-		if (StringUtils.isNotBlank(filePath)) {
-			filePath = context.replace(filePath);
-			fileName = context.replace(fileName);
-			File file = new File(String.format("%s/%s", filePath, fileName));
-			if (file.exists()) {
-				log.format(Colorize.yellow("[SKIP]\t%s. Arquivo já existe."), file.getAbsolutePath());
-				return;
-			}
-			// write(file.toPath(), content);
-		}
+	@Override
+	public void write(Path path, String content) throws IOException {
+		BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.CREATE_NEW);
+		writer.write(content);
+		writer.flush();
+		writer.close();
+		String pathOut = Colorize.bold(Colorize.blue(path.toFile().getAbsolutePath()));
+		log.format("%s\t%s", CREATE_ID, pathOut);
 	}
 
 }

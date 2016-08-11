@@ -3,7 +3,7 @@ package sk4j.model;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
+import java.util.SortedSet;
 
 /**
  * 
@@ -30,25 +30,25 @@ public interface EJavaProject extends Serializable {
 
 	File getProjectFile();
 
-	List<EJavaClass> getAllEJavaClasses() throws IOException;
+	SortedSet<EJavaClass> getAllEJavaClasses() throws IOException;
 
-	List<EJavaClass> getMainEJavaClasses();
+	SortedSet<EJavaClass> getMainEJavaClasses();
 
-	List<EJavaPackage> getMainEJavaPackages();
+	SortedSet<EJavaPackage> getMainEJavaPackages();
 
-	List<EJavaPackage> getTestEJavaPackages();
+	SortedSet<EJavaPackage> getTestEJavaPackages();
 
-	List<EJavaClass> getTestEJavaClasses();
+	SortedSet<EJavaClass> getTestEJavaClasses();
 
-	List<EPath> getWebappEPaths() throws IOException;
+	SortedSet<EPath> getWebappEPaths() throws IOException;
 
-	List<EFile> getWebappEFiles() throws IOException;
+	SortedSet<EFile> getWebappEFiles() throws IOException;
 
-	List<EFile> getWebappXHTMLFiles() throws IOException;
+	SortedSet<EFile> getWebappXHTMLFiles() throws IOException;
 
-	List<EPath> getEPaths() throws IOException;
+	SortedSet<EPath> getEPaths() throws IOException;
 
-	List<EFile> getEFiles() throws IOException;
+	SortedSet<EFile> getEFiles() throws IOException;
 
 	boolean hasMainEJavaClassByName(String javaClassName) throws IOException;
 

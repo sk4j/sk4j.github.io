@@ -2,6 +2,7 @@ package sk4j.file;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Path;
 
 import sk4j.model.EPath;
 
@@ -32,4 +33,13 @@ public interface FS extends Serializable {
 	 * @throws IOException
 	 */
 	void copy(String source, EPath epathDestination) throws IOException;
+
+	/**
+	 * 
+	 * @param path
+	 * @param content
+	 * @throws IOException
+	 */
+	public void write(Path path, String content) throws IOException;
+
 }

@@ -2,6 +2,8 @@ package sk4j.implementation;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FilenameUtils;
@@ -38,9 +40,9 @@ public class EJavaClassImpl implements EJavaClass {
 
 	private JavaClass qdoxJavaClass;
 
-	private List<EJavaAttribute> javaAttributes;
+	private SortedSet<EJavaAttribute> javaAttributes;
 
-	private List<EJavaMethod> javaMethods;
+	private SortedSet<EJavaMethod> javaMethods;
 
 	public EJavaClassImpl(EJavaProject project, String sourceFolder, JavaClass qdoxJavaClass) {
 		super();
@@ -132,13 +134,13 @@ public class EJavaClassImpl implements EJavaClass {
 	 * @see sk4j.model.EJavaClass#getJavaAttributes()
 	 */
 	@Override
-	public List<EJavaAttribute> getEJavaAttributes() {
+	public SortedSet<EJavaAttribute> getEJavaAttributes() {
 		//@formatter:off
 		if (this.javaAttributes == null) {
 			this.javaAttributes = Arrays.asList(qdoxJavaClass.getFields())
 										.stream()
 										.map(javaField -> new EJavaAttributeImpl(project,javaField))
-										.collect(Collectors.toList());
+										.collect(Collectors.toCollection(TreeSet::new));
 		}
 		//@formatter:on
 		return javaAttributes;
@@ -150,13 +152,13 @@ public class EJavaClassImpl implements EJavaClass {
 	 * @see sk4j.model.EJavaClass#getJavaMethods()
 	 */
 	@Override
-	public List<EJavaMethod> getEJavaMethods() {
+	public SortedSet<EJavaMethod> getEJavaMethods() {
 		//@formatter:off
 		if (this.javaMethods == null) {
 			this.javaMethods = Arrays.asList(qdoxJavaClass.getMethods())
 									 .stream()
 									 .map(javaMethod -> new EJavaMethodImpl(project,javaMethod))
-									 .collect(Collectors.toList());
+									 .collect(Collectors.toCollection(TreeSet::new));
 		}
 		//@formatter:on
 		return javaMethods;

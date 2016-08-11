@@ -3,9 +3,9 @@ package sk4j.implementation;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FilenameUtils;
@@ -29,25 +29,25 @@ public class EJavaProjectImpl implements EJavaProject {
 
 	private File file;
 
-	private List<EJavaClass> allEJavaClasses;
+	private SortedSet<EJavaClass> allEJavaClasses;
 
-	private List<EJavaClass> mainEJavaClasses;
+	private SortedSet<EJavaClass> mainEJavaClasses;
 
-	private List<EJavaClass> testEJavaClasses;
+	private SortedSet<EJavaClass> testEJavaClasses;
 
-	private List<EJavaPackage> mainEJavaPackages;
+	private SortedSet<EJavaPackage> mainEJavaPackages;
 
-	private List<EJavaPackage> testEJavaPackages;
+	private SortedSet<EJavaPackage> testEJavaPackages;
 
-	private List<EPath> webappEPaths;
+	private SortedSet<EPath> webappEPaths;
 
-	private List<EFile> webappEFiles;
+	private SortedSet<EFile> webappEFiles;
 
-	private List<EPath> epaths;
+	private SortedSet<EPath> epaths;
 
-	private List<EFile> efiles;
+	private SortedSet<EFile> efiles;
 
-	private List<EFile> webappXHTMLFiles;
+	private SortedSet<EFile> webappXHTMLFiles;
 
 	public EJavaProjectImpl(File file) {
 		super();
@@ -93,9 +93,9 @@ public class EJavaProjectImpl implements EJavaProject {
 	 * @see sk4j.model.EJavaProject#getJavaClasses()
 	 */
 	@Override
-	public List<EJavaClass> getAllEJavaClasses() throws IOException {
+	public SortedSet<EJavaClass> getAllEJavaClasses() throws IOException {
 		if (allEJavaClasses == null) {
-			this.allEJavaClasses = new ArrayList<>();
+			this.allEJavaClasses = new TreeSet<>();
 			this.allEJavaClasses.addAll(getMainEJavaClasses());
 			this.allEJavaClasses.addAll(getTestEJavaClasses());
 		}
@@ -108,7 +108,7 @@ public class EJavaProjectImpl implements EJavaProject {
 	 * @see sk4j.model.EJavaProject#getDirs()
 	 */
 	@Override
-	public List<EPath> getEPaths() throws IOException {
+	public SortedSet<EPath> getEPaths() throws IOException {
 		//@formatter:off
 		if (this.epaths == null) {
 			this.epaths = Files.walk(file.toPath())
@@ -117,7 +117,7 @@ public class EJavaProjectImpl implements EJavaProject {
 									 	 !p.toFile().getAbsolutePath().contains(".svn") &&
 									 	 !p.toFile().getAbsolutePath().contains("/target"))
 							 .map(EPathImpl::new)
-							 .collect(Collectors.toList());
+							 .collect(Collectors.toCollection(TreeSet::new));
 		}
 		//@formatter:on
 		return epaths;
@@ -129,13 +129,13 @@ public class EJavaProjectImpl implements EJavaProject {
 	 * @see sk4j.model.EJavaProject#getFiles()
 	 */
 	@Override
-	public List<EFile> getEFiles() throws IOException {
+	public SortedSet<EFile> getEFiles() throws IOException {
 		if (this.efiles == null) {
 			//@formatter:off
 			this.efiles = Files.walk(file.toPath())
 							  .filter(p -> p.toFile().isFile() && !p.toFile().isHidden())
 							  .map(p -> new EFileImpl(p.toFile()))
-							  .collect(Collectors.toList());
+							  .collect(Collectors.toCollection(TreeSet::new));
 			//@formatter:on
 		}
 		return efiles;
@@ -181,7 +181,7 @@ public class EJavaProjectImpl implements EJavaProject {
 	 * @see sk4j.model.EJavaProject#getSrcMainJavaClasses()
 	 */
 	@Override
-	public List<EJavaClass> getMainEJavaClasses() {
+	public SortedSet<EJavaClass> getMainEJavaClasses() {
 		if (this.mainEJavaClasses == null) {
 			//@formatter:off
 			this.mainEJavaClasses = getMainEJavaPackages()
@@ -190,7 +190,7 @@ public class EJavaProjectImpl implements EJavaProject {
 							.flatMap(qdoxJavaClasses -> Arrays.asList(qdoxJavaClasses).stream())
 							.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/main/java/", qdoxJavaClass))
 							.filter(javaClass -> !javaClass.getQdoxJavaClass().isInterface() && !javaClass.getQdoxJavaClass().isEnum())
-							.collect(Collectors.toList());
+							.collect(Collectors.toCollection(TreeSet::new));
 			//@formatter:on
 		}
 		return mainEJavaClasses;
@@ -202,7 +202,7 @@ public class EJavaProjectImpl implements EJavaProject {
 	 * @see sk4j.model.EJavaProject#getSrcTestJavaClasses()
 	 */
 	@Override
-	public List<EJavaClass> getTestEJavaClasses() {
+	public SortedSet<EJavaClass> getTestEJavaClasses() {
 		if (this.testEJavaClasses == null) {
 			//@formatter:off
 			this.testEJavaClasses = getTestEJavaPackages()
@@ -211,7 +211,7 @@ public class EJavaProjectImpl implements EJavaProject {
 							.flatMap(qdoxJavaClasses -> Arrays.asList(qdoxJavaClasses).stream())
 							.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/test/java/", qdoxJavaClass))
 							.filter(javaClass -> !javaClass.getQdoxJavaClass().isInterface() && !javaClass.getQdoxJavaClass().isEnum())
-							.collect(Collectors.toList());
+							.collect(Collectors.toCollection(TreeSet::new));
 			//@formatter:on
 		}
 		return testEJavaClasses;
@@ -223,7 +223,7 @@ public class EJavaProjectImpl implements EJavaProject {
 	 * @see sk4j.model.EJavaProject#getSrcMainJavaPackages()
 	 */
 	@Override
-	public List<EJavaPackage> getMainEJavaPackages() {
+	public SortedSet<EJavaPackage> getMainEJavaPackages() {
 		if (this.mainEJavaPackages == null) {
 			JavaDocBuilder builder = new JavaDocBuilder();
 			File srcMainJavaDir = new File(FilenameUtils.normalize(getPathName().concat("/src/main/java/")));
@@ -233,7 +233,7 @@ public class EJavaProjectImpl implements EJavaProject {
 			this.mainEJavaPackages = Arrays.asList(builder.getPackages())
 					.stream()
 					.map(javaPackage -> new EJavaPackageImpl(this, javaPackage , "/src/main/java/"))
-					.collect(Collectors.toList());
+					.collect(Collectors.toCollection(TreeSet::new));
 			//@formatter:on
 		}
 		return this.mainEJavaPackages;
@@ -245,14 +245,14 @@ public class EJavaProjectImpl implements EJavaProject {
 	 * @see sk4j.model.EJavaProject#getSrcMainWebappDirs()
 	 */
 	@Override
-	public List<EPath> getWebappEPaths() throws IOException {
+	public SortedSet<EPath> getWebappEPaths() throws IOException {
 		if (this.webappEPaths == null) {
 			//@formatter:off
 			this.webappEPaths= Files.walk(file.toPath())
 					 				.filter(path -> path.toFile().isDirectory() && !path.toFile().isHidden())
 					 				.filter(dir -> dir.toFile().getAbsolutePath().contains("/src/main/webapp/"))
 					 				.map(EPathImpl::new)
-					 				.collect(Collectors.toList());
+					 				.collect(Collectors.toCollection(TreeSet::new));
 			//@formatter:on
 		}
 		return webappEPaths;
@@ -264,14 +264,14 @@ public class EJavaProjectImpl implements EJavaProject {
 	 * @see sk4j.model.EJavaProject#getSrcMainWebappFiles()
 	 */
 	@Override
-	public List<EFile> getWebappEFiles() throws IOException {
+	public SortedSet<EFile> getWebappEFiles() throws IOException {
 		if (this.webappEFiles == null) {
 			//@formatter:off
 			this.webappEFiles = Files.walk(file.toPath())
 					 				.filter(path -> path.toFile().isFile() && !path.toFile().isHidden())
 					 				.filter(file -> file.toFile().getAbsolutePath().contains("/src/main/webapp/"))
 					 				.map(path -> new EFileImpl(path.toFile()))
-					 				.collect(Collectors.toList());
+					 				.collect(Collectors.toCollection(TreeSet::new));
 			//@formatter:on
 		}
 		return webappEFiles;
@@ -283,7 +283,7 @@ public class EJavaProjectImpl implements EJavaProject {
 	 * @see sk4j.model.EJavaProject#getSrcTestJavaPackages()
 	 */
 	@Override
-	public List<EJavaPackage> getTestEJavaPackages() {
+	public SortedSet<EJavaPackage> getTestEJavaPackages() {
 		if (this.testEJavaPackages == null) {
 			JavaDocBuilder builder = new JavaDocBuilder();
 			File srcTestJavaDir = new File(FilenameUtils.normalize(getPathName().concat("/src/test/java/")));
@@ -293,7 +293,7 @@ public class EJavaProjectImpl implements EJavaProject {
 			this.testEJavaPackages = Arrays.asList(builder.getPackages())
 										.stream()
 										.map(javaPackage -> new EJavaPackageImpl(this, javaPackage , "/src/test/java/"))
-										.collect(Collectors.toList());
+										.collect(Collectors.toCollection(TreeSet::new));
 			//@formatter:on
 		}
 		return this.testEJavaPackages;
@@ -305,13 +305,13 @@ public class EJavaProjectImpl implements EJavaProject {
 	 * @see sk4j.model.EJavaProject#getSrcMainWebappXHTMLFiles()
 	 */
 	@Override
-	public List<EFile> getWebappXHTMLFiles() throws IOException {
+	public SortedSet<EFile> getWebappXHTMLFiles() throws IOException {
 		if (this.webappXHTMLFiles == null) {
 			//@formatter:off
 			this.webappXHTMLFiles = getWebappEFiles()
 												.stream()
 												.filter(file -> file.getFile().getName().endsWith(".xhtml"))
-												.collect(Collectors.toList());
+												.collect(Collectors.toCollection(TreeSet::new));
 			//@formatter:on
 		}
 		return webappXHTMLFiles;

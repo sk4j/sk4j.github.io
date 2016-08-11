@@ -28,7 +28,9 @@ public class ContextImpl implements Context {
 	 */
 	@Override
 	public void put(String key, Object value) {
-		this.ctx.put(key, value);
+		if (StringUtils.isNotBlank(key) && value != null) {
+			this.ctx.put(key, value);
+		}
 	}
 
 	/*

@@ -1,5 +1,6 @@
 package sk4j.file;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import sk4j.core.Beans;
@@ -17,5 +18,14 @@ public class EPaths {
 	 */
 	public static EPath get(String pathName) {
 		return new EPathImpl(Paths.get(Beans.getReference(Context.class).replace(pathName)));
+	}
+
+	/**
+	 * 
+	 * @param path
+	 * @return
+	 */
+	public static EPath get(Path path) {
+		return new EPathImpl(path);
 	}
 }

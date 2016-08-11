@@ -1,6 +1,9 @@
 package sk4j.template;
 
+import java.io.IOException;
 import java.io.Serializable;
+
+import sk4j.model.EPath;
 
 /**
  * 
@@ -9,7 +12,18 @@ import java.io.Serializable;
  */
 public interface Template extends Serializable {
 
+	/**
+	 * 
+	 * @param templateName
+	 * @return
+	 */
 	String merge(String templateName);
 
-	void mergeAndCreateFile(String templateName, String path);
+	/**
+	 * 
+	 * @param templateName
+	 * @param path
+	 * @throws IOException
+	 */
+	void mergeAndCreateFile(String templateName, EPath epath) throws IOException;
 }

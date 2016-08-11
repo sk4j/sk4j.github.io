@@ -33,7 +33,6 @@ public class Beans {
 
 		try {
 			instance = getReference(getBeanManager().getBeans(beanClass), beanClass);
-			System.out.println("Instance: " + instance);
 		} catch (NoSuchElementException cause) {
 			cause.printStackTrace();
 		}

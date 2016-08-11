@@ -1,7 +1,7 @@
 package sk4j.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.SortedSet;
 
 import com.thoughtworks.qdox.model.JavaClass;
 
@@ -26,9 +26,9 @@ public interface EJavaClass extends Selectable<EJavaClass>, Serializable {
 
 	JavaClass getQdoxJavaClass();
 
-	List<EJavaAttribute> getEJavaAttributes();
+	SortedSet<EJavaAttribute> getEJavaAttributes();
 
-	List<EJavaMethod> getEJavaMethods();
+	SortedSet<EJavaMethod> getEJavaMethods();
 
 	String getSuperClassGenericNameByIndex(int index);
 
