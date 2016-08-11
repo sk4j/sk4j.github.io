@@ -23,15 +23,29 @@ public interface EPath extends Selectable<EPath> {
 	Path getPath();
 
 	/**
+	 * 
+	 * @return
+	 */
+	Optional<EPath> getParent();
+
+	/**
 	 * Retorna o caminho irmão do nó atual com o nome correspondente
 	 * 
 	 * 
 	 * @param name
 	 * @return
+	 * @throws IOException
 	 */
-	Optional<EPath> sibling(String name);
+	Optional<EPath> getSibling(String name) throws IOException;
 
-	SortedSet<EPath> siblings() throws IOException;
+	/**
+	 * 
+	 * Retorna os caminho irmãos do nó atual.
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
+	SortedSet<EPath> getSiblings() throws IOException;
 
 	@Override
 	default int compareTo(EPath o) {
