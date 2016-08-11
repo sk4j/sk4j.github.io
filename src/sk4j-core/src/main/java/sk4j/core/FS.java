@@ -37,17 +37,7 @@ public interface FS extends Serializable {
 	 *            Nome do arquivo.
 	 * @param content
 	 *            Conteúdo do arquivo.
-	 * @throws IOException
 	 */
 	void createFile(String filePath, String fileName, String content);
-
-
-	/**
-	 * 
-	 * @param base
-	 * @param name
-	 * @return
-	 */
-	String findSiblingPath(String base, String name, int parentDepth);
 
 }

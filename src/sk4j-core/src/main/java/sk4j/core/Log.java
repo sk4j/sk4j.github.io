@@ -31,4 +31,8 @@ public interface Log {
 
 	void error(String message);
 
+	void error(String message, Object... params);
+
+	void format(String format, Object... params);
+
 }

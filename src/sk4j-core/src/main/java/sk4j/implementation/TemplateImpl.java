@@ -16,25 +16,27 @@ public class TemplateImpl implements Template {
 
 	private Context context = Beans.getReference(Context.class);
 
-	private JtwigTemplate template;
-
-	private String templateName;
-
-	public TemplateImpl(String templateName) {
-		super();
-		this.templateName = templateName;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see sk4j.template.Template#merge()
 	 */
 	@Override
-	public String merge() {
-		this.template = JtwigTemplate.classpathTemplate(templateName);
-		return template.render(this.createJtwigModel());
+	public String merge(String templateName) {
+		return JtwigTemplate.classpathTemplate(String.format("/templates/%s.jtwig", templateName)).render(this.createJtwigModel());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see sk4j.template.Template#mergeAndCreateFile(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void mergeAndCreateFile(String templateName, String path) {
+
+	}
+
+	/*
+	 * Cria um model do template e popula com as variáveis do context.
+	 */
 	private JtwigModel createJtwigModel() {
 		JtwigModel jtwigModel = JtwigModel.newModel();
 		context.getContext().forEach((k, v) -> jtwigModel.with(k, v));

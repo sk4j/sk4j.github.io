@@ -56,4 +56,14 @@ public class LogImpl implements Log {
 	public void error(String message) {
 		System.out.println(Colorize.red(message));
 	}
+
+	@Override
+	public void format(String format, Object... params) {
+		System.out.println(String.format(format, params));
+	}
+
+	@Override
+	public void error(String message, Object... params) {
+		System.out.println(String.format(Colorize.red(message), Arrays.asList(params).stream().map(String::valueOf).toArray()));
+	}
 }
