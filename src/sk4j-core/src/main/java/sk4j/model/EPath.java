@@ -1,7 +1,9 @@
 package sk4j.model;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.SortedSet;
 
 import sk4j.input.Selectable;
 
@@ -27,7 +29,9 @@ public interface EPath extends Selectable<EPath> {
 	 * @param name
 	 * @return
 	 */
-	Optional<Path> sibling(String name);
+	Optional<EPath> sibling(String name);
+
+	SortedSet<EPath> siblings() throws IOException;
 
 	@Override
 	default int compareTo(EPath o) {
