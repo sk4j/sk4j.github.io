@@ -55,7 +55,7 @@ public class EJavaClassImpl implements EJavaClass {
 	 * @see sk4j.model.EJavaClass#getName()
 	 */
 	@Override
-	public String getName() {
+	public String getClassName() {
 		if (this.name == null) {
 			this.name = this.qdoxJavaClass.getName();
 		}
@@ -81,10 +81,10 @@ public class EJavaClassImpl implements EJavaClass {
 	 * @see sk4j.model.EJavaClass#getPath()
 	 */
 	@Override
-	public String getPath() {
+	public String getPathName() {
 		if (this.path == null) {
 			String packageDir = this.qdoxJavaClass.getPackage().getName().replaceAll("\\.", "/");
-			this.path = FilenameUtils.normalize(project.getPath().concat(this.sourceFolderName).concat("/").concat(packageDir));
+			this.path = FilenameUtils.normalize(project.getPathName().concat(this.sourceFolderName).concat("/").concat(packageDir));
 		}
 		return path;
 	}
@@ -132,7 +132,7 @@ public class EJavaClassImpl implements EJavaClass {
 	 * @see sk4j.model.EJavaClass#getJavaAttributes()
 	 */
 	@Override
-	public List<EJavaAttribute> getJavaAttributes() {
+	public List<EJavaAttribute> getEJavaAttributes() {
 		//@formatter:off
 		if (this.javaAttributes == null) {
 			this.javaAttributes = Arrays.asList(qdoxJavaClass.getFields())
@@ -150,7 +150,7 @@ public class EJavaClassImpl implements EJavaClass {
 	 * @see sk4j.model.EJavaClass#getJavaMethods()
 	 */
 	@Override
-	public List<EJavaMethod> getJavaMethods() {
+	public List<EJavaMethod> getEJavaMethods() {
 		//@formatter:off
 		if (this.javaMethods == null) {
 			this.javaMethods = Arrays.asList(qdoxJavaClass.getMethods())
@@ -168,7 +168,7 @@ public class EJavaClassImpl implements EJavaClass {
 	 * @see sk4j.model.EJavaClass#getJavaPackage()
 	 */
 	@Override
-	public EJavaPackage getJavaPackage() {
+	public EJavaPackage getEJavaPackage() {
 		return null;
 	}
 

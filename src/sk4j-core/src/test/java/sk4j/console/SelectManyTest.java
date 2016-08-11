@@ -25,7 +25,7 @@ public class SelectManyTest {
 	public void test() throws IOException {
 		EJavaProject javaProject = new EJavaProjectImpl(new File("/home/jcruz/Programs/eclipse-mars/workspace/aelis2016"));
 		//@formatter:off
-		List<EJavaClass> selectedJavaClass = selector.selectMany("Selecione a(s) entidade(s)",javaProject.getSrcMainJavaClasses()
+		List<EJavaClass> selectedJavaClass = selector.selectMany("Selecione a(s) entidade(s)",javaProject.getMainEJavaClasses()
 					.stream()
 					.filter(javaClass -> javaClass.hasAnnotationByName("Entity"))
 					.collect(Collectors.toList()));

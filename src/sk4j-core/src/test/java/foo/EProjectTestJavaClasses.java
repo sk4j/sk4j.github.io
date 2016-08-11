@@ -11,10 +11,10 @@ public class EProjectTestJavaClasses {
 	public static void main(String[] args) {
 		EJavaProject project = new EJavaProjectImpl(new File("/home/jcruz/Programs/eclipse-mars/workspace/ouvidoriaweb"));
 		//@formatter:off
-		project.getSrcMainJavaPackages()
+		project.getMainEJavaPackages()
 			.stream()
 			.forEach(javaPackage -> {
-				System.out.println(javaPackage.getName());
+				System.out.println(javaPackage.getPackageName());
 				//System.out.println(javaPackage.getPath());
 				Arrays.asList(javaPackage.getQdoxJavaPackage().getClasses())
 					.stream().forEach(javaClass -> System.out.println(javaClass.getName()));

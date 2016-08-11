@@ -19,38 +19,38 @@ public interface EJavaProject extends Serializable {
 	 * 
 	 * @return Nome do projeto
 	 */
-	String getName();
+	String getProjectName();
 
 	/**
 	 * Retorna o caminho do projeto.
 	 * 
 	 * @return Caminho do projeto.
 	 */
-	String getPath();
+	String getPathName();
 
-	File getFile();
+	File getProjectFile();
 
-	List<EJavaClass> getJavaClasses() throws IOException;
+	List<EJavaClass> getAllEJavaClasses() throws IOException;
 
-	List<EJavaClass> getSrcMainJavaClasses();
+	List<EJavaClass> getMainEJavaClasses();
 
-	List<EJavaPackage> getSrcMainJavaPackages();
+	List<EJavaPackage> getMainEJavaPackages();
 
-	List<EJavaPackage> getSrcTestJavaPackages();
+	List<EJavaPackage> getTestEJavaPackages();
 
-	List<EJavaClass> getSrcTestJavaClasses();
+	List<EJavaClass> getTestEJavaClasses();
 
-	List<EFile> getSrcMainWebappDirs() throws IOException;
+	List<EPath> getWebappEPaths() throws IOException;
 
-	List<EFile> getSrcMainWebappFiles() throws IOException;
+	List<EFile> getWebappEFiles() throws IOException;
 
-	List<EFile> getSrcMainWebappXHTMLFiles() throws IOException;
+	List<EFile> getWebappXHTMLFiles() throws IOException;
 
-	List<EFile> getDirs() throws IOException;
+	List<EPath> getEPaths() throws IOException;
 
-	List<EFile> getFiles() throws IOException;
+	List<EFile> getEFiles() throws IOException;
 
-	boolean hasSrcMainJavaClassByName(String javaClassName) throws IOException;
+	boolean hasMainEJavaClassByName(String javaClassName) throws IOException;
 
 	public boolean isMavenProject();
 

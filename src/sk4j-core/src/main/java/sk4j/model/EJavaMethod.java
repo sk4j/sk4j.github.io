@@ -8,22 +8,22 @@ import sk4j.input.Selectable;
 
 public interface EJavaMethod extends Selectable<EJavaMethod>, Serializable {
 
-	String getName();
+	String getMethodName();
 
 	JavaMethod getQdoxJavaMethod();
 
 	boolean hasAnnotationByName(String annotationName);
 
-	EJavaProject getProject();
+	EJavaProject getEJavaProject();
 
 	@Override
 	default int compareTo(EJavaMethod o) {
-		return getName().compareTo(o.getName());
+		return getMethodName().compareTo(o.getMethodName());
 	}
 
 	@Override
 	default String getSelectLabel() {
-		return getName();
+		return getMethodName();
 	}
 
 }

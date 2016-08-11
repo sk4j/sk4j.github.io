@@ -25,7 +25,7 @@ public class SelectorTest {
 	public void test() throws IOException {
 		EJavaProject javaProject = new EJavaProjectImpl(new File("/home/jcruz/Programs/eclipse-mars/workspace/aelis2016"));
 		//@formatter:off
-		EJavaClass selectedJavaClass = selector.selectOne("Selecione o DAO",javaProject.getSrcMainJavaClasses()
+		EJavaClass selectedJavaClass = selector.selectOne("Selecione o DAO",javaProject.getMainEJavaClasses()
 					.stream()
 					.filter(javaClass -> javaClass.hasAnnotationByName("PersistenceController"))
 					.collect(Collectors.toList()));

@@ -37,7 +37,7 @@ public class EJavaPackageImpl implements EJavaPackage {
 	 * @see sk4j.model.EJavaPackage#getName()
 	 */
 	@Override
-	public String getName() {
+	public String getPackageName() {
 		if (this.name == null) {
 			this.name = this.qdoxJavaPackage.getName();
 		}
@@ -70,7 +70,7 @@ public class EJavaPackageImpl implements EJavaPackage {
 	 * @see sk4j.model.EJavaPackage#getProject()
 	 */
 	@Override
-	public EJavaProject getProject() {
+	public EJavaProject getEJavaProject() {
 		return this.project;
 	}
 
@@ -80,10 +80,10 @@ public class EJavaPackageImpl implements EJavaPackage {
 	 * @see sk4j.model.EJavaPackage#getPath()
 	 */
 	@Override
-	public String getPath() {
+	public String getPathName() {
 		if (this.path == null) {
 			String packageDir = this.qdoxJavaPackage.getName().replaceAll("\\.", "/");
-			this.path = FilenameUtils.normalize(project.getPath().concat(this.sourceFolderName).concat("/").concat(packageDir));
+			this.path = FilenameUtils.normalize(project.getPathName().concat(this.sourceFolderName).concat("/").concat(packageDir));
 		}
 		return this.path;
 	}

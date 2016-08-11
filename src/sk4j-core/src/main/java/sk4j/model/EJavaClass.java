@@ -10,25 +10,25 @@ import sk4j.input.Selectable;
 
 public interface EJavaClass extends Selectable<EJavaClass>, Serializable {
 
-	String getName();
+	String getClassName();
 
 	String getFullyQualifiedName();
 
 	String getSourceFolderName();
 
-	String getPath();
+	String getPathName();
 
 	String getPackageName();
 
-	EJavaPackage getJavaPackage();
+	EJavaPackage getEJavaPackage();
 
 	String getParentPackageName();
 
 	JavaClass getQdoxJavaClass();
 
-	List<EJavaAttribute> getJavaAttributes();
+	List<EJavaAttribute> getEJavaAttributes();
 
-	List<EJavaMethod> getJavaMethods();
+	List<EJavaMethod> getEJavaMethods();
 
 	String getSuperClassGenericNameByIndex(int index);
 
@@ -43,13 +43,13 @@ public interface EJavaClass extends Selectable<EJavaClass>, Serializable {
 	boolean isAbstract();
 
 	@Override
-	default int compareTo(EJavaClass javaClass) {
-		return getName().compareTo(javaClass.getName());
+	default int compareTo(EJavaClass ejavaClass) {
+		return getClassName().compareTo(ejavaClass.getClassName());
 	}
 
 	@Override
 	default String getSelectLabel() {
-		return this.getName() + " - " + Colorize.gray(this.getQdoxJavaClass().getPackageName());
+		return this.getClassName() + " - " + Colorize.gray(this.getQdoxJavaClass().getPackageName());
 	}
 
 }

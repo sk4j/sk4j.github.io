@@ -9,10 +9,7 @@ public class ProjectDirWalk {
 
 	public static void main(String[] args) throws IOException {
 		EJavaProjectImpl project = new EJavaProjectImpl(new File("/home/jcruz/Programs/eclipse-mars/workspace/ouvidoriaweb"));
-		project.getDirs()
-			   .stream()
-			   .map(p -> p.getFile().getName())
-			   .forEach(System.out::println);
+		project.getEPaths().stream().map(p -> p.getPath().toFile()).forEach(System.out::println);
 	}
 
 }

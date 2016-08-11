@@ -10,9 +10,9 @@ public class EProjectTest {
 	public static void main(String[] args) {
 		EJavaProject project = new EJavaProjectImpl(new File("/home/jcruz/Programs/eclipse-mars/workspace/ouvidoriaweb"));
 		//@formatter:off
-		project.getSrcMainJavaClasses()
+		project.getMainEJavaClasses()
 			.stream()
-			.forEach(javaClass -> System.out.println(javaClass.getName()));
+			.forEach(javaClass -> System.out.println(javaClass.getClassName()));
 		//@formatter:on
 	}
 

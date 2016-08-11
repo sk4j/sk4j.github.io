@@ -30,7 +30,7 @@ public class EJavaMethodImpl implements EJavaMethod {
 	 * @see sk4j.model.EJavaMethod#getName()
 	 */
 	@Override
-	public String getName() {
+	public String getMethodName() {
 		return name;
 	}
 
@@ -64,7 +64,7 @@ public class EJavaMethodImpl implements EJavaMethod {
 	 * @see sk4j.model.EJavaMethod#getProject()
 	 */
 	@Override
-	public EJavaProject getProject() {
+	public EJavaProject getEJavaProject() {
 		return project;
 	}
 

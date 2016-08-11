@@ -20,7 +20,7 @@ public interface EJavaAttribute extends Selectable<EJavaAttribute>, Serializable
 	 * 
 	 * @return Nome do atributo java.
 	 */
-	String getName();
+	String getAttributeName();
 
 	/**
 	 * Retorna objeto qdox do atributo.
@@ -69,16 +69,16 @@ public interface EJavaAttribute extends Selectable<EJavaAttribute>, Serializable
 
 	String getGenericNameByIndex(int index);
 
-	EJavaProject getProject();
+	EJavaProject getEJavaProject();
 
 	@Override
 	default int compareTo(EJavaAttribute o) {
-		return getName().compareTo(o.getName());
+		return getAttributeName().compareTo(o.getAttributeName());
 	}
 
 	@Override
 	default String getSelectLabel() {
-		return this.getName() + " - " + Colorize.gray(this.getQdoxJavaField().getType().getValue());
+		return this.getAttributeName() + " - " + Colorize.gray(this.getQdoxJavaField().getType().getValue());
 	}
 
 }

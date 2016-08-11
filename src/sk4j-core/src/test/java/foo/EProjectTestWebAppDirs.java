@@ -11,7 +11,7 @@ public class EProjectTestWebAppDirs {
 	public static void main(String[] args) throws IOException {
 		EJavaProject project = new EJavaProjectImpl(new File("/home/jcruz/Programs/eclipse-mars/workspace/ouvidoriaweb"));
 		//@formatter:off
-		project.getSrcMainWebappFiles()
+		project.getWebappEFiles()
 			.stream()
 			.forEach(dir -> System.out.println(dir.getFile().getName()));
 			

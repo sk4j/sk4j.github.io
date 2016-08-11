@@ -32,7 +32,7 @@ public class EJavaAttributeImpl implements EJavaAttribute {
 	 * @see sk4j.model.EJavaAttribute#getName()
 	 */
 	@Override
-	public String getName() {
+	public String getAttributeName() {
 		return this.qdoxJavaField.getName();
 	}
 
@@ -269,7 +269,7 @@ public class EJavaAttributeImpl implements EJavaAttribute {
 	 * @see sk4j.model.EJavaAttribute#getProject()
 	 */
 	@Override
-	public EJavaProject getProject() {
+	public EJavaProject getEJavaProject() {
 		return project;
 	}
 

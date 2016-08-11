@@ -8,24 +8,24 @@ import sk4j.input.Selectable;
 
 public interface EJavaPackage extends Selectable<EJavaPackage>, Serializable {
 
-	String getName();
+	String getPackageName();
 
 	String getSourceFolderName();
 
 	JavaPackage getQdoxJavaPackage();
 
-	String getPath();
+	String getPathName();
 
-	EJavaProject getProject();
+	EJavaProject getEJavaProject();
 
 	@Override
 	default int compareTo(EJavaPackage o) {
-		return getName().compareTo(o.getName());
+		return getPackageName().compareTo(o.getPackageName());
 	}
 
 	@Override
 	default String getSelectLabel() {
-		return getName();
+		return getPackageName();
 	}
 
 }
