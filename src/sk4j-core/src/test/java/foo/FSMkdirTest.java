@@ -1,31 +1,30 @@
 package foo;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 
-import org.jboss.weld.environment.se.Weld;
-import org.jboss.weld.environment.se.WeldContainer;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import sk4j.bootstrap.SK4JRunner;
+import sk4j.core.Context;
+import sk4j.file.EPaths;
 import sk4j.file.FS;
 
+@RunWith(SK4JRunner.class)
 public class FSMkdirTest {
 
 	@Inject
 	private FS fs;
 
-	public void run() {
-		fs.mkdir("build/abc-weld-test");
-	}
+	@Inject
+	private Context context;
 
-	public static void main(String[] args) {
-		Weld weld = new Weld();
-
-		WeldContainer container = weld.initialize();
-
-		FSMkdirTest app = container.instance().select(FSMkdirTest.class).get();
-
-		app.run();
-
-		weld.shutdown();
+	@Test
+	public void run() throws IOException {
+		context.put("project", "aelis");
+		fs.mkdir(EPaths.get("build/{{project}}/ativivdade"));
 	}
 
 }

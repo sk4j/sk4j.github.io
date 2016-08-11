@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import javax.inject.Inject;
 
@@ -15,6 +14,7 @@ import sk4j.console.Colorize;
 import sk4j.core.Context;
 import sk4j.core.Log;
 import sk4j.file.FS;
+import sk4j.model.EPath;
 
 /**
  * 
@@ -39,25 +39,23 @@ public class FSImpl implements FS {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public void mkdir(String path) {
-		path = context.replace(path);
-		File dir = new File(path);
-		if (!dir.exists()) {
-			dir.mkdirs();
-			log.format("%s\t%s", CREATE_ID, Colorize.bold(Colorize.blue(dir.getAbsolutePath())));
+	public void mkdir(EPath epath) throws IOException {
+		if (Files.notExists(epath.getPath())) {
+			Files.createDirectories(epath.getPath());
+			log.format("%s\t%s", CREATE_ID, Colorize.bold(Colorize.blue(epath.getPath().toString())));
 			return;
 		}
-		log.format(Colorize.gray("[SKIP]\t%s. Diretório já existe."), dir.getAbsolutePath());
+		log.format(Colorize.gray("[SKIP]\t%s. Diretório já existe."), epath.getPath().toString());
 	}
 
 	@Override
-	public void copy(String source, String destination) throws IOException {
+	public void copy(String source, EPath destination) throws IOException {
 		source = context.replace(source);
-		destination = context.replace(destination);
 		InputStream inputStream = this.getClass().getResourceAsStream(source);
-		Path pdestination = Paths.get(destination);
+		Path pdestination = destination.getPath();
 		Files.copy(inputStream, pdestination);
-		log.format("%s\t%s -> %s", COPY_ID, Colorize.bold(Colorize.green(source)), Colorize.bold(Colorize.blue(destination)));
+		log.format("%s\t%s -> %s", COPY_ID, Colorize.bold(Colorize.green(source)),
+				Colorize.bold(Colorize.blue(destination.getPath().toString())));
 	}
 
 	public void createFile(String filePath, String fileName, String content) {
