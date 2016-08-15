@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -40,7 +39,6 @@ public class FSImpl implements FS {
 
 	@Override
 	public void mkdir(EPath epath) throws IOException {
-		Set<String> p;
 		if (Files.notExists(epath.getPath())) {
 			Files.createDirectories(epath.getPath());
 			log.format("%s\t%s", CREATE_ID, Colorize.bold(Colorize.blue(epath.getPath().toString())));
