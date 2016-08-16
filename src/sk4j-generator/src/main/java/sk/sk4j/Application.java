@@ -1,16 +1,19 @@
 package sk.sk4j;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
-import sk4j.api.Console;
-import sk4j.api.Context;
-import sk4j.api.FS;
-import sk4j.api.Template;
-import sk4j.console.reader.ReadConf;
+import sk.sk4j.name.ProjectDesc;
+import sk.sk4j.name.ProjectName;
+import sk4j.core.Context;
 import sk4j.event.AfterStart;
+import sk4j.file.EPaths;
+import sk4j.file.FS;
+import sk4j.input.Reader;
+import sk4j.template.Template;
 
 public class Application implements Serializable {
 
@@ -29,36 +32,41 @@ public class Application implements Serializable {
 	private Context ctx;
 
 	@Inject
-	private Console console;
+	private Reader reader;
 
-	public void run(@Observes AfterStart event) {
+	@Inject
+	private ProjectName projectName;
 
-		String projectName = console.read("Digite o nome do projeto", ReadConf.SK_PROJECT_NAME);
-		String projectDesc = console.read("Digite a descrição do projeto", ReadConf.ALPHANUMERIC_SPACE);
+	@Inject
+	private ProjectDesc projectDesc;
 
-		ctx.putItem("PROJECT_NAME", projectName);
-		ctx.putItem("PROJECT_DESC", projectDesc);
-		ctx.putItem("PROJECT_DIR", ctx.replace("{{SK4J_HOME}}/src/{{PROJECT_NAME}}"));
+	public void run(@Observes AfterStart event) throws IOException {
 
-		fs.mkdir("{{PROJECT_DIR}}");
-		fs.mkdir("{{PROJECT_DIR}}/src/main/java");
-		fs.mkdir("{{PROJECT_DIR}}/src/main/java/sk4j");
-		fs.mkdir("{{PROJECT_DIR}}/src/main/java/sk4j/bootstrap");
-		fs.mkdir("{{PROJECT_DIR}}/src/main/resources/templates");
-		fs.mkdir("{{PROJECT_DIR}}/src/main/resources/files");
-		fs.mkdir("{{PROJECT_DIR}}/src/main/resources/META-INF");
-		fs.mkdir("{{PROJECT_DIR}}/bin");
-		fs.mkdir("{{PROJECT_DIR}}/build");
+		reader.read("Digite o nome do projeto", "projectName", projectName);
+		reader.read("Digite a descrição do projeto", "projectDesc", projectDesc);
+		ctx.put("PROJECT_DIR", ctx.replace("{{SK4J_HOME}}/src/{{projectName.value}}"));
 
-		fs.copy("/files/gitignore", "{{PROJECT_DIR}}/.gitignore");
-		fs.copy("/files/readme-txt", "{{PROJECT_DIR}}/src/main/resources/templates/readme.txt");
-		fs.copy("/files/readme-txt", "{{PROJECT_DIR}}/src/main/resources/files/readme.txt");
-		fs.copy("/files/bootstrap-java", "{{PROJECT_DIR}}/src/main/java/sk4j/bootstrap/Bootstrap.java");
-		fs.copy("/files/application-java", "{{PROJECT_DIR}}/src/main/java/sk4j/Application.java");
-		fs.copy("/files/beans-xml", "{{PROJECT_DIR}}/src/main/resources/META-INF/beans.xml");
+		fs.mkdir(EPaths.get("{{PROJECT_DIR}}"));
+		fs.mkdir(EPaths.get("{{PROJECT_DIR}}/src/main/java"));
+		fs.mkdir(EPaths.get("{{PROJECT_DIR}}/src/main/java/sk4j"));
+		fs.mkdir(EPaths.get("{{PROJECT_DIR}}/src/main/java/sk4j/bootstrap"));
+		fs.mkdir(EPaths.get("{{PROJECT_DIR}}/src/main/resources/templates"));
+		fs.mkdir(EPaths.get("{{PROJECT_DIR}}/src/main/resources/files"));
+		fs.mkdir(EPaths.get("{{PROJECT_DIR}}/src/main/resources/META-INF"));
+		fs.mkdir(EPaths.get("{{PROJECT_DIR}}/bin"));
+		fs.mkdir(EPaths.get("{{PROJECT_DIR}}/build"));
 
-		fs.createFile("{{PROJECT_DIR}}", "build.gradle", template.merge("/templates/build-gradle.jtwig"));
-		fs.createFile("{{PROJECT_DIR}}/src/main/resources", "description.txt", template.merge("/templates/description-txt.jtwig"));
+		fs.copy("/files/gitignore", EPaths.get("{{PROJECT_DIR}}/.gitignore"));
+		fs.copy("/files/readme-txt", EPaths.get("{{PROJECT_DIR}}/src/main/resources/templates/readme.txt"));
+		fs.copy("/files/readme-txt", EPaths.get("{{PROJECT_DIR}}/src/main/resources/files/readme.txt"));
+		fs.copy("/files/bootstrap-java", EPaths.get("{{PROJECT_DIR}}/src/main/java/sk4j/bootstrap/Bootstrap.java"));
+		fs.copy("/files/application-java", EPaths.get("{{PROJECT_DIR}}/src/main/java/sk4j/Application.java"));
+		fs.copy("/files/beans-xml", EPaths.get("{{PROJECT_DIR}}/src/main/resources/META-INF/beans.xml"));
+
+		template.mergeAndCreateFile("build-gradle", EPaths.get("{{PROJECT_DIR}}/build.gradle"));
+		template.mergeAndCreateFile("description-txt", EPaths.get("{{PROJECT_DIR}}/src/main/resources/description.txt"));
+		// fs.createFile("{{PROJECT_DIR}}", "build.gradle", template.merge("/templates/build-gradle.jtwig"));
+		// fs.createFile("{{PROJECT_DIR}}/src/main/resources", "description.txt", template.merge("/templates/description-txt.jtwig"));
 
 	}
 
