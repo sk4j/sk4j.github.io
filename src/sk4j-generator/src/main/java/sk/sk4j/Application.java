@@ -65,8 +65,6 @@ public class Application implements Serializable {
 
 		template.mergeAndCreateFile("build-gradle", EPaths.get("{{PROJECT_DIR}}/build.gradle"));
 		template.mergeAndCreateFile("description-txt", EPaths.get("{{PROJECT_DIR}}/src/main/resources/description.txt"));
-		// fs.createFile("{{PROJECT_DIR}}", "build.gradle", template.merge("/templates/build-gradle.jtwig"));
-		// fs.createFile("{{PROJECT_DIR}}/src/main/resources", "description.txt", template.merge("/templates/description-txt.jtwig"));
 
 	}
 
