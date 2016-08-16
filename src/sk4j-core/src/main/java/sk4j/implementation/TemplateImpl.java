@@ -4,9 +4,11 @@ import java.io.IOException;
 
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
+import org.jtwig.resource.exceptions.ResourceNotFoundException;
 
 import sk4j.core.Beans;
 import sk4j.core.Context;
+import sk4j.core.Log;
 import sk4j.file.EPaths;
 import sk4j.file.FS;
 import sk4j.model.EPath;
@@ -23,6 +25,8 @@ public class TemplateImpl implements Template {
 
 	private FS fs = Beans.getReference(FS.class);
 
+	private Log log = Beans.getReference(Log.class);
+
 	/*
 	 * (non-Javadoc)
 	 * @see sk4j.template.Template#merge()
@@ -38,9 +42,13 @@ public class TemplateImpl implements Template {
 	 */
 	@Override
 	public void mergeAndCreateFile(String templateName, EPath epath) throws IOException {
-		String content = this.merge(templateName);
-		fs.mkdir(EPaths.get(epath.getPath().getParent()));
-		fs.write(epath.getPath(), content);
+		try {
+			String content = this.merge(templateName);
+			fs.mkdir(EPaths.get(epath.getPath().getParent()));
+			fs.write(epath.getPath(), content);
+		} catch (ResourceNotFoundException e) {
+			log.error("Template não existe: %s ", templateName);
+		}
 	}
 
 	/*

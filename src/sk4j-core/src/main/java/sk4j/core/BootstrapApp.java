@@ -1,5 +1,6 @@
 package sk4j.core;
 
+import java.io.File;
 import java.io.Serializable;
 
 import javax.enterprise.event.Event;
@@ -14,7 +15,6 @@ import sk4j.console.Colorize;
 import sk4j.event.AfterStart;
 import sk4j.event.BeforeStart;
 import sk4j.exception.RequiredJavaProjectException;
-import sk4j.model.EJavaProject;
 
 public abstract class BootstrapApp implements Serializable {
 	/**
@@ -25,8 +25,8 @@ public abstract class BootstrapApp implements Serializable {
 	@Inject
 	private Context context;
 
-	@Inject
-	private EJavaProject project;
+	// @Inject
+	// private EJavaProject project;
 
 	@Inject
 	private Event<AfterStart> afterStartEvent;
@@ -86,8 +86,10 @@ public abstract class BootstrapApp implements Serializable {
 	}
 
 	private void checkRequiredJavaProject() throws RequiredJavaProjectException {
+		boolean isMavenProject = new File(String.format("%s/pom.xml", context.get("PROJECT_HOME"))).exists();
+		boolean isGradleProject = new File(String.format("%s/build.gradle", context.get("PROJECT_HOME"))).exists();
 		if (this.getClass().isAnnotationPresent(RequiredJavaProject.class)) {
-			if (!this.project.isMavenProject() || !this.project.isGradleProject()) {
+			if (!isMavenProject || isGradleProject) {
 				throw new RequiredJavaProjectException("O diretório não possui projeto maven ou gradle.");
 			}
 		}
