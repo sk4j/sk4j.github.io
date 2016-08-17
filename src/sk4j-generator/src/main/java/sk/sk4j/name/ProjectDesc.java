@@ -12,7 +12,7 @@ public class ProjectDesc extends Name {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	@NotEmpty
+	@NotEmpty(message = "A descrição do projeto é obrigatória.")
 	public String getValue() {
 		return super.getValue();
 	}
