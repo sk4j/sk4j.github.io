@@ -6,6 +6,12 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import sk4j.input.Name;
 
+/**
+ * Classe Name com o nome do projeto.
+ * 
+ * @author jcruz
+ *
+ */
 public class ProjectName extends Name {
 
 	/**
