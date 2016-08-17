@@ -45,7 +45,7 @@ test { systemProperties 'property': 'value' }
 
 jar {
 	manifest {
-		attributes 'Implementation-Title': '' ,
+		attributes 'Implementation-Title': 'jpa-entity-analyzer' ,
 		'Implementation-Version': version,
 		'Main-Class' : 'sk4j.bootstrap.Bootstrap',
 		'Class-Path': configurations.compile.collect {File file -> "./../lib/${file.name}"}.join(" ")
@@ -60,7 +60,7 @@ task pack(dependsOn: build) << {
 		into '../../lib'
 	}
 	copy {
-		from "build/libs/.jar"
+		from "build/libs/jpa-entity-analyzer.jar"
 		into '../../artifact'
 	}
 	copy {

@@ -2,9 +2,11 @@ package sk4j.bootstrap;
 
 import javax.enterprise.event.Observes;
 
-import sk4j.event.BeforeStart;
+import sk4j.annotation.RequiredJavaProject;
 import sk4j.core.BootstrapApp;
+import sk4j.event.BeforeStart;
 
+@RequiredJavaProject
 public class Bootstrap extends BootstrapApp {
 
 	/**

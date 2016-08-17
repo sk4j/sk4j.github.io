@@ -84,8 +84,7 @@ public class SelectorImpl implements Selector {
 	 * @see sk4j.input.Selector#selectOne(java.lang.String, java.lang.String, java.lang.Iterable)
 	 */
 	@Override
-	public <X, T extends Selectable<X>> void selectOne(String prompt, String contextKey, Iterable<T> selectableOptions)
-			throws IOException {
+	public <X, T extends Selectable<X>> void selectOne(String prompt, String contextKey, Iterable<T> selectableOptions) throws IOException {
 		if (StringUtils.isNotBlank(contextKey)) {
 			T t = selectOne(prompt, selectableOptions);
 			context.put(contextKey, t);
@@ -212,6 +211,7 @@ public class SelectorImpl implements Selector {
 	private <X, T extends Selectable<X>> Map<Integer, T> printSelectableOptions(List<T> selectableOptions) {
 		AtomicInteger counter = new AtomicInteger(0);
 		Map<Integer, T> optionMap = new HashMap<>();
+		System.out.println("");
 		//@formatter:off
 		selectableOptions
 			.stream()

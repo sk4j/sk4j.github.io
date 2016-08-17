@@ -45,7 +45,7 @@ test { systemProperties 'property': 'value' }
 
 jar {
 	manifest {
-		attributes 'Implementation-Title': '{{PROJECT_NAME}}' ,
+		attributes 'Implementation-Title': '{{projectName.value}}' ,
 		'Implementation-Version': version,
 		'Main-Class' : 'sk4j.bootstrap.Bootstrap',
 		'Class-Path': configurations.compile.collect {File file -> "./../lib/${file.name}"}.join(" ")
@@ -60,7 +60,7 @@ task pack(dependsOn: build) << {
 		into '../../lib'
 	}
 	copy {
-		from "build/libs/{{PROJECT_NAME}}.jar"
+		from "build/libs/{{projectName.value}}.jar"
 		into '../../artifact'
 	}
 	copy {
