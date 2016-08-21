@@ -185,7 +185,7 @@ public class EJavaProjectImpl implements EJavaProject {
 		if (this.mainEJavaClasses == null) {
 			//@formatter:off
 			this.mainEJavaClasses = getMainEJavaPackages()
-							.stream()
+							.parallelStream()
 							.map(javaPackage -> javaPackage.getQdoxJavaPackage().getClasses())
 							.flatMap(qdoxJavaClasses -> Arrays.asList(qdoxJavaClasses).stream())
 							.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/main/java/", qdoxJavaClass))
